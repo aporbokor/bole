@@ -1,7 +1,8 @@
 class voter{
-  constructor(x, y){
+  constructor(x, y, strategic){
     this.x = x;
     this.y = y;
+    this.staregic = strategic;
   }
 
   distance_to_candidate(candidate){
