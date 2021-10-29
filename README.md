@@ -1,1 +1,3 @@
 # globalize
+
+Some random stuff I wrote here, to see if this thing works or not...
