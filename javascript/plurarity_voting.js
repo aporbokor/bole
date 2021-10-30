@@ -33,44 +33,24 @@ class PlurarityVoter extends VotingMethod{
   }
 
   count_votes(){
-    let result = [];
-    let used_votecounts = new Set();
-
-    for (let i = 0; i<this.candidates.length; i++){
-      let append = [];
-      let max_counts = -1;
-      for (let j = 0; j<this.candidates.length; j++){
-        let votes = this.candidates[j].votes;
-        if ( (votes > max_counts) & (!(used_votecounts.has(votes)))){
-          max_counts = votes;
-          append = [];
-        }
-        if (votes == max_counts){
-          append.push(this.candidates[j]);
-        }
-      }
-      if (append.length > 0){
-        result.push(append);
-        used_votecounts.add(max_counts);
-      }
-    }
-    return result;
+    return count_votes_for_ints(this.candidates);
   }
 }
 
-let voters = [new Voter(0,0,false), new Voter(1,1,false), new Voter(0.5,0.5,false), new Voter(0.1,0.1,false)];
-
-let candidates = [new Candidate(0,0,undefined), new Candidate(0.5,0.5,undefined), new Candidate(1,1,undefined)];
-
-let votings = new PlurarityVoter(candidates);
-votings.prepare_for_voting()
-
-console.log(votings);
-
-for (let i = 0; i< voters.length; i++){
-  votings.registrate_vote(voters[i]);
-}
-
-console.log(candidates);
-console.log(voters);
-console.log(votings.count_votes());
+// Testing stuff
+// let voters = [new Voter(0,0,false), new Voter(1,1,false), new Voter(0.5,0.5,false), new Voter(0.1,0.1,false)];
+//
+// let candidates = [new Candidate(0,0,undefined), new Candidate(0.5,0.5,undefined), new Candidate(1,1,undefined)];
+//
+// let votings = new PlurarityVoter(candidates);
+// votings.prepare_for_voting()
+//
+// console.log(votings);
+//
+// for (let i = 0; i< voters.length; i++){
+//   votings.registrate_vote(voters[i]);
+// }
+//
+// console.log(candidates);
+// console.log(voters);
+// console.log(votings.count_votes());
