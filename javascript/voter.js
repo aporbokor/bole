@@ -13,7 +13,10 @@ class Voter{
   }
 
   show(){
-    fill(voter_color);
+    fill(honest_voter_color);
+    if (this.staregic){
+      fill(strategic_voter_color);
+    }
     circle(this.x, this.y, voter_size);
   }
 }
