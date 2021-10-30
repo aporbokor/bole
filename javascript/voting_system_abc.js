@@ -8,6 +8,10 @@ class VotingMethod{
     }
   }
 
+  prepare_for_voting(){
+    throw new Error("You must implement a prepare_for_voting method to your VotingMethod class");
+  }
+
   registrate_honest_vote(voter){
       throw new Error("You must implement a registrate_honest_vote method to your VotingMethod class");
   }

@@ -3,5 +3,6 @@ class Candidate{
     this.x = x;
     this.y = y;
     this.name = name;
+    this.votes = undefined;
   }
 }
