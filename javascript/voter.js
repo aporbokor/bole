@@ -11,4 +11,9 @@ class Voter{
     let y_dist = this.y - candidate.y;
     return Math.sqrt(x_dist*x_dist + y_dist*y_dist);
   }
+
+  show(){
+    fill(voter_color);
+    circle(this.x, this.y, voter_size);
+  }
 }

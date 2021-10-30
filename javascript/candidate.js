@@ -5,4 +5,8 @@ class Candidate{
     this.name = name;
     this.votes = undefined;
   }
+  show(){
+    fill(this.name);
+    circle(this.x, this.y, candidate_size);
+  }
 }

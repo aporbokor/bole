@@ -45,19 +45,19 @@ class PerfectVoter extends VotingMethod{
 }
 
 // Testing stuff
-let voters = [new Voter(0,0,false), new Voter(1,1,false), new Voter(0.5,0.5,false), new Voter(0.5,0.5,false)];
-
-let candidates = [new Candidate(0,0,undefined), new Candidate(0.5,0.5,undefined), new Candidate(1,1,undefined)];
-
-let votings = new PerfectVoter(candidates);
-votings.prepare_for_voting()
-
-for (let i = 0; i< voters.length; i++){
-  votings.registrate_vote(voters[i]);
-}
-
-
-console.log(votings);
-console.log(candidates);
-console.log(voters);
-console.log(votings.count_votes());
+// let voters = [new Voter(0,0,false), new Voter(1,1,false), new Voter(0.5,0.5,false), new Voter(0.5,0.5,false)];
+//
+// let candidates = [new Candidate(0,0,undefined), new Candidate(0.5,0.5,undefined), new Candidate(1,1,undefined)];
+//
+// let votings = new PerfectVoter(candidates);
+// votings.prepare_for_voting()
+//
+// for (let i = 0; i< voters.length; i++){
+//   votings.registrate_vote(voters[i]);
+// }
+//
+//
+// console.log(votings);
+// console.log(candidates);
+// console.log(voters);
+// console.log(votings.count_votes());
