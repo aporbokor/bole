@@ -1,5 +1,11 @@
 let voters;
+let min_voters = 1;
+let max_voters = 999;
+
 let candidates;
+let min_candidates = 2;
+let max_candidates = 24;
+
 let votingmethod;
 let results;
 let selected;
@@ -57,7 +63,15 @@ function random_voter(){
 }
 
 function add_voter(){
-  voters.push(random_voter());
+  if (voters.length != max_voters){
+    voters.push(random_voter());
+  }
+}
+
+function remove_voter(){
+  if (voters.length != min_voters){
+    voters.pop();
+  }
 }
 
 function random_candidate(i){
@@ -65,7 +79,15 @@ function random_candidate(i){
 }
 
 function add_candidate(){
-  candidates.push(random_candidate(candidates.length))
+  if (candidates.length != max_candidates){
+    candidates.push(random_candidate(candidates.length))
+  }
+}
+
+function remove_candidate(){
+  if (candidates.length != min_candidates){
+    candidates.pop();
+  }
 }
 
 function make_voters(db){
@@ -226,14 +248,20 @@ function setup() {
   make_candidates(candidate_population);
 
   strategic_chance_slider = createSlider(0, 1, 0, 0.01);
-  voter_population_slider = createSlider(1,1000, 1, 1);
-  candidate_population_slider = createSlider(2, 20, 1);
+  voter_population_slider = createSlider(min_voters, max_voters, 1, 1);
+  candidate_population_slider = createSlider(min_candidates, max_candidates, 1);
 
   add_voter_button = createButton('add voter');
   add_voter_button.mousePressed(add_voter);
 
   add_candidate_button = createButton('add candidate');
   add_candidate_button.mousePressed(add_candidate);
+
+  delete_candidate_button = createButton('delete candidate');
+  delete_candidate_button.mousePressed(remove_candidate);
+
+  delete_voter_button = createButton('delete voter');
+  delete_voter_button.mousePressed(remove_voter);
 
   reset_button = createButton('reset enviroment');
   reset_button.mousePressed(reset_enviroment);
