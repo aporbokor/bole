@@ -8,8 +8,12 @@ let max_candidates = 24;
 
 let votingmethod;
 let results;
+
 let selected;
 let last_selected;
+let clicked_selected;
+let selected_div;
+
 let locked = false;
 let strategic_chance = 0.2;
 let voter_population = 100;
@@ -72,6 +76,14 @@ function remove_voter(){
   if (voters.length != min_voters){
     voters.pop();
   }
+}
+
+function remove_specific_voter(voter){
+  voters = voters.filter(function(curval){return curval != voter})
+}
+
+function remove_specific_candidate(candidate){
+  candidates = candidates.filter(function(curval){return curval != candidate})
 }
 
 function random_candidate(i){
@@ -148,9 +160,17 @@ function find_selected(){
   selected = undefined;
 }
 
+function load_clicked_selected(){
+
+}
+
 function mousePressed(){
   if (selected != undefined){
     locked = true;
+    clicked_selected = last_selected;
+    console.log(clicked_selected)
+    selected_div.child()[0].remove();
+    selected_div.child(clicked_selected.get_div())
   }
 }
 
@@ -201,7 +221,7 @@ function int_to_str(i){
 }
 
 function display_votes(){
-  vote_result_div.html('');
+  vote_result_div.html('Voting results:');
   for (let i = 0; i < voting_results.length; i++){
     let subdiv = createDiv(int_to_str(i+1));
     let places = voting_results[i];
@@ -277,7 +297,10 @@ function setup() {
   simulate_button = createButton('simulate');
   simulate_button.mousePressed(simulate_voting);
 
-  vote_result_div = createDiv();
+  selected_div = createDiv('Nobody is selected');
+  selected_div.position(WIDTH,round(HEIGHT/2));
+
+  vote_result_div = createDiv('Voting results:');
 
 }
 
