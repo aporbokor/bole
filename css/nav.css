@@ -1,151 +1,35 @@
-/* Navbar */
-
+/*Navbar*/
 nav {
-  height: 3rem;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 2rem;
+  height: 2rem;
   background: var(--primary-black);
-  z-index: 1000;
+  border-top: 1px solid var(--primary-blue);
 }
-
-.company-name {
-  font-size: 2rem;
-  color: var(--primary-green);
-  order: 1;
-  margin-left: 10vw;
-}
-
-.navbar-link {
-  text-decoration: none;
-  font-size: 0.9rem;
-  color: var(--primary-green);
-  order: 2;
-}
-
-.navbar-link:hover {
-  cursor: pointer;
-  color: var(--secondary-green);
-}
-
-.navbar-links {
+.burger {
   display: none;
 }
 
-.nav-btn {
-  cursor: pointer;
-}
-
-.nav-burger {
-  display: none;
-}
-
-@media  {
-  .body {
-    overflow-y: hidden;
-  }
-
-  .navbar-link {
-    display: none;
-  }
-
-  .nav-btn {
-    position: absolute;
-  }
-
-  .nav-burger {
+@media (max-width: var(--mobile)) {
+  .burger {
     display: block;
-    left: 1rem;
   }
-
-  .nav-burger div {
-    width: 20px;
-    height: 1px;
-    background-color: var(--lght);
+  .burger div {
+    width: 40px;
+    height: 3px;
+    background-color: var(--primary-green);
     margin: 5px;
     transition: all 0.5s ease;
   }
-
-  .navbar-links {
-    display: initial;
-    position: absolute;
-    left: 0;
-    height: calc(100vh - 3rem);
-    width: 100%;
-    top: 100%;
-    background: var(--body);
-    transform: scale(1, 0);
-    transform-origin: top;
-    transition: transform 500ms ease-in-out;
-  }
-
-  .navbar-links ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    list-style: none;
-    flex-direction: column;
-  }
-
-  .navbar-links li {
-    border-top: 0.5px solid var(--border);
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 0 10vw;
-  }
-
-  .navbar-links li:first-child {
-    border-top: none;
-  }
-
-  .navbar-links a {
-    text-decoration: none;
-    font-size: 0.95rem;
-    color: var(--lght);
-    font-weight: 300;
-    opacity: 0;
-    transition: opacity 250ms ease-in-out 250ms;
-  }
-
-  .navbar-links a:hover {
-    cursor: pointer;
-    color: var(--gnr);
-  }
-
-  .nav-active {
+  .burger-active {
     transform: scale(1, 1);
   }
-
-  .navLinks-active {
-    opacity: 1 !important;
-  }
-
-  .company-name {
-    margin-left: 0;
-  }
 }
-
-/*TODO: media query for desktop*/
-
 .toggle .line1 {
-  transform: rotate(-45deg) translate(-2.5px, 6px);
-  -webkit-transform: rotate(-45deg) translate(-2.5px, 6px);
-  -moz-transform: rotate(-45deg) translate(-2.5px, 6px);
-  -ms-transform: rotate(-45deg) translate(-2.5px, 6px);
-  -o-transform: rotate(-45deg) translate(-2.5px, 6px);
+  transform: rotate(-45 deg) translate(-2.5px, 6px);
 }
 .toggle .line2 {
   opacity: 0;
 }
 .toggle .line3 {
   transform: rotate(45deg) translate(-2.5px, -6px);
-  -webkit-transform: rotate(45deg) translate(-2.5px, -6px);
-  -moz-transform: rotate(45deg) translate(-2.5px, -6px);
-  -ms-transform: rotate(45deg) translate(-2.5px, -6px);
-  -o-transform: rotate(45deg) translate(-2.5px, -6px);
 }
