@@ -45,12 +45,14 @@ let votingmethods = new Map([
   ['theoretical_perfect', PerfectVoter]]
 )
 
-let strategic_voter_color = '#B63946';
+let strategic_voter_color = 'rgba(0, 0, 0, 0.5)';
 let honest_voter_color = '#E63946';
 let voter_size = 15;
+let voter_strokeWeight = 1;
 
 let candidate_colors = ['#F1FAEE', '#A8DADC', '#457B9D', '#1D3557'];
 let candidate_size = 35;
+let candidate_strokeWeight = 4;
 
 let selected_size = 5;
 
@@ -63,7 +65,7 @@ function rewrapp_index(arr,i){
 }
 
 function random_voter(){
-  return new Voter(round(random(WIDTH)), round(random(HEIGHT)), random_bool(strategic_chance));
+  return new Voter(round(random(WIDTH)), round(random(HEIGHT)), random_bool(strategic_chance),honest_voter_color);
 }
 
 function add_voter(){
@@ -87,7 +89,7 @@ function remove_specific_candidate(candidate){
 }
 
 function random_candidate(i){
-  return new Candidate(round(random(WIDTH)), round(random(HEIGHT)), rewrapp_index(candidate_colors,i), 'cnadidate#' + i);
+  return new Candidate(round(random(WIDTH)), round(random(HEIGHT)), rewrapp_index(candidate_colors,i), 'candidate#' + i);
 }
 
 function add_candidate(){
@@ -222,7 +224,7 @@ function int_to_str(i){
   return i + 'th';
 }
 
-function display_votes(){
+function display_votes(voter_maschine){
   vote_result_div.html('Voting results:');
   for (let i = 0; i < voting_results.length; i++){
     let subdiv = createDiv(int_to_str(i+1));
@@ -232,6 +234,7 @@ function display_votes(){
     }
     vote_result_div.child(subdiv);
   }
+  voter_maschine.extra_visualize(voters);
 }
 
 function simulate_voting(){
@@ -253,7 +256,7 @@ function simulate_voting(){
   console.log('The voters:');
   console.log(voters);
 
-  display_votes();
+  display_votes(voter_maschine);
 }
 
 function setup() {
@@ -262,7 +265,7 @@ function setup() {
 
   // Set colors
   // fill(204, 101, 192, 127);
-  stroke(127, 63, 120);
+  stroke(0,0,0);
   FPS = document.createElement('p');
   document.body.appendChild(FPS);
 

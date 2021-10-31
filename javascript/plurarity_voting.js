@@ -35,7 +35,14 @@ class PlurarityVoter extends VotingMethod{
   count_votes(){
     return count_votes_for_ints(this.candidates);
   }
+
+  extra_visualize(voters){
+    for (let i = 0; i<voters.length; i++){
+      voters[i].color = voters[i].voted_for.color;
+    }
+  }
 }
+
 
 // Testing stuff
 // let voters = [new Voter(0,0,false), new Voter(1,1,false), new Voter(0.5,0.5,false), new Voter(0.1,0.1,false)];

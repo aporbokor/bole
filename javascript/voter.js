@@ -1,7 +1,8 @@
 class Voter{
-  constructor(x, y, strategic){
+  constructor(x, y, strategic, color){
     this.x = x;
     this.y = y;
+    this.color = color;
     this.strategic = strategic;
     this.voted_for = undefined;
   }
@@ -13,11 +14,13 @@ class Voter{
   }
 
   show(){
-    fill(honest_voter_color);
+    strokeWeight(voter_strokeWeight)
+    fill(this.color);
+    circle(this.x, this.y, voter_size);
     if (this.strategic){
       fill(strategic_voter_color);
+      circle(this.x, this.y, voter_size);
     }
-    circle(this.x, this.y, voter_size);
   }
 
   get_div(){

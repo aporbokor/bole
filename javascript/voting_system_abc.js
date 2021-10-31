@@ -27,6 +27,9 @@ class VotingMethod{
   count_votes(){
       throw new Error("You must implement a count_votes method to your VotingMethod class");
   }
+  extra_visualize(voters){
+    throw new Error("You must implement a extra_visualize method to your VotingMethod class");
+  }
 }
 
 function count_votes_for_ints(candidates){

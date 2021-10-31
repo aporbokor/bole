@@ -7,6 +7,7 @@ class Candidate{
     this.votes = undefined;
   }
   show(){
+    strokeWeight(candidate_strokeWeight)
     fill(this.color);
     circle(this.x, this.y, candidate_size);
   }
