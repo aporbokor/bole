@@ -1,6 +1,6 @@
 let voters;
 let min_voters = 1;
-let max_voters = 999;
+let max_voters = 1000;
 
 let candidates;
 let min_candidates = 2;
@@ -52,7 +52,7 @@ let voter_strokeWeight = 1;
 
 let candidate_colors = ['#F1FAEE', '#A8DADC', '#457B9D', '#1D3557'];
 let candidate_size = 35;
-let candidate_strokeWeight = 4;
+let candidate_strokeWeight = 7;
 
 let selected_size = 5;
 
@@ -265,7 +265,7 @@ function setup() {
 
   // Set colors
   // fill(204, 101, 192, 127);
-  stroke(0,0,0);
+  stroke(0,0,0,80);
   FPS = document.createElement('p');
   document.body.appendChild(FPS);
 
@@ -303,7 +303,7 @@ function setup() {
   simulate_button.mousePressed(simulate_voting);
 
   selected_div = createDiv('Nobody is selected');
-  selected_div.position(WIDTH,round(HEIGHT/2));
+  selected_div.position(WIDTH+10,round(HEIGHT/2));
 
   vote_result_div = createDiv('Voting results:');
 
