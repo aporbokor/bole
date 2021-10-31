@@ -9,13 +9,23 @@ let strategic_chance = 0.2;
 let voter_population = 100;
 let candidate_population = 3;
 
+let vote_result_div;
+let voting_results;
+
 
 let strategic_chance_slider;
 let voter_population_slider;
 let candidate_population_slider;
 let reset_button;
 let simulate_button;
+
+let add_voter_button;
+let delete_voter_button;
+let add_candidate_button;
+let delete_candidate_button;
+
 let voting_type_selector;
+let FPS;
 
 const WIDTH = 720;
 const HEIGHT = 400;
@@ -46,8 +56,16 @@ function random_voter(){
   return new Voter(round(random(WIDTH)), round(random(HEIGHT)), random_bool(strategic_chance));
 }
 
+function add_voter(){
+  voters.push(random_voter());
+}
+
 function random_candidate(i){
-  return new Candidate(round(random(WIDTH)), round(random(HEIGHT)), rewrapp_index(candidate_colors,i));
+  return new Candidate(round(random(WIDTH)), round(random(HEIGHT)), rewrapp_index(candidate_colors,i), 'cnadidate#' + i);
+}
+
+function add_candidate(){
+  candidates.push(random_candidate(candidates.length))
 }
 
 function make_voters(db){
@@ -143,6 +161,34 @@ function select_voting(){
   votingmethod = votingmethods.get(voting_type_selector.value())
 
 }
+function int_to_str(i){
+  let str_int = '' + i;
+  if (str_int.slice(-2,-3) === '1'){
+    return i + 'th';
+  }
+  if (str_int.slice(-1) === '1'){
+    return i + 'st';
+  }
+  if (str_int.slice(-1) === '2'){
+    return i + 'nd';
+  }
+  if (str_int.slice(-1) === '3'){
+    return i + 'rd';
+  }
+  return i + 'th';
+}
+
+function display_votes(){
+  vote_result_div.html('');
+  for (let i = 0; i < voting_results.length; i++){
+    let subdiv = createDiv(int_to_str(i+1));
+    let places = voting_results[i];
+    for (let j = 0; j < places.length; j++){
+      subdiv.child(places[j].get_p());
+    }
+    vote_result_div.child(subdiv);
+  }
+}
 
 function simulate_voting(){
   let voter_maschine = new votingmethod(candidates);
@@ -152,14 +198,18 @@ function simulate_voting(){
   for (let i = 0; i<voters.length; i++){
     voter_maschine.registrate_vote(voters[i]);
   }
+
+  voting_results = voter_maschine.count_votes()
   console.log('The voting maschine:');
   console.log(voter_maschine);
 
   console.log('The results:');
-  console.log(voter_maschine.count_votes());
+  console.log(voting_results);
 
   console.log('The voters:');
   console.log(voters);
+
+  display_votes();
 }
 
 function setup() {
@@ -169,6 +219,8 @@ function setup() {
   // Set colors
   // fill(204, 101, 192, 127);
   stroke(127, 63, 120);
+  FPS = document.createElement('p');
+  document.body.appendChild(FPS);
 
   make_voters(voter_population);
   make_candidates(candidate_population);
@@ -176,6 +228,12 @@ function setup() {
   strategic_chance_slider = createSlider(0, 1, 0, 0.01);
   voter_population_slider = createSlider(1,1000, 1, 1);
   candidate_population_slider = createSlider(2, 20, 1);
+
+  add_voter_button = createButton('add voter');
+  add_voter_button.mousePressed(add_voter);
+
+  add_candidate_button = createButton('add candidate');
+  add_candidate_button.mousePressed(add_candidate);
 
   reset_button = createButton('reset enviroment');
   reset_button.mousePressed(reset_enviroment);
@@ -191,11 +249,16 @@ function setup() {
   simulate_button = createButton('simulate');
   simulate_button.mousePressed(simulate_voting);
 
+  vote_result_div = createDiv();
+
 }
 
 function draw() {
+  let start = new Date().getTime();
   find_selected();
   handle_elements();
   draw_background();
   draw_everyone();
+  let end = new Date().getTime() - start;
+  FPS.innerText = 'FPS: ' + frameRate();
 }
