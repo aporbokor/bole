@@ -168,8 +168,10 @@ function mousePressed(){
   if (selected != undefined){
     locked = true;
     clicked_selected = last_selected;
-    console.log(clicked_selected)
-    selected_div.child()[0].remove();
+    let ch = selected_div.child();
+    if (ch.length != 0){
+      ch[0].remove();
+    }
     selected_div.child(clicked_selected.get_div())
   }
 }

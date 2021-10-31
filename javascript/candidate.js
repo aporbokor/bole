@@ -41,9 +41,14 @@ class Candidate{
     }else if (typeof this.votes === 'undefined'){
       votes_d.child(createP('none'))
     }else{
-      voteds_d.child(createP('Votes: ' + this.votes));
+      votes_d.child(createP('Votes: ' + this.votes));
 
     }
+
+    let color_picker = createColorPicker(this.color);
+    color_picker.parent_candidate = this;
+    color_picker.parent_div = returned;
+    color_picker.input(set_color);
 
     let delete_button = createButton('Delete');
     delete_button.parent_candidate = this;
@@ -53,6 +58,7 @@ class Candidate{
     returned.child(xp);
     returned.child(yp);
     returned.child(votes_d);
+    returned.child(color_picker);
     returned.child(delete_button);
 
     return returned;
@@ -66,4 +72,10 @@ function delete_selected_candidate(){
 
 function update_candidate_name(){
   this.parent_candidate.name = this.value();
+}
+
+function set_color(){
+  let val = this.value();
+  this.parent_candidate.color = this.value();
+  this.parent_div.style('color',val);
 }
