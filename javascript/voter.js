@@ -1,10 +1,13 @@
-class Voter{
+class Voter extends Person{
   constructor(x, y, strategic, color){
+    super();
     this.x = x;
     this.y = y;
     this.color = color;
     this.strategic = strategic;
     this.voted_for = undefined;
+    this.size = 0;
+    this.target_size = voter_size;
   }
 
   distance_to_candidate(candidate){
@@ -14,13 +17,15 @@ class Voter{
   }
 
   show(){
-    strokeWeight(voter_strokeWeight)
+    this.grow_to_size();
+    strokeWeight(voter_strokeWeight);
     fill(this.color);
-    circle(this.x, this.y, voter_size);
+    circle(this.x, this.y, this.size);
     if (this.strategic){
       fill(strategic_voter_color);
-      circle(this.x, this.y, voter_size);
+      circle(this.x, this.y, this.size);
     }
+    this.target_size = voter_size;
   }
 
   get_div(){
@@ -49,12 +54,15 @@ class Voter{
     let delete_button = createButton('Delete');
     delete_button.parent_voter = this;
     delete_button.mousePressed(delete_selected_voter);
+    delete_button.class('delete_person');
 
     returned.child(xp);
     returned.child(yp);
     returned.child(strategic_p);
     returned.child(voted_for_d);
     returned.child(delete_button);
+
+    returned.class('voterdiv');
 
     return returned;
   }

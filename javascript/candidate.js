@@ -1,15 +1,20 @@
-class Candidate{
+class Candidate extends Person{
   constructor(x, y, color, name){
+    super();
     this.x = x;
     this.y = y;
     this.name = name;
     this.color = color;
     this.votes = undefined;
+    this.size = 0;
+    this.target_size = candidate_size;
   }
   show(){
-    strokeWeight(candidate_strokeWeight)
+    this.grow_to_size();
+    strokeWeight(candidate_strokeWeight);
     fill(this.color);
-    circle(this.x, this.y, candidate_size);
+    circle(this.x, this.y, this.size);
+    this.target_size = candidate_size;
   }
 
   get_p(){
@@ -21,6 +26,14 @@ class Candidate{
     }
     let returned = createP(this.name + '|votes:' + vote_);
     returned.style('color', this.color);
+    returned.candidate_parent = this;
+    returned.mousePressed(function (){
+      clicked_selected = this.candidate_parent;
+      load_clicked_selected();
+    });
+    returned.mouseMoved(function(){selected = this.candidate_parent})
+    returned.class('candidate_p')
+
     return returned;
   }
 
@@ -54,6 +67,7 @@ class Candidate{
     let delete_button = createButton('Delete');
     delete_button.parent_candidate = this;
     delete_button.mousePressed(delete_selected_candidate);
+    delete_button.class('delete_person');
 
     returned.child(name);
     returned.child(xp);
@@ -61,6 +75,8 @@ class Candidate{
     returned.child(votes_d);
     returned.child(color_picker);
     returned.child(delete_button);
+
+    returned.class('candidate_div');
 
     return returned;
   }

@@ -1,10 +1,10 @@
 let voters;
-let min_voters = 1;
-let max_voters = 1000;
+const min_voters = 1;
+const max_voters = 1000;
 
 let candidates;
-let min_candidates = 2;
-let max_candidates = 24;
+const min_candidates = 2;
+const max_candidates = 24;
 
 let votingmethod;
 let results;
@@ -25,6 +25,7 @@ let voting_results;
 
 let strategic_chance_slider;
 let voter_population_slider;
+let reset_voter_color_buttton;
 let candidate_population_slider;
 let reset_button;
 let simulate_button;
@@ -45,16 +46,22 @@ let votingmethods = new Map([
   ['theoretical_perfect', PerfectVoter]]
 )
 
-let strategic_voter_color = 'rgba(0, 0, 0, 0.5)';
-let honest_voter_color = '#E63946';
-let voter_size = 15;
-let voter_strokeWeight = 1;
+const grow_speed = 1;
+const selected_size_adder = 5;
+const clicked_selected_size_adder = 7;
+const clicked_selected_laser_color = 'rgb(255, 0, 0)'
 
-let candidate_colors = ['#F1FAEE', '#A8DADC', '#457B9D', '#1D3557'];
-let candidate_size = 35;
-let candidate_strokeWeight = 7;
+const default_stroke = 'rgba(0,0,0,0.5)'
+const strategic_voter_color = 'rgba(0, 0, 0, 0.5)';
+const honest_voter_color = '#E63946';
+const voter_size = 15;
+const voter_strokeWeight = 1;
 
-let selected_size = 5;
+const candidate_colors = ['#F1FAEE', '#A8DADC', '#457B9D', '#1D3557'];
+const candidate_size = 35;
+const candidate_strokeWeight = 7;
+
+const selected_size = 5;
 
 function random_bool(true_chance){
   return (random()<true_chance);
@@ -71,6 +78,12 @@ function random_voter(){
 function add_voter(){
   if (voters.length != max_voters){
     voters.push(random_voter());
+  }
+}
+
+function reset_voter_color(){
+  for (let i = 0; i < voters.length; i++){
+    voters[i].color = honest_voter_color
   }
 }
 
@@ -118,13 +131,32 @@ function make_candidates(db){
   }
 }
 
+function empty_function(){
+  return undefined;
+}
+
+let extra_function = empty_function;
+
+let extra_varible;
+
 function draw_everyone(){
+  if (typeof selected != 'undefined'){
+    selected.target_size = selected.target_size + selected_size_adder;
+  }
+
   for (let i = 0; i<voters.length; i++){
     voters[i].show();
   }
 
   for (i = 0; i<candidates.length; i++){
     candidates[i].show();
+  }
+
+  if (typeof clicked_selected != 'undefined'){
+    clicked_selected.target_size = clicked_selected.target_size + clicked_selected_size_adder;
+    stroke(clicked_selected_laser_color);
+    line(clicked_selected.x, 0, clicked_selected.x, clicked_selected.y);
+    stroke(default_stroke);
   }
 
 }
@@ -163,18 +195,19 @@ function find_selected(){
 }
 
 function load_clicked_selected(){
-
+  console.log(clicked_selected)
+  let ch = selected_div.child();
+  if (ch.length != 0){
+    ch[0].remove();
+  }
+  selected_div.child(clicked_selected.get_div());
 }
 
 function mousePressed(){
   if (selected != undefined){
     locked = true;
     clicked_selected = last_selected;
-    let ch = selected_div.child();
-    if (ch.length != 0){
-      ch[0].remove();
-    }
-    selected_div.child(clicked_selected.get_div())
+    load_clicked_selected();
   }
 }
 
@@ -228,6 +261,7 @@ function display_votes(voter_maschine){
   vote_result_div.html('Voting results:');
   for (let i = 0; i < voting_results.length; i++){
     let subdiv = createDiv(int_to_str(i+1));
+    subdiv.class('place_div')
     let places = voting_results[i];
     for (let j = 0; j < places.length; j++){
       subdiv.child(places[j].get_p());
@@ -265,7 +299,7 @@ function setup() {
 
   // Set colors
   // fill(204, 101, 192, 127);
-  stroke(0,0,0,80);
+  stroke(default_stroke);
   FPS = document.createElement('p');
   document.body.appendChild(FPS);
 
@@ -278,6 +312,9 @@ function setup() {
 
   add_voter_button = createButton('add voter');
   add_voter_button.mousePressed(add_voter);
+
+  reset_voter_color_buttton = createButton('reset voter colors');
+  reset_voter_color_buttton.mousePressed(reset_voter_color)
 
   add_candidate_button = createButton('add candidate');
   add_candidate_button.mousePressed(add_candidate);
@@ -301,20 +338,26 @@ function setup() {
 
   simulate_button = createButton('simulate');
   simulate_button.mousePressed(simulate_voting);
+  simulate_button.class('simulate_button')
 
   selected_div = createDiv('Nobody is selected');
   selected_div.position(WIDTH+10,round(HEIGHT/2));
+  selected_div.class('selected')
 
   vote_result_div = createDiv('Voting results:');
+  vote_result_div.class('vote_results');
 
 }
 
 function draw() {
   let start = new Date().getTime();
+
+  draw_background();
+  extra_function();
+  draw_everyone();
   find_selected();
   handle_elements();
-  draw_background();
-  draw_everyone();
+
   let end = new Date().getTime() - start;
   FPS.innerText = 'FPS: ' + frameRate();
 }

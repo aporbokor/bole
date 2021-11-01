@@ -42,6 +42,14 @@ class PerfectVoter extends VotingMethod{
     return count_votes_for_ints(this.candidates).reverse();
 
   }
+
+  extra_visualize(voters){
+    extra_varible = this
+    extra_function = function(){
+      fill(0)
+      circle(extra_varible.average_x, extra_varible.average_y, voter_size)
+    }
+  }
 }
 
 // Testing stuff
