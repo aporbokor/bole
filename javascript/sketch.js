@@ -38,6 +38,7 @@ let delete_candidate_button;
 let voting_type_selector;
 let FPS;
 
+let canvas;
 const WIDTH = 720;
 const HEIGHT = 400;
 
@@ -298,7 +299,8 @@ function simulate_voting(){
 
 function setup() {
   // Create the canvas
-  createCanvas(WIDTH, HEIGHT);
+  canvas = createCanvas(WIDTH, HEIGHT);
+  canvas.class('canvas')
 
   // Set colors
   // fill(204, 101, 192, 127);
