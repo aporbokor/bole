@@ -56,3 +56,9 @@ function count_votes_for_ints(candidates){
   }
   return result;
 }
+
+function best_candidate_tier_list(voter, candidates){
+  let returned = candidates.concat([]);
+  returned.sort(function (a,b){return voter.distance_to_candidate(b)-voter.distance_to_candidate(a)});
+  return returned;
+}

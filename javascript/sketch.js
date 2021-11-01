@@ -41,9 +41,11 @@ let FPS;
 const WIDTH = 720;
 const HEIGHT = 400;
 
+const approval_range = Math.floor(WIDTH*0.3);
 let votingmethods = new Map([
   ['plurarity', PlurarityVoter],
-  ['theoretical_perfect', PerfectVoter]]
+  ['theoretical perfect', PerfectVoter],
+  ['approval voting', ApprovalVoter]]
 )
 
 const grow_speed = 1;
@@ -237,7 +239,8 @@ function reset_enviroment(){
 }
 
 function select_voting(){
-  votingmethod = votingmethods.get(voting_type_selector.value())
+  votingmethod = votingmethods.get(voting_type_selector.value());
+  extra_function = empty_function
 
 }
 function int_to_str(i){
