@@ -34,8 +34,9 @@ a,
 li,
 span,
 div,
-p {
-  font-family: "PT Sans", sans-serif;
+p,
+button {
+  font-family: "Nunito", sans-serif;
 }
 
 h1,
@@ -44,5 +45,5 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "PT Serif", serif;
+  font-family: "Comfortaa", cursive;
 }
