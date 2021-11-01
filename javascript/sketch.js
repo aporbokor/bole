@@ -13,6 +13,7 @@ let selected;
 let last_selected;
 let clicked_selected;
 let selected_div;
+let szim_gombok;
 
 let locked = false;
 let strategic_chance = 0.2;
@@ -198,12 +199,13 @@ function find_selected(){
 }
 
 function load_clicked_selected(){
-  console.log(clicked_selected)
-  let ch = selected_div.child();
-  if (ch.length != 0){
-    ch[0].remove();
+  if (typeof(clicked_selected) != 'undefined'){
+    let ch = selected_div.child();
+    if (ch.length != 0){
+      ch[0].remove();
+    }
+    selected_div.child(clicked_selected.get_div());
   }
-  selected_div.child(clicked_selected.get_div());
 }
 
 function mousePressed(){
@@ -295,6 +297,7 @@ function simulate_voting(){
   console.log(voters);
 
   display_votes(voter_maschine);
+  load_clicked_selected();
 }
 
 function setup() {
@@ -310,6 +313,8 @@ function setup() {
 
   make_voters(voter_population);
   make_candidates(candidate_population);
+
+  szim_gombok = createDiv('szimulation buttons')
 
   strategic_chance_slider = createSlider(0, 1, 0, 0.01);
   voter_population_slider = createSlider(min_voters, max_voters, 1, 1);
@@ -344,6 +349,20 @@ function setup() {
   simulate_button = createButton('simulate');
   simulate_button.mousePressed(simulate_voting);
   simulate_button.class('simulate_button')
+
+  szim_gombok.child(strategic_chance_slider);
+  szim_gombok.child(voter_population_slider);
+  szim_gombok.child(candidate_population_slider);
+  szim_gombok.child(add_voter_button);
+  szim_gombok.child(reset_voter_color_buttton);
+  szim_gombok.child(add_candidate_button);
+  szim_gombok.child(delete_candidate_button);
+  szim_gombok.child(delete_voter_button);
+  szim_gombok.child(reset_button);
+  szim_gombok.child(voting_type_selector);
+  szim_gombok.child(simulate_button);
+
+  szim_gombok.class('sim_gombok')
 
   selected_div = createDiv('Nobody is selected');
   selected_div.position(WIDTH+10,round(HEIGHT/2));
