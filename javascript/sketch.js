@@ -220,11 +220,13 @@ function mouseDragged() {
   if (locked) {
     selected.x = constrain(mouseX, 0, WIDTH);
     selected.y = constrain(mouseY, 0, HEIGHT);
+    load_clicked_selected();
   }
 }
 
 function mouseReleased() {
   locked = false;
+  load_clicked_selected();
 }
 
 function handle_elements(){
