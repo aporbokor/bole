@@ -5,13 +5,18 @@ nav {
   background: var(--primary-black);
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .company-name {
   color: white;
   font-size: 1.2rem;
-  margin-left: 1rem;
 }
 nav button {
-  margin-left: 0.5rem;
   height: 2rem;
+  margin-left: 0.5rem;
 }
