@@ -78,6 +78,13 @@ class ApprovalVoter extends VotingMethod{
         circle(candidates[i].x, candidates[i].y, approval_range*2)
       }
       stroke(default_stroke);
+      if (candidates.some(function(a){return a === selected}){
+        for (let i = 0; i < voters.length; i++){
+          if (voters[i].voted_for.some(function(a){return a === selected)){
+            voters[i].target_size += selected_size_adder;
+          }
+        }
+      }
     }
   }
 }
