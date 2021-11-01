@@ -1,11 +1,12 @@
 main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
   top: 3rem;
 }
 
+.sim_gombok {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .canvas {
 }
 
