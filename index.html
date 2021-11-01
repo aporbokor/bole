@@ -12,34 +12,19 @@
       rel="stylesheet"
     />
     <!--CSS stylesheets-->
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/nav.css" />
-    <link rel="stylesheet" type="text/css" href="css/header.css" />
-    <link rel="stylesheet" type="text/css" href="css/general.css" />
-    <link rel="stylesheet" type="text/css" href="css/simulation.css" />
-
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/simulation.css" />
+    <!--HTML sheets-->
+    <link rel="stylesheet" href="simulation.html" />
   </head>
   <body>
-    <header>
-      <div class="nav-btn company-name">globalize</div>
-    </header>
     <nav>
-      <div class="nav-btn burger">
-        <div class="line-1"></div>
-        <div class="line-2"></div>
-        <div class="line-3"></div>
-      </div>
+      <div class="company-name">globalize</div>
+      <button class="simulate-btn" onclick="location.href='simulation.html';">
+        SIMULATE
+      </button>
     </nav>
-
-
-		<script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
-    <script src="javascript/person.js"></script>
-    <script src="javascript/voter.js"></script>
-    <script src="javascript/candidate.js"></script>
-    <script src="javascript/voting_system_abc.js"></script>
-    <script src="javascript/plurarity_voting.js"></script>
-    <script src="javascript/perfect_voting.js"></script>
-    <script src="javascript/approval_voting.js"></script>
-		<script src="javascript/sketch.js"></script>
   </body>
 </html>
