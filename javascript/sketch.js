@@ -226,7 +226,6 @@ function mouseDragged() {
 
 function mouseReleased() {
   locked = false;
-  load_clicked_selected();
 }
 
 function handle_elements(){
