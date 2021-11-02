@@ -1,1 +1,25 @@
 /*Main*/
+main {
+  position: fixed;
+  top: 3rem;
+  height: 3rem - 100vh;
+  width: 100%;
+  background: gray;
+}
+main section {
+  margin: 2rem;
+}
+main section h2,
+h3 {
+  margin-bottom: 1rem;
+}
+
+main section h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+main section h3 {
+  font-style: italic;
+}
