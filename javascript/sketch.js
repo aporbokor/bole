@@ -305,12 +305,13 @@ function simulate_voting(){
 }
 
 function setup() {
-  // Create the canvas
   canvas = createCanvas(WIDTH, HEIGHT);
   canvas.class('canvas')
 
-  // Set colors
-  // fill(204, 101, 192, 127);
+  selected_div = createDiv('Nobody is selected');
+  selected_div.class('selected')
+
+
   stroke(default_stroke);
   FPS = document.createElement('p');
   document.body.appendChild(FPS);
@@ -380,9 +381,8 @@ function setup() {
   szim_gombok.child(szimulation_div);
   szim_gombok.class('sim_gombok')
 
-  selected_div = createDiv('Nobody is selected');
-  selected_div.position(WIDTH+10,round(HEIGHT/2));
-  selected_div.class('selected')
+  // selected_div = createDiv('Nobody is selected');
+  // selected_div.class('selected')
 
   vote_result_div = createDiv('Voting results:');
   vote_result_div.class('vote_results');

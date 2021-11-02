@@ -2,12 +2,24 @@ main {
   top: 3rem;
 }
 
+body{
+  overflow-y: scroll;
+}
+
+.sim_title{
+  font-size: 70px;
+  text-align: center;
+}
+
 .sim_gombok {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .canvas {
+  position: relative;
+  left: 0px;
+  top: 30px;
 }
 
 .vote_results {
@@ -21,6 +33,9 @@ main {
 }
 
 .selected {
+  position:relative;
+  top: -370px;
+  left: 740px;
 }
 
 .voterdiv {
