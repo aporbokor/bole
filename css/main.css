@@ -4,22 +4,17 @@ main {
   top: 3rem;
   height: 3rem - 100vh;
   width: 100%;
-  background: gray;
+  background: var(--accent);
 }
 main section {
   margin: 2rem;
 }
-main section h2,
-h3 {
-  margin-bottom: 1rem;
-}
 
 main section h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  text-decoration: underline;
+  margin-bottom: 1rem;
 }
-
-main section h3 {
-  font-style: italic;
+main section p {
+  margin-bottom: 0.5rem;
 }

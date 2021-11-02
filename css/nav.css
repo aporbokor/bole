@@ -2,7 +2,7 @@
 nav {
   top: 2rem;
   height: 3rem;
-  background: var(--primary-black);
+  background: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,10 +13,11 @@ nav {
   justify-content: center;
 }
 .company-name {
-  color: white;
+  color: var(--secondary);
   font-size: 1.2rem;
 }
 nav button {
   height: 2rem;
   margin-left: 0.5rem;
+  color: var(--primary);
 }

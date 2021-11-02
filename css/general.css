@@ -1,10 +1,8 @@
 /* Colors */
 :root {
-  --primary-green: #00b9ae;
-  --secondary-green: #009f93;
-  --secondary-blue: #02c3bd;
-  --primary-black: #03312e;
-  --accent: #037171;
+  --primary: #03312e;
+  --secondary: white;
+  --accent: gray;
 }
 
 /* Breakpoints */
@@ -37,13 +35,11 @@ div,
 p,
 button {
   font-family: "Nunito", sans-serif;
+  color: white;
 }
 
 h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h2 {
   font-family: "Comfortaa", cursive;
+  color: white;
 }
