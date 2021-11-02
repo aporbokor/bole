@@ -320,9 +320,9 @@ function setup() {
 
   szim_gombok = createDiv('szimulation buttons')
 
-  strategic_chance_slider = createSlider(0, 1, 0, 0.01);
-  voter_population_slider = createSlider(min_voters, max_voters, 1, 1);
-  candidate_population_slider = createSlider(min_candidates, max_candidates, 1);
+  strategic_chance_slider = slider_with_name('strategic voter chance: ',0, 1, 0, 0.01);
+  voter_population_slider = slider_with_name('number of voters: ', min_voters, max_voters, 1, 1);
+  candidate_population_slider = slider_with_name('number of candidates: ', min_candidates, max_candidates, 1, 1);
 
   add_voter_button = createButton('add voter');
   add_voter_button.mousePressed(add_voter);
