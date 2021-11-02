@@ -24,7 +24,7 @@ class Candidate extends Person{
     } else if (Array.isArray(this.votes)){
       vote_ = this.votes.toString();
     }
-    let returned = createP(this.name + '|votes:' + vote_);
+    let returned = createProgress(this.name + '|votes:', vote_, voters.length);
     returned.style('color', this.color);
     returned.candidate_parent = this;
     returned.mousePressed(function (){
