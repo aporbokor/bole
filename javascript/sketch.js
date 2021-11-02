@@ -14,6 +14,9 @@ let last_selected;
 let clicked_selected;
 let selected_div;
 let szim_gombok;
+let new_envitoment_div;
+let edit_enviroment_div;
+let simulation_div;
 
 let locked = false;
 let strategic_chance = 0.2;
@@ -349,20 +352,32 @@ function setup() {
 
   simulate_button = createButton('simulate');
   simulate_button.mousePressed(simulate_voting);
-  simulate_button.class('simulate_button')
+  simulate_button.class('simulate_button');
 
-  szim_gombok.child(strategic_chance_slider);
-  szim_gombok.child(voter_population_slider);
-  szim_gombok.child(candidate_population_slider);
-  szim_gombok.child(add_voter_button);
-  szim_gombok.child(reset_voter_color_buttton);
-  szim_gombok.child(add_candidate_button);
-  szim_gombok.child(delete_candidate_button);
-  szim_gombok.child(delete_voter_button);
-  szim_gombok.child(reset_button);
-  szim_gombok.child(voting_type_selector);
-  szim_gombok.child(simulate_button);
+  new_envitoment_div = createDiv('Nev enviroment');
+  new_envitoment_div.class('new_envitoment_div');
 
+  edit_enviroment_div = createDiv('Edit enviroment');
+  edit_enviroment_div.class('edit_enviroment_div');
+
+  szimulation_div = createDiv('Szimulation');
+  szimulation_div.class('szimulation_div');
+
+  new_envitoment_div.child(strategic_chance_slider);
+  new_envitoment_div.child(voter_population_slider);
+  new_envitoment_div.child(candidate_population_slider);
+  edit_enviroment_div.child(add_voter_button);
+  edit_enviroment_div.child(reset_voter_color_buttton);
+  edit_enviroment_div.child(add_candidate_button);
+  edit_enviroment_div.child(delete_candidate_button);
+  edit_enviroment_div.child(delete_voter_button);
+  new_envitoment_div.child(reset_button);
+  szimulation_div.child(voting_type_selector);
+  szimulation_div.child(simulate_button);
+
+  szim_gombok.child(new_envitoment_div);
+  szim_gombok.child(edit_enviroment_div);
+  szim_gombok.child(szimulation_div);
   szim_gombok.class('sim_gombok')
 
   selected_div = createDiv('Nobody is selected');
