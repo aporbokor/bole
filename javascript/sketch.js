@@ -50,7 +50,8 @@ const approval_range = Math.floor(WIDTH*0.3);
 let votingmethods = new Map([
   ['plurarity', PlurarityVoter],
   ['theoretical perfect', PerfectVoter],
-  ['approval voting', ApprovalVoter]]
+  ['approval voting', ApprovalVoter],
+  ['instant runof', InstantRunOffVoter]]
 )
 
 const grow_speed = 1;
@@ -283,6 +284,7 @@ function display_votes(voter_maschine){
 
 function simulate_voting(){
   let voter_maschine = new votingmethod(candidates);
+
 
   voter_maschine.prepare_for_voting();
 

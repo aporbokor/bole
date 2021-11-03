@@ -18,13 +18,9 @@ class Candidate extends Person{
   }
 
   get_p(){
-    let vote_ = 'unedfined';
-    if (typeof this.votes === 'number'){
-      vote_ = this.votes;
-    } else if (Array.isArray(this.votes)){
-      vote_ = this.votes.toString();
-    }
-    let returned = createProgress(this.name + '|votes:', vote_, voters.length);
+
+    let returned = createProgress(this.name + '|votes:', this.votes, voters.length);
+
     returned.style('color', this.color);
     returned.candidate_parent = this;
     returned.mousePressed(function (){
@@ -50,7 +46,7 @@ class Candidate extends Person{
 
     let votes_d = createDiv('votes:');
     if (Array.isArray(this.votes)){
-        voteds_d.child(createP('Votes:' + this.votes.toString()));
+        votes_d.child(createP('Votes:' + this.votes.toString()));
 
     }else if (typeof this.votes === 'undefined'){
       votes_d.child(createP('none'))

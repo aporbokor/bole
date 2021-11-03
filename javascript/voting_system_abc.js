@@ -28,7 +28,7 @@ class VotingMethod{
       throw new Error("You must implement a count_votes method to your VotingMethod class");
   }
   extra_visualize(voters){
-    throw new Error("You must implement a extra_visualize method to your VotingMethod class");
+  return undefined;
   }
 }
 
@@ -59,6 +59,6 @@ function count_votes_for_ints(candidates){
 
 function best_candidate_tier_list(voter, candidates){
   let returned = candidates.concat([]);
-  returned.sort(function (a,b){return voter.distance_to_candidate(b)-voter.distance_to_candidate(a)});
+  returned.sort(function (a,b){return voter.distance_to_candidate(a)-voter.distance_to_candidate(b)});
   return returned;
 }

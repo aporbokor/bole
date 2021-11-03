@@ -18,13 +18,29 @@ function slider_with_name(name, min, max, value, step){
 
 function createProgress(name, value, max){
   let returned = createDiv();
-  let bar = document.createElement('progress');
-  bar.setAttribute("value", value);
-  bar.setAttribute("max", max);
-  bar.innerHTML = name;
 
-  returned.child(createP(name + value));
-  returned.child(bar);
+  if (typeof(value) === 'number'){
 
+    let bar = document.createElement('progress');
+    bar.setAttribute("value", value);
+    bar.setAttribute("max", max);
+    bar.innerHTML = name;
+
+    returned.child(createP(name + value));
+    returned.child(bar);
+
+  } else if (Array.isArray(value)){
+    returned.child(createP(name + value.toString()));
+    for (let i = 0; i < value.length; i++){
+      let bar = document.createElement('progress');
+      bar.setAttribute("value", i);
+      bar.setAttribute("max", max);
+      bar.innerHTML = name;
+
+      returned.child(bar)
+      returned.child(document.createElement('b'))
+    }
+
+  }
   return returned;
 }
