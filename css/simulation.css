@@ -11,11 +11,6 @@ body {
   background: transparent; /* Optional: just make scrollbar invisible */
 }
 
-.sim_title {
-  font-size: 70px;
-  text-align: center;
-}
-
 .sim_gombok {
   display: flex;
   align-items: center;
@@ -33,9 +28,11 @@ body {
 }
 
 .place_div {
+  /* each place in the vote_results div */
 }
 
 .candidate_p {
+  /* The candidates representation which only contains the candidates name and votes visualized by proggresbars*/
 }
 
 .selected {
@@ -45,15 +42,19 @@ body {
 }
 
 .voterdiv {
+  /* If the selected person is a voter, this is the style which the voter is gona appear in */
 }
 
 .candidate_div {
+  /* If the selected person is a candidate, this is the style which the candidate is gona appear in */
 }
 
 .delete_person {
+  /* The style of the delete button inside the selected div */
 }
 
 .named_slider {
+  /* The sytle of the divs which have a p and a slider */
 }
 
 .simulate_button {
@@ -68,4 +69,8 @@ body {
 }
 .edit_enviroment_div {
   width: 143.15px;
+}
+
+.tool_div{
+  
 }

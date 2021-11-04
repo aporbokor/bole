@@ -42,6 +42,15 @@ let delete_candidate_button;
 let voting_type_selector;
 let FPS;
 
+let tool_div;
+let current_tool;
+let tools = new Map([['no tool',NoTool],
+                     ['delete tool', DeleteTool]]);
+let tool_selector;
+let tool_size;
+let max_tool_size = 200;
+let tool_color = 'green'
+
 let canvas;
 const WIDTH = 720;
 const HEIGHT = 400;
@@ -97,7 +106,7 @@ function reset_voter_color(){
 
 function remove_voter(){
   if (voters.length != min_voters){
-    voters.pop();
+    delete voters.pop();
   }
 }
 
@@ -148,6 +157,8 @@ let extra_function = empty_function;
 let extra_varible;
 
 function draw_everyone(){
+  stroke(default_stroke);
+
   if (typeof selected != 'undefined'){
     selected.target_size = selected.target_size + selected_size_adder;
   }
@@ -218,6 +229,7 @@ function mousePressed(){
     clicked_selected = last_selected;
     load_clicked_selected();
   }
+  current_tool.on_click();
 }
 
 function mouseDragged() {
@@ -226,10 +238,12 @@ function mouseDragged() {
     selected.y = constrain(mouseY, 0, HEIGHT);
     load_clicked_selected();
   }
+  current_tool.on_drag();
 }
 
 function mouseReleased() {
   locked = false;
+  current_tool.on_relase();
 }
 
 function handle_elements(){
@@ -249,8 +263,13 @@ function reset_enviroment(){
 function select_voting(){
   votingmethod = votingmethods.get(voting_type_selector.value());
   extra_function = empty_function
-
 }
+
+function select_tool(){
+  let current_tool_class = tools.get(tool_selector.value());
+  current_tool = new current_tool_class()
+}
+
 function int_to_str(i){
   let str_int = '' + i;
   if (str_int.slice(-2,-3) === '1'){
@@ -350,8 +369,19 @@ function setup() {
   for (const x of votingmethods.entries()) {
     voting_type_selector.option(x[0]);
   }
+
   voting_type_selector.changed(select_voting);
   select_voting();
+
+  tool_selector = createSelect();
+  for (const x of tools.entries()){
+    tool_selector.option(x[0]);
+  }
+
+  tool_selector.changed(select_tool);
+  select_tool();
+
+  tool_size = slider_with_name('tool size: ', 0, max_tool_size,0,1);
 
   simulate_button = createButton('simulate');
   simulate_button.mousePressed(simulate_voting);
@@ -366,6 +396,9 @@ function setup() {
   szimulation_div = createDiv('Szimulation');
   szimulation_div.class('szimulation_div');
 
+  tool_div = createDiv('tools');
+  tool_div.class('tool_div');
+
   new_envitoment_div.child(strategic_chance_slider);
   new_envitoment_div.child(voter_population_slider);
   new_envitoment_div.child(candidate_population_slider);
@@ -377,11 +410,14 @@ function setup() {
   new_envitoment_div.child(reset_button);
   szimulation_div.child(voting_type_selector);
   szimulation_div.child(simulate_button);
+  tool_div.child(tool_selector);
+  tool_div.child(tool_size);
 
   szim_gombok.child(new_envitoment_div);
   szim_gombok.child(edit_enviroment_div);
   szim_gombok.child(szimulation_div);
-  szim_gombok.class('sim_gombok')
+  szim_gombok.class('sim_gombok');
+  szim_gombok.child(tool_div);
 
   // selected_div = createDiv('Nobody is selected');
   // selected_div.class('selected')
@@ -398,8 +434,9 @@ function draw() {
 
   draw_background();
   extra_function();
-  draw_everyone();
   find_selected();
+  current_tool.draw();
+  draw_everyone();
   handle_elements();
 
   let end = new Date().getTime() - start;
