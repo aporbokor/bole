@@ -389,6 +389,8 @@ function setup() {
   vote_result_div = createDiv('Voting results:');
   vote_result_div.class('vote_results');
 
+  szim_gombok.parent(document.getElementsByTagName('main')[0])
+
 }
 
 function draw() {
