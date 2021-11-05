@@ -58,7 +58,7 @@ let max_tool_size = 200;
 let tool_color = 'green';
 const activated_tool_stroke_weight = 5;
 const inactive_tool_stroke_weight = 2;
-const voter_per_pixel = 0.001;
+const voter_per_pixel = 0.0001;
 
 let canvas;
 const WIDTH = 720;
@@ -86,6 +86,14 @@ const voter_strokeWeight = 1;
 const candidate_colors = ['#F1FAEE', '#A8DADC', '#457B9D', '#1D3557'];
 const candidate_size = 35;
 const candidate_strokeWeight = 7;
+
+const primary_background_color = 200;
+const secondary_background_color = 192;
+const background_roundness = 15;
+const background_tiles_per_row = 10;
+const background_tiles_per_colum = 6;
+let background_tiles_width;
+let background_tiles_height;
 
 const selected_size = 5;
 
@@ -116,7 +124,7 @@ function reset_voter_color(){
 
 function remove_voter(){
   if (voters.length != min_voters){
-    delete voters.pop();
+    delete voters[voters.length-1].remove();
   }
 }
 
@@ -142,7 +150,7 @@ function add_candidate(){
 
 function remove_candidate(){
   if (candidates.length != min_candidates){
-    candidates.pop();
+    candidates[candidates.length-1].remove();
   }
 }
 
@@ -194,7 +202,24 @@ function draw_everyone(){
 }
 
 function draw_background(){
-  background(200);
+  erase()
+  rect(0,0,width,height);
+  noErase();
+  noStroke();
+  fill(primary_background_color);
+  rect(0,0,width, height, background_roundness);
+
+  strokeWeight(5);
+  fill(secondary_background_color);
+  for (let i = 0; i < background_tiles_per_row; i++){
+    start_x = i * background_tiles_width;
+    for (let j = 0; j < background_tiles_per_colum; j++){
+      start_y = j * background_tiles_height;
+      if ((i+j)%2 == 0){
+        rect(start_x, start_y, background_tiles_width, background_tiles_height, background_roundness);
+      }
+    }
+  }
 }
 
 function load_clicked_selected(){
@@ -303,9 +328,11 @@ function setup() {
   canvas = createCanvas(constrain(WIDTH, 0, window.innerWidth), constrain(HEIGHT,0, window.innerHeight));
   canvas.class('canvas')
 
+  background_tiles_width = round(width / background_tiles_per_row)
+  background_tiles_height = round(height / background_tiles_per_colum)
+
   selected_div = createDiv('Nobody is selected');
   selected_div.class('selected')
-
 
   stroke(default_stroke);
   FPS = document.createElement('p');

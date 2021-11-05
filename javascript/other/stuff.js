@@ -25,3 +25,7 @@ function random_point_inside_circle(x, y, r){
 
   return result;
 }
+
+function is_point_inside_rect(x1, y1, x2, y2, px, py){
+  return !((px < x1)||(px > x2)||(py < y1)||(py > y2))
+}
