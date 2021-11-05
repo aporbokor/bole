@@ -1,8 +1,8 @@
 /* Colors */
 :root {
-  --primary: #03312e;
+  --primary: black;
   --secondary: white;
-  --accent: gray;
+  --accent: #222;
 }
 
 /* Breakpoints */

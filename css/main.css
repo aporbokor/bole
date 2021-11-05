@@ -20,10 +20,3 @@ main section ul {
 main section ul lI {
   margin-bottom: 0.5rem;
 }
-
-.primary {
-  background-color: var(--primary);
-}
-.accent {
-  background-color: var(--accent);
-}
