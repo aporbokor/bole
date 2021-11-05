@@ -10,6 +10,10 @@ function inverse_filter_array_by_array(arr, filter_arr){
   return arr.filter(function(x){return !(filter_arr.includes(x))});
 }
 
+function point_in_circle(point_x, point_y, circle_x, circle_y, radius){
+  return dist(point_x, point_y, circle_x, circle_y) <= radius;
+}
+
 function random_point_inside_circle(x, y, r){
   let result = {};
 

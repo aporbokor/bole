@@ -36,10 +36,13 @@ class DrawTool extends Tool{
     circle(mouseX, mouseY, tool_size.value()*2);
     for (let i = 0; i < voters.length; i++){
       let voter = voters[i]
-      if (dist(voter.x, voter.y, mouseX, mouseY) <= tool_size.value()){
+      if (is_inside_tool(voter)){
         voter.grow_by(selected_size_adder)
       }
     }
   }
+}
 
+function is_inside_tool(voter){
+  return (dist(voter.x, voter.y, mouseX, mouseY) <= tool_size.value());
 }

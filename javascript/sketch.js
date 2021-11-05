@@ -49,7 +49,9 @@ let tool_div;
 let current_tool;
 let tools = new Map([['select tool', SelectTool],
                      ['delete tool', DeleteTool],
-                     ['voter painter', VoterPainter]]);
+                     ['voter painter', VoterPainter],
+                     ['honesty painter', HonestyPainter],
+                     ['strategy painter', StrategyPainter]]);
 let tool_selector;
 let tool_size;
 let max_tool_size = 200;
@@ -191,12 +193,6 @@ function draw_everyone(){
 
 function draw_background(){
   background(200);
-}
-
-function point_in_circle(point_x, point_y, circle_x, circle_y, radius){
-  let x_dist = point_x - circle_x;
-  let y_dist = point_y - circle_y;
-  return Math.sqrt(x_dist*x_dist + y_dist*y_dist) <= radius;
 }
 
 function load_clicked_selected(){

@@ -11,7 +11,7 @@ class DeleteTool extends DrawTool{
 
       for (let i = 0; i < voters.length; i++){
         let voter = voters[i];
-        if (dist(voter.x, voter.y, mouseX, mouseY) < tool_size.value()){
+        if (is_inside_tool(voter)){
           to_delete.push(voter);
         }
       }
