@@ -48,11 +48,13 @@ let FPS;
 let tool_div;
 let current_tool;
 let tools = new Map([['select tool', SelectTool],
-                     ['delete tool', DeleteTool]]);
+                     ['delete tool', DeleteTool],
+                     ['voter painter', VoterPainter]]);
 let tool_selector;
 let tool_size;
 let max_tool_size = 200;
-let tool_color = 'green'
+let tool_color = 'green';
+const voter_per_pixel = 0.001;
 
 let canvas;
 const WIDTH = 720;
@@ -90,6 +92,15 @@ function random_voter(){
 function add_voter(){
   if (voters.length != max_voters){
     voters.push(random_voter());
+  }
+}
+
+function add_voter_to_position(x, y){
+  if (voters.length != max_voters){
+    let x_ = constrain(round(x), 0, WIDTH);
+    let y_ = constrain(round(y), 0, HEIGHT);
+
+    voters.push(new Voter(x_, y_, random_bool(strategic_chance), honest_voter_color));
   }
 }
 
@@ -290,6 +301,7 @@ function simulate_voting(){
 }
 
 function setup() {
+
   canvas = createCanvas(WIDTH, HEIGHT);
   canvas.class('canvas')
 

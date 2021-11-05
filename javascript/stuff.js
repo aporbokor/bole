@@ -9,3 +9,15 @@ function rewrapp_index(arr,i){
 function inverse_filter_array_by_array(arr, filter_arr){
   return arr.filter(function(x){return !(filter_arr.includes(x))});
 }
+
+function random_point_inside_circle(x, y, r){
+  let result = {};
+
+  let r_ = Math.sqrt(random()) * r;
+  let ang = random(TWO_PI);
+
+  result.x = x + (r_ * cos(ang))
+  result.y = y + (r_ * sin(ang))
+
+  return result;
+}
