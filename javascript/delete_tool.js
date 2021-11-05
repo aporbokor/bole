@@ -19,7 +19,8 @@ class DeleteTool extends DrawTool{
       }
     }
     for (let j = 0; j < to_delete.length; j++){
-      remove_specific_voter(to_delete[j]);
+      to_delete[j].target_size = 0;
+      // remove_specific_voter(to_delete[j]);
       clicked_selected = undefined;
     }
   }

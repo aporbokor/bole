@@ -25,6 +25,9 @@ class Voter extends Person{
       fill(strategic_voter_color);
       circle(this.x, this.y, this.size);
     }
+    if (this.size == 0){
+      remove_specific_voter(this)
+    }
     this.target_size = voter_size;
   }
 

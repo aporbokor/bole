@@ -1,3 +1,5 @@
+const main_element = document.getElementsByTagName('main')[0];
+
 let voters;
 const min_voters = 1;
 const max_voters = 1000;
@@ -425,13 +427,14 @@ function setup() {
   vote_result_div = createDiv('Voting results:');
   vote_result_div.class('vote_results');
 
-  szim_gombok.parent(document.getElementsByTagName('main')[0])
+  szim_gombok.parent(main_element);
+  vote_result_div.parent(main_element);
+  selected_div.parent(main_element);
 
 }
 
 function draw() {
   let start = new Date().getTime();
-
   draw_background();
   extra_function();
   find_selected();
