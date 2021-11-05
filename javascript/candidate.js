@@ -7,14 +7,18 @@ class Candidate extends Person{
     this.color = color;
     this.votes = undefined;
     this.size = 0;
-    this.target_size = candidate_size;
+    this.default_size = candidate_size;
+    this.target_size = this.default_size;
   }
   show(){
     this.grow_to_size();
     strokeWeight(candidate_strokeWeight);
     fill(this.color);
     circle(this.x, this.y, this.size);
-    this.target_size = candidate_size;
+  }
+
+  remove_self(){
+    remove_specific_candidate(this);
   }
 
   get_p(){
@@ -79,7 +83,7 @@ class Candidate extends Person{
 }
 
 function delete_selected_candidate(){
-  remove_specific_candidate(this.parent_candidate);
+  this.parent_candidate.remove();
   selected_div.child()[0].remove();
 }
 

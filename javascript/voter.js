@@ -7,7 +7,8 @@ class Voter extends Person{
     this.strategic = strategic;
     this.voted_for = undefined;
     this.size = 0;
-    this.target_size = voter_size;
+    this.default_size = voter_size;
+    this.target_size = this.default_size;
   }
 
   distance_to_candidate(candidate){
@@ -28,7 +29,10 @@ class Voter extends Person{
     if (this.size == 0){
       remove_specific_voter(this)
     }
-    this.target_size = voter_size;
+  }
+
+  remove_self(){
+    remove_specific_voter(this);
   }
 
   get_div(){
@@ -76,6 +80,6 @@ function strategic_changed(){
 }
 
 function delete_selected_voter(){
-  remove_specific_voter(this.parent_voter);
+  this.parent_voter.remove();
   selected_div.child()[0].remove();
 }

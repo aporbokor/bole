@@ -31,9 +31,15 @@ class DrawTool extends Tool{
   }
 
   draw_outline(){
-    stroke(this.color)
-    noFill()
-    circle(mouseX, mouseY, tool_size.value()*2)
+    stroke(this.color);
+    noFill();
+    circle(mouseX, mouseY, tool_size.value()*2);
+    for (let i = 0; i < voters.length; i++){
+      let voter = voters[i]
+      if (dist(voter.x, voter.y, mouseX, mouseY) <= tool_size.value()){
+        voter.grow_by(selected_size_adder)
+      }
+    }
   }
 
 }

@@ -1,10 +1,12 @@
 const main_element = document.getElementsByTagName('main')[0];
 
 let voters;
+let to_remove_voters = [];
 const min_voters = 1;
 const max_voters = 1000;
 
 let candidates;
+let to_remove_candidates = [];
 const min_candidates = 2;
 const max_candidates = 24;
 
@@ -15,19 +17,18 @@ let selected;
 let last_selected;
 let clicked_selected;
 let selected_div;
+
 let szim_gombok;
 let new_envitoment_div;
 let edit_enviroment_div;
 let simulation_div;
 
-let locked = false;
 let strategic_chance = 0.2;
 let voter_population = 100;
 let candidate_population = 3;
 
 let vote_result_div;
 let voting_results;
-
 
 let strategic_chance_slider;
 let voter_population_slider;
@@ -46,7 +47,7 @@ let FPS;
 
 let tool_div;
 let current_tool;
-let tools = new Map([['no tool',NoTool],
+let tools = new Map([['select tool', SelectTool],
                      ['delete tool', DeleteTool]]);
 let tool_selector;
 let tool_size;
@@ -82,14 +83,6 @@ const candidate_strokeWeight = 7;
 
 const selected_size = 5;
 
-function random_bool(true_chance){
-  return (random()<true_chance);
-}
-
-function rewrapp_index(arr,i){
-  return arr[i%arr.length];
-}
-
 function random_voter(){
   return new Voter(round(random(WIDTH)), round(random(HEIGHT)), random_bool(strategic_chance),honest_voter_color);
 }
@@ -113,11 +106,13 @@ function remove_voter(){
 }
 
 function remove_specific_voter(voter){
-  voters = voters.filter(function(curval){return curval != voter})
+  // voters = voters.filter(function(curval){return curval != voter})
+  to_remove_voters.push(voter);
 }
 
 function remove_specific_candidate(candidate){
-  candidates = candidates.filter(function(curval){return curval != candidate})
+  // candidates = candidates.filter(function(curval){return curval != candidate})
+  to_remove_candidates.push(candidate);
 }
 
 function random_candidate(i){
@@ -134,6 +129,14 @@ function remove_candidate(){
   if (candidates.length != min_candidates){
     candidates.pop();
   }
+}
+
+function remove_people(){
+  candidates = inverse_filter_array_by_array(candidates,to_remove_candidates);
+  voters = inverse_filter_array_by_array(voters, to_remove_voters);
+
+  to_remove_candidates = [];
+  to_remove_voters = []
 }
 
 function make_voters(db){
@@ -162,7 +165,7 @@ function draw_everyone(){
   stroke(default_stroke);
 
   if (typeof selected != 'undefined'){
-    selected.target_size = selected.target_size + selected_size_adder;
+    selected.grow_by(selected_size_adder);
   }
 
   for (let i = 0; i<voters.length; i++){
@@ -171,13 +174,6 @@ function draw_everyone(){
 
   for (i = 0; i<candidates.length; i++){
     candidates[i].show();
-  }
-
-  if (typeof clicked_selected != 'undefined'){
-    clicked_selected.target_size = clicked_selected.target_size + clicked_selected_size_adder;
-    stroke(clicked_selected_laser_color);
-    line(clicked_selected.x, 0, clicked_selected.x, clicked_selected.y);
-    stroke(default_stroke);
   }
 
 }
@@ -192,29 +188,6 @@ function point_in_circle(point_x, point_y, circle_x, circle_y, radius){
   return Math.sqrt(x_dist*x_dist + y_dist*y_dist) <= radius;
 }
 
-function find_selected(){
-  if (locked){
-    return undefined;
-  }
-  for (let i = 0; i<candidates.length; i++){
-    let candidate = candidates[i];
-    if (point_in_circle(mouseX, mouseY,candidate.x, candidate.y, candidate_size)){
-      selected = candidate;
-      last_selected = selected;
-      return undefined;
-    }
-  }
-  for (i = 0; i<voters.length; i++){
-    let voter = voters[i];
-    if (point_in_circle(mouseX, mouseY,voter.x, voter.y, voter_size)){
-      selected = voter;
-      last_selected = selected;
-      return undefined;
-    }
-  }
-  selected = undefined;
-}
-
 function load_clicked_selected(){
   if (typeof(clicked_selected) != 'undefined'){
     let ch = selected_div.child();
@@ -226,25 +199,14 @@ function load_clicked_selected(){
 }
 
 function mousePressed(){
-  if (selected != undefined){
-    locked = true;
-    clicked_selected = last_selected;
-    load_clicked_selected();
-  }
   current_tool.on_click();
 }
 
 function mouseDragged() {
-  if (locked) {
-    selected.x = constrain(mouseX, 0, WIDTH);
-    selected.y = constrain(mouseY, 0, HEIGHT);
-    load_clicked_selected();
-  }
   current_tool.on_drag();
 }
 
 function mouseReleased() {
-  locked = false;
   current_tool.on_relase();
 }
 
@@ -435,9 +397,10 @@ function setup() {
 
 function draw() {
   let start = new Date().getTime();
+
+  remove_people();
   draw_background();
   extra_function();
-  find_selected();
   current_tool.draw();
   draw_everyone();
   handle_elements();

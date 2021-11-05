@@ -6,22 +6,21 @@ class DeleteTool extends DrawTool{
 
   draw(){
     this.draw_outline();
-  }
+    if (mouseIsPressed){
+      let to_delete = [];
 
-  on_drag(){
-    let to_delete = [];
-
-    for (let i = 0; i < voters.length; i++){
-      let voter = voters[i];
-      if (dist(voter.x, voter.y, mouseX, mouseY) < tool_size.value()){
-        console.log('pushed')
-        to_delete.push(voter);
+      for (let i = 0; i < voters.length; i++){
+        let voter = voters[i];
+        if (dist(voter.x, voter.y, mouseX, mouseY) < tool_size.value()){
+          to_delete.push(voter);
+        }
+      }
+      for (let j = 0; j < to_delete.length; j++){
+        to_delete[j].remove();
+        // remove_specific_voter(to_delete[j]);
+        clicked_selected = undefined;
       }
     }
-    for (let j = 0; j < to_delete.length; j++){
-      to_delete[j].target_size = 0;
-      // remove_specific_voter(to_delete[j]);
-      clicked_selected = undefined;
-    }
   }
+
 }
