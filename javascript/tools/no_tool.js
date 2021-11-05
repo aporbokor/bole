@@ -48,8 +48,8 @@ class SelectTool extends Tool{
 
   on_drag(){
     if (this.locked) {
-      selected.x = constrain(mouseX, 0, WIDTH);
-      selected.y = constrain(mouseY, 0, HEIGHT);
+      selected.x = constrain(mouseX, 0, width);
+      selected.y = constrain(mouseY, 0, height);
       load_clicked_selected();
     }
   }
