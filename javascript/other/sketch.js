@@ -56,6 +56,8 @@ let tool_selector;
 let tool_size;
 let max_tool_size = 200;
 let tool_color = 'green';
+const activated_tool_stroke_weight = 5;
+const inactive_tool_stroke_weight = 2;
 const voter_per_pixel = 0.001;
 
 let canvas;
@@ -88,7 +90,7 @@ const candidate_strokeWeight = 7;
 const selected_size = 5;
 
 function random_voter(){
-  return new Voter(round(random(WIDTH)), round(random(HEIGHT)), random_bool(strategic_chance),honest_voter_color);
+  return new Voter(round(random(width)), round(random(height)), random_bool(strategic_chance),honest_voter_color);
 }
 
 function add_voter(){
@@ -99,8 +101,8 @@ function add_voter(){
 
 function add_voter_to_position(x, y){
   if (voters.length != max_voters){
-    let x_ = constrain(round(x), 0, WIDTH);
-    let y_ = constrain(round(y), 0, HEIGHT);
+    let x_ = constrain(round(x), 0, width);
+    let y_ = constrain(round(y), 0, height);
 
     voters.push(new Voter(x_, y_, random_bool(strategic_chance), honest_voter_color));
   }
@@ -129,7 +131,7 @@ function remove_specific_candidate(candidate){
 }
 
 function random_candidate(i){
-  return new Candidate(round(random(WIDTH)), round(random(HEIGHT)), rewrapp_index(candidate_colors,i), 'candidate#' + i);
+  return new Candidate(round(random(width)), round(random(height)), rewrapp_index(candidate_colors,i), 'candidate#' + i);
 }
 
 function add_candidate(){
@@ -298,7 +300,7 @@ function simulate_voting(){
 
 function setup() {
 
-  canvas = createCanvas(WIDTH, HEIGHT);
+  canvas = createCanvas(constrain(WIDTH, 0, window.innerWidth), constrain(HEIGHT,0, window.innerHeight));
   canvas.class('canvas')
 
   selected_div = createDiv('Nobody is selected');

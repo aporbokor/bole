@@ -28,10 +28,12 @@ class DrawTool extends Tool{
     if (this.constructor == DrawTool){
       throw new Error("Abstract baseclass can't be initialized");
     }
+    this.weight = inactive_tool_stroke_weight;
   }
 
   draw_outline(){
     stroke(this.color);
+    strokeWeight(this.weight);
     noFill();
     circle(mouseX, mouseY, tool_size.value()*2);
     for (let i = 0; i < voters.length; i++){
@@ -40,6 +42,13 @@ class DrawTool extends Tool{
         voter.grow_by(selected_size_adder)
       }
     }
+  }
+  on_click(){
+    this.weight = activated_tool_stroke_weight;
+  }
+
+  on_relase(){
+    this.weight = inactive_tool_stroke_weight;
   }
 }
 
