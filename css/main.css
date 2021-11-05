@@ -8,6 +8,13 @@ main section {
   width: 100vw;
 }
 
+.documentation {
+  border-top: 0.5px solid #333;
+  border-bottom: 0.5px solid #333;
+}
+.first {
+  border-top: none;
+}
 main section h2 {
   font-size: 1.3rem;
   font-weight: bold;

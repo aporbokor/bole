@@ -40,7 +40,11 @@ div,
 p,
 button {
   font-family: "Nunito", sans-serif;
-  color: white;
+  color: var(--secondary);
+}
+
+button {
+  color: var(--primary);
 }
 
 h1,

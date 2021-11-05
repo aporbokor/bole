@@ -1,9 +1,32 @@
+.canvas {
+  grid-area: canvas;
+  width: 50vw;
+}
+.sim_gombok {
+  grid-area: sim-gombok;
+  width: 20vw;
+}
+.vote_results {
+  grid-area: vote-results;
+}
+.selected {
+  grid-area: selected;
+  width: 20vw;
+}
 main {
-  top: 3rem;
+  height: 100vh - 3rem;
+  display: grid;
+  column-gap: 2rem;
+  place-items: center;
+  place-content: center;
+  grid-template-areas:
+    "sim-gombok canvas selected"
+    "vote-results vote-results vote-results";
 }
 
 body {
   overflow-y: scroll;
+  background: var(--accent);
 }
 
 ::-webkit-scrollbar {
@@ -12,15 +35,8 @@ body {
 }
 
 .sim_gombok {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .canvas {
-  order: 2;
-  position: relative;
-  left: 0px;
-  top: 30px;
 }
 
 .vote_results {
@@ -36,9 +52,6 @@ body {
 }
 
 .selected {
-  position: relative;
-  top: -370px;
-  left: 740px;
 }
 
 .voterdiv {
@@ -71,6 +84,5 @@ body {
   width: 143.15px;
 }
 
-.tool_div{
-  
+.tool_div {
 }
