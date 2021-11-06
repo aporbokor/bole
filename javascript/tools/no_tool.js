@@ -8,6 +8,7 @@ class SelectTool extends Tool{
     if (typeof clicked_selected != 'undefined'){
       clicked_selected.grow_by(clicked_selected_size_adder);
       stroke(clicked_selected_laser_color);
+      strokeWeight(clicked_selected_stroke_weight);
       line(clicked_selected.x, 0, clicked_selected.x, clicked_selected.y);
       stroke(default_stroke);
     }

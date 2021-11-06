@@ -31,39 +31,51 @@ class InstantRunOffVoter extends VotingMethod{
     let was = new Set();
 
     for (let i = 0; i < this.candidates.length; i++){
-      let min_candidates = mins(this.candidates, i, was);
-      result.unshift(min_candidates)
-      // let min = Infinity;
-      // let min_candidates = [];
-      //
-      // for (let j = 0; j < this.candidates.length; j++){
-      //
-      //   if (!(was.has(this.candidates[j]))){
-      //     let votes = this.candidates[j].votes[i];
-      //
-      //     if (votes < min){
-      //       min = votes;
-      //       min_candidates = [];
-      //     }
-      //     if (votes === min){
-      //       min_candidates.push(this.candidates[j]);
-      //     }
-      //   }
-      // }
-      // for (let f = 0; f < min_candidates.length; f++){
-      //   was.add(min_candidates[i]);
-      // }
-      // if (min_candidates.length != 0){
-      //   result.unshift(min_candidates);
-      // }
+      let min = mins(this.candidates, i, was);
+      if (min != Infinity){
+        let min_candidates = this.candidates.filter(function (a) {
+          return (!(was.has(a))&(a.votes[i] == min)) })
+
+        result.unshift(min_candidates);
+
+        for (let f = 0; f < min_candidates.length; f++){
+          was.add(min_candidates[f]);
+        }
+      }
     }
     return result;
+  }
+
+  extra_visualize(voters){
+    for (let i = 0; i < voters.length; i++){
+      voters[i].color = voters[i].voted_for[0].color;
+    }
+
+    extra_function = function(){
+      if (typeof(clicked_selected) != 'undefined'){
+        if (typeof(clicked_selected.voted_for) != 'undefined'){
+          let voter = clicked_selected;
+          for (let j = 0; j < voter.voted_for.length; j++){
+            let candidate = voter.voted_for[j];
+            stroke(candidate.color);
+            strokeWeight(map(voter.voted_for.length - j, 1, voter.voted_for.length, 1, clicked_selected_stroke_weight));
+            line(voter.x, voter.y, candidate.x, candidate.y);
+          }
+        } else {
+          let candidate = clicked_selected;
+          for (let i = 0; i < voters.length; i++){
+            let voter = voters[i];
+            let place = voter.voted_for.findIndex(function (a){return a === candidate});
+            voter.grow_by(map(voter.voted_for.length-place,1,voter.voted_for.length,-0.5*voter_size, 0.5*voter_size));
+          }
+        }
+      }
+    }
   }
 }
 
 function mins(candidates_, place, was){
   let min = Infinity;
-  let min_candidates = [];
 
   for (let j = 0; j < candidates_.length; j++){
 
@@ -72,15 +84,8 @@ function mins(candidates_, place, was){
 
       if (votes < min){
         min = votes;
-        min_candidates = [];
-      }
-      if (votes === min){
-        min_candidates.push(candidates_[j]);
       }
     }
   }
-  for (let f = 0; f < min_candidates.length; f++){
-    was.add(min_candidates[f]);
-  }
-  return min_candidates;
+  return min;
 }

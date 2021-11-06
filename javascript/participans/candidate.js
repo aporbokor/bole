@@ -32,6 +32,7 @@ class Candidate extends Person{
       load_clicked_selected();
     });
     returned.mouseMoved(function(){selected = this.candidate_parent})
+    returned.label.style('color', this.color)
     returned.class('candidate_p')
 
     return returned;

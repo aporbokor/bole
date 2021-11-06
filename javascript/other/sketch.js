@@ -76,14 +76,15 @@ const grow_speed = 1;
 const selected_size_adder = 5;
 const clicked_selected_size_adder = 7;
 const clicked_selected_laser_color = 'rgb(255, 0, 0)'
+const clicked_selected_stroke_weight = 4;
 
 const default_stroke = 'rgba(0,0,0,0.5)'
 const strategic_voter_color = 'rgba(0, 0, 0, 0.5)';
-const honest_voter_color = '#E63946';
+const honest_voter_color = '#F18F01';
 const voter_size = 15;
 const voter_strokeWeight = 1;
 
-const candidate_colors = ['#F1FAEE', '#A8DADC', '#457B9D', '#1D3557'];
+const candidate_colors = ['#8FCB9B', 'F9B3D1','#FFEEDB','#C62E65','#624763','#5B9279','#2F1847','#D63AF9','#ADA8B6','#61C9A8'];
 const candidate_size = 35;
 const candidate_strokeWeight = 7;
 
@@ -173,8 +174,8 @@ function remove_people(){
   to_remove_candidates = [];
   to_remove_voters = [];
 
-  update_voter_population_slider();
-  update_candidate_poupulation();
+  // update_voter_population_slider();
+  // update_candidate_poupulation();
 }
 
 function make_voters(db){

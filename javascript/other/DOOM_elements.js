@@ -34,14 +34,19 @@ function createProgress(name, value, max){
     bar.setAttribute("max", max);
     bar.innerHTML = name;
 
-    returned.child(createP(name + value));
+    let p = createP(name + value)
+    returned.child(p);
+    returned.label = p;
+
     returned.child(bar);
 
   } else if (Array.isArray(value)){
-    returned.child(createP(name + value.toString()));
+    let p = createP(name + value.toString())
+    returned.child(p);
+    returned.label = p;
     for (let i = 0; i < value.length; i++){
       let bar = document.createElement('progress');
-      bar.setAttribute("value", i);
+      bar.setAttribute("value", value[i]);
       bar.setAttribute("max", max);
       bar.innerHTML = name;
 
