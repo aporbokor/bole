@@ -303,7 +303,7 @@ function display_votes(voter_maschine){
   vote_result_div.html('Voting results:');
   for (let i = 0; i < voting_results.length; i++){
     let subdiv = createDiv(int_to_str(i+1));
-    subdiv.class('place_div')
+    subdiv.addClass('place_div')
     let places = voting_results[i];
     for (let j = 0; j < places.length; j++){
       subdiv.child(places[j].get_p());
@@ -340,19 +340,19 @@ function simulate_voting(){
 function setup() {
 
   canvas = createCanvas(constrain(WIDTH, 0, window.innerWidth), constrain(HEIGHT,0, window.innerHeight),WEBGL);
-  canvas.class('canvas')
+  canvas.addClass('canvas')
 
   background_tiles_width = round(width / background_tiles_per_row)
   background_tiles_height = round(height / background_tiles_per_colum)
 
   selected_div = createDiv('Nobody is selected');
-  selected_div.class('selected')
+  selected_div.addClass('selected')
 
   stroke(default_stroke);
   FPS = document.createElement('p');
   document.body.appendChild(FPS);
 
-  szim_gombok = createDiv('szimulation buttons')
+  szim_gombok = createDivWithP('szimulation buttons');
 
   strategic_chance_slider = slider_with_name('strategic voter chance: ',0, 1, 0, 0.01);
   voter_population_slider = slider_with_name('number of voters: ', min_voters, max_voters, 1, 1);
@@ -397,19 +397,19 @@ function setup() {
 
   simulate_button = createButton('simulate');
   simulate_button.mousePressed(simulate_voting);
-  simulate_button.class('simulate_button');
+  simulate_button.addClass('simulate_button');
 
-  new_envitoment_div = createDiv('Nev enviroment');
-  new_envitoment_div.class('new_envitoment_div');
+  new_envitoment_div = createDivWithP('Nev enviroment');
+  new_envitoment_div.addClass('new_envitoment_div');
 
-  edit_enviroment_div = createDiv('Edit enviroment');
-  edit_enviroment_div.class('edit_enviroment_div');
+  edit_enviroment_div = createDivWithP('Edit enviroment');
+  edit_enviroment_div.addClass('edit_enviroment_div');
 
-  szimulation_div = createDiv('Szimulation');
-  szimulation_div.class('szimulation_div');
+  szimulation_div = createDivWithP('Szimulation');
+  szimulation_div.addClass('szimulation_div');
 
-  tool_div = createDiv('tools');
-  tool_div.class('tool_div');
+  tool_div = createDivWithP('tools');
+  tool_div.addClass('tool_div');
 
   new_envitoment_div.child(strategic_chance_slider);
   new_envitoment_div.child(voter_population_slider);
@@ -433,14 +433,14 @@ function setup() {
   szim_gombok.child(new_envitoment_div);
   szim_gombok.child(edit_enviroment_div);
   szim_gombok.child(szimulation_div);
-  szim_gombok.class('sim_gombok');
+  szim_gombok.addClass('sim_gombok');
   szim_gombok.child(tool_div);
 
   // selected_div = createDiv('Nobody is selected');
-  // selected_div.class('selected')
+  // selected_div.addClass('selected')
 
   vote_result_div = createDiv('Voting results:');
-  vote_result_div.class('vote_results');
+  vote_result_div.addClass('vote_results');
 
   szim_gombok.parent(main_element);
   vote_result_div.parent(main_element);

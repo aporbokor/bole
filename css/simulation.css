@@ -35,7 +35,17 @@ body {
 }
 
 .sim_gombok {
+
 }
+
+.p_div_p{
+  margin-left: -10px;
+}
+
+.div_w_p{
+  margin-left: 20px;
+}
+
 .canvas {
 }
 
@@ -49,6 +59,10 @@ body {
 
 .candidate_p {
   /* The candidates representation which only contains the candidates name and votes visualized by proggresbars*/
+  margin-left: 10px;
+}
+.progress_{
+  margin-left: 10px;
 }
 
 .selected {
@@ -75,6 +89,7 @@ body {
 }
 
 .simulate_button {
+
 }
 
 .new_envitoment_div {

@@ -30,6 +30,7 @@ function createProgress(name, value, max){
   if (typeof(value) === 'number'){
 
     let bar = document.createElement('progress');
+    bar.setAttribute("class","progress_");
     bar.setAttribute("value", value);
     bar.setAttribute("max", max);
     bar.innerHTML = name;
@@ -46,6 +47,7 @@ function createProgress(name, value, max){
     returned.label = p;
     for (let i = 0; i < value.length; i++){
       let bar = document.createElement('progress');
+      bar.setAttribute("class","progress_");
       bar.setAttribute("value", value[i]);
       bar.setAttribute("max", max);
       bar.innerHTML = name;
@@ -55,5 +57,17 @@ function createProgress(name, value, max){
     }
 
   }
+  return returned;
+}
+
+function createDivWithP(text){
+  let returned = createDiv();
+  let p = createP(text);
+
+  p.class('p_div_p');
+  returned.child(p);
+
+  returned.class('div_w_p')
+
   return returned;
 }

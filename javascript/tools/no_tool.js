@@ -44,6 +44,8 @@ class SelectTool extends Tool{
       this.locked = true;
       clicked_selected = last_selected;
       load_clicked_selected();
+    } else {
+      clicked_selected = undefined;
     }
   }
 
