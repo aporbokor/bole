@@ -82,6 +82,7 @@ body {
 
 .named_slider {
   /* The sytle of the divs which have a p and a slider */
+  border: 1px solid;
 }
 
 .named_slider_title{

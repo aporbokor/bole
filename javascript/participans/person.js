@@ -38,6 +38,7 @@ class Person{
       this.target_size = 0;
       if (this.size == 0){
         this.remove_self()
+        this.to_delete = false;
       }
       return;
     }

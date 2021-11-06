@@ -58,11 +58,11 @@ let max_tool_size = 200;
 let tool_color = 'green';
 const activated_tool_stroke_weight = 5;
 const inactive_tool_stroke_weight = 2;
-const voter_per_pixel = 0.0001;
+const voter_per_pixel = 0.001;
 
 let canvas;
 const WIDTH = 720;
-const HEIGHT = 400;
+const HEIGHT = 720;
 
 const approval_range = Math.floor(WIDTH*0.3);
 let votingmethods = new Map([
@@ -91,7 +91,7 @@ const candidate_strokeWeight = 7;
 const primary_background_color = 200;
 const secondary_background_color = 192;
 const background_tiles_per_row = 10;
-const background_tiles_per_colum = 6;
+const background_tiles_per_colum = 10;
 let background_tiles_width;
 let background_tiles_height;
 
@@ -141,12 +141,16 @@ function remove_voter(){
 
 function remove_specific_voter(voter){
   // voters = voters.filter(function(curval){return curval != voter})
-  to_remove_voters.push(voter);
+  if (voters.length - to_remove_voters.length != min_voters){
+    to_remove_voters.push(voter);
+  }
 }
 
 function remove_specific_candidate(candidate){
   // candidates = candidates.filter(function(curval){return curval != candidate})
-  to_remove_candidates.push(candidate);
+  if (candidates.length - to_remove_candidates != min_candidates){
+    to_remove_candidates.push(candidate);
+  }
 }
 
 function random_candidate(i){
@@ -168,14 +172,16 @@ function remove_candidate(){
 }
 
 function remove_people(){
-  candidates = inverse_filter_array_by_array(candidates,to_remove_candidates);
-  voters = inverse_filter_array_by_array(voters, to_remove_voters);
+  if ((to_remove_candidates.length != 0)||(to_remove_voters.length != 0)){
+    candidates = inverse_filter_array_by_array(candidates,to_remove_candidates);
+    voters = inverse_filter_array_by_array(voters, to_remove_voters);
 
-  to_remove_candidates = [];
-  to_remove_voters = [];
+    to_remove_candidates = [];
+    to_remove_voters = [];
 
-  // update_voter_population_slider();
-  // update_candidate_poupulation();
+    update_voter_population_slider();
+    update_candidate_poupulation();
+  }
 }
 
 function make_voters(db){
