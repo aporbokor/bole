@@ -89,7 +89,6 @@ const candidate_strokeWeight = 7;
 
 const primary_background_color = 200;
 const secondary_background_color = 192;
-const background_roundness = 15;
 const background_tiles_per_row = 10;
 const background_tiles_per_colum = 6;
 let background_tiles_width;
@@ -202,12 +201,9 @@ function draw_everyone(){
 }
 
 function draw_background(){
-  erase()
-  rect(0,0,width,height);
-  noErase();
   noStroke();
   fill(primary_background_color);
-  rect(0,0,width, height, background_roundness);
+  rect(0,0,width, height);
 
   strokeWeight(5);
   fill(secondary_background_color);
@@ -216,7 +212,7 @@ function draw_background(){
     for (let j = 0; j < background_tiles_per_colum; j++){
       start_y = j * background_tiles_height;
       if ((i+j)%2 == 0){
-        rect(start_x, start_y, background_tiles_width, background_tiles_height, background_roundness);
+        rect(start_x, start_y, background_tiles_width, background_tiles_height);
       }
     }
   }
@@ -325,7 +321,7 @@ function simulate_voting(){
 
 function setup() {
 
-  canvas = createCanvas(constrain(WIDTH, 0, window.innerWidth), constrain(HEIGHT,0, window.innerHeight));
+  canvas = createCanvas(constrain(WIDTH, 0, window.innerWidth), constrain(HEIGHT,0, window.innerHeight),WEBGL);
   canvas.class('canvas')
 
   background_tiles_width = round(width / background_tiles_per_row)
@@ -403,14 +399,19 @@ function setup() {
   new_envitoment_div.child(strategic_chance_slider);
   new_envitoment_div.child(voter_population_slider);
   new_envitoment_div.child(candidate_population_slider);
+  new_envitoment_div.child(reset_button);
+
   edit_enviroment_div.child(add_voter_button);
   edit_enviroment_div.child(reset_voter_color_buttton);
   edit_enviroment_div.child(add_candidate_button);
   edit_enviroment_div.child(delete_candidate_button);
   edit_enviroment_div.child(delete_voter_button);
-  new_envitoment_div.child(reset_button);
+
+  szimulation_div.child(document.createElement('br'))
   szimulation_div.child(voting_type_selector);
   szimulation_div.child(simulate_button);
+
+  tool_div.child(document.createElement('br'))
   tool_div.child(tool_selector);
   tool_div.child(tool_size);
 
@@ -433,6 +434,7 @@ function setup() {
 }
 
 function draw() {
+  translate(-width/2, -height/2)
   let start = new Date().getTime();
 
   remove_people();

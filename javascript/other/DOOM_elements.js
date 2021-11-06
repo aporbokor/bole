@@ -38,7 +38,7 @@ function createProgress(name, value, max){
       bar.innerHTML = name;
 
       returned.child(bar)
-      returned.child(document.createElement('b'))
+      returned.child(document.createElement('br'))
     }
 
   }
