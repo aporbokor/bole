@@ -449,6 +449,7 @@ function setup() {
   make_voters(voter_population);
   make_candidates(candidate_population);
 
+  // make_candidate_mask();
 }
 
 function draw() {

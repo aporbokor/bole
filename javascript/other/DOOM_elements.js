@@ -42,7 +42,7 @@ function createProgress(name, value, max){
     returned.child(bar);
 
   } else if (Array.isArray(value)){
-    let p = createP(name + value.toString())
+    let p = createP(name + value.join(', '));
     returned.child(p);
     returned.label = p;
     for (let i = 0; i < value.length; i++){
@@ -53,7 +53,7 @@ function createProgress(name, value, max){
       bar.innerHTML = name;
 
       returned.child(bar)
-      returned.child(document.createElement('br'))
+      returned.child(document.createElement('br'));
     }
 
   }

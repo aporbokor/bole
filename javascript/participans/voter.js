@@ -48,11 +48,11 @@ class Voter extends Person{
     let voted_for_d = createDiv('Voted_for:');
     if (Array.isArray(this.voted_for)){
       for (let i = 0; i<this.voted_for.length; i++){
-          voted_for_d.child(this.voted_for[i].get_p());
+          voted_for_d.child(this.voted_for[i].get_small_p());
       }
 
     }else if (typeof this.voted_for === 'undefined'){
-      voted_for_d.child(createP('noone'))
+      voted_for_d.child(createP('this person has not voted for anyone yet'));
     }else{
       voted_for_d.child(this.voted_for.get_p());
 

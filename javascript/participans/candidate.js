@@ -9,21 +9,44 @@ class Candidate extends Person{
     this.size = 0;
     this.default_size = candidate_size;
     this.target_size = this.default_size;
+    this.show_image = null;
   }
   show(){
     this.grow_to_size();
     strokeWeight(candidate_strokeWeight);
-    fill(this.color);
-    circle(this.x, this.y, this.size);
+
+    if (this.show_image){
+      let half_size = this.size * 0.5
+      image(this.show_image, this.x-half_size, this.y-half_size, this.size, this.size);
+    }else{
+      fill(this.color);
+      circle(this.x, this.y, this.size);
+    }
   }
 
   remove_self(){
     remove_specific_candidate(this);
   }
 
+  get_small_p(){
+    let returned;
+    if (typeof(this.votes) === 'undefined'){
+      returned = createP(this.name + '|no votes yet');
+    }else if (Array.isArray(this.votes)){
+      returned = createP(this.name + '|votes: ' + this.votes.join(', '));
+    } else if (typeof(this.votes) === 'number'){
+      returned = createP(this.name + '|votes: ' + this.votes);
+    }
+
+    returned.class('candidate_p');
+    returned.style('color', this.color);
+
+    return returned;
+  }
+
   get_p(){
 
-    let returned = createProgress(this.name + '|votes:', this.votes, voters.length);
+    let returned = createProgress(this.name + '|votes: ', this.votes, voters.length);
 
     returned.style('color', this.color);
     returned.candidate_parent = this;
@@ -65,6 +88,15 @@ class Candidate extends Person{
     color_picker.parent_div = returned;
     color_picker.input(set_color);
 
+    let this_ = this;
+
+    let image_input = createFileInput(function (file) {
+      if (file.type === 'image'){
+        this_.show_image = loadImage(file.data);
+        this_.show_image.resize(35,35);
+      }
+    })
+
     let delete_button = createButton('Delete');
     delete_button.parent_candidate = this;
     delete_button.mousePressed(delete_selected_candidate);
@@ -75,6 +107,7 @@ class Candidate extends Person{
     returned.child(yp);
     returned.child(votes_d);
     returned.child(color_picker);
+    returned.child(image_input);
     returned.child(delete_button);
 
     returned.class('candidate_div');
@@ -96,4 +129,5 @@ function set_color(){
   let val = this.value();
   this.parent_candidate.color = this.value();
   this.parent_div.style('color',val);
+  this.parent_candidate.show_image = null;
 }
