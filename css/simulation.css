@@ -70,6 +70,10 @@ body {
   /* The sytle of the divs which have a p and a slider */
 }
 
+.named_slider_title{
+  /* The title (p) of the named slider */
+}
+
 .simulate_button {
 }
 

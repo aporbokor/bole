@@ -1,13 +1,21 @@
 function slider_with_name(name, min, max, value, step){
   let returned = createDiv();
   let text = createP(name + value);
+  text.class('named_slider_title')
 
   let slider = createSlider(min, max, value, step);
 
   returned.child(text);
+  returned.title_text = text;
+
   returned.child(slider);
 
   returned.class('named_slider');
+
+  returned.setValue = function(val){
+    slider.elt.value = val;
+    this.value();
+  }
 
   returned.value = function(){
     text.html(name + slider.value());

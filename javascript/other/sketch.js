@@ -100,9 +100,18 @@ function random_voter(){
   return new Voter(round(random(width)), round(random(height)), random_bool(strategic_chance),honest_voter_color);
 }
 
+function update_voter_population_slider(){
+  voter_population_slider.setValue(voters.length);
+}
+
+function update_candidate_poupulation(){
+  candidate_population_slider.setValue(candidates.length);
+}
+
 function add_voter(){
   if (voters.length != max_voters){
     voters.push(random_voter());
+    update_voter_population_slider();
   }
 }
 
@@ -112,18 +121,20 @@ function add_voter_to_position(x, y){
     let y_ = constrain(round(y), 0, height);
 
     voters.push(new Voter(x_, y_, random_bool(strategic_chance), honest_voter_color));
+    update_voter_population_slider();
   }
 }
 
 function reset_voter_color(){
   for (let i = 0; i < voters.length; i++){
-    voters[i].color = honest_voter_color
+    voters[i].color = honest_voter_color;
   }
 }
 
 function remove_voter(){
   if (voters.length != min_voters){
     delete voters[voters.length-1].remove();
+    update_voter_population_slider();
   }
 }
 
@@ -143,13 +154,15 @@ function random_candidate(i){
 
 function add_candidate(){
   if (candidates.length != max_candidates){
-    candidates.push(random_candidate(candidates.length))
+    candidates.push(random_candidate(candidates.length));
+    update_candidate_poupulation();
   }
 }
 
 function remove_candidate(){
   if (candidates.length != min_candidates){
     candidates[candidates.length-1].remove();
+    update_candidate_poupulation();
   }
 }
 
@@ -158,7 +171,10 @@ function remove_people(){
   voters = inverse_filter_array_by_array(voters, to_remove_voters);
 
   to_remove_candidates = [];
-  to_remove_voters = []
+  to_remove_voters = [];
+
+  update_voter_population_slider();
+  update_candidate_poupulation();
 }
 
 function make_voters(db){
@@ -166,6 +182,7 @@ function make_voters(db){
   for (let i = 0; i<db; i++){
     voters.push(random_voter());
   }
+  update_voter_population_slider();
 }
 
 function make_candidates(db){
@@ -334,9 +351,6 @@ function setup() {
   FPS = document.createElement('p');
   document.body.appendChild(FPS);
 
-  make_voters(voter_population);
-  make_candidates(candidate_population);
-
   szim_gombok = createDiv('szimulation buttons')
 
   strategic_chance_slider = slider_with_name('strategic voter chance: ',0, 1, 0, 0.01);
@@ -430,6 +444,9 @@ function setup() {
   szim_gombok.parent(main_element);
   vote_result_div.parent(main_element);
   selected_div.parent(main_element);
+
+  make_voters(voter_population);
+  make_candidates(candidate_population);
 
 }
 
