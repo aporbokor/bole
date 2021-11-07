@@ -105,4 +105,25 @@ body {
 }
 
 .tool_div {
+  width: 143.15px;
+}
+
+.step_by_stepp{
+  /* The div containig the stepp by stepp info of the simulated voting system */
+  border: 1px solid;
+}
+
+.stepping_box_title{
+
+}
+
+.stepping_content_div{
+  border: 1px solid;
+  margin-left: 10px;
+
+}
+
+.next_stepp{
+  /* The next button */
+
 }

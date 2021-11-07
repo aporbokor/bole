@@ -65,12 +65,14 @@ const WIDTH = 720;
 const HEIGHT = 720;
 
 const approval_range = Math.floor(WIDTH*0.3);
-let votingmethods = new Map([
+const votingmethods = new Map([
   ['plurarity', PlurarityVoter],
   ['theoretical perfect', PerfectVoter],
   ['approval voting', ApprovalVoter],
   ['instant runof', InstantRunOffVoter]]
 )
+
+let stepping_box;
 
 const grow_speed = 1;
 const selected_size_adder = 5;
@@ -288,40 +290,35 @@ function select_tool(){
   current_tool = new current_tool_class()
 }
 
-function int_to_str(i){
-  let str_int = '' + i;
-  if (str_int.slice(-2,-3) === '1'){
-    return i + 'th';
+function get_results_elements(results, show_method=function (place){return place.get_p()}){
+  console.log(results);
+  let returned = createDiv();
+  for (let i = 0; i < results.length; i++){
+
+    let subdiv = createDiv(int_to_str(i+1));
+    subdiv.addClass('place_div')
+    let places = results[i];
+
+    for (let j = 0; j < places.length; j++){
+      subdiv.child(show_method(places[j]));
+    }
+
+    returned.child(subdiv);
   }
-  if (str_int.slice(-1) === '1'){
-    return i + 'st';
-  }
-  if (str_int.slice(-1) === '2'){
-    return i + 'nd';
-  }
-  if (str_int.slice(-1) === '3'){
-    return i + 'rd';
-  }
-  return i + 'th';
+  return returned;
 }
 
 function display_votes(voter_maschine){
+  stepping_box.delete_content();
+  
   vote_result_div.html('Voting results:');
-  for (let i = 0; i < voting_results.length; i++){
-    let subdiv = createDiv(int_to_str(i+1));
-    subdiv.addClass('place_div')
-    let places = voting_results[i];
-    for (let j = 0; j < places.length; j++){
-      subdiv.child(places[j].get_p());
-    }
-    vote_result_div.child(subdiv);
-  }
+  vote_result_div.child(get_results_elements(voting_results))
+
   voter_maschine.extra_visualize(voters);
 }
 
 function simulate_voting(){
   let voter_maschine = new votingmethod(candidates);
-
 
   voter_maschine.prepare_for_voting();
 
@@ -340,6 +337,7 @@ function simulate_voting(){
   console.log(voters);
 
   display_votes(voter_maschine);
+  voter_maschine.stepping_box_func(stepping_box);
   load_clicked_selected();
 }
 
@@ -455,7 +453,7 @@ function setup() {
   make_voters(voter_population);
   make_candidates(candidate_population);
 
-  // make_candidate_mask();
+  stepping_box = new SteppingBox();
 }
 
 function draw() {

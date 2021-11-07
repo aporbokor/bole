@@ -3,6 +3,7 @@ class InstantRunOffVoter extends VotingMethod{
   constructor(candidates){
     super();
     this.candidates = candidates;
+    this.voters = [];
   }
 
   prepare_for_voting(){
@@ -24,26 +25,79 @@ class InstantRunOffVoter extends VotingMethod{
     for (let i = 0; i < voter.voted_for.length; i++){
       voter.voted_for[i].votes[i] += 1;
     }
+    this.voters.push(voter);
+  }
+
+  votes_for(voter, eliminated){
+    let tier_list = voter.voted_for;
+    let index = 0;
+    let returned = tier_list[index];
+
+    while (eliminated.has(returned)){
+      index++;
+      returned = tier_list[index];
+    }
+    return returned;
   }
 
   count_votes(){
     let result = [];
-    let was = new Set();
+    let elliminated = new Set();
 
-    for (let i = 0; i < this.candidates.length; i++){
-      let min = mins(this.candidates, i, was);
-      if (min != Infinity){
-        let min_candidates = this.candidates.filter(function (a) {
-          return (!(was.has(a))&(a.votes[i] == min)) })
+    this.sub_results = [];
 
-        result.unshift(min_candidates);
+    while (elliminated.size != this.candidates.length){
+      let sub_votes = new Counter();
 
-        for (let f = 0; f < min_candidates.length; f++){
-          was.add(min_candidates[f]);
-        }
+      for (let i = 0; i < this.voters.length; i++){
+        sub_votes.count(this.votes_for(this.voters[i],elliminated));
+      }
+      let sub_result = [];
+
+      for (const x of sub_votes){
+        sub_result.push(x)
+      }
+
+      this.sub_results.push(count_votes_for_ints(sub_result, function(cand){return cand[1]}));
+
+      let mins = sub_votes.mins();
+      result.unshift(mins);
+
+      for (let j = 0; j < mins.length; j++){
+        elliminated.add(mins[j]);
       }
     }
     return result;
+  }
+
+  show_stepping_box_content(){
+    let voting_sytem = this.parent_box.visualized_system;
+    let content = createDiv();
+
+    content.child(createP('This is the ' + int_to_str(voting_sytem.visualization_stepp) + ' stepp'));
+
+    let res = get_results_elements(voting_sytem.sub_results[voting_sytem.visualization_stepp],
+      function (cand){
+        let returned = createProgress(cand[0].name,cand[1],voters.length);
+        returned.label.style('color',cand[0].color);
+        return returned;
+      })
+
+    content.child(res);
+
+    this.parent_box.set_content(content);
+    voting_sytem.visualization_stepp += 1;
+  }
+
+  stepping_box_func(steppig_box){
+    this.steppig_box = steppig_box;
+    steppig_box.visualized_system = this;
+
+    this.elliminated_visualization = [];
+    this.visualization_stepp = 0;
+    stepping_box.show_next();
+
+    steppig_box.next_func(this.show_stepping_box_content);
   }
 
   extra_visualize(voters){
@@ -57,11 +111,14 @@ class InstantRunOffVoter extends VotingMethod{
           let voter = clicked_selected;
           for (let j = 0; j < voter.voted_for.length; j++){
             let candidate = voter.voted_for[j];
+            let thick_amount = map(voter.voted_for.length - j, 1, voter.voted_for.length, 1, clicked_selected_stroke_weight);
+
             stroke(candidate.color);
-            strokeWeight(map(voter.voted_for.length - j, 1, voter.voted_for.length, 1, clicked_selected_stroke_weight));
+            strokeWeight(thick_amount);
             line(voter.x, voter.y, candidate.x, candidate.y);
+            candidate.grow_by(-candidate_size + 5 + thick_amount*10)
           }
-        } else {
+        } else if (typeof(clicked_selected.votes) != 'undefined'){
           let candidate = clicked_selected;
           for (let i = 0; i < voters.length; i++){
             let voter = voters[i];
@@ -72,20 +129,4 @@ class InstantRunOffVoter extends VotingMethod{
       }
     }
   }
-}
-
-function mins(candidates_, place, was){
-  let min = Infinity;
-
-  for (let j = 0; j < candidates_.length; j++){
-
-    if (!(was.has(candidates_[j]))){
-      let votes = candidates_[j].votes[place];
-
-      if (votes < min){
-        min = votes;
-      }
-    }
-  }
-  return min;
 }

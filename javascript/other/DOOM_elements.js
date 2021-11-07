@@ -68,6 +68,54 @@ function createDivWithP(text){
   returned.child(p);
 
   returned.class('div_w_p')
+  returned.p = p;
 
   return returned;
+}
+
+class SteppingBox{
+  constructor(){
+    this.main_div = createDivWithP('The voting method stepp by stepp');
+    this.main_div.class('step_by_stepp');
+    this.main_div.p.class('stepping_box_title');
+
+    this.next_button = createButton('next stepp');
+    this.next_button.class('next_stepp');
+    this.next_button.parent_box = this;
+
+    this.content_div = createDiv();
+    this.content_div.class('stepping_content_div');
+    this.content_div.inside = createP('No voting yet');
+    this.content_div.child(this.content_div.inside);
+
+    this.main_div.child(this.content_div);
+    this.main_div.child(this.next_button);
+
+    this.main_div.parent(main_element);
+    this.hide_next();
+
+    this.visualized_system = null;
+  }
+
+  delete_content(){
+    this.content_div.inside.remove();
+  }
+
+  set_content(element){
+    this.delete_content();
+    this.content_div.inside = element;
+    this.content_div.child(element);
+  }
+
+  next_func(func){
+    this.next_button.mousePressed(func);
+  }
+
+  hide_next(){
+    this.next_button.hide();
+  }
+
+  show_next(){
+    this.next_button.show();
+  }
 }

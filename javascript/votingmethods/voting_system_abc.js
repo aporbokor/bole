@@ -27,12 +27,17 @@ class VotingMethod{
   count_votes(){
       throw new Error("You must implement a count_votes method to your VotingMethod class");
   }
+
   extra_visualize(voters){
-  return undefined;
+    return undefined;
+  }
+
+  stepping_box_func(steppig_box){
+    stepping_box.set_content(createP('Stepp by step visualization is not avalable for this votingmethod'))
   }
 }
 
-function count_votes_for_ints(candidates){
+function count_votes_for_ints(candidates, get_votes=function (cand){return cand.votes}){
   let result = [];
   let used_votecounts = new Set();
 
@@ -40,7 +45,7 @@ function count_votes_for_ints(candidates){
     let append = [];
     let max_counts = -1;
     for (let j = 0; j<candidates.length; j++){
-      let votes = candidates[j].votes;
+      let votes = get_votes(candidates[j]);
       if ( (votes > max_counts) & (!(used_votecounts.has(votes)))){
         max_counts = votes;
         append = [];

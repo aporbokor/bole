@@ -28,7 +28,6 @@ class ApprovalVoter extends VotingMethod{
       }
       counted.push(min_candidate);
     }
-    console.log(counted)
     voter.voted_for = counted;
 
   }
