@@ -50,8 +50,9 @@ function is_point_inside_rect(x1, y1, x2, y2, px, py){
 
 class Counter extends Map{
 
-  constructor(){
+  constructor(start_value=0){
     super();
+    this.start_value = start_value;
   }
 
   count(object){
@@ -59,7 +60,7 @@ class Counter extends Map{
       this.set(object, this.get(object)+1)
       return;
     }
-    this.set(object,0);
+    this.set(object,this.start_value);
   }
 
   mins(){

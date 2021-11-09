@@ -46,8 +46,8 @@ class InstantRunOffVoter extends VotingMethod{
 
     this.sub_results = [];
 
-    while (elliminated.size != this.candidates.length){
-      let sub_votes = new Counter();
+    while (elliminated.size < this.candidates.length){
+      let sub_votes = new Counter(1);
 
       for (let i = 0; i < this.voters.length; i++){
         sub_votes.count(this.votes_for(this.voters[i],elliminated));
@@ -70,20 +70,50 @@ class InstantRunOffVoter extends VotingMethod{
     return result;
   }
 
+  color_voters(){
+    for (let i = 0; i < this.voters.length; i++){
+      this.voters[i].color = this.votes_for(this.voters[i],this.elliminated_visualization).color
+    }
+  }
+
   show_stepping_box_content(){
     let voting_sytem = this.parent_box.visualized_system;
     let content = createDiv();
 
-    content.child(createP('This is the ' + int_to_str(voting_sytem.visualization_stepp) + ' stepp'));
+    content.child(createP('This is the ' + int_to_str(voting_sytem.visualization_stepp) + ' step'));
 
-    let res = get_results_elements(voting_sytem.sub_results[voting_sytem.visualization_stepp],
-      function (cand){
-        let returned = createProgress(cand[0].name,cand[1],voters.length);
-        returned.label.style('color',cand[0].color);
-        return returned;
-      })
+    if (voting_sytem.visualization_stepp < voting_sytem.sub_results.length){
+      content.child(createP('Now we are going to run the election counting the best-ranked not-elliminated candidates of each voters preference-list'));
 
-    content.child(res);
+      let subresult = voting_sytem.sub_results[voting_sytem.visualization_stepp];
+
+      let res = get_results_elements(subresult,
+        function (cand){
+          let returned = createProgress(cand[0].name + ': ',cand[1],voters.length);
+          returned.label.style('color',cand[0].color);
+          return returned;
+        })
+
+      let elliminated_candidates = subresult[subresult.length-1];
+      let elliminated_div = createDivWithP('These candidate(s) were elliminated:');
+
+      for (let i = 0; i < elliminated_candidates.length; i++){
+        elliminated_div.child(elliminated_candidates[i][0].get_small_p());
+        voting_sytem.elliminated_visualization.add(elliminated_candidates[i]);
+      }
+
+      elliminated_div.child(createP('The elliminated candidates in this votecounting had ' + elliminated_candidates[0][1] + ' votes'))
+
+      content.child(res);
+      content.child(elliminated_div);
+      console.log(voting_sytem.elliminated_visualization);
+      voting_sytem.color_voters();
+
+
+    } else {
+      content.child(createP('The winner has been chosen'));
+      this.hide();
+    }
 
     this.parent_box.set_content(content);
     voting_sytem.visualization_stepp += 1;
@@ -93,7 +123,7 @@ class InstantRunOffVoter extends VotingMethod{
     this.steppig_box = steppig_box;
     steppig_box.visualized_system = this;
 
-    this.elliminated_visualization = [];
+    this.elliminated_visualization = new Set();
     this.visualization_stepp = 0;
     stepping_box.show_next();
 
