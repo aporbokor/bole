@@ -69,7 +69,8 @@ const votingmethods = new Map([
   ['plurarity', PlurarityVoter],
   ['theoretical perfect', PerfectVoter],
   ['approval voting', ApprovalVoter],
-  ['instant runof', InstantRunOffVoter]]
+  ['instant runof', InstantRunOffVoter],
+  ['tideman', TideMan]]
 )
 
 let stepping_box;
@@ -310,7 +311,7 @@ function get_results_elements(results, show_method=function (place){return place
 
 function display_votes(voter_maschine){
   stepping_box.delete_content();
-  
+
   vote_result_div.html('Voting results:');
   vote_result_div.child(get_results_elements(voting_results))
 
