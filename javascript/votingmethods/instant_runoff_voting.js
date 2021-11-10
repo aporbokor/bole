@@ -7,6 +7,7 @@ class InstantRunOffVoter extends VotingMethod{
   }
 
   prepare_for_voting(){
+    this.elliminated_visualization = new Set();
     for (let i = 0; i<this.candidates.length; i++){
       let votes = [];
       for (let j = 0; j<this.candidates.length; j++){
@@ -106,35 +107,32 @@ class InstantRunOffVoter extends VotingMethod{
 
       content.child(res);
       content.child(elliminated_div);
-      console.log(voting_sytem.elliminated_visualization);
       voting_sytem.color_voters();
 
 
     } else {
       content.child(createP('The winner has been chosen'));
+      voting_sytem.set_final_extra_function();
       this.hide();
     }
 
     this.parent_box.set_content(content);
     voting_sytem.visualization_stepp += 1;
+    voting_sytem.extra_visualize(voters);
   }
 
   stepping_box_func(steppig_box){
     this.steppig_box = steppig_box;
     steppig_box.visualized_system = this;
 
-    this.elliminated_visualization = new Set();
     this.visualization_stepp = 0;
     stepping_box.show_next();
 
     steppig_box.next_func(this.show_stepping_box_content);
   }
 
-  extra_visualize(voters){
-    for (let i = 0; i < voters.length; i++){
-      voters[i].color = voters[i].voted_for[0].color;
-    }
-
+  set_final_extra_function(){
+    this.extra_visualize(voters);
     extra_function = function(){
       if (typeof(clicked_selected) != 'undefined'){
         if (typeof(clicked_selected.voted_for) != 'undefined'){
@@ -157,6 +155,13 @@ class InstantRunOffVoter extends VotingMethod{
           }
         }
       }
+    }
+  }
+
+  extra_visualize(voters){
+    console.log(this.elliminated_visualization);
+    for (let i = 0; i < voters.length; i++){
+      voters[i].color = this.votes_for(voters[i],this.elliminated_visualization).color;
     }
   }
 }

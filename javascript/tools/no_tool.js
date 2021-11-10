@@ -9,7 +9,7 @@ class SelectTool extends Tool{
       clicked_selected.grow_by(clicked_selected_size_adder);
       stroke(clicked_selected_laser_color);
       strokeWeight(clicked_selected_stroke_weight);
-      line(clicked_selected.x, 0, clicked_selected.x, clicked_selected.y);
+      // line(clicked_selected.x, 0, clicked_selected.x, clicked_selected.y);
       stroke(default_stroke);
     }
   }
@@ -18,6 +18,7 @@ class SelectTool extends Tool{
     if (this.locked){
       return undefined;
     }
+    
     for (let i = 0; i<candidates.length; i++){
       let candidate = candidates[i];
       if (point_in_circle(mouseX, mouseY,candidate.x, candidate.y, candidate_size)){

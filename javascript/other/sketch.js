@@ -8,7 +8,7 @@ const max_voters = 1000;
 let candidates;
 let to_remove_candidates = [];
 const min_candidates = 2;
-const max_candidates = 24;
+const max_candidates = 11;
 
 let votingmethod;
 let results;
@@ -64,7 +64,7 @@ let canvas;
 WIDTH = 800;
 HEIGHT = 740;
 
-const approval_range = Math.floor(WIDTH*0.25);
+let approval_range;
 const votingmethods = new Map([
   ['plurarity', PlurarityVoter],
   ['theoretical perfect', PerfectVoter],
@@ -77,12 +77,12 @@ let stepping_box;
 
 const grow_speed = 1;
 const selected_size_adder = 5;
-const clicked_selected_size_adder = 7;
-const clicked_selected_laser_color = 'rgb(255, 0, 0)'
+const clicked_selected_size_adder = 15;
+const clicked_selected_laser_color = 'rgba(0, 0, 0, 255)'
 const clicked_selected_stroke_weight = 4;
 
 const default_stroke = 'rgba(0,0,0,0.5)'
-const strategic_voter_color = 'rgba(0, 0, 0, 0.5)';
+const strategic_voter_color = 'rgb(255, 0, 0)';
 const honest_voter_color = '#F18F01';
 const voter_size = 15;
 const voter_strokeWeight = 1;
@@ -95,8 +95,8 @@ const background_color = 200;
 
 const selected_size = 5;
 
-function random_voter(){
-  return new Voter(round(random(width)), round(random(height)), random_bool(strategic_chance),honest_voter_color);
+function random_voter(i){
+  return new Voter(round(random(width)), round(random(height)), random_bool(strategic_chance),honest_voter_color,'voter#'+i);
 }
 
 function update_voter_population_slider(){
@@ -109,7 +109,7 @@ function update_candidate_poupulation(){
 
 function add_voter(){
   if (voters.length != max_voters){
-    voters.push(random_voter());
+    voters.push(random_voter(voters.length));
     update_voter_population_slider();
   }
 }
@@ -185,7 +185,7 @@ function remove_people(){
 function make_voters(db){
   voters = [];
   for (let i = 0; i<db; i++){
-    voters.push(random_voter());
+    voters.push(random_voter(i));
   }
   update_voter_population_slider();
 }
@@ -326,6 +326,7 @@ function simulate_voting(){
 }
 
 function setup() {
+  approval_range = Math.floor(dist(0,0,WIDTH,HEIGHT)*0.2);
 
   canvas = createCanvas(constrain(WIDTH, 0, window.innerWidth), constrain(HEIGHT,0, window.innerHeight),WEBGL);
   canvas.addClass('canvas')
@@ -339,9 +340,9 @@ function setup() {
 
   szim_gombok = createDivWithP('simulation buttons');
 
-  strategic_chance_slider = slider_with_name('strategic voter chance: ',0, 1, 0, 0.01);
-  voter_population_slider = slider_with_name('number of voters: ', min_voters, max_voters, 1, 1);
-  candidate_population_slider = slider_with_name('number of candidates: ', min_candidates, max_candidates, 1, 1);
+  strategic_chance_slider = slider_with_name('strategic voter chance: ',0, 1, strategic_chance, 0.01);
+  voter_population_slider = slider_with_name('number of voters: ', min_voters, max_voters, voter_population, 1);
+  candidate_population_slider = slider_with_name('number of candidates: ', min_candidates, max_candidates, candidate_population, 1);
 
   add_voter_button = createButton('add voter');
   add_voter_button.mousePressed(add_voter);

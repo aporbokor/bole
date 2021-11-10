@@ -1,9 +1,10 @@
 class Voter extends Person{
-  constructor(x, y, strategic, color){
-    super();
+  constructor(x, y, strategic, color, name){
+    super(color, name);
     this.x = x;
     this.y = y;
-    this.color = color;
+    // this.color = color;
+    // this.name = name
     this.strategic = strategic;
     this.voted_for = undefined;
     this.size = 0;
@@ -21,26 +22,20 @@ class Voter extends Person{
     this.grow_to_size();
     strokeWeight(voter_strokeWeight);
     fill(this.color);
-    circle(this.x, this.y, this.size);
+    
     if (this.strategic){
-      fill(strategic_voter_color);
-      circle(this.x, this.y, this.size);
+      stroke(strategic_voter_color);
     }
-    if (this.size == 0){
-      remove_specific_voter(this)
-    }
+
+    this.default_show();
   }
 
   remove_self(){
     remove_specific_voter(this);
   }
 
-  get_div(){
-    let returned = createDiv('Voter');
-
-    let xp = createP('x: ' + this.x);
-    let yp = createP('y: ' + this.y);
-
+  get_extra_to_div(){
+    let returned = createDiv();
     let strategic_p = createCheckbox('strategic', this.strategic);
     strategic_p.parent_voter = this;
     strategic_p.changed(strategic_changed);
@@ -55,22 +50,10 @@ class Voter extends Person{
       voted_for_d.child(createP('this person has not voted for anyone yet'));
     }else{
       voted_for_d.child(this.voted_for.get_p());
-
     }
 
-    let delete_button = createButton('Delete');
-    delete_button.parent_voter = this;
-    delete_button.mousePressed(delete_selected_voter);
-    delete_button.class('delete_person');
-
-    returned.child(xp);
-    returned.child(yp);
     returned.child(strategic_p);
     returned.child(voted_for_d);
-    returned.child(delete_button);
-
-    returned.class('voterdiv');
-
     return returned;
   }
 }
