@@ -12,6 +12,8 @@
   grid-area: vote-results;
   align-self: start;
   width: 20vw;
+  height: 488px;
+  overflow-y: scroll;
   background: var(--primary);
   padding: 1rem;
 }
@@ -20,7 +22,8 @@
   background: var(--primary);
   align-self: start;
   margin-top: 1rem;
-  height: 30vh auto;
+  height: 218px;
+  overflow-y: scroll;
   padding: 1rem;
   width: 20vw;
 }
@@ -38,11 +41,6 @@ main {
 body {
   overflow-y: scroll;
   background: var(--accent);
-}
-
-::-webkit-scrollbar {
-  width: 0; /* Remove scrollbar space */
-  background: transparent; /* Optional: just make scrollbar invisible */
 }
 
 .sim_gombok {

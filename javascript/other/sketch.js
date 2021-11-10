@@ -91,12 +91,7 @@ const candidate_colors = ['#8FCB9B', 'F9B3D1','#FFEEDB','#C62E65','#624763','#5B
 const candidate_size = 35;
 const candidate_strokeWeight = 7;
 
-const primary_background_color = 200;
-const secondary_background_color = 192;
-const background_tiles_per_row = 10;
-const background_tiles_per_colum = 10;
-let background_tiles_width;
-let background_tiles_height;
+const background_color = 200;
 
 const selected_size = 5;
 
@@ -228,11 +223,7 @@ function draw_everyone(){
 }
 
 function draw_background(){
-  noStroke();
-  fill(primary_background_color);
-  rect(0,0,width, height);
-
-  strokeWeight(5);
+  background(background_color);
 }
 
 function load_clicked_selected(){
@@ -338,9 +329,6 @@ function setup() {
 
   canvas = createCanvas(constrain(WIDTH, 0, window.innerWidth), constrain(HEIGHT,0, window.innerHeight),WEBGL);
   canvas.addClass('canvas')
-
-  background_tiles_width = round(width / background_tiles_per_row)
-  background_tiles_height = round(height / background_tiles_per_colum)
 
   selected_div = createDiv('Nobody is selected');
   selected_div.addClass('selected')
