@@ -61,8 +61,8 @@ const inactive_tool_stroke_weight = 2;
 const voter_per_pixel = 0.001;
 
 let canvas;
-const WIDTH = 500;
-const HEIGHT = 600;
+WIDTH = 800;
+HEIGHT = 740;
 
 const approval_range = Math.floor(WIDTH*0.25);
 const votingmethods = new Map([
@@ -233,16 +233,6 @@ function draw_background(){
   rect(0,0,width, height);
 
   strokeWeight(5);
-  fill(secondary_background_color);
-  for (let i = 0; i < background_tiles_per_row; i++){
-    start_x = i * background_tiles_width;
-    for (let j = 0; j < background_tiles_per_colum; j++){
-      start_y = j * background_tiles_height;
-      if ((i+j)%2 == 0){
-        rect(start_x, start_y, background_tiles_width, background_tiles_height);
-      }
-    }
-  }
 }
 
 function load_clicked_selected(){
