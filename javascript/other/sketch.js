@@ -61,10 +61,10 @@ const inactive_tool_stroke_weight = 2;
 const voter_per_pixel = 0.001;
 
 let canvas;
-const WIDTH = 720;
-const HEIGHT = 720;
+const WIDTH = 500;
+const HEIGHT = 600;
 
-const approval_range = Math.floor(WIDTH*0.3);
+const approval_range = Math.floor(WIDTH*0.25);
 const votingmethods = new Map([
   ['plurarity', PlurarityVoter],
   ['theoretical perfect', PerfectVoter],
@@ -256,7 +256,9 @@ function load_clicked_selected(){
 }
 
 function mousePressed(){
-  current_tool.on_click();
+  if (is_point_inside_rect(0,0,width, height, mouseX, mouseY)){
+    current_tool.on_click();
+  }
 }
 
 function mouseDragged() {
