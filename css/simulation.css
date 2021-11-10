@@ -35,6 +35,7 @@ body {
 }
 
 .sim_gombok {
+  margin-top: 1rem;
   padding: 1rem;
   border: 1px solid var(--accent-lt);
   display: grid;
@@ -49,24 +50,43 @@ body {
   text-align: center;
 }
 .new_environment_div {
-  width: 160px;
+  width: 100%;
+  border-top: 1px solid var(--accent-ltr);
+  border-bottom: 1px solid var(--accent-ltr);
+  text-align: center;
+  padding-bottom: 1rem;
 }
 
 .named_slider {
   /* The sytle of the divs which have a p and a slider */
-  border: 1px solid var(--accent-lt);
+  border: 1px solid var(--accent-ltr);
+  margin-left: 2rem;
+  margin-right: 2rem;
+  border-radius: 5%;
   padding: 1rem;
   text-align: center;
   margin-bottom: 1rem;
 }
 
-main button {
+main button,
+main select {
   width: 10rem;
 }
 
 .edit_enviroment_div {
   width: 143.15px auto;
+  text-align: center;
+  border-bottom: 1px solid var(--accent-ltr);
+  padding-bottom: 1rem;
 }
+
+.szimulation_div {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid var(--accent-ltr);
+  padding-bottom: 1rem;
+}
+
 .named_slider {
 }
 
@@ -109,10 +129,6 @@ main button {
 }
 
 .simulate_button {
-}
-
-.simulation_div {
-  width: 143.15px;
 }
 
 .tool_div {
