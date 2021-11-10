@@ -75,7 +75,7 @@ function createDivWithP(text){
 
 class SteppingBox{
   constructor(){
-    this.main_div = createDivWithP('The voting method stepp by step');
+    this.main_div = createDivWithP('The voting method step by step');
     this.main_div.class('step_by_stepp');
     this.main_div.p.class('stepping_box_title');
 

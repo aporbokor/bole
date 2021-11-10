@@ -35,15 +35,39 @@ body {
 }
 
 .sim_gombok {
-
+  padding: 1rem;
+  border: 1px solid var(--accent-lt);
+  display: grid;
+  justify-items: center;
 }
 
-.p_div_p{
-  margin-left: -10px;
+.p_div_p {
+  text-transform: lowercase;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  font-family: "Comfortaa", cursive;
+  text-align: center;
+}
+.new_environment_div {
+  width: 160px;
 }
 
-.div_w_p{
-  margin-left: 20px;
+.named_slider {
+  /* The sytle of the divs which have a p and a slider */
+  border: 1px solid var(--accent-lt);
+  padding: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+main button {
+  width: 10rem;
+}
+
+.edit_enviroment_div {
+  width: 143.15px auto;
+}
+.named_slider {
 }
 
 .canvas {
@@ -61,7 +85,7 @@ body {
   /* The candidates representation which only contains the candidates name and votes visualized by proggresbars*/
   margin-left: 10px;
 }
-.progress_{
+.progress_ {
   margin-left: 10px;
 }
 
@@ -80,27 +104,14 @@ body {
   /* The style of the delete button inside the selected div */
 }
 
-.named_slider {
-  /* The sytle of the divs which have a p and a slider */
-  border: 1px solid;
-}
-
-.named_slider_title{
+.named_slider_title {
   /* The title (p) of the named slider */
 }
 
 .simulate_button {
-
-}
-
-.new_envitoment_div {
-  width: 160px;
 }
 
 .simulation_div {
-  width: 143.15px;
-}
-.edit_enviroment_div {
   width: 143.15px;
 }
 
@@ -108,22 +119,19 @@ body {
   width: 143.15px;
 }
 
-.step_by_stepp{
+.step_by_stepp {
   /* The div containig the stepp by stepp info of the simulated voting system */
   border: 1px solid;
 }
 
-.stepping_box_title{
-
+.stepping_box_title {
 }
 
-.stepping_content_div{
+.stepping_content_div {
   border: 1px solid;
   margin-left: 10px;
-
 }
 
-.next_stepp{
+.next_stepp {
   /* The next button */
-
 }

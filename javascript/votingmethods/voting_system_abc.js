@@ -33,7 +33,7 @@ class VotingMethod{
   }
 
   stepping_box_func(steppig_box){
-    stepping_box.set_content(createP('Stepp by step visualization is not avalable for this votingmethod'))
+    stepping_box.set_content(createP('Step by step visualization is not avalable for this votingmethod'))
   }
 }
 

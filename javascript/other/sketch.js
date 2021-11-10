@@ -328,7 +328,7 @@ function simulate_voting(){
   }
 
   voting_results = voter_maschine.count_votes()
-  console.log('The voting maschine:');
+  console.log('The voting machine:');
   console.log(voter_maschine);
 
   console.log('The results:');
@@ -357,7 +357,7 @@ function setup() {
   FPS = document.createElement('p');
   document.body.appendChild(FPS);
 
-  szim_gombok = createDivWithP('szimulation buttons');
+  szim_gombok = createDivWithP('simulation buttons');
 
   strategic_chance_slider = slider_with_name('strategic voter chance: ',0, 1, 0, 0.01);
   voter_population_slider = slider_with_name('number of voters: ', min_voters, max_voters, 1, 1);
@@ -404,13 +404,13 @@ function setup() {
   simulate_button.mousePressed(simulate_voting);
   simulate_button.addClass('simulate_button');
 
-  new_envitoment_div = createDivWithP('Nev enviroment');
-  new_envitoment_div.addClass('new_envitoment_div');
+  new_envitoment_div = createDivWithP('New enviroment');
+  new_envitoment_div.addClass('new_environment_div');
 
   edit_enviroment_div = createDivWithP('Edit enviroment');
   edit_enviroment_div.addClass('edit_enviroment_div');
 
-  szimulation_div = createDivWithP('Szimulation');
+  szimulation_div = createDivWithP('Simulation');
   szimulation_div.addClass('szimulation_div');
 
   tool_div = createDivWithP('tools');
