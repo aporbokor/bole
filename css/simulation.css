@@ -105,6 +105,7 @@ main select {
 .step_by_stepp {
   position: absolute;
   height: 100vh - 740px;
+  width: 800px;
   top: 800px;
   margin-top: 1rem;
   padding: 1rem;

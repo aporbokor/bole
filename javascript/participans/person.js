@@ -1,24 +1,38 @@
 class Person{
-  constructor(color, name){
+  constructor(x, y, color, name){
     if (this.constructor == Person){
       throw new Error("Abstract baseclass can't be initialized");
     }
-    this.to_delete = false;
+    this.x = x;
+    this.y = y;
     this.color = color;
     this.name = name;
+
+    this.to_delete = false;
+    this.shown = true;
   }
 
   show(){
     throw new Error("You must implement a show method to your Person class");
   }
 
+  hide(){
+    this.shown = false;
+  }
+
+  show(){
+    this.shown = true;
+  }
+
   default_show(){
-    if (this.show_image){
-      let half_size = this.size * 0.5
-      image(this.show_image, this.x-half_size, this.y-half_size, this.size, this.size);
-    }else{
-      fill(this.color);
-      circle(this.x, this.y, this.size);
+    if (this.shown){
+      if (this.show_image){
+        let half_size = this.size * 0.5
+        image(this.show_image, this.x-half_size, this.y-half_size, this.size, this.size);
+      }else{
+        fill(this.color);
+        circle(this.x, this.y, this.size);
+      }
     }
     stroke(default_stroke);
   }
@@ -99,7 +113,9 @@ class Person{
       }
       return;
     }
+
     this.target_size = this.default_size;
+
   }
 
   grow_by(value){

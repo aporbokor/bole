@@ -1,10 +1,6 @@
 class Voter extends Person{
   constructor(x, y, strategic, color, name){
-    super(color, name);
-    this.x = x;
-    this.y = y;
-    // this.color = color;
-    // this.name = name
+    super(x, y, color, name);
     this.strategic = strategic;
     this.voted_for = undefined;
     this.size = 0;
@@ -22,7 +18,7 @@ class Voter extends Person{
     this.grow_to_size();
     strokeWeight(voter_strokeWeight);
     fill(this.color);
-    
+
     if (this.strategic){
       stroke(strategic_voter_color);
     }

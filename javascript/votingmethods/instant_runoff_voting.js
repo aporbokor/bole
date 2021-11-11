@@ -72,8 +72,8 @@ class InstantRunOffVoter extends VotingMethod{
   }
 
   color_voters(){
-    for (let i = 0; i < this.voters.length; i++){
-      this.voters[i].color = this.votes_for(this.voters[i],this.elliminated_visualization).color
+    for (let i = 0; i < voters.length; i++){
+      voters[i].color = this.votes_for(voters[i],this.elliminated_visualization).color
     }
   }
 
@@ -83,7 +83,9 @@ class InstantRunOffVoter extends VotingMethod{
 
     content.child(createP('This is the ' + int_to_str(voting_sytem.visualization_stepp) + ' step'));
 
-    if (voting_sytem.visualization_stepp < voting_sytem.sub_results.length){
+    if (voting_sytem.visualization_stepp < voting_sytem.sub_results.length -1){
+      voting_sytem.color_voters();
+
       content.child(createP('Now we are going to run the election counting the best-ranked not-elliminated candidates of each voters preference-list'));
 
       let subresult = voting_sytem.sub_results[voting_sytem.visualization_stepp];
@@ -98,16 +100,19 @@ class InstantRunOffVoter extends VotingMethod{
       let elliminated_candidates = subresult[subresult.length-1];
       let elliminated_div = createDivWithP('These candidate(s) were elliminated:');
 
+      for (const x of voting_sytem.elliminated_visualization.values()){
+        x.hide();
+      }
+
       for (let i = 0; i < elliminated_candidates.length; i++){
         elliminated_div.child(elliminated_candidates[i][0].get_small_p());
-        voting_sytem.elliminated_visualization.add(elliminated_candidates[i]);
+        voting_sytem.elliminated_visualization.add(elliminated_candidates[i][0]);
       }
 
       elliminated_div.child(createP('The elliminated candidates in this votecounting had ' + elliminated_candidates[0][1] + ' votes'))
 
       content.child(res);
       content.child(elliminated_div);
-      voting_sytem.color_voters();
 
 
     } else {
@@ -118,7 +123,6 @@ class InstantRunOffVoter extends VotingMethod{
 
     this.parent_box.set_content(content);
     voting_sytem.visualization_stepp += 1;
-    voting_sytem.extra_visualize(voters);
   }
 
   stepping_box_func(steppig_box){
@@ -129,9 +133,11 @@ class InstantRunOffVoter extends VotingMethod{
     stepping_box.show_next();
 
     steppig_box.next_func(this.show_stepping_box_content);
+
   }
 
   set_final_extra_function(){
+    this.elliminated_visualization.clear();
     this.extra_visualize(voters);
     extra_function = function(){
       if (typeof(clicked_selected) != 'undefined'){
@@ -159,9 +165,13 @@ class InstantRunOffVoter extends VotingMethod{
   }
 
   extra_visualize(voters){
-    console.log(this.elliminated_visualization);
     for (let i = 0; i < voters.length; i++){
       voters[i].color = this.votes_for(voters[i],this.elliminated_visualization).color;
+    }
+    extra_function = function(){
+      for (const y of stepping_box.visualized_system.elliminated_visualization.values()){
+        y.grow_by(-0.4*candidate_size);
+      }
     }
   }
 }

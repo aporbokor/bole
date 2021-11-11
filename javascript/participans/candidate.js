@@ -1,10 +1,6 @@
 class Candidate extends Person{
   constructor(x, y, color, name){
-    super(color, name);
-    this.x = x;
-    this.y = y;
-    // this.name = name;
-    // this.color = color;
+    super(x, y, color, name);
     this.votes = undefined;
     this.size = 0;
     this.default_size = candidate_size;
