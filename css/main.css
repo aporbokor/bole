@@ -3,27 +3,31 @@ main {
   width: 100%;
   background: var(--accent);
 }
+
 main section {
-  padding: 2rem;
-  width: 100vw;
+  width: 100%;
+  padding: 1rem;
+  padding-left: 2rem;
 }
 
-.documentation {
-  border-top: 0.5px solid #333;
-  border-bottom: 0.5px solid #333;
+#intro {
+  font-style: italic;
 }
-.first {
-  border-top: none;
+
+#toc {
+  padding: 2rem;
+  width: 100vw;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
 }
-main section h2 {
+#toc h2 {
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  text-decoration: 2px solid var(--secondary) underline;
 }
-main section ul {
+#toc ul {
   list-style-type: disc;
-  margin-left: 1.2rem;
-}
-main section ul lI {
-  margin-bottom: 0.5rem;
+  margin-left: 1.3rem;
+  margin-bottom: 1rem;
 }
