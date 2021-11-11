@@ -1,8 +1,7 @@
 class PerfectVoter extends VotingMethod{
 
   constructor(candidates){
-    super();
-    this.candidates = candidates;
+    super(candidates);
     this.sum_x = 0;
     this.sum_y = 0;
     this.voted_persons = 0;

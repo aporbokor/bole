@@ -83,6 +83,7 @@ const clicked_selected_stroke_weight = 4;
 
 const default_stroke = 'rgba(0,0,0,0.5)'
 const strategic_voter_color = 'rgb(255, 0, 0)';
+const strategic_voter_stroeke_weight = 5;
 const honest_voter_color = '#F18F01';
 const voter_size = 15;
 const voter_strokeWeight = 1;

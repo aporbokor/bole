@@ -1,10 +1,5 @@
 class ApprovalVoter extends VotingMethod{
 
-  constructor(candidates){
-    super();
-    this.candidates = candidates;
-  }
-
   prepare_for_voting(){
     for (let i = 0; i<this.candidates.length; i++){
       this.candidates[i].votes = 0;

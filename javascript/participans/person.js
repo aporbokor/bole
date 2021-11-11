@@ -1,8 +1,7 @@
 class Person{
   constructor(x, y, color, name){
-    if (this.constructor == Person){
-      throw new Error("Abstract baseclass can't be initialized");
-    }
+    ABC_constructor(this, Person);
+
     this.x = x;
     this.y = y;
     this.color = color;
@@ -20,7 +19,7 @@ class Person{
     this.shown = false;
   }
 
-  show(){
+  appear(){
     this.shown = true;
   }
 

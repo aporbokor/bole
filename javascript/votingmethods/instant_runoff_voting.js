@@ -1,24 +1,17 @@
-class InstantRunOffVoter extends VotingMethod{
+class InstantRunOffVoter extends RankingVotingMethod{
 
   constructor(candidates){
-    super();
-    this.candidates = candidates;
+    super(candidates);
     this.voters = [];
   }
 
   prepare_for_voting(){
+    super.prepare_for_voting();
     this.elliminated_visualization = new Set();
-    for (let i = 0; i<this.candidates.length; i++){
-      let votes = [];
-      for (let j = 0; j<this.candidates.length; j++){
-        votes.push(0);
-      }
-      this.candidates[i].votes = votes;
-    }
   }
 
   registrate_honest_vote(voter){
-    voter.voted_for = best_candidate_tier_list(voter, this.candidates);
+    voter.voted_for = this.best_candidate_tier_list(voter, this.candidates);
   }
 
   registrate_vote(voter){
@@ -81,6 +74,14 @@ class InstantRunOffVoter extends VotingMethod{
     let voting_sytem = this.parent_box.visualized_system;
     let content = createDiv();
 
+    if (voting_sytem.visualization_stepp == 0){
+      extra_function = function(){
+        for (const y of stepping_box.visualized_system.elliminated_visualization.values()){
+          y.grow_by(-0.4*candidate_size);
+        }
+      }
+    }
+
     content.child(createP('This is the ' + int_to_str(voting_sytem.visualization_stepp) + ' step'));
 
     if (voting_sytem.visualization_stepp < voting_sytem.sub_results.length -1){
@@ -137,41 +138,8 @@ class InstantRunOffVoter extends VotingMethod{
   }
 
   set_final_extra_function(){
+    this.elliminated_visualization.forEach(function (candidate){candidate.appear()})
     this.elliminated_visualization.clear();
     this.extra_visualize(voters);
-    extra_function = function(){
-      if (typeof(clicked_selected) != 'undefined'){
-        if (typeof(clicked_selected.voted_for) != 'undefined'){
-          let voter = clicked_selected;
-          for (let j = 0; j < voter.voted_for.length; j++){
-            let candidate = voter.voted_for[j];
-            let thick_amount = map(voter.voted_for.length - j, 1, voter.voted_for.length, 1, clicked_selected_stroke_weight);
-
-            stroke(candidate.color);
-            strokeWeight(thick_amount);
-            line(voter.x, voter.y, candidate.x, candidate.y);
-            candidate.grow_by(-candidate_size + 5 + thick_amount*10)
-          }
-        } else if (typeof(clicked_selected.votes) != 'undefined'){
-          let candidate = clicked_selected;
-          for (let i = 0; i < voters.length; i++){
-            let voter = voters[i];
-            let place = voter.voted_for.findIndex(function (a){return a === candidate});
-            voter.grow_by(map(voter.voted_for.length-place,1,voter.voted_for.length,-0.5*voter_size, 0.5*voter_size));
-          }
-        }
-      }
-    }
-  }
-
-  extra_visualize(voters){
-    for (let i = 0; i < voters.length; i++){
-      voters[i].color = this.votes_for(voters[i],this.elliminated_visualization).color;
-    }
-    extra_function = function(){
-      for (const y of stepping_box.visualized_system.elliminated_visualization.values()){
-        y.grow_by(-0.4*candidate_size);
-      }
-    }
   }
 }

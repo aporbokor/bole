@@ -1,3 +1,30 @@
+function ABC_constructor(instance, class_){
+  if (instance.constructor == class_){
+    throw new Error("Abstract baseclass can't be initialized");
+  }
+}
+
+function sum(arr){
+  let returned = 0;
+
+  for (let i = 0; i < arr.length; i++){
+    returned += arr[i];
+  }
+  return returned;
+}
+
+function twoDMatrixWithZeros(dim1, dim2){
+  let returned = [];
+  for (let i = 0; i < dim1; i++){
+    let sub = [];
+    for (let j = 0; j < dim2; j++){
+      sub.push(0);
+    }
+    returned.push(sub);
+  }
+  return returned;
+}
+
 function int_to_str(i){
   let str_int = '' + i;
 
