@@ -1,13 +1,20 @@
 /*Main*/
 main {
   width: 100%;
-  background: var(--accent);
+  background: var(--primary-lt);
 }
 
 main section {
   width: 100%;
   padding: 1rem;
   padding-left: 2rem;
+}
+
+main h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-decoration: 2px solid var(--secondary) underline;
 }
 
 #intro {
@@ -17,17 +24,29 @@ main section {
 #toc {
   padding: 2rem;
   width: 100vw;
-  border-top: 1px solid #333;
-  border-bottom: 1px solid #333;
-}
-#toc h2 {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-decoration: 2px solid var(--secondary) underline;
+  border-top: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
 }
 #toc ul {
   list-style-type: disc;
   margin-left: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.doc {
+  padding: 2rem;
+  width: 100vw;
+  border-bottom: 1px solid var(--accent);
+}
+.doc ul {
+  margin-left: 1.3rem;
+  margin-bottom: 1rem;
+  list-style-type: disc;
+}
+.docli h3 {
+  font-family: "Comfortaa", cursive;
+  color: var(--secondary);
+  font-weight: bold;
+  font-size: 1.1rem;
   margin-bottom: 1rem;
 }

@@ -2,7 +2,8 @@
 :root {
   --primary: black;
   --secondary: white;
-  --accent: #222;
+  --primary-lt: #222;
+  --accent: #333;
 }
 
 /* Breakpoints */

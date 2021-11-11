@@ -40,13 +40,13 @@ main {
 
 body {
   overflow-y: scroll;
-  background: var(--accent);
+  background: var(--primary-lt);
 }
 
 .sim_gombok {
   margin-top: 1rem;
   padding: 1rem;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--primary-lt);
   display: grid;
   justify-items: center;
   background: var(--primary);
@@ -61,15 +61,15 @@ body {
 }
 .new_environment_div {
   width: 100%;
-  border-top: 1px solid var(--accent);
-  border-bottom: 1px solid var(--accent);
+  border-top: 1px solid var(--primary-lt);
+  border-bottom: 1px solid var(--primary-lt);
   text-align: center;
   padding-bottom: 1rem;
 }
 
 .named_slider {
   /* The sytle of the divs which have a p and a slider */
-  border: 1px solid var(--accent);
+  border: 1px solid var(--primary-lt);
   margin-left: 2rem;
   margin-right: 2rem;
   border-radius: 5%;
@@ -86,14 +86,14 @@ main select {
 .edit_enviroment_div {
   width: 10vw auto;
   text-align: center;
-  border-bottom: 1px solid var(--accent);
+  border-bottom: 1px solid var(--primary-lt);
   padding-bottom: 1rem;
 }
 
 .szimulation_div {
   width: 100%;
   text-align: center;
-  border-bottom: 1px solid var(--accent);
+  border-bottom: 1px solid var(--primary-lt);
   padding-bottom: 1rem;
 }
 
