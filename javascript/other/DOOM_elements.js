@@ -112,10 +112,12 @@ class SteppingBox{
   }
 
   hide_next(){
+    frozen_sim = false;
     this.next_button.hide();
   }
 
   show_next(){
+    frozen_sim = true;
     this.next_button.show();
   }
 }

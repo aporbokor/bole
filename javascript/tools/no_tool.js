@@ -18,7 +18,7 @@ class SelectTool extends Tool{
     if (this.locked){
       return undefined;
     }
-    
+
     for (let i = 0; i<candidates.length; i++){
       let candidate = candidates[i];
       if (point_in_circle(mouseX, mouseY,candidate.x, candidate.y, candidate_size)){
@@ -51,7 +51,7 @@ class SelectTool extends Tool{
   }
 
   on_drag(){
-    if (this.locked) {
+    if ((this.locked) & (!(frozen_sim))) {
       selected.x = constrain(mouseX, 0, width);
       selected.y = constrain(mouseY, 0, height);
       load_clicked_selected();

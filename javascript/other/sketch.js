@@ -13,6 +13,8 @@ const max_candidates = 11;
 let votingmethod;
 let results;
 
+let frozen_sim = false;
+
 let selected;
 let last_selected;
 let clicked_selected;
@@ -109,14 +111,14 @@ function update_candidate_poupulation(){
 }
 
 function add_voter(){
-  if (voters.length != max_voters){
+  if ((voters.length != max_voters) & (!(frozen_sim))){
     voters.push(random_voter(voters.length));
     update_voter_population_slider();
   }
 }
 
 function add_voter_to_position(x, y){
-  if (voters.length != max_voters){
+  if ((voters.length != max_voters) & (!(frozen_sim))){
     let x_ = constrain(round(x), 0, width);
     let y_ = constrain(round(y), 0, height);
 
@@ -132,7 +134,7 @@ function reset_voter_color(){
 }
 
 function remove_voter(){
-  if (voters.length != min_voters){
+  if ((voters.length != min_voters)& (!(frozen_sim))){
     delete voters[voters.length-1].remove();
     update_voter_population_slider();
   }
@@ -140,14 +142,14 @@ function remove_voter(){
 
 function remove_specific_voter(voter){
   // voters = voters.filter(function(curval){return curval != voter})
-  if (voters.length - to_remove_voters.length != min_voters){
+  if ((voters.length - to_remove_voters.length != min_voters) & (!(frozen_sim))){
     to_remove_voters.push(voter);
   }
 }
 
 function remove_specific_candidate(candidate){
   // candidates = candidates.filter(function(curval){return curval != candidate})
-  if (candidates.length - to_remove_candidates != min_candidates){
+  if ((candidates.length - to_remove_candidates != min_candidates) & (!(frozen_sim))){
     to_remove_candidates.push(candidate);
   }
 }
@@ -157,21 +159,21 @@ function random_candidate(i){
 }
 
 function add_candidate(){
-  if (candidates.length != max_candidates){
+  if ((candidates.length != max_candidates) & (!(frozen_sim))){
     candidates.push(random_candidate(candidates.length));
     update_candidate_poupulation();
   }
 }
 
 function remove_candidate(){
-  if (candidates.length != min_candidates){
+  if ((candidates.length != min_candidates) & (!(frozen_sim))){
     candidates[candidates.length-1].remove();
     update_candidate_poupulation();
   }
 }
 
 function remove_people(){
-  if ((to_remove_candidates.length != 0)||(to_remove_voters.length != 0)){
+  if (((to_remove_candidates.length != 0)||(to_remove_voters.length != 0)) & (!(frozen_sim))){
     candidates = inverse_filter_array_by_array(candidates,to_remove_candidates);
     voters = inverse_filter_array_by_array(voters, to_remove_voters);
 
@@ -184,17 +186,21 @@ function remove_people(){
 }
 
 function make_voters(db){
-  voters = [];
-  for (let i = 0; i<db; i++){
-    voters.push(random_voter(i));
+  if (!(frozen_sim)){
+    voters = [];
+    for (let i = 0; i<db; i++){
+      voters.push(random_voter(i));
+    }
+    update_voter_population_slider();
   }
-  update_voter_population_slider();
 }
 
 function make_candidates(db){
-  candidates = [];
-  for (let i = 0; i<db; i++){
-    candidates.push(random_candidate(i));
+  if (!(frozen_sim)){
+    candidates = [];
+    for (let i = 0; i<db; i++){
+      candidates.push(random_candidate(i));
+    }
   }
 }
 
