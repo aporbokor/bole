@@ -11,6 +11,7 @@ class PerfectVoter extends VotingMethod{
     for (let i = 0; i<this.candidates.length; i++){
       this.candidates[i].votes = 0;
     }
+    max_votes = Math.sqrt((width * width) + (height * height));
   }
 
   registrate_honest_vote(voter){

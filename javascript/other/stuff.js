@@ -1,3 +1,13 @@
+function increasing_sum(start, end){
+  let returned = 0;
+
+  for (let i = start; i <= end;i++){
+    returned += i
+  }
+  return returned;
+}
+
+
 function ABC_constructor(instance, class_){
   if (instance.constructor == class_){
     throw new Error("Abstract baseclass can't be initialized");

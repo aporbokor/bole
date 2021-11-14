@@ -1,10 +1,4 @@
-class PlurarityVoter extends VotingMethod{
-
-  prepare_for_voting(){
-    for (let i = 0; i<this.candidates.length; i++){
-      this.candidates[i].votes = 0;
-    }
-  }
+class PlurarityVoter extends NumberVotecountVotingMethod{
 
   registrate_honest_vote(voter){
     let min_tav = Infinity;
@@ -44,16 +38,6 @@ class PlurarityVoter extends VotingMethod{
       return;
     }
     this.registrate_honest_vote(voter);
-  }
-
-  count_votes(){
-    return count_votes_for_ints(this.candidates);
-  }
-
-  extra_visualize(voters){
-    for (let i = 0; i<voters.length; i++){
-      voters[i].color = voters[i].voted_for.color;
-    }
   }
 }
 

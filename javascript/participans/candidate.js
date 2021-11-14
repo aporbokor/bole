@@ -37,7 +37,7 @@ class Candidate extends Person{
 
   get_p(){
 
-    let returned = createProgress(this.name + '|votes: ', this.votes, voters.length);
+    let returned = createProgress(this.name + '|votes: ', this.votes, max_votes);
 
     returned.style('color', this.color);
     returned.candidate_parent = this;

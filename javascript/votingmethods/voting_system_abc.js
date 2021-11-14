@@ -61,6 +61,29 @@ function count_votes_for_ints(candidates, get_votes=function (cand){return cand.
   return result;
 }
 
+class NumberVotecountVotingMethod extends VotingMethod{
+  constructor(candidates){
+    super(candidates);
+    ABC_constructor(this, NumberVotecountVotingMethod);
+  }
+
+  prepare_for_voting(){
+    for (let i = 0; i<this.candidates.length; i++){
+      this.candidates[i].votes = 0;
+    }
+  }
+
+  count_votes(){
+    return count_votes_for_ints(this.candidates);
+  }
+
+  extra_visualize(voters){
+    for (let i = 0; i<voters.length; i++){
+      voters[i].color = voters[i].voted_for.color;
+    }
+  }
+}
+
 class RankingVotingMethod extends VotingMethod{
   constructor(candidates){
     super(candidates);
@@ -83,11 +106,7 @@ class RankingVotingMethod extends VotingMethod{
     return returned;
   }
 
-  extra_visualize(voters){
-    for (let i = 0; i < voters.length; i++){
-      voters[i].color = this.votes_for(voters[i],this.elliminated_visualization).color;
-    }
-
+  set_extra_funct(voters){
     extra_function = function(){
       if (typeof(clicked_selected) != 'undefined'){
         if (typeof(clicked_selected.voted_for) != 'undefined'){
@@ -112,11 +131,21 @@ class RankingVotingMethod extends VotingMethod{
       }
     }
   }
+
+  extra_visualize(voters){
+
+    for (let i = 0; i < voters.length; i++){
+      voters[i].color = voters[i].voted_for[0].color;
+    }
+
+    this.set_extra_funct(voters);
+  }
 }
 
 class RunoffLike extends RankingVotingMethod{
   constructor(candidates){
     super(candidates);
+    ABC_constructor(this, RunoffLike);
     this.voters = [];
     this.explaining_text = '[placeholder text]';
   }
@@ -291,6 +320,13 @@ class RunoffLike extends RankingVotingMethod{
     this.elliminated_visualization.forEach(function (candidate){candidate.appear()})
     this.elliminated_visualization.clear();
     this.extra_visualize(voters);
+  }
+
+  extra_visualize(voters){
+    for (let i = 0; i < voters.length; i++){
+      voters[i].color = this.votes_for(voters[i],this.elliminated_visualization).color;
+    }
+    super.set_extra_funct(voters);
   }
 }
 

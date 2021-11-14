@@ -1,10 +1,4 @@
-class ApprovalVoter extends VotingMethod{
-
-  prepare_for_voting(){
-    for (let i = 0; i<this.candidates.length; i++){
-      this.candidates[i].votes = 0;
-    }
-  }
+class ApprovalVoter extends NumberVotecountVotingMethod{
 
   registrate_honest_vote(voter){
     let counted = this.candidates.filter(function(c){return voter.distance_to_candidate(c) <= approval_range});
@@ -54,10 +48,6 @@ class ApprovalVoter extends VotingMethod{
     }
     counted.push(min_candidate);
     voter.voted_for = counted;
-  }
-
-  count_votes(){
-    return count_votes_for_ints(this.candidates);
   }
 
   extra_visualize(voters){

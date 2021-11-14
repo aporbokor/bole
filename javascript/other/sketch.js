@@ -12,6 +12,7 @@ const max_candidates = 11;
 
 let votingmethod;
 let results;
+let max_votes;
 
 let frozen_sim = false;
 
@@ -76,14 +77,17 @@ let seems_win_candidates;
 
 const votingmethods = new Map([
   ['plurarity', PlurarityVoter],
+  ['anti-plurarity', AntiPlurarityVoter],
   ['theoretical perfect', PerfectVoter],
   ['approval voting', ApprovalVoter],
+  ['borda counting', BordaCounting],
   ['instant runof', InstantRunOffVoter],
   ['coombs', CoombsVoting],
   ['tideman', TideMan]]
 )
 
 let stepping_box;
+let results_and_selected_d;
 
 const grow_speed = 1;
 const selected_size_adder = 5;
@@ -318,6 +322,8 @@ function display_votes(voter_maschine){
 }
 
 function simulate_voting(){
+  max_votes = voters.length;
+
   count_supporters();
   calculate_seems_win_candidates();
 
@@ -443,15 +449,16 @@ function setup() {
   szim_gombok.addClass('sim_gombok');
   szim_gombok.child(tool_div);
 
-  // selected_div = createDiv('Nobody is selected');
-  // selected_div.addClass('selected')
-
   vote_result_div = createDiv('Voting results:');
   vote_result_div.addClass('vote_results');
 
+  results_and_selected_d = createDiv();
+  results_and_selected_d.class('results-and-selected-div');
+  results_and_selected_d.child(selected_div);
+  results_and_selected_d.child(vote_result_div);
+
   szim_gombok.parent(main_element);
-  vote_result_div.parent(main_element);
-  selected_div.parent(main_element);
+  results_and_selected_d.parent(main_element);
 
   make_voters(voter_population);
   make_candidates(candidate_population);

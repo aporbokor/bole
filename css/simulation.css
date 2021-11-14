@@ -8,9 +8,15 @@
   grid-area: sim-gombok;
   width: 20vw;
 }
-.vote_results {
-  grid-area: vote-results;
+
+.results-and-selected-div{
+  grid-area: results-and-selected-div;
   align-self: start;
+}
+
+.vote_results {
+  border: 10px solid var(--primary);
+  margin-top: 17px;
   width: 20vw;
   height: 488px;
   overflow-y: scroll;
@@ -18,9 +24,8 @@
   padding: 1rem;
 }
 .selected {
-  grid-area: selected;
+  border: 10px solid var(--primary);
   background: var(--primary);
-  align-self: start;
   margin-top: 1rem;
   height: 218px;
   overflow-y: scroll;
@@ -34,12 +39,11 @@ main {
   place-items: center;
   place-content: center;
   grid-template-areas:
-    "sim-gombok canvas selected"
-    "sim-gombok canvas vote-results";
+    "sim-gombok canvas results-and-selected-div";
 }
 
 body {
-  overflow-y: scroll;
+  overflow: scroll;
   background: var(--primary-lt);
 }
 
