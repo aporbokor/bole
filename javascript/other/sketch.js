@@ -72,6 +72,7 @@ const votingmethods = new Map([
   ['theoretical perfect', PerfectVoter],
   ['approval voting', ApprovalVoter],
   ['instant runof', InstantRunOffVoter],
+  ['coombs', CoombsVoting],
   ['tideman', TideMan]]
 )
 
@@ -90,7 +91,7 @@ const honest_voter_color = '#F18F01';
 const voter_size = 15;
 const voter_strokeWeight = 1;
 
-const candidate_colors = ['#8FCB9B', 'F9B3D1','#FFEEDB','#C62E65','#624763','#5B9279','#2F1847','#D63AF9','#ADA8B6','#61C9A8'];
+const candidate_colors = ['#8FCB9B', '#EEA5A5','#FFEEDB','#C62E65','#624763','#5B9279','#2F1847','#D63AF9','#ADA8B6','#61C9A8'];
 const candidate_size = 35;
 const candidate_strokeWeight = 7;
 
@@ -264,11 +265,12 @@ function handle_elements(){
 }
 
 function reset_enviroment(){
-  voters = [];
-  candidates = [];
-  make_voters(voter_population);
-  make_candidates(candidate_population);
-
+  if (!(frozen_sim)){
+    voters = [];
+    candidates = [];
+    make_voters(voter_population);
+    make_candidates(candidate_population);
+  }
 }
 
 function select_voting(){

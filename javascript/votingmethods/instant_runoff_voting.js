@@ -1,145 +1,17 @@
-class InstantRunOffVoter extends RankingVotingMethod{
+class InstantRunOffVoter extends RunoffLike{
 
   constructor(candidates){
     super(candidates);
-    this.voters = [];
+    this.explaining_text = 'Now we are going to run the election counting the best-ranked not-elliminated candidates of each voters preference-list.';
   }
 
-  prepare_for_voting(){
-    super.prepare_for_voting();
-    this.elliminated_visualization = new Set();
+  elliminate_canidates(sub_votes, elliminated){
+    console.log(sub_votes);
+    let mins = sub_votes.mins();
+    return mins;
   }
 
-  registrate_honest_vote(voter){
-    voter.voted_for = this.best_candidate_tier_list(voter, this.candidates);
-  }
-
-  registrate_vote(voter){
-    this.registrate_honest_vote(voter);
-    for (let i = 0; i < voter.voted_for.length; i++){
-      voter.voted_for[i].votes[i] += 1;
-    }
-    this.voters.push(voter);
-  }
-
-  votes_for(voter, eliminated){
-    let tier_list = voter.voted_for;
-    let index = 0;
-    let returned = tier_list[index];
-
-    while (eliminated.has(returned)){
-      index++;
-      returned = tier_list[index];
-    }
-    return returned;
-  }
-
-  count_votes(){
-    let result = [];
-    let elliminated = new Set();
-
-    this.sub_results = [];
-
-    while (elliminated.size < this.candidates.length){
-      let sub_votes = new Counter(1);
-
-      for (let i = 0; i < this.voters.length; i++){
-        sub_votes.count(this.votes_for(this.voters[i],elliminated));
-      }
-      let sub_result = [];
-
-      for (const x of sub_votes){
-        sub_result.push(x)
-      }
-
-      this.sub_results.push(count_votes_for_ints(sub_result, function(cand){return cand[1]}));
-
-      let mins = sub_votes.mins();
-      result.unshift(mins);
-
-      for (let j = 0; j < mins.length; j++){
-        elliminated.add(mins[j]);
-      }
-    }
-    return result;
-  }
-
-  color_voters(){
-    for (let i = 0; i < voters.length; i++){
-      voters[i].color = this.votes_for(voters[i],this.elliminated_visualization).color
-    }
-  }
-
-  show_stepping_box_content(){
-    let voting_sytem = this.parent_box.visualized_system;
-    let content = createDiv();
-
-    if (voting_sytem.visualization_stepp == 0){
-      extra_function = function(){
-        for (const y of stepping_box.visualized_system.elliminated_visualization.values()){
-          y.grow_by(-0.4*candidate_size);
-        }
-      }
-    }
-
-    content.child(createP('This is the ' + int_to_str(voting_sytem.visualization_stepp) + ' step'));
-
-    if (voting_sytem.visualization_stepp < voting_sytem.sub_results.length -1){
-      voting_sytem.color_voters();
-
-      content.child(createP('Now we are going to run the election counting the best-ranked not-elliminated candidates of each voters preference-list'));
-
-      let subresult = voting_sytem.sub_results[voting_sytem.visualization_stepp];
-
-      let res = get_results_elements(subresult,
-        function (cand){
-          let returned = createProgress(cand[0].name + ': ',cand[1],voters.length);
-          returned.label.style('color',cand[0].color);
-          return returned;
-        })
-
-      let elliminated_candidates = subresult[subresult.length-1];
-      let elliminated_div = createDivWithP('These candidate(s) were elliminated:');
-
-      for (const x of voting_sytem.elliminated_visualization.values()){
-        x.hide();
-      }
-
-      for (let i = 0; i < elliminated_candidates.length; i++){
-        elliminated_div.child(elliminated_candidates[i][0].get_small_p());
-        voting_sytem.elliminated_visualization.add(elliminated_candidates[i][0]);
-      }
-
-      elliminated_div.child(createP('The elliminated candidates in this votecounting had ' + elliminated_candidates[0][1] + ' votes'))
-
-      content.child(res);
-      content.child(elliminated_div);
-
-
-    } else {
-      content.child(createP('The winner has been chosen'));
-      voting_sytem.set_final_extra_function();
-      this.hide();
-    }
-
-    this.parent_box.set_content(content);
-    voting_sytem.visualization_stepp += 1;
-  }
-
-  stepping_box_func(steppig_box){
-    this.steppig_box = steppig_box;
-    steppig_box.visualized_system = this;
-
-    this.visualization_stepp = 0;
-    stepping_box.show_next();
-
-    steppig_box.next_func(this.show_stepping_box_content);
-
-  }
-
-  set_final_extra_function(){
-    this.elliminated_visualization.forEach(function (candidate){candidate.appear()})
-    this.elliminated_visualization.clear();
-    this.extra_visualize(voters);
+  get_reasoning_text(elliminated_candidates){
+    return createP('The elliminated candidates in this votecounting had the fewest votes.');
   }
 }

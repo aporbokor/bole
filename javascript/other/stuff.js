@@ -82,6 +82,15 @@ class Counter extends Map{
     this.start_value = start_value;
   }
 
+  copy(){
+    let returned = new Counter(this.start_value);
+
+    for (const x of this.entries()){
+      returned.set(x[0],x[1]);
+    }
+    return returned;
+  }
+
   count(object){
     if (this.has(object)){
       this.set(object, this.get(object)+1)
@@ -110,4 +119,45 @@ class Counter extends Map{
     return returned;
   }
 
+  maxs(){
+    let max_val = -Infinity;
+    let returned = [];
+
+    for (const x of this.entries()){
+      let value = x[1];
+      let key = x[0];
+
+      if (value > max_val){
+        max_val = value;
+        returned = [];
+      }
+      if (value == max_val){
+        returned.push(key);
+      }
+
+    }
+    return returned;
+  }
+
+  min_count(){
+    let min_val = Infinity;
+
+    for (const x of this.entries()){
+      if (x[1] < min_val){
+        min_val = x[1]
+      }
+    }
+    return min_val;
+  }
+
+  max_count(){
+    let max_val = -Infinity;
+
+    for (const x of this.entries()){
+      if (x[1] > max_val){
+        max_val = x[1]
+      }
+    }
+    return max_val;
+  }
 }
