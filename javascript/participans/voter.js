@@ -6,6 +6,7 @@ class Voter extends Person{
     this.size = 0;
     this.default_size = voter_size;
     this.target_size = this.default_size;
+    this.supports = [];
   }
 
   distance_to_candidate(candidate){
@@ -35,6 +36,8 @@ class Voter extends Person{
   get_extra_to_div(){
     let returned = createDiv();
     let strategic_p = createCheckbox('strategic', this.strategic);
+    let supports_d = createDiv('Supports:');
+
     strategic_p.parent_voter = this;
     strategic_p.changed(strategic_changed);
 
@@ -49,9 +52,18 @@ class Voter extends Person{
     }else{
       voted_for_d.child(this.voted_for.get_p());
     }
+    if (this.supports.length != 0){
+      for (let i = 0; i<this.supports.length; i++){
+          supports_d.child(this.supports[i].get_small_p());
+      }
+
+    } else {
+      supports_d.child(createP('this voter doesn\'t support anyone'));
+    }
 
     returned.child(strategic_p);
     returned.child(voted_for_d);
+    returned.child(supports_d);
     return returned;
   }
 }

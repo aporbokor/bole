@@ -67,6 +67,13 @@ WIDTH = 800;
 HEIGHT = 740;
 
 let approval_range;
+let support_range;
+const support_per_approval_range = 1;
+let supporter_population;
+let supporter_per_candidate;
+let seems_win_percent = 1;
+let seems_win_candidates;
+
 const votingmethods = new Map([
   ['plurarity', PlurarityVoter],
   ['theoretical perfect', PerfectVoter],
@@ -85,8 +92,8 @@ const clicked_selected_laser_color = 'rgba(0, 0, 0, 255)'
 const clicked_selected_stroke_weight = 4;
 
 const default_stroke = 'rgba(0,0,0,0.5)'
-const strategic_voter_color = 'rgb(255, 0, 0)';
-const strategic_voter_stroeke_weight = 5;
+const strategic_voter_color = 'rgb(0, 0, 0)';
+const strategic_voter_stroeke_weight = 3;
 const honest_voter_color = '#F18F01';
 const voter_size = 15;
 const voter_strokeWeight = 1;
@@ -311,6 +318,9 @@ function display_votes(voter_maschine){
 }
 
 function simulate_voting(){
+  count_supporters();
+  calculate_seems_win_candidates();
+
   let voter_maschine = new votingmethod(candidates);
 
   voter_maschine.prepare_for_voting();
@@ -335,10 +345,12 @@ function simulate_voting(){
 }
 
 function setup() {
-  approval_range = Math.floor(dist(0,0,WIDTH,HEIGHT)*0.2);
 
   canvas = createCanvas(constrain(WIDTH, 0, window.innerWidth), constrain(HEIGHT,0, window.innerHeight),WEBGL);
   canvas.addClass('canvas')
+
+  approval_range = Math.floor(dist(0,0,WIDTH,HEIGHT)*0.2);
+  support_range = Math.floor(support_per_approval_range * approval_range);
 
   selected_div = createDiv('Nobody is selected');
   selected_div.addClass('selected')
