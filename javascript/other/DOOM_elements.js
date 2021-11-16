@@ -91,10 +91,27 @@ class SteppingBox{
     this.main_div.child(this.content_div);
     this.main_div.child(this.next_button);
 
-    this.main_div.parent(main_element);
+    this.main_div.parent(results_and_selected_d);
     this.hide_next();
 
     this.visualized_system = null;
+
+    hide_stepping_box = createButton('Hide stepp-by stepp box');
+    this.shown = true;
+    hide_stepping_box.parent_stepping_box = this;
+
+    hide_stepping_box.mousePressed(function (){
+      if (this.parent_stepping_box.shown){
+        this.parent_stepping_box.hide();
+        vote_result_div.show();
+      }else{
+        this.parent_stepping_box.show();
+        vote_result_div.hide();
+      }
+      this.parent_stepping_box.shown = !(this.parent_stepping_box.shown);
+    })
+
+    szimulation_div.child(hide_stepping_box);
   }
 
   delete_content(){
@@ -114,6 +131,14 @@ class SteppingBox{
   hide_next(){
     frozen_sim = false;
     this.next_button.hide();
+  }
+
+  hide(){
+    this.main_div.hide();
+  }
+
+  show(){
+    this.main_div.show();
   }
 
   show_next(){

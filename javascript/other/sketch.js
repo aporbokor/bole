@@ -87,6 +87,7 @@ const votingmethods = new Map([
 )
 
 let stepping_box;
+let hide_stepping_box;
 let results_and_selected_d;
 
 const grow_speed = 1;
