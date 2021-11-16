@@ -4,17 +4,17 @@
   align-self: start;
   margin-top: 1rem;
 }
-.sim_gombok {
+#sim_gombok {
   grid-area: sim-gombok;
   width: 20vw;
 }
 
-.results-and-selected-div{
+#results-and-selected-div{
   grid-area: results-and-selected-div;
   align-self: start;
 }
 
-.vote_results {
+#vote_results {
   border: 10px solid var(--primary);
   margin-top: 17px;
   width: 20vw;
@@ -23,7 +23,7 @@
   background: var(--primary);
   padding: 1rem;
 }
-.selected {
+#selected {
   border: 10px solid var(--primary);
   background: var(--primary);
   margin-top: 1rem;
@@ -47,7 +47,7 @@ body {
   background: var(--primary-lt);
 }
 
-.sim_gombok {
+#sim_gombok {
   margin-top: 1rem;
   padding: 1rem;
   border: 1px solid var(--primary-lt);
@@ -63,7 +63,7 @@ body {
   font-family: "Comfortaa", cursive;
   text-align: center;
 }
-.new_environment_div {
+#new_environment_div {
   width: 100%;
   border-top: 1px solid var(--primary-lt);
   border-bottom: 1px solid var(--primary-lt);
@@ -87,21 +87,25 @@ main select {
   width: 10rem;
 }
 
-.edit_enviroment_div {
+#szim_gombok{
+
+}
+
+#edit_enviroment_div {
   width: 10vw auto;
   text-align: center;
   border-bottom: 1px solid var(--primary-lt);
   padding-bottom: 1rem;
 }
 
-.szimulation_div {
+#szimulation_div {
   width: 100%;
   text-align: center;
   border-bottom: 1px solid var(--primary-lt);
   padding-bottom: 1rem;
 }
 
-.tool_div {
+#tool_div {
   width: 10vw auto;
   text-align: center;
 }

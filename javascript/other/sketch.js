@@ -358,14 +358,13 @@ function setup() {
   approval_range = Math.floor(dist(0,0,WIDTH,HEIGHT)*0.2);
   support_range = Math.floor(support_per_approval_range * approval_range);
 
-  selected_div = createDiv('Nobody is selected');
-  selected_div.addClass('selected')
+  selected_div = select("#selected")
 
   stroke(default_stroke);
   FPS = document.createElement('p');
   document.body.appendChild(FPS);
 
-  szim_gombok = createDivWithP('simulation buttons');
+  szim_gombok = select('#sim_gombok');
 
   strategic_chance_slider = slider_with_name('strategic voter chance: ',0, 1, strategic_chance, 0.01);
   voter_population_slider = slider_with_name('number of voters: ', min_voters, max_voters, voter_population, 1);
@@ -412,17 +411,13 @@ function setup() {
   simulate_button.mousePressed(simulate_voting);
   simulate_button.addClass('simulate_button');
 
-  new_envitoment_div = createDivWithP('New enviroment');
-  new_envitoment_div.addClass('new_environment_div');
+  new_envitoment_div = select('#new_environment_div');
 
-  edit_enviroment_div = createDivWithP('Edit enviroment');
-  edit_enviroment_div.addClass('edit_enviroment_div');
+  edit_enviroment_div = select('#edit_enviroment_div');
 
-  szimulation_div = createDivWithP('Simulation');
-  szimulation_div.addClass('szimulation_div');
+  szimulation_div = select('#szimulation_div');
 
-  tool_div = createDivWithP('tools');
-  tool_div.addClass('tool_div');
+  tool_div = select('#tool_div');
 
   new_envitoment_div.child(strategic_chance_slider);
   new_envitoment_div.child(voter_population_slider);
@@ -446,14 +441,11 @@ function setup() {
   szim_gombok.child(new_envitoment_div);
   szim_gombok.child(edit_enviroment_div);
   szim_gombok.child(szimulation_div);
-  szim_gombok.addClass('sim_gombok');
   szim_gombok.child(tool_div);
 
-  vote_result_div = createDiv('Voting results:');
-  vote_result_div.addClass('vote_results');
+  vote_result_div = select('#vote_results');
 
-  results_and_selected_d = createDiv();
-  results_and_selected_d.class('results-and-selected-div');
+  results_and_selected_d = select('#results-and-selected-div');
   results_and_selected_d.child(selected_div);
   results_and_selected_d.child(vote_result_div);
 

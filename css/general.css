@@ -24,11 +24,18 @@
 }
 
 ::-webkit-scrollbar {
-  width: 0;
-  background: transparent;
+  width: 0.8vw;
+  background: var(--accent);
+  border-radius: 1vw;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 1vw;
 }
 
 body {
+  overflow-x: hidden;
   overflow-y: scroll;
   line-height: 1.5rem;
 }
