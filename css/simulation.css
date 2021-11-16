@@ -7,9 +7,11 @@
 #sim_gombok {
   grid-area: sim-gombok;
   width: 20vw;
+  height: 90vh;
+  overflow-y: scroll;
 }
 
-#results-and-selected-div{
+#results-and-selected-div {
   grid-area: results-and-selected-div;
   align-self: start;
 }
@@ -56,8 +58,7 @@ main {
   column-gap: 2rem;
   place-items: center;
   place-content: center;
-  grid-template-areas:
-    "sim-gombok canvas results-and-selected-div";
+  grid-template-areas: "sim-gombok canvas results-and-selected-div";
 }
 
 body {
@@ -105,8 +106,7 @@ main select {
   width: 10rem;
 }
 
-#szim_gombok{
-
+#szim_gombok {
 }
 
 #edit_enviroment_div {
