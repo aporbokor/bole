@@ -470,5 +470,5 @@ function draw() {
   handle_elements();
 
   let end = new Date().getTime() - start;
-  FPS.innerText = 'FPS: ' + frameRate();
+  // FPS.innerText = 'FPS: ' + frameRate();
 }
