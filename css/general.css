@@ -24,14 +24,15 @@
 }
 
 ::-webkit-scrollbar {
-  width: 0.8vw;
+  width: 0.8rem;
   background: var(--accent);
-  border-radius: 1vw;
+  border-radius: 1rem;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--primary);
-  border-radius: 1vw;
+  border-radius: 1rem;
+  border: 0.1rem solid var(--accent);
 }
 
 body {

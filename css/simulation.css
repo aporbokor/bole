@@ -1,55 +1,63 @@
+:root{
+  --canvas-height: 740px;
+  --canvas-width: 800px;
+}
+
 .canvas {
   grid-area: canvas;
   width: 50vw;
   align-self: start;
   margin-top: 1rem;
 }
+.content_box{
+  width:300px;
+  height: var(--canvas-height);
+}
+
 #sim_gombok {
   grid-area: sim-gombok;
-  width: 20vw;
-  height: 90vh;
   overflow-y: scroll;
 }
 
 #results-and-selected-div {
   grid-area: results-and-selected-div;
   align-self: start;
+  --selected-height: 240px;
 }
 
-#vote_results {
-  width: 200px;
+.under_selected{
+  height: calc(var(--canvas-height) - var(--selected-height) - 17px - 1rem);
   border: 10px solid var(--primary);
   margin-top: 17px;
-  height: 488px;
   overflow-y: scroll;
   background: var(--primary);
   padding: 1rem;
 }
+
+#vote_results {
+
+}
 #selected {
-  width: 200px;
   border: 10px solid var(--primary);
   background: var(--primary);
   margin-top: 1rem;
-  height: 218px;
+  height: var(--selected-height);
   overflow-y: scroll;
   padding: 1rem;
 }
 
 .step_by_stepp {
-  overflow-y: scroll;
-  position: absolute;
-  height: 100vh - 740px;
-  height: 488px;
-  width: 200px;
-  top: 800px;
-  margin-top: 1rem;
+  /* overflow-y: scroll; */
+  /* position: absolute; */
+  /* top: 800px; */
+  /* margin-top: 1rem;
   padding: 1rem;
-  background: var(--primary);
-  display: flex;
+  background: var(--primary); */
+  /* display: flex;
   flex-direction: column;
   align-self: center;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 main {

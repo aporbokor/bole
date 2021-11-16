@@ -77,6 +77,7 @@ class SteppingBox{
   constructor(){
     this.main_div = createDivWithP('The voting method step by step');
     this.main_div.class('step_by_stepp');
+    this.main_div.addClass('under_selected');
     this.main_div.p.class('stepping_box_title');
 
     this.next_button = createButton('next step');
@@ -96,7 +97,7 @@ class SteppingBox{
 
     this.visualized_system = null;
 
-    hide_stepping_box = createButton('Hide stepp-by stepp box');
+    hide_stepping_box = createButton('hide step by step box');
     this.shown = true;
     hide_stepping_box.parent_stepping_box = this;
 
@@ -104,14 +105,17 @@ class SteppingBox{
       if (this.parent_stepping_box.shown){
         this.parent_stepping_box.hide();
         vote_result_div.show();
+        this.html("show step by step box");
       }else{
         this.parent_stepping_box.show();
         vote_result_div.hide();
+        this.html("hide step by step box");
       }
       this.parent_stepping_box.shown = !(this.parent_stepping_box.shown);
     })
 
     szimulation_div.child(hide_stepping_box);
+    this.hide();
   }
 
   delete_content(){
