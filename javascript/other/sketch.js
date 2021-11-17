@@ -69,11 +69,12 @@ HEIGHT = 740;
 
 let approval_range;
 let support_range;
-const support_per_approval_range = 1;
+const support_per_approval_range = 1.1;
 let supporter_population;
 let supporter_per_candidate;
 let seems_win_percent = 1;
 let seems_win_candidates;
+let seems_lose_candidates;
 
 const votingmethods = new Map([
   ['plurarity', PlurarityVoter],

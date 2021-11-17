@@ -86,9 +86,10 @@ function count_supporters(){
     for (let j = 0; j < candidates.length; j++){
       let candidate = candidates[j];
       let res = (dist(candidate.x, candidate.y, voter.x, voter.y) <= support_range);
-      supporter_population += res;
-      candidate.supporters += res;
+
       if (res){
+        supporter_population += 1;
+        candidate.supporters += 1;
         voter.supports.push(candidate);
       }
     }
@@ -100,10 +101,15 @@ function calculate_seems_win_candidates(){
     const supporters_to_win = seems_win_percent * supporter_per_candidate;
 
     seems_win_candidates = [];
+    seems_lose_candidates = [];
+
     for (let i = 0; i < candidates.length; i++){
       let candidate = candidates[i];
+
       if (candidate.supporters >= supporters_to_win ){
         seems_win_candidates.push(candidate);
+        continue;
       }
+      seems_lose_candidates.push(candidate);
     }
 }

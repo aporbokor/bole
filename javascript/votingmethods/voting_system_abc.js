@@ -100,8 +100,8 @@ class RankingVotingMethod extends VotingMethod{
     }
   }
 
-  best_candidate_tier_list(voter){
-    let returned = this.candidates.concat([]);
+  best_candidate_tier_list(voter, candidates_=this.candidates){
+    let returned = candidates_.concat([]);
     returned.sort(function (a,b){return voter.distance_to_candidate(a)-voter.distance_to_candidate(b)});
     return returned;
   }

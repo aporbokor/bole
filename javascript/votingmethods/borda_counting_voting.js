@@ -11,11 +11,24 @@ class BordaCounting extends RankingVotingMethod{
     return this.best_candidate_tier_list(voter);
   }
 
+  registrate_strategic_vote(voter){
+    let winner_tier_list = this.best_candidate_tier_list(voter, seems_win_candidates);
+    let top = winner_tier_list[0];
+    let bottom = winner_tier_list.slice(1);
+
+    let loser_tier_list = this.best_candidate_tier_list(voter, seems_lose_candidates);
+
+    let returned = loser_tier_list.concat(bottom);
+    returned.unshift(top);
+
+    return returned;
+  }
+
   registrate_vote(voter){
     let tier_list;
 
     if (voter.strategic){
-      tier_list = this.registrate_honest_vote(voter);
+      tier_list = this.registrate_strategic_vote(voter);
     }else{
       tier_list = this.registrate_honest_vote(voter);
     }
