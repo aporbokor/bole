@@ -25,8 +25,24 @@ class Candidate extends Person{
       returned = createP(this.name + '|no votes yet');
     }else if (Array.isArray(this.votes)){
       returned = createP(this.name + '|votes: ' + this.votes.join(', '));
-    } else if (typeof(this.votes) === 'number'){
+    } else {
       returned = createP(this.name + '|votes: ' + this.votes);
+    }
+
+    returned.class('candidate_p');
+    returned.style('color', this.color);
+
+    return returned;
+  }
+
+  get_custom_p(text_after_name){
+    let returned;
+    if (typeof(text_after_name) === 'undefined'){
+      returned = createP(this.name + '|no votes yet');
+    }else if (Array.isArray(text_after_name)){
+      returned = createP(this.name + '|votes: ' + text_after_name.join(', '));
+    } else{
+      returned = createP(this.name + '|votes: ' + text_after_name);
     }
 
     returned.class('candidate_p');

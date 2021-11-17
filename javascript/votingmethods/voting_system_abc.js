@@ -192,6 +192,17 @@ class RunoffLike extends RankingVotingMethod{
     return returned;
   }
 
+  best_valid_candidate_tier_list(voter, elliminated){
+    let tier_list = voter.voted_for;
+    for (let i = tier_list.length-1; i >= 0; i--){
+      let item = tier_list[i];
+      if (elliminated.has(item)){
+        tier_list.splice(i,1);
+      }
+    }
+    return tier_list;
+  }
+
   elliminate_canidates(sub_votes, elliminated){
     throw new Error("You must implement an elliminate_canidates method to your RankingVotingMethod class");
   }
@@ -281,7 +292,7 @@ class RunoffLike extends RankingVotingMethod{
       }
       console.log(elliminated_candidates);
       for (let i = 0; i < elliminated_candidates.length; i++){
-        elliminated_div.child(elliminated_candidates[i].get_small_p());
+        elliminated_div.child(elliminated_candidates[i].get_custom_p());
       }
 
 
