@@ -1,10 +1,14 @@
-function increasing_sum(start, end){
-  let returned = 0;
+function sum_of_natural_numbers(start, end, stepp=1){
+  let range = end-start;
+  return (range/2)*((2*start)+((range-1)*stepp));
+}
 
-  for (let i = start; i <= end;i++){
-    returned += i
+function faktorial(n){
+  if (n == 0){
+    return 1;
   }
-  return returned;
+
+  return n * faktorial(n-1);
 }
 
 

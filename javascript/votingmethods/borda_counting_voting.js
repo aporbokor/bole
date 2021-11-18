@@ -4,7 +4,7 @@ class BordaCounting extends RankingVotingMethod{
     for (let i = 0; i<this.candidates.length; i++){
       this.candidates[i].votes = 0;
     }
-    max_votes = increasing_sum(1, this.candidates.length) * voter_population * 0.5;
+    max_votes = sum_of_natural_numbers(0, this.candidates.length) * voter_population * 1.8;
   }
 
   registrate_honest_vote(voter){

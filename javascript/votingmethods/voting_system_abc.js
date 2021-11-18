@@ -153,6 +153,9 @@ class RunoffLike extends RankingVotingMethod{
   prepare_for_voting(){
     super.prepare_for_voting();
     this.elliminated_visualization = new Set();
+    for (let i = 0; i < this.candidates.length; i++){
+      this.candidates[i].sub_votes_for_visualization = [];
+    }
   }
 
   registrate_honest_vote(voter){
@@ -165,10 +168,11 @@ class RunoffLike extends RankingVotingMethod{
       voter.voted_for[i].votes[i] += 1;
     }
     this.voters.push(voter);
+    console.log(voter);
   }
 
   votes_for(voter, eliminated){
-    let tier_list = voter.voted_for;
+    let tier_list = voter.voted_for.concat([]);
     let index = 0;
     let returned = tier_list[index];
 
@@ -181,7 +185,7 @@ class RunoffLike extends RankingVotingMethod{
 
 
   get_last_valid_preference(voter, elliminated){
-    let tier_list = voter.voted_for;
+    let tier_list = voter.voted_for.concat([]);
     let index = tier_list.length-1;
     let returned = tier_list[index];
 
@@ -193,7 +197,7 @@ class RunoffLike extends RankingVotingMethod{
   }
 
   best_valid_candidate_tier_list(voter, elliminated){
-    let tier_list = voter.voted_for;
+    let tier_list = voter.voted_for.concat([]);
     for (let i = tier_list.length-1; i >= 0; i--){
       let item = tier_list[i];
       if (elliminated.has(item)){
@@ -201,6 +205,32 @@ class RunoffLike extends RankingVotingMethod{
       }
     }
     return tier_list;
+  }
+
+  set_candidate_votes(elliminated){
+    for (let i = 0; i < this.candidates.length; i++){
+      let pushed = []
+      for(let j = 0; j < this.candidates.length - elliminated.size; j++){
+        pushed.push(0);
+      }
+
+      this.candidates[i].sub_votes_for_visualization.push(pushed);
+    }
+
+    for(let i = 0; i < voters.length; i++){
+      let tier_list = this.best_valid_candidate_tier_list(voters[i], elliminated);
+
+      for (let j = 0; j < tier_list.length; j++){
+        let candidate = tier_list[j]
+        candidate.sub_votes_for_visualization[candidate.sub_votes_for_visualization.length - 1][j] += 1
+      }
+    }
+  }
+
+  stepp_in_visualization(){
+    for (let i = 0; i < this.candidates.length; i++){
+      this.candidates[i].sub_votes_for_visualization.shift()
+    }
   }
 
   elliminate_canidates(sub_votes, elliminated){
@@ -225,13 +255,16 @@ class RunoffLike extends RankingVotingMethod{
         sub_votes.count(this.votes_for(this.voters[i],elliminated));
       }
 
+      this.set_candidate_votes(elliminated);
+
       this.sub_votes_for_visualization.push(sub_votes.copy());
 
       let sub_result = [];
 
-      for (const x of sub_votes){
-        sub_result.push(x)
+      for (const x of sub_votes.entries()){
+        sub_result.push(x);
       }
+      console.log(sub_result)
 
       this.sub_results.push(count_votes_for_ints(sub_result, function(cand){return cand[1]}));
 
@@ -279,9 +312,11 @@ class RunoffLike extends RankingVotingMethod{
 
       let res = get_results_elements(subresult,
         function (cand){
-          let returned = createProgress(cand[0].name + ': ',cand[1],voters.length);
-          returned.label.style('color',cand[0].color);
-          return returned;
+          let candidate = cand[0];
+          // let returned = createProgress(cand[0].name + ': ',cand[1],voters.length);
+          // returned.label.style('color',cand[0].color);
+          console.log(candidate.sub_votes_for_visualization);
+          return candidate.get_custom_p(candidate.sub_votes_for_visualization[0]);
         })
 
       let elliminated_candidates = voting_sytem.elliminate_canidates(voting_sytem.sub_votes_for_visualization[voting_sytem.visualization_stepp], voting_sytem.elliminated_visualization)
@@ -292,9 +327,8 @@ class RunoffLike extends RankingVotingMethod{
       }
       console.log(elliminated_candidates);
       for (let i = 0; i < elliminated_candidates.length; i++){
-        elliminated_div.child(elliminated_candidates[i].get_custom_p());
+        elliminated_div.child(elliminated_candidates[i].get_custom_p(elliminated_candidates[i].sub_votes_for_visualization[0]));
       }
-
 
       elliminated_div.child(voting_sytem.get_reasoning_text(elliminated_candidates));
 
@@ -304,6 +338,8 @@ class RunoffLike extends RankingVotingMethod{
 
       content.child(res);
       content.child(elliminated_div);
+
+      voting_sytem.stepp_in_visualization();
 
 
     } else {

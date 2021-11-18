@@ -50,3 +50,8 @@ main h2 {
   font-size: 1.1rem;
   margin-bottom: 1rem;
 }
+
+.canvas_img{
+  width: 50%;
+  height: 50%;
+}

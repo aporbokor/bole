@@ -82,6 +82,15 @@
 		      <li><a>Contributing</a></li>
 	      </ul>
       </section>
+      <article id="visualization" class ="doc">
+        <h2>Visualization</h2>
+        <p>If we want to visualize diferent voting systems, than first we are going to need a way to visualize the voters' and the candidates' opinions. To put it simply: in our visualization if two people are close to each other, than their opinion is similar. If they are far away, than teir opinion is quite different. So we can place these lovely people into an opinion plane, where everyone's coordinate coresponds to their opinion.</p>
+        <p>In our visualization the voters are marked with a smaller circle, and the candidates are marked with a bigger circle.</p>
+        <p>Take the following picture for example:</p>
+        <img src='opinion_example.png', class='canvas_img'></img>
+        <p>There are 2 candidates and one voter in this picture. The orange voter is closer to the green candidate, than the green candidate. Tis means that if the orange voter had to chose between these two candidates, it will chose green.</p>
+        <p>So when there is an election every voters' dream is that, the candidate closest to it gets elected. Our goal is to make sure, that the candidate, who is the closest to the average opinion gets elected.</p>
+      </article>
       <article id="voter_types" class="doc">
 	      <h2>Voter Types</h2>
 	      <p>Inside the simulation, the placement of a voter on the x and y axis represents their opinion. This stands for the candidates, too, meaning the closer the voter is to a candidate's position, the more similar their opinions are.</p>
@@ -103,7 +112,19 @@
 		<ul>
   		<li><section class="docli">
   			<h3>Plurality</h3>
-  			<p>Plurality voting is an electoral system in which a candidate, or candidates, who poll more than any other counterpart (that is, receive a plurality), are elected. Sometimes, it is called first-past-the-post (FPTP) voting. This system is widely used, for example, in the United States.</p>
+        <p>So let's take a look at the most known, most used voting system inthe word: plurarity voting. The rules are simple: every voter votes for exactly one candidate. We will count the total number of votes of each candidate. The candidate with the most votes wins. Pretty straightforward, isn't it? </p>
+        <p>Let's start with the simple case: only two candidates, 600 voters. We will color the voters based on who's name did they put an x next to.</p>
+        <img src='plurality_first.png' class='canvas_img'></img>
+        <p>In this case, pink wins. Pink has 370 votes and green has 230. Let's see what happens if we add another candidate:</p>
+
+        <img src='plurality_second.png' class='canvas_img'></img>
+        <p>Seems like the new candidate took the last place with only 151 votes. Green still has 230 votes. But look at pink's votecount. She only has 219 votes. So basicly this round, white joined the race, only to take last place, but the winner still changed. This doesn't make any sense. We clearly saw in the previous round, that more voters preferd pink over green.</p>
+
+        <p>If we look at the pictures more closely, we'll see, that white literarly stole votes from pink. Those voters would have preferd pink more, than green, so they are prety unsatisfied about the outcome. This is called the spoiler effect. But there is still a way for pink to win. If among the white voters there are some strategic voters (indicated by larger strokeweight) then tey will vote for pink instead of white to prevent green from winning. Let's see this in action!</p>
+        <img src='plurality_third.png' class='canvas_img'></img>
+        <p>As you can see here, the strategic voters recognized that white has a pretty low chance of winning. So they voted for pink instead to help her win. And in the end, they succeded: pink has 290 votes, green has 230 and white has 80. So if voters know the chances of each candidate they can make decisions to prevent an undesirable outcome. But for this, they roughly need to know each candidates' chances. If they don't know or even worse, they've got a misinformation, than obiusly this is not going to work.</p>
+        <p>I wonder why plurarity voting in most cases leads to two party sytems.</p>
+        <p>Plurality voting is an electoral system in which a candidate, or candidates, who poll more than any other counterpart (that is, receive a plurality), are elected. Sometimes, it is called first-past-the-post (FPTP) voting. This system is widely used, for example, in the United States.</p>
   		</section></li>
 
   		<li><section class="docli">

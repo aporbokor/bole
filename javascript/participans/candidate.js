@@ -36,24 +36,8 @@ class Candidate extends Person{
   }
 
   get_custom_p(text_after_name){
-    let returned;
-    if (typeof(text_after_name) === 'undefined'){
-      returned = createP(this.name + '|no votes yet');
-    }else if (Array.isArray(text_after_name)){
-      returned = createP(this.name + '|votes: ' + text_after_name.join(', '));
-    } else{
-      returned = createP(this.name + '|votes: ' + text_after_name);
-    }
 
-    returned.class('candidate_p');
-    returned.style('color', this.color);
-
-    return returned;
-  }
-
-  get_p(){
-
-    let returned = createProgress(this.name + '|votes: ', this.votes, max_votes);
+    let returned = createProgress(this.name + '|votes: ', text_after_name, max_votes);
 
     returned.style('color', this.color);
     returned.candidate_parent = this;
@@ -61,11 +45,15 @@ class Candidate extends Person{
       clicked_selected = this.candidate_parent;
       load_clicked_selected();
     });
-    returned.mouseMoved(function(){selected = this.candidate_parent})
-    returned.label.style('color', this.color)
-    returned.class('candidate_p')
+    returned.mouseMoved(function(){selected = this.candidate_parent});
+    returned.label.style('color', this.color);
+    returned.class('candidate_p');
 
     return returned;
+  }
+
+  get_p(){
+    return this.get_custom_p(this.votes);
   }
   get_extra_to_div(){
     let extra_to_div = createDiv();

@@ -278,12 +278,13 @@ function handle_elements(){
 }
 
 function reset_enviroment(){
-  if (!(frozen_sim)){
-    voters = [];
-    candidates = [];
-    make_voters(voter_population);
-    make_candidates(candidate_population);
-  }
+  frozen_sim = false;
+  voters = [];
+  candidates = [];
+  make_voters(voter_population);
+  make_candidates(candidate_population);
+  stepping_box.delete_content();
+  stepping_box.hide_next();
 }
 
 function select_voting(){
