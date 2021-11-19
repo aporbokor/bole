@@ -52,6 +52,16 @@ main h2 {
 }
 
 .canvas_img{
+  grid-area: canvas_img;
   width: 50%;
   height: 50%;
+}
+
+.voting_results{
+  grid-area: voting_results;
+
+}
+
+.voteresult{
+  grid-template-areas: "canvas_img voting_results"
 }

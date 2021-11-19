@@ -68,6 +68,7 @@ WIDTH = 800;
 HEIGHT = 740;
 
 let approval_range;
+const approval_range_size = 0.3;
 let support_range;
 const support_per_approval_range = 1.1;
 let supporter_population;
@@ -358,7 +359,7 @@ function setup() {
   canvas = createCanvas(constrain(WIDTH, 0, window.innerWidth), constrain(HEIGHT,0, window.innerHeight),WEBGL);
   canvas.addClass('canvas')
 
-  approval_range = Math.floor(dist(0,0,WIDTH,HEIGHT)*0.2);
+  approval_range = Math.floor(dist(0,0,WIDTH,HEIGHT)*approval_range_size);
   support_range = Math.floor(support_per_approval_range * approval_range);
 
   selected_div = select("#selected")

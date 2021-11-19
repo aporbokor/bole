@@ -58,10 +58,11 @@
 			      <ul>
 				      <li><a>Plurality</a></li>
 				      <li><a>Approval</a></li>
+              <li><a>Borda counting</a></li>
 				      <li><a>Instant-runoff</a></li>
               <li><a>Coombs</a></li>
-              <li><a>Theoretical Perfect</a></li>
 				      <li><a>Tideman<a></li>
+              <li><a>Theoretical Perfect</a></li>
 			      </ul>
 		      </li>
 		      <li><a>Credits</a>
@@ -114,27 +115,33 @@
   			<h3>Plurality</h3>
         <p>So let's take a look at the most known, most used voting system inthe word: plurarity voting. The rules are simple: every voter votes for exactly one candidate. We will count the total number of votes of each candidate. The candidate with the most votes wins. Pretty straightforward, isn't it? </p>
         <p>Let's start with the simple case: only two candidates, 600 voters. We will color the voters based on who's name did they put an x next to.</p>
-        <img src='plurality_first.png' class='canvas_img'></img>
-        <p>In this case, pink wins. Pink has 370 votes and green has 230. Let's see what happens if we add another candidate:</p>
 
-        <img src='plurality_second.png' class='canvas_img'></img>
-        <p>Seems like the new candidate took the last place with only 151 votes. Green still has 230 votes. But look at pink's votecount. She only has 219 votes. So basicly this round, white joined the race, only to take last place, but the winner still changed. This doesn't make any sense. We clearly saw in the previous round, that more voters preferd pink over green.</p>
+        <div class="voteresult">
+          <img src='plurality_first.png' class='canvas_img'></img>
+          <div class="voting_results">Voting results:<div><div class="place_div">1st<div class="candidate_p" style="color: rgb(238, 165, 165);"><p style="color: rgb(238, 165, 165);">candidate#1|votes: 381</p><progress class="progress_" value="381" max="600">candidate#1|votes: </progress></div></div><div class="place_div">2nd<div class="candidate_p" style="color: rgb(143, 203, 155);"><p style="color: rgb(143, 203, 155);">candidate#0|votes: 219</p><progress class="progress_" value="219" max="600">candidate#0|votes: </progress></div></div></div></div>
+        </div>
+        <p>In this case as you can see pink wins. Let's see what happens if we add another candidate:</p>
+
+        <div class="voteresult">
+          <img src='plurality_second.png' class='canvas_img'></img>
+          <div class="voting_results">Voting results:<div><div class="place_div">1st<div class="candidate_p" style="color: rgb(143, 203, 155);"><p style="color: rgb(143, 203, 155);">candidate#0|votes: 219</p><progress class="progress_" value="219" max="600">candidate#0|votes: </progress></div></div><div class="place_div">2nd<div class="candidate_p" style="color: rgb(238, 165, 165);"><p style="color: rgb(238, 165, 165);">candidate#1|votes: 204</p><progress class="progress_" value="204" max="600">candidate#1|votes: </progress></div></div><div class="place_div">3rd<div class="candidate_p" style="color: rgb(255, 238, 219);"><p style="color: rgb(255, 238, 219);">candidate#2|votes: 177</p><progress class="progress_" value="177" max="600">candidate#2|votes: </progress></div></div></div></div>
+        </div>
+        <p>Seems like the new candidate took the last place. Green still has as many votes as it has before. But look at pink's votecount. She only has 204 votes. So basicly this round, white joined the race, only to take last place, but the winner still changed. This doesn't make any sense. We clearly saw in the previous round, that more voters preferd pink over green.</p>
 
         <p>If we look at the pictures more closely, we'll see, that white literarly stole votes from pink. Those voters would have preferd pink more, than green, so they are prety unsatisfied about the outcome. This is called the spoiler effect. But there is still a way for pink to win. If among the white voters there are some strategic voters (indicated by larger strokeweight) then tey will vote for pink instead of white to prevent green from winning. Let's see this in action!</p>
-        <img src='plurality_third.png' class='canvas_img'></img>
-        <p>As you can see here, the strategic voters recognized that white has a pretty low chance of winning. So they voted for pink instead to help her win. And in the end, they succeded: pink has 290 votes, green has 230 and white has 80. So if voters know the chances of each candidate they can make decisions to prevent an undesirable outcome. But for this, they roughly need to know each candidates' chances. If they don't know or even worse, they've got a misinformation, than obiusly this is not going to work.</p>
+
+        <div class="voteresult">
+          <img src='plurality_third.png' class='canvas_img'></img>
+          <div class="voting_results">Voting results:<div><div class="place_div">1st<div class="candidate_p" style="color: rgb(238, 165, 165);"><p style="color: rgb(238, 165, 165);">candidate#1|votes: 240</p><progress class="progress_" value="240" max="600">candidate#1|votes: </progress></div></div><div class="place_div">2nd<div class="candidate_p" style="color: rgb(143, 203, 155);"><p style="color: rgb(143, 203, 155);">candidate#0|votes: 219</p><progress class="progress_" value="219" max="600">candidate#0|votes: </progress></div></div><div class="place_div">3rd<div class="candidate_p" style="color: rgb(255, 238, 219);"><p style="color: rgb(255, 238, 219);">candidate#2|votes: 141</p><progress class="progress_" value="141" max="600">candidate#2|votes: </progress></div></div></div></div>
+        </div>
+        <p>As you can see here, the strategic voters recognized that white has a pretty low chance of winning. So they voted for pink instead to help her win. And in the end, they succeded. So if voters know the chances of each candidate they can make decisions to prevent an undesirable outcome. But for this, they roughly need to know each candidates' chances. If they don't know or even worse, they've got a misinformation, than obiusly this is not going to work.</p>
         <p>I wonder why plurarity voting in most cases leads to two party sytems.</p>
         <p>Plurality voting is an electoral system in which a candidate, or candidates, who poll more than any other counterpart (that is, receive a plurality), are elected. Sometimes, it is called first-past-the-post (FPTP) voting. This system is widely used, for example, in the United States.</p>
   		</section></li>
 
   		<li><section class="docli">
-    		<h3>Theoretical Perfect</h3>
-    		<p>Theoretical perfect voting systems are....</p>
-  		</section></li>
-
-  		<li><section class="docli">
     		<h3>Approval</h3>
-    		<p>Approval voting systems are the first of multiple choice voting systems in our list....</p>
+    		<p>Approval voting systems are the first of multiple choice voting systems in our list. In this voting system basicly every voter can vote to as many candidates as they like. So for example if a voter would be satisfied if either candidate#1 or candidate#2 won the election, than the voter would vote for both candidate#1 and candidate#2. So it's almost like plurality, but here the voters' choices are not limited to one candidate.</p>
   	  </section></li>
 
       <li><section class="docli">
@@ -155,6 +162,11 @@
   		<li><section class="docli">
   			<h3>Tideman</h3>
   			<p>Tideman voting systems are...</p>
+  		</section></li>
+
+      <li><section class="docli">
+    		<h3>Theoretical Perfect</h3>
+    		<p>Theoretical perfect voting systems are....</p>
   		</section></li>
 
 		</ul>
