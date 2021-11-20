@@ -131,7 +131,7 @@
         <p>If we look at the pictures more closely, we'll see, that white literarly stole votes from pink. Those voters would have preferd pink more, than green, so they are prety unsatisfied about the outcome. This is called the spoiler effect. But there is still a way for pink to win. If among the white voters there are some strategic voters (indicated by larger strokeweight) then tey will vote for pink instead of white to prevent green from winning. Let's see this in action!</p>
 
         <div class="voteresult">
-          <img src='plurality_third.png' class='canvas_img'></img>
+          <img src='plurality_third.png' class="canvas_img"></img>
           <div class="voting_results">Voting results:<div><div class="place_div">1st<div class="candidate_p" style="color: rgb(238, 165, 165);"><p style="color: rgb(238, 165, 165);">candidate#1|votes: 240</p><progress class="progress_" value="240" max="600">candidate#1|votes: </progress></div></div><div class="place_div">2nd<div class="candidate_p" style="color: rgb(143, 203, 155);"><p style="color: rgb(143, 203, 155);">candidate#0|votes: 219</p><progress class="progress_" value="219" max="600">candidate#0|votes: </progress></div></div><div class="place_div">3rd<div class="candidate_p" style="color: rgb(255, 238, 219);"><p style="color: rgb(255, 238, 219);">candidate#2|votes: 141</p><progress class="progress_" value="141" max="600">candidate#2|votes: </progress></div></div></div></div>
         </div>
         <p>As you can see here, the strategic voters recognized that white has a pretty low chance of winning. So they voted for pink instead to help her win. And in the end, they succeded. So if voters know the chances of each candidate they can make decisions to prevent an undesirable outcome. But for this, they roughly need to know each candidates' chances. If they don't know or even worse, they've got a misinformation, than obiusly this is not going to work.</p>
@@ -142,7 +142,41 @@
   		<li><section class="docli">
     		<h3>Approval</h3>
     		<p>Approval voting systems are the first of multiple choice voting systems in our list. In this voting system basicly every voter can vote to as many candidates as they like. So for example if a voter would be satisfied if either candidate#1 or candidate#2 won the election, than the voter would vote for both candidate#1 and candidate#2. So it's almost like plurality, but here the voters' choices are not limited to one candidate.</p>
-  	  </section></li>
+        <p>If we want to model this behavior, than we will need to define an approval range. If a candidate is inide of a voter's approval range, than the voter is going to vote for that candidate. If 2 candidates are inside the voter's approval range, than the voter is going to vote for those 2 canididates. In our idealized simulation every voter has the same approval range. So if we draw a circle around each candidate with the radius of the approval range, than every voter inside of that approval range is going to vote for that candidate. In the following example there are 3 candidates and 142 voters.</p>
+
+        <img src="approval_introduction.png" class="canvas_img"></img>
+        <p>For example in this case the voter marked with a blue color will vote for white. This is due to the fact, that white is the only candidate inside the blue voter's approval radius. On the other end the red voter has 2 candidates inside the approval range. So when it comes to voting he is going to vote for both white and green. But as you can see there are some sad voters, for example the purple voter. No candidate is inside their approval range. In this case they are going to vote for the candidate closest to them. In this picture purple is going to vote for pink. Let's run the election to see what happens!</p>
+
+        <div class="voteresult">
+          <img src="approval_first.png" class="canvas_img"></img>
+          <div class="voting_results">Voting results:<div><div class="place_div">1st<div class="candidate_p" style="color: rgb(255, 238, 219);"><p style="color: rgb(255, 238, 219);">candidate#2|votes: 60</p><progress class="progress_" value="60" max="142">candidate#2|votes: </progress></div></div><div class="place_div">2nd<div class="candidate_p" style="color: rgb(143, 203, 155);"><p style="color: rgb(143, 203, 155);">candidate#0|votes: 57</p><progress class="progress_" value="57" max="142">candidate#0|votes: </progress></div></div><div class="place_div">3rd<div class="candidate_p" style="color: rgb(238, 165, 165);"><p style="color: rgb(238, 165, 165);">candidate#1|votes: 53</p><progress class="progress_" value="53" max="142">candidate#1|votes: </progress></div></div></div></div>
+        </div>
+        <p>It seems like white won. Notice that green is quite close to white. They have a similar opinion. So if this had been a plularity election, a spoiler effect would have occured and pink would have won. This is what would have happened if we had held a plularity election:</p>
+
+        <div class="voteresult">
+          <img src="plurarity_instead_approval.png" class="canvas_img"></img>
+          <div class="voting_results">Voting results:<div><div class="place_div">1st<div class="candidate_p" style="color: rgb(238, 165, 165);"><p style="color: rgb(238, 165, 165);">candidate#1|votes: 53</p><progress class="progress_" value="53" max="142">candidate#1|votes: </progress></div></div><div class="place_div">2nd<div class="candidate_p" style="color: rgb(255, 238, 219);"><p style="color: rgb(255, 238, 219);">candidate#2|votes: 52</p><progress class="progress_" value="52" max="142">candidate#2|votes: </progress></div></div><div class="place_div">3rd<div class="candidate_p" style="color: rgb(143, 203, 155);"><p style="color: rgb(143, 203, 155);">candidate#0|votes: 37</p><progress class="progress_" value="37" max="142">candidate#0|votes: </progress></div></div></div></div>
+        </div>
+        <p>Great, so approval fixes the spioler effect. So what else could cause a not win-worthy candidate to be chosen in an approval election? Well, the voters themself. If you look at the above approval voting results, you can see that green was qute close to winning. It was only 3 votes of. So what if 4 out of the voters who have voted for both green and white but had a little bit of preference to green decided not to vote for white, but only vote for green. So green, their most fauvorite has more chance to win. These are the strategic voters. Let's see what happens!</p>
+
+        <div class="voteresult">
+          <img src="approval_second.png" class="canvas_img"></img>
+          <div class="voting_results">Voting results:<div><div class="place_div">1st<div class="candidate_p" style="color: rgb(143, 203, 155);"><p style="color: rgb(143, 203, 155);">candidate#0|votes: 57</p><progress class="progress_" value="57" max="142">candidate#0|votes: </progress></div></div><div class="place_div">2nd<div class="candidate_p" style="color: rgb(255, 238, 219);"><p style="color: rgb(255, 238, 219);">candidate#2|votes: 56</p><progress class="progress_" value="56" max="142">candidate#2|votes: </progress></div></div><div class="place_div">3rd<div class="candidate_p" style="color: rgb(238, 165, 165);"><p style="color: rgb(238, 165, 165);">candidate#1|votes: 53</p><progress class="progress_" value="53" max="142">candidate#1|votes: </progress></div></div></div></div>
+        </div>
+        <p>As you can see these 4 strategic voters have succesfully made green win by beatraying white. I wonder what would happen if some of the white voters beatrayed green...</p>
+
+        <div class="voteresult">
+          <img src="approval_third.png" class="canvas_img"></img>
+          <div class="voting_results">Voting results:<div><div class="place_div">1st<div class="candidate_p" style="color: rgb(255, 238, 219);"><p style="color: rgb(255, 238, 219);">candidate#2|votes: 56</p><progress class="progress_" value="56" max="142">candidate#2|votes: </progress></div></div><div class="place_div">2nd<div class="candidate_p" style="color: rgb(143, 203, 155);"><p style="color: rgb(143, 203, 155);">candidate#0|votes: 54</p><progress class="progress_" value="54" max="142">candidate#0|votes: </progress></div></div><div class="place_div">3rd<div class="candidate_p" style="color: rgb(238, 165, 165);"><p style="color: rgb(238, 165, 165);">candidate#1|votes: 53</p><progress class="progress_" value="53" max="142">candidate#1|votes: </progress></div></div></div></div>
+        </div>
+        <p>It seems like white wins again. So what if even more voters beatryed white? Green would win again? That would mean that more white voters would need to beatray green in order for white to win. Let's see where this leads us!</p>
+
+        <div class="voteresult">
+          <img src="approval_fourth.png" class="canvas_img"></img>
+          <div class="voting_results">Voting results:<div><div class="place_div">1st<div class="candidate_p" style="color: rgb(238, 165, 165);"><p style="color: rgb(238, 165, 165);">candidate#1|votes: 53</p><progress class="progress_" value="53" max="142">candidate#1|votes: </progress></div></div><div class="place_div">2nd<div class="candidate_p" style="color: rgb(255, 238, 219);"><p style="color: rgb(255, 238, 219);">candidate#2|votes: 52</p><progress class="progress_" value="52" max="142">candidate#2|votes: </progress></div></div><div class="place_div">3rd<div class="candidate_p" style="color: rgb(143, 203, 155);"><p style="color: rgb(143, 203, 155);">candidate#0|votes: 37</p><progress class="progress_" value="37" max="142">candidate#0|votes: </progress></div></div></div></div>
+        </div>
+        <p>Seems like pink won. The voters beatrayed eachother so much, that they lowerd eachother's votecount so in the end pink was able to win. This is called the chicken dillema. In the extreme case where everyone is strategic everyone votes for one candidate. And that is nothing better than plurality voting.</p>
+      </section></li>
 
       <li><section class="docli">
         <h3>Borda counting</h3>

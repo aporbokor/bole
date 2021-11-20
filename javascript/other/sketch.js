@@ -68,9 +68,9 @@ WIDTH = 800;
 HEIGHT = 740;
 
 let approval_range;
-const approval_range_size = 0.3;
+const approval_range_size = 0.2;
 let support_range;
-const support_per_approval_range = 1.1;
+const support_per_approval_range = 1.65;
 let supporter_population;
 let supporter_per_candidate;
 let seems_win_percent = 1;
