@@ -35,23 +35,6 @@ class Candidate extends Person{
     return returned;
   }
 
-  get_custom_p(text_after_name){
-
-    let returned = createProgress(this.name + '|votes: ', text_after_name, max_votes);
-
-    returned.style('color', this.color);
-    returned.candidate_parent = this;
-    returned.mousePressed(function (){
-      clicked_selected = this.candidate_parent;
-      load_clicked_selected();
-    });
-    returned.mouseMoved(function(){selected = this.candidate_parent});
-    returned.label.style('color', this.color);
-    returned.class('candidate_p');
-
-    return returned;
-  }
-
   get_p(){
     return this.get_custom_p(this.votes);
   }

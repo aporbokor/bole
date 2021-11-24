@@ -25,15 +25,42 @@ class Person{
 
   default_show(){
     if (this.shown){
-      if (this.show_image){
-        let half_size = this.size * 0.5
-        image(this.show_image, this.x-half_size, this.y-half_size, this.size, this.size);
-      }else{
+        if (this.show_image){
+          let half_size = this.size * 0.5
+          texture(this.show_image);
+          // image(this.show_image, this.x-half_size, this.y-half_size, this.size, this.size);
+       }else{
         fill(this.color);
-        circle(this.x, this.y, this.size);
       }
+      circle(this.x, this.y, this.size);
     }
     stroke(default_stroke);
+  }
+
+  get_name_p(){
+    if (!this.show_image){
+      return  `● ${this.name}`;
+    }
+    console.log(this.show_image.elt);
+    let returned = this.profile_pic.elt.outerHTML + ` ${this.name}`;
+    return returned;
+  }
+
+  get_custom_p(text_after_name){
+
+    let returned = createProgress(this.get_name_p() + '|votes: ', text_after_name, max_votes);
+
+    returned.style('color', this.color);
+    returned.candidate_parent = this;
+    returned.mousePressed(function (){
+      clicked_selected = this.candidate_parent;
+      load_clicked_selected();
+    });
+    returned.mouseMoved(function(){selected = this.candidate_parent});
+    returned.label.style('color', this.color);
+    returned.class('candidate_p');
+
+    return returned;
   }
 
   get_div(){
@@ -57,6 +84,8 @@ class Person{
 
     let image_input = createFileInput(function (file) {
       if (file.type === 'image'){
+        this_.profile_pic = createImg(file.data, `picture of ${this_.constructor.name} named ${this_.name}`);
+        this_.profile_pic.class("person_profile_pic")
         this_.show_image = loadImage(file.data);
         this_.show_image.resize(35,35);
       }
