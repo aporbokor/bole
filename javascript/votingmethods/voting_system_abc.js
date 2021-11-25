@@ -160,15 +160,45 @@ class RunoffLike extends RankingVotingMethod{
 
   registrate_honest_vote(voter){
     voter.voted_for = this.best_candidate_tier_list(voter, this.candidates);
+    return voter.voted_for;
+  }
+
+  registrate_strategic_vote(voter){
+    return this.registrate_honest_vote(voter);
   }
 
   registrate_vote(voter){
-    this.registrate_honest_vote(voter);
+    if (voter.strategic){
+      this.registrate_strategic_vote(voter);
+    }else{
+      this.registrate_honest_vote(voter);
+    }
     for (let i = 0; i < voter.voted_for.length; i++){
       voter.voted_for[i].votes[i] += 1;
     }
     this.voters.push(voter);
-    console.log(voter);
+  }
+
+  winner_by_majority(sub_votes){
+    // console.log(sub_votes.max_count);
+    return (sub_votes.max_count() > (voters.length / 2));
+  }
+  get_majority_losers(sub_votes){
+    if ((this.winner_by_majority(sub_votes)) & (sub_votes.size > 1)){
+      const winner_votes = sub_votes.max_count();
+      let losers = Array.from(sub_votes).filter(function (a){
+        return a[1] != winner_votes;
+      });
+
+      let returned = [];
+      for (let i = 0; i < losers.length; i++){
+        returned.push(losers[i][0]);
+      }
+
+      // this.won_by_majority = true;
+      return returned;
+    }
+    return [];
   }
 
   votes_for(voter, eliminated){
@@ -264,7 +294,7 @@ class RunoffLike extends RankingVotingMethod{
       for (const x of sub_votes.entries()){
         sub_result.push(x);
       }
-      console.log(sub_result)
+      console.log(sub_result);
 
       this.sub_results.push(count_votes_for_ints(sub_result, function(cand){return cand[1]}));
 

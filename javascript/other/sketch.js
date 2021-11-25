@@ -46,7 +46,6 @@ let add_candidate_button;
 let delete_candidate_button;
 
 let voting_type_selector;
-let FPS;
 
 let tool_div;
 let current_tool;
@@ -83,6 +82,7 @@ const votingmethods = new Map([
   ['theoretical perfect', PerfectVoter],
   ['approval voting', ApprovalVoter],
   ['borda counting', BordaCounting],
+  ['contingent vote', ContingentVoter],
   ['instant runof', InstantRunOffVoter],
   ['coombs', CoombsVoting],
   ['tideman', TideMan]]
@@ -365,8 +365,6 @@ function setup() {
   selected_div = select("#selected")
 
   stroke(default_stroke);
-  FPS = document.createElement('p');
-  document.body.appendChild(FPS);
 
   szim_gombok = select('#sim_gombok');
 
@@ -471,8 +469,9 @@ function draw() {
   extra_function();
   current_tool.draw();
   draw_everyone();
+
+
   handle_elements();
 
   let end = new Date().getTime() - start;
-  // FPS.innerText = 'FPS: ' + frameRate();
 }

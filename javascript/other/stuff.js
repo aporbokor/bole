@@ -174,4 +174,13 @@ class Counter extends Map{
     }
     return max_val;
   }
+
+  sorted_array(){
+    let returned = Array.from(this);
+    for (let i = 0; i < returned.length; i++){
+      returned[i] = returned[i][0];
+    }
+    returned.sort();
+    return returned;
+  }
 }

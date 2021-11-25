@@ -1,5 +1,5 @@
 class Person{
-  constructor(x, y, color, name){
+  constructor(x, y, color, name, sim){
     ABC_constructor(this, Person);
 
     this.x = x;
@@ -9,6 +9,7 @@ class Person{
 
     this.to_delete = false;
     this.shown = true;
+    this.parent_sim = sim;
   }
 
   show(){
@@ -42,7 +43,7 @@ class Person{
       return  `● ${this.name}`;
     }
     console.log(this.show_image.elt);
-    let returned = this.profile_pic.elt.outerHTML + ` ${this.name}`;
+    let returned = this.profile_pic.outerHTML + ` ${this.name}`;
     return returned;
   }
 
@@ -84,8 +85,9 @@ class Person{
 
     let image_input = createFileInput(function (file) {
       if (file.type === 'image'){
-        this_.profile_pic = createImg(file.data, `picture of ${this_.constructor.name} named ${this_.name}`);
-        this_.profile_pic.class("person_profile_pic")
+        this_.profile_pic = document.createElement('img');
+        this_.profile_pic.src = file.data;
+        this_.profile_pic.setAttribute("class","person_profile_pic");
         this_.show_image = loadImage(file.data);
         this_.show_image.resize(35,35);
       }
