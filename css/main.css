@@ -33,6 +33,10 @@ main h2 {
   margin-bottom: 1rem;
 }
 
+.accent_border{
+  border: 1px solid var(--accent);
+}
+
 .doc {
   padding: 2rem;
   width: 100vw;
@@ -52,16 +56,45 @@ main h2 {
 }
 
 .canvas_img{
-  grid-area: canvas_img;
-  width: 50%;
-  height: 50%;
-}
-
-.voting_results{
-  grid-area: voting_results;
-
+  width: 100%;
+  max-width: 40rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .voteresult{
-  grid-template-areas: "canvas_img voting_results"
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  align-items: center;
+  gap: 1rem;
+  grid-template-areas:
+  "canvas_img voting_results";
+}
+
+.voteresult .canvas_img{
+  grid-area: canvas_img;
+  margin-left: auto;
+  padding: 0;
+}
+
+.voteresult .voting_result{
+  grid-area: voting_results;
+  height: 100%;
+  margin-right: auto;
+
+  background: var(--primary);
+  padding: 1rem;
+}
+
+@media only screen and (max-width: 720px){
+  .voteresult{
+    grid-template-areas:
+    "canvas_img"
+    "voting_results"
+  }
+  .voting_result{
+    width: 100%;
+  }
 }
