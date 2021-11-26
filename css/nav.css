@@ -1,6 +1,7 @@
 /*Navbar*/
 nav {
-  top: 2rem;
+  position: sticky;
+  top: 0;
   height: 3rem;
   background: var(--primary);
   display: flex;

@@ -62,3 +62,7 @@ h2 {
   font-family: "Comfortaa", cursive;
   color: white;
 }
+
+.hidden{
+  display: none;
+}

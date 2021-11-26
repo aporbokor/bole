@@ -33,6 +33,28 @@ main h2 {
   margin-bottom: 1rem;
 }
 
+.viewable_picture{
+  cursor: pointer;
+}
+
+.pic_holder{
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  align-items: center;
+  background-color: rgba(0,0,0,.3);
+}
+
+.pic_holder img{
+  max-height: calc(100vh - 2rem);
+  max-width: calc(100vw - 2rem);
+  margin: auto;
+  opacity: 1;
+}
+
 .accent_border{
   border: 1px solid var(--accent);
 }
