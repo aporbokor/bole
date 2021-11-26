@@ -11,6 +11,7 @@ class InstantRunOffVoter extends RunoffLike{
       this.won_by_majority = true;
       return losers;
     }
+    this.won_by_majority = false;
 
     let mins = sub_votes.mins();
     return mins;

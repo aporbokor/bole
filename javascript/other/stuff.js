@@ -177,10 +177,14 @@ class Counter extends Map{
 
   sorted_array(){
     let returned = Array.from(this);
+    returned.sort(function (a, b){
+      return b[1] - a[1];
+    });
+
     for (let i = 0; i < returned.length; i++){
       returned[i] = returned[i][0];
     }
-    returned.sort();
+
     return returned;
   }
 }

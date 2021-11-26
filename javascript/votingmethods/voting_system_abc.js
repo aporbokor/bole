@@ -125,7 +125,11 @@ class RankingVotingMethod extends VotingMethod{
           for (let i = 0; i < voters.length; i++){
             let voter = voters[i];
             let place = voter.voted_for.findIndex(function (a){return a === candidate});
-            voter.grow_by(map(voter.voted_for.length-place,1,voter.voted_for.length,-0.5*voter_size, 0.5*voter_size));
+            if (place != -1){
+              voter.grow_by(map(voter.voted_for.length-place,1,voter.voted_for.length,-0.5*voter_size, 0.5*voter_size));
+              continue;
+            }
+            voter.grow_by(-voter_size + 1);
           }
         }
       }
@@ -159,8 +163,7 @@ class RunoffLike extends RankingVotingMethod{
   }
 
   registrate_honest_vote(voter){
-    voter.voted_for = this.best_candidate_tier_list(voter, this.candidates);
-    return voter.voted_for;
+    return this.best_candidate_tier_list(voter, this.candidates);
   }
 
   registrate_strategic_vote(voter){
@@ -168,15 +171,20 @@ class RunoffLike extends RankingVotingMethod{
   }
 
   registrate_vote(voter){
+    let vote;
+
     if (voter.strategic){
-      this.registrate_strategic_vote(voter);
+      vote = this.registrate_strategic_vote(voter);
     }else{
-      this.registrate_honest_vote(voter);
+      vote = this.registrate_honest_vote(voter);
     }
-    for (let i = 0; i < voter.voted_for.length; i++){
-      voter.voted_for[i].votes[i] += 1;
+
+    for (let i = 0; i < vote.length; i++){
+      vote[i].votes[i] += 1;
     }
+
     this.voters.push(voter);
+    voter.voted_for = vote;
   }
 
   winner_by_majority(sub_votes){
@@ -210,6 +218,7 @@ class RunoffLike extends RankingVotingMethod{
       index++;
       returned = tier_list[index];
     }
+
     return returned;
   }
 
@@ -282,7 +291,10 @@ class RunoffLike extends RankingVotingMethod{
       let sub_votes = new Counter(1);
 
       for (let i = 0; i < this.voters.length; i++){
-        sub_votes.count(this.votes_for(this.voters[i],elliminated));
+        let vote = this.votes_for(this.voters[i],elliminated);
+        if (vote != undefined){
+          sub_votes.count(vote);
+        }
       }
 
       this.set_candidate_votes(elliminated);
@@ -312,7 +324,13 @@ class RunoffLike extends RankingVotingMethod{
 
   color_voters(){
     for (let i = 0; i < voters.length; i++){
-      voters[i].color = this.votes_for(voters[i],this.elliminated_visualization).color
+      let chosen_candidate = this.votes_for(voters[i],this.elliminated_visualization);
+      if (chosen_candidate === undefined){
+        voters[i].color = honest_voter_color;
+        continue;
+      }
+
+      voters[i].color = chosen_candidate.color;
     }
   }
 
