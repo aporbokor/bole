@@ -92,7 +92,7 @@ main h2 {
   .voteresult{
     grid-template-areas:
     "canvas_img"
-    "voting_results"
+    "voting_results";
   }
   .voting_result{
     width: 100%;

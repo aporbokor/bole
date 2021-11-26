@@ -63,8 +63,8 @@ const inactive_tool_stroke_weight = 2;
 const voter_per_pixel = 0.001;
 
 let canvas;
-WIDTH = 800;
-HEIGHT = 740;
+WIDTH = 780;
+HEIGHT = 660;
 
 let approval_range;
 const approval_range_size = 0.2;

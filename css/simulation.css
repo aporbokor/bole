@@ -1,17 +1,19 @@
 :root{
-  --canvas-height: 740px;
-  --canvas-width: 800px;
+  --canvas-height: 660px;
+  --canvas-width: 780px;
 }
 
 .canvas {
   grid-area: canvas;
-  width: 50vw;
-  align-self: start;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 1rem;
 }
 .content_box{
-  width: 300px;
+  width: 280px;
   height: var(--canvas-height);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #sim_gombok {
@@ -61,16 +63,12 @@
 }
 
 main {
-  height: 100vh - 3rem;
   display: grid;
-  column-gap: 2rem;
-  place-items: center;
-  place-content: center;
   grid-template-areas: "sim-gombok canvas results-and-selected-div";
 }
 
 body {
-  overflow-y: scroll;
+  overflow-y: hidden;
   background: var(--primary-lt);
 }
 
@@ -112,9 +110,6 @@ body {
 main button,
 main select {
   width: 10rem;
-}
-
-#szim_gombok {
 }
 
 #edit_enviroment_div {
