@@ -49,8 +49,8 @@ main h2 {
 }
 
 .pic_holder img{
-  max-height: calc(100vh - 2rem);
-  max-width: calc(100vw - 2rem);
+  max-height: 95vh;
+  max-width: 95vw;
   margin: auto;
   opacity: 1;
 }

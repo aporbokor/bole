@@ -357,7 +357,7 @@ class RunoffLike extends RankingVotingMethod{
 
 
       let subresult = voting_sytem.sub_results[voting_sytem.visualization_stepp];
-
+      
       let res = get_results_elements(subresult,
         function (cand){
           let candidate = cand[0];

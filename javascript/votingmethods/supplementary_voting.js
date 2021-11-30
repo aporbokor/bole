@@ -1,5 +1,12 @@
 class SupplementaryVoter extends RunoffLike{
 
+  constructor(candidates){
+    super(candidates);
+    this.first_round = true;
+    this.explaining_text = "In this round we are going to count the votes using voter's top choices. After that we are going to elliminate everyone except for the top 2 candidates."
+    this.second_explaining_text = "These are the candidates with the fewest votes."
+  }
+
 
   prepare_for_voting(){
     super.prepare_for_voting();
@@ -24,6 +31,13 @@ class SupplementaryVoter extends RunoffLike{
     }
     let returned = sub_votes.sorted_array().slice(2);
     console.log(returned);
+    return returned;
+  }
+  get_reasoning_text(elliminated_candidates){
+    let returned = createP(this.second_explaining_text);
+    if (this.first_round){
+      this.explaining_text = "Now we are going to re-run the election counting the each voter's highest ranked not elliminated candidate. The winner of this run will be the winner of the election.";
+    }
     return returned;
   }
 }
