@@ -83,6 +83,8 @@ const votingmethods = new Map([
   ['approval voting', ApprovalVoter],
   ['borda counting', BordaCounting],
   ['supplementary vote', SupplementaryVoter],
+  ['Sir Lankan Contingent vote', SirLankanContingentVoter],
+  ['contingent vote', ContingentVoter],
   ['instant runof', InstantRunOffVoter],
   ['coombs', CoombsVoting],
   ['tideman', TideMan]]

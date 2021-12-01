@@ -2,6 +2,7 @@ class SupplementaryVoter extends RunoffLike{
 
   constructor(candidates){
     super(candidates);
+    this.tier_list_len = 2;
     this.first_round = true;
     this.explaining_text = "In this round we are going to count the votes using voter's top choices. After that we are going to elliminate everyone except for the top 2 candidates."
     this.second_explaining_text = "These are the candidates with the fewest votes."
@@ -11,12 +12,12 @@ class SupplementaryVoter extends RunoffLike{
   prepare_for_voting(){
     super.prepare_for_voting();
     for (let i = 0; i < this.candidates.length; i++){
-      this.candidates[i].votes = this.candidates[i].votes.slice(0,2);
+      this.candidates[i].votes = this.candidates[i].votes.slice(0,this.tier_list_len);
     }
   }
 
   registrate_honest_vote(voter){
-    return super.registrate_honest_vote(voter).slice(0,2);
+    return super.registrate_honest_vote(voter).slice(0,this.tier_list_len);
   }
 
   elliminate_canidates(sub_votes, elliminated){
@@ -39,5 +40,21 @@ class SupplementaryVoter extends RunoffLike{
       this.explaining_text = "Now we are going to re-run the election counting the each voter's highest ranked not elliminated candidate. The winner of this run will be the winner of the election.";
     }
     return returned;
+  }
+}
+
+class ContingentVoter extends SupplementaryVoter{
+  constructor(candidates){
+    super(candidates);
+    this.tier_list_len = candidates.length;
+  }
+}
+
+class SirLankanContingentVoter extends ContingentVoter{
+  constructor(candidates){
+    super(candidates);
+    if (this.candidates.length > 3){
+      this.tier_list_len = 3;
+    }
   }
 }
