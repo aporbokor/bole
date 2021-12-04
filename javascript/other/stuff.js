@@ -39,6 +39,12 @@ function twoDMatrixWithZeros(dim1, dim2){
   return returned;
 }
 
+function set_diagnal(matrix,value){
+  for(let i = 0; i < matrix.length; i++){
+    matrix[i][i] = value;
+  }
+}
+
 function int_to_str(i){
   let str_int = '' + i;
 

@@ -8,7 +8,7 @@ const max_voters = 1000;
 let candidates;
 let to_remove_candidates = [];
 const min_candidates = 2;
-const max_candidates = 11;
+const max_candidates = 7;
 
 let votingmethod;
 let results;
@@ -87,8 +87,9 @@ const votingmethods = new Map([
   ['contingent vote', ContingentVoter],
   ['instant runof', InstantRunOffVoter],
   ['coombs', CoombsVoting],
+  ['copleland',CopelandVoter],
   ['tideman', TideMan]]
-)
+);
 
 let stepping_box;
 let hide_stepping_box;
@@ -97,19 +98,19 @@ let results_and_selected_d;
 const grow_speed = 1;
 const selected_size_adder = 5;
 const clicked_selected_size_adder = 15;
-const clicked_selected_laser_color = 'rgba(0, 0, 0, 255)'
+const clicked_selected_laser_color = 'rgb(0, 0, 0)'
 const clicked_selected_stroke_weight = 4;
 
-const default_stroke = 'rgba(0,0,0,0.5)'
+const default_stroke = 'rgb(0,0,0)'
 const strategic_voter_color = 'rgb(0, 0, 0)';
-const strategic_voter_stroeke_weight = 3;
+const strategic_voter_stroeke_weight = 5;
 const honest_voter_color = '#F18F01';
 const voter_size = 15;
-const voter_strokeWeight = 1;
+const voter_strokeWeight = 2;
 
-const candidate_colors = ['#8FCB9B', '#EEA5A5','#FFEEDB','#C62E65','#624763','#5B9279','#2F1847','#D63AF9','#ADA8B6','#61C9A8'];
-const candidate_size = 35;
-const candidate_strokeWeight = 7;
+const candidate_colors = ['#FEFCFB','#ED3907','#7247FF','#162CD9','#2BB7DE','#BF1160','#0FFA42'];
+const candidate_size = 40;
+const candidate_strokeWeight = 5;
 
 const background_color = 0;
 

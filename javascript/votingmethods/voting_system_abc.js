@@ -357,7 +357,7 @@ class RunoffLike extends RankingVotingMethod{
 
 
       let subresult = voting_sytem.sub_results[voting_sytem.visualization_stepp];
-      
+
       let res = get_results_elements(subresult,
         function (cand){
           let candidate = cand[0];
@@ -429,8 +429,7 @@ class RunoffLike extends RankingVotingMethod{
 class CondorcetVotingMethod extends RankingVotingMethod{
   constructor(candidates){
     super(candidates);
-    ABC_constructor(this,CondorcetVotingMethod);
-    this.pairs = new Counter();
+    ABC_constructor(this, CondorcetVotingMethod);
   }
 
   prepare_for_voting(){
@@ -438,46 +437,54 @@ class CondorcetVotingMethod extends RankingVotingMethod{
     for (let i = 0; i < this.candidates.length; i++){
       candidates[i].id = i;
     }
+
+    this.outranking_matrix = twoDMatrixWithZeros(this.candidates.length, this.candidates.length);
+    set_diagnal(this.outranking_matrix, null);
   }
 
-  pairviseCount(preference){
-    for (let i = 0; i < preference.length; i++){
-      for(let j = i; j < preference.length; j++){
-        this.pairs.count([preference[i],preference[j]]);
+  registrate_vote(voter){
+    let tier_list = this.best_candidate_tier_list(voter);
+
+    for (let i = 0; i < tier_list.length; i++){
+      let runner = tier_list[i].id;
+      for (let j = i+1; j < tier_list.length; j++){
+        let opponent = tier_list[j].id;
+        this.outranking_matrix[runner][opponent] += 1;
       }
+      tier_list[i].votes[i] += 1;
     }
+
+    voter.voted_for = tier_list;
   }
 
-  get_pairs_matrix(){
-    let returned = twoDMatrixWithZeros(this.candidates.length, this.candidates.length);
-
-    for (const i of this.pairs.entries()){
-      let runner = i[0][0];
-      let opponent = i[0][1];
-      let win_count = i[1];
-
-      returned[runner.id][opponent.id] = win_count;
-    }
+  calc_relative_strength_matrix(){
+    this.relative_strength_matrix = twoDMatrixWithZeros(this.candidates.length, this.candidates.length);
+    set_diagnal(this.relative_strength_matrix, null);
 
     for (let i = 0; i < this.candidates.length; i++){
-      let candidate_id = this.candidates[i].id
-      returned[candidate_id][candidate_id] = null;
-    }
-
-    return returned;
-  }
-
-  get_max_voter_of_pairs_matrix(matrix){
-    let returned;
-    let max = 0;
-
-    for (let i = 0; i < matrix.length; i++){
-      let curr = sum(matrix[i]);
-      if (curr > max){
-        max = curr;
-        returned = this.candidates[i];
+      for (let j = 0; j < this.candidates.length; j++){
+        if (i === j){
+          continue;
+        }
+        this.relative_strength_matrix[i][j] = this.outranking_matrix[i][j] - this.outranking_matrix[j][i];
       }
     }
-    return returned;
+  }
+
+  get_condorcet_winner(){
+    for (let i = 0; i < this.candidates.length; i++){
+        let winner = this.relative_strength_matrix[i].every(
+          function(curr){
+            if (curr == null){
+              return true;
+            }
+
+            return curr >= 0;
+          })
+
+        if (winner){
+          return this.candidates[i];
+      }
+    }
   }
 }

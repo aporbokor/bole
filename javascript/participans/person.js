@@ -30,9 +30,8 @@ class Person{
           let half_size = this.size * 0.5
           texture(this.show_image);
           // image(this.show_image, this.x-half_size, this.y-half_size, this.size, this.size);
-       }else{
-        stroke(this.color);
       }
+      stroke(this.color);
       circle(this.x, this.y, this.size);
     }
     stroke(default_stroke);
