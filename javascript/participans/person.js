@@ -31,7 +31,7 @@ class Person{
           texture(this.show_image);
           // image(this.show_image, this.x-half_size, this.y-half_size, this.size, this.size);
        }else{
-        fill(this.color);
+        stroke(this.color);
       }
       circle(this.x, this.y, this.size);
     }

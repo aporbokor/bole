@@ -21,11 +21,10 @@ class Voter extends Person{
 
     if (this.strategic){
       strokeWeight(strategic_voter_stroeke_weight)
-      stroke(strategic_voter_color);
     }else{
       strokeWeight(voter_strokeWeight);
     }
-
+    noFill();
     this.default_show();
   }
 

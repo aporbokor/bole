@@ -18,38 +18,3 @@ nav {
   color: var(--secondary);
   font-size: 1.2rem;
 }
-nav button {
-  height: 2rem;
-  margin-left: 0.5rem;
-  color: var(--primary);
-  position: relative;
-  z-index: 1;
-  transition-property: color;
-  transition-duration: 0.4s;
-  transition-timing-function: ease-in-out;
-}
-
-nav button::before{
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-color: var(--accent);
-  z-index: -1;
-  height: 100%;
-  width: 100%;
-  transform: scaleX(0);
-  transition-property: transform;
-  transition-duration: 0.4s;
-  transition-timing-function: ease-in-out;
-  transform-origin: right;
-}
-
-nav button:hover{
-  color: red;
-}
-
-nav button:hover::before {
-  transform-origin: left;
-  transform: scaleX(1);
-}

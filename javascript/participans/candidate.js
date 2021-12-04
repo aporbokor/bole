@@ -12,6 +12,7 @@ class Candidate extends Person{
     this.grow_to_size();
     strokeWeight(candidate_strokeWeight);
 
+    fill(this.color);
     this.default_show();
   }
 

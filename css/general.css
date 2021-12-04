@@ -3,7 +3,7 @@
   --primary: black;
   --secondary: white;
   --primary-lt: #222;
-  --accent: #333;
+  --accent: #F18F01;
 }
 
 /* Breakpoints */
@@ -65,4 +65,58 @@ h2 {
 
 .hidden{
   display: none;
+}
+
+input{
+  accent-color: var(--accent);
+}
+
+select{
+  background-color: var(--primary);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+button {
+  height: 2rem;
+  margin-left: 0.5rem;
+  color: var(--accent);
+  background: var(--primary);
+  border: 1px solid var(--accent);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition-property: color;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in-out;
+}
+
+button::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--accent);
+  z-index: -1;
+  transform: scaleX(0);
+  transition-property: transform;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transform-origin: right;
+}
+
+button:hover{
+  color: var(--primary);
+  font-weight: bold;
+}
+
+button:hover::before {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+progress{
+  accent-color: var(--accent);
 }

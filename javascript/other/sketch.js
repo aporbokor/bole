@@ -111,7 +111,7 @@ const candidate_colors = ['#8FCB9B', '#EEA5A5','#FFEEDB','#C62E65','#624763','#5
 const candidate_size = 35;
 const candidate_strokeWeight = 7;
 
-const background_color = 200;
+const background_color = 0;
 
 const selected_size = 5;
 
