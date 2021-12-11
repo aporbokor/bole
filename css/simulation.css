@@ -112,6 +112,21 @@ main select {
   width: 10rem;
 }
 
+ul,
+ol{
+  padding-left: 2em;
+}
+
+li::marker{
+  color: var(--accent);
+  padding-right: 0.05em;
+}
+
+.tick-marker::marker{
+  content:"✔";
+}
+
+
 #edit_enviroment_div {
   width: 10vw auto;
   text-align: center;
@@ -149,16 +164,17 @@ main select {
 .canvas {
 }
 
-.place_div {
+.place_div > * {
   /* each place in the vote_results div */
+  margin-left: 1em;
 }
 
 .candidate_p {
   /* The candidates representation which only contains the candidates name and votes visualized by proggresbars*/
-  margin-left: 10px;
+
 }
 .progress_ {
-  margin-left: 10px;
+
 }
 
 .selected {

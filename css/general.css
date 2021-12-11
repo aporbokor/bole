@@ -120,3 +120,21 @@ button:hover::before {
 progress{
   accent-color: var(--accent);
 }
+
+table,
+td{
+  border: 1px solid var(--accent);
+}
+
+td,
+th{
+  text-align: center;
+  padding: 0.5em;
+}
+
+th{
+  background-color: var(--accent);
+  color: var(--primary);
+  font-weight: bold;
+  border: 1px solid var(--primary);
+}

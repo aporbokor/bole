@@ -11,7 +11,6 @@ function faktorial(n){
   return n * faktorial(n-1);
 }
 
-
 function ABC_constructor(instance, class_){
   if (instance.constructor == class_){
     throw new Error("Abstract baseclass can't be initialized");

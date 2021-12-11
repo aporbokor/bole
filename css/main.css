@@ -84,6 +84,11 @@ main h2 {
   padding-bottom: 2rem;
 }
 
+.flowchart_img{
+  width: 100%;
+  max-width: 35rem;
+}
+
 .voteresult{
   padding: 1rem;
   margin-top: 1rem;

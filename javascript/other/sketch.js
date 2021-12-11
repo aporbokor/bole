@@ -79,7 +79,7 @@ let seems_lose_candidates;
 const votingmethods = new Map([
   ['plurarity', PlurarityVoter],
   ['anti-plurarity', AntiPlurarityVoter],
-  ['theoretical perfect', PerfectVoter],
+  // ['theoretical perfect', PerfectVoter],
   ['approval voting', ApprovalVoter],
   ['borda counting', BordaCounting],
   ['supplementary vote', SupplementaryVoter],

@@ -31,15 +31,26 @@ class SupplementaryVoter extends RunoffLike{
       return losers;
     }
     let returned = sub_votes.sorted_array().slice(2);
-    console.log(returned);
     return returned;
   }
+
   get_reasoning_text(elliminated_candidates){
+    if (this.won_by_majority){
+      return createP("In this case a candidate already has a majority so it automatically wins.")
+    }
+
     let returned = createP(this.second_explaining_text);
     if (this.first_round){
       this.explaining_text = "Now we are going to re-run the election counting the each voter's highest ranked not elliminated candidate. The winner of this run will be the winner of the election.";
     }
     return returned;
+  }
+
+  extra_visualize(voters){
+    for (let i = 0; i < this.candidates.length; i++){
+      this.candidates[i].sub_votes_for_visualization[0] = this.candidates[i].sub_votes_for_visualization[0].slice(0,this.tier_list_len);
+    }
+    super.extra_visualize(voters);
   }
 }
 

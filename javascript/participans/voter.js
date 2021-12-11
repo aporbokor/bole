@@ -17,14 +17,15 @@ class Voter extends Person{
 
   show(){
     this.grow_to_size();
-    fill(this.color);
 
     if (this.strategic){
       strokeWeight(strategic_voter_stroeke_weight)
+      fill(this.color);
     }else{
       strokeWeight(voter_strokeWeight);
+      noFill();
     }
-    noFill();
+
     this.default_show();
   }
 
@@ -42,15 +43,14 @@ class Voter extends Person{
 
     let voted_for_d = createDiv('Voted_for:');
     if (Array.isArray(this.voted_for)){
-      for (let i = 0; i<this.voted_for.length; i++){
-          voted_for_d.child(this.voted_for[i].get_small_p());
-      }
+      voted_for_d.child(this.last_voting_sytem.get_ballot_element(this.voted_for));
 
     }else if (typeof this.voted_for === 'undefined'){
       voted_for_d.child(createP('this person has not voted for anyone yet'));
     }else{
       voted_for_d.child(this.voted_for.get_p());
     }
+
     if (this.supports.length != 0){
       for (let i = 0; i<this.supports.length; i++){
           supports_d.child(this.supports[i].get_small_p());

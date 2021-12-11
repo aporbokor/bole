@@ -30,4 +30,37 @@ class CopelandVoter extends CondorcetVotingMethod{
       return can.copeland_score;
     })
   }
+
+  show_first(){
+    let voting_sytem = this.parent_box.visualized_system;
+    let content = document.createElement('div');
+
+    let text = document.createElement('p');
+    text.innerHTML = "From the relative strength matrix we can calculate a copeland score for each candidate. Every candidate's copeland score equals to the number of candidates defeated plus half of the number of candidates tied" +
+    "So basicly if:<ul>"+
+    "<li>R(i,j) > 0 : i's score is incremented by one</li>"+
+    "<li>R(i,j) < 0 : i's score is not changed</li>"+
+    "<li>R(i,j) = 0 : i's score is incremented by a half</li>"+
+    "<li>R(i,i) : i's score is not changed</li></ul>"+
+    "We do this for every candidate i, and in the end we get this:";
+
+    let table = table_from_matrix(voting_sytem.copeland_matrix, voting_sytem.candidate_names, voting_sytem.candidate_names);
+
+    let second_text = document.createElement('p');
+    second_text.innerHTML = "From this, we can determine the winner with ease:";
+
+    let res = get_results_elements(voting_results, function(cand){
+      let returned = document.createElement("div");
+      returned.appendChild(cand.get_small_p().elt);
+      returned.appendChild(createP("copeland_score: "+cand.copeland_score).elt);
+      return returned;
+    }).elt;
+
+    content.appendChild(text);
+    content.appendChild(table);
+    content.appendChild(second_text);
+    content.appendChild(res);
+    this.parent_box.set_content(content);
+    this.parent_box.hide_next();
+  }
 }

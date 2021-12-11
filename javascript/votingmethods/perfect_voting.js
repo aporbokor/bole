@@ -1,4 +1,4 @@
-class PerfectVoter extends VotingMethod{
+class PerfectVoter extends NumberVotecountVotingMethod{
 
   constructor(candidates){
     super(candidates);

@@ -60,6 +60,49 @@ function createProgress(name, value, max){
   return returned;
 }
 
+function table_from_matrix(matrix, x_axis, y_axis, x_name='', y_name=''){
+  let table = document.createElement("table");
+  let first_row = document.createElement("tr");
+
+  let corner = document.createElement("th");
+  corner.classList.add("table-corner");
+
+  let x_axis_text = document.createElement("p");
+  let y_axis_text = document.createElement("p");
+
+  corner.appendChild(x_axis_text);
+  corner.appendChild(y_axis_text);
+
+  first_row.appendChild(corner);
+
+  for (let i = 0; i < x_axis.length; i++){
+    let cell = document.createElement("th");
+    cell.classList.add("table-top");
+
+    cell.innerHTML = x_axis[i];
+    first_row.appendChild(cell);
+  }
+
+  table.appendChild(first_row);
+
+  for (let i = 0; i<matrix.length; i++){
+    let matrix_row = matrix[i];
+    let row = document.createElement("tr");
+    let table_left = document.createElement("th");
+
+    table_left.innerHTML = y_axis[i];
+    row.appendChild(table_left);
+
+    for (let j = 0; j < matrix_row.length; j++){
+      let cell = document.createElement("td");
+      cell.innerHTML = matrix_row[j];
+      row.appendChild(cell);
+    }
+    table.appendChild(row);
+  }
+  return table;
+}
+
 function createDivWithP(text){
   let returned = createDiv();
   let p = createP(text);
