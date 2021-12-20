@@ -14,9 +14,33 @@ class CoombsVoting extends RunoffLike{
     return last_places.maxs();
   }
 
+  visualize_for_stepping_box(subresult){
+    for (let i = 0; i < subresult.length; i++){
+      for (let j = 0; j < subresult[i].length; j++){
+        let votes = subresult[i][j][0].sub_votes_for_visualization[0];
+        subresult[i][j][0].text = votes[votes.length-1];
+        subresult[i][j][1] = votes[votes.length-1];
+      }
+    }
+
+    subresult.sort(function (a, b){
+      return a[0][1] - b[0][1];
+    })
+
+    let res = get_results_elements(subresult,
+      function (cand){
+        let candidate = cand[0];
+        // let returned = createProgress(cand[0].name + ': ',cand[1],voters.length);
+        // returned.label.style('color',cand[0].color);
+        return candidate.get_custom_p(candidate.sub_votes_for_visualization[0]);
+      })
+
+    return res;
+  }
+
   get_reasoning_text(elliminated_candidates){
     let votes = Array.from(elliminated_candidates.entries())[0][1].sub_votes_for_visualization[0];
     let vote = votes[votes.length-1];
-    return createP(`The elliminated candidates in this votecounting had the fewest votes. In the first place. They all had ${vote}`);
+    return createP(`The elliminated candidates in this votecounting had the most votes in the last place. They all had ${vote}`);
   }
 }

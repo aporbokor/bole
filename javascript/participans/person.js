@@ -12,8 +12,10 @@ class Person{
     this.to_delete = false;
     this.shown = true;
     this.parent_sim = sim;
+    this.text = null;
   }
 
+  // Visual methods
   default_show(){
     if (this.shown){
         if (this.show_image){
@@ -24,9 +26,24 @@ class Person{
       circle(this.x, this.y, this.size);
     }
     stroke(default_stroke);
+    this.draw_text("Ha");
   }
 
-  // Visual methods
+  draw_text(){
+    // Draws text inside person
+    textFont(font);
+    textAlign(CENTER, CENTER);
+    if (this.text !== null){
+      fill(honest_voter_color);
+      textSize(this.size * 0.35);
+      text(this.text, this.x, this.y );
+
+      fill(0);
+      textSize(this.size * 0.3);
+      text(this.text, this.x, this.y );
+    }
+  }
+
   show(){
     // Runs in every frame. Used to draw the person. Usually calls the default_show method at some point
     throw new Error("You must implement a show method to your Person class");

@@ -106,8 +106,13 @@ class NumberVotecountVotingMethod extends VotingMethod{
 
   extra_visualize(voters){
     // Colors the voters based on who they voted for
-    for (let i = 0; i<voters.length; i++){
+    for (let i = 0; i < voters.length; i++){
       voters[i].color = voters[i].voted_for.color;
+    }
+
+    //Displays the votes of the candidates
+    for (let i = 0; i < candidates.length; i++){
+      candidates[i].text = candidates[i].votes;
     }
   }
 }
@@ -380,6 +385,24 @@ class RunoffLike extends RankingVotingMethod{
     }
   }
 
+  visualize_for_stepping_box(subresult){
+    for (let i = 0; i < subresult.length; i++){
+      for (let j = 0; j < subresult[i].length; j++){
+        subresult[i][j][0].text = subresult[i][j][1];
+      }
+    }
+
+    let res = get_results_elements(subresult,
+      function (cand){
+        let candidate = cand[0];
+        // let returned = createProgress(cand[0].name + ': ',cand[1],voters.length);
+        // returned.label.style('color',cand[0].color);
+        return candidate.get_custom_p(candidate.sub_votes_for_visualization[0]);
+      })
+
+    return res;
+  }
+
   show_stepping_box_content(){
     let voting_sytem = this.parent_box.visualized_system;
     let content = createDiv();
@@ -392,7 +415,7 @@ class RunoffLike extends RankingVotingMethod{
       }
     }
 
-    content.child(createP('This is the ' + int_to_str(voting_sytem.visualization_stepp) + ' step'));
+    content.child(createP('This is the ' + int_to_serial_number(voting_sytem.visualization_stepp) + ' step'));
 
     if (voting_sytem.visualization_stepp < voting_sytem.sub_results.length -1){
       voting_sytem.color_voters();
@@ -404,14 +427,8 @@ class RunoffLike extends RankingVotingMethod{
 
       let subresult = voting_sytem.sub_results[voting_sytem.visualization_stepp];
 
-      let res = get_results_elements(subresult,
-        function (cand){
-          let candidate = cand[0];
-          // let returned = createProgress(cand[0].name + ': ',cand[1],voters.length);
-          // returned.label.style('color',cand[0].color);
-          console.log(candidate.sub_votes_for_visualization);
-          return candidate.get_custom_p(candidate.sub_votes_for_visualization[0]);
-        })
+
+      let res = voting_sytem.visualize_for_stepping_box(subresult);
 
       let elliminated_candidates = voting_sytem.elliminate_canidates(voting_sytem.sub_votes_for_visualization[voting_sytem.visualization_stepp], voting_sytem.elliminated_visualization)
       let elliminated_div = createDivWithP('These candidate(s) were elliminated:');
@@ -419,7 +436,7 @@ class RunoffLike extends RankingVotingMethod{
       for (const x of voting_sytem.elliminated_visualization.values()){
         x.hide();
       }
-      console.log(elliminated_candidates);
+
       for (let i = 0; i < elliminated_candidates.length; i++){
         elliminated_div.child(elliminated_candidates[i].get_custom_p(elliminated_candidates[i].sub_votes_for_visualization[0]));
       }
@@ -464,6 +481,10 @@ class RunoffLike extends RankingVotingMethod{
   }
 
   extra_visualize(voters){
+    for (let i = 0; i< candidates.length; i++){
+      candidates[i].text = null;
+    }
+
     for (let i = 0; i < voters.length; i++){
       voters[i].color = this.votes_for(voters[i],this.elliminated_visualization).color;
     }

@@ -1,4 +1,5 @@
 const main_element = document.getElementsByTagName('main')[0];
+let font;
 
 let voters;
 let to_remove_voters = [];
@@ -341,6 +342,10 @@ function simulate_voting(){
   // Handles the voting process. Uses the selected voting_method
   max_votes = voters.length;
 
+  for (let i = 0; i < candidates.length; i++){
+    candidates[i].text = null;
+  }
+
   count_supporters();
   calculate_seems_win_candidates();
 
@@ -365,6 +370,10 @@ function simulate_voting(){
   display_votes(voter_maschine);
   voter_maschine.stepping_box_func(stepping_box);
   load_clicked_selected();
+}
+
+function preload(){
+  font = loadFont("../fonts/Comfortaa-VariableFont_wght.ttf");
 }
 
 function setup() {

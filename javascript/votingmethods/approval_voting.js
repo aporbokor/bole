@@ -51,7 +51,8 @@ class ApprovalVoter extends NumberVotecountVotingMethod{
   }
 
   extra_visualize(voters){
-    for (let i = 0; i<voters.length; i++){
+    super.extra_visualize(voters);
+    for (let i = 0; i < voters.length; i++){
       voters[i].color = voters[i].voted_for[0].color;
     }
 

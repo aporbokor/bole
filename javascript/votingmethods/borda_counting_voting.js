@@ -43,4 +43,11 @@ class BordaCounting extends RankingVotingMethod{
   count_votes(){
     return count_votes_for_ints(this.candidates);
   }
+  extra_visualize(voters){
+    super.extra_visualize(voters);
+
+    for (let i = 0; i < candidates.length; i++){
+      candidates[i].text = candidates[i].votes;
+    }
+  }
 }

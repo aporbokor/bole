@@ -63,4 +63,12 @@ class CopelandVoter extends CondorcetVotingMethod{
     this.parent_box.set_content(content);
     this.parent_box.hide_next();
   }
+
+  extra_visualize(voters){
+    super.extra_visualize(voters);
+
+    for(let i = 0; i < candidates.length; i++){
+      candidates[i].text = candidates[i].copeland_score;
+    }
+  }
 }
