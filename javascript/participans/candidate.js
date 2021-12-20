@@ -1,4 +1,5 @@
 class Candidate extends Person{
+  // Class representing the candidates
   constructor(x, y, color, name){
     super(x, y, color, name);
     this.votes = undefined;
@@ -39,6 +40,7 @@ class Candidate extends Person{
   get_p(){
     return this.get_custom_p(this.votes);
   }
+
   get_extra_to_div(){
     let extra_to_div = createDiv();
 
@@ -62,6 +64,8 @@ class Candidate extends Person{
 }
 
 function count_supporters(){
+  // Counts the supportes of each candidate. This data can be used by strategic voters
+
   supporter_population = 0;
 
   for (let i = 0; i < candidates.length; i++){
@@ -85,6 +89,7 @@ function count_supporters(){
 }
 
 function calculate_seems_win_candidates(){
+    // Decides what candidate seems likely to win and to lose. This data can be used by strategic voters
     supporter_per_candidate = supporter_population/candidates.length;
     const supporters_to_win = seems_win_percent * supporter_per_candidate;
 

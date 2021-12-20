@@ -1,4 +1,6 @@
 class Voter extends Person{
+  // Representation of the voters
+
   constructor(x, y, strategic, color, name){
     super(x, y, color, name);
     this.strategic = strategic;
@@ -68,6 +70,7 @@ class Voter extends Person{
 }
 
 function strategic_changed(){
+  // For the starategic checkbox in the selected_div
   this.parent_voter.strategic = this.checked();
 }
 

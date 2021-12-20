@@ -204,6 +204,7 @@ function remove_people(){
 }
 
 function make_voters(db){
+  // Add voters to the sim
   if (!(frozen_sim)){
     voters = [];
     for (let i = 0; i<db; i++){
@@ -214,6 +215,7 @@ function make_voters(db){
 }
 
 function make_candidates(db){
+  // Add candidates to the sim
   if (!(frozen_sim)){
     candidates = [];
     for (let i = 0; i<db; i++){
@@ -226,11 +228,14 @@ function empty_function(){
   return undefined;
 }
 
+/* The extra function is a visualizatin function which runs in every frame
+   By default it doesn't do anythong but this can de easily overwritten by votingmethods for example*/
 let extra_function = empty_function;
 
 let extra_varible;
 
 function draw_everyone(){
+  // Draws the voters and the candidates onto the canvas
   stroke(default_stroke);
 
   if (typeof selected != 'undefined'){
@@ -248,6 +253,7 @@ function draw_everyone(){
 }
 
 function draw_background(){
+  // Function for drawing the background. Currently it's very simple
   background(background_color);
 }
 
@@ -276,6 +282,7 @@ function mouseReleased() {
 }
 
 function handle_elements(){
+  // Update values based on inputs
   strategic_chance = strategic_chance_slider.value();
   voter_population = voter_population_slider.value();
   candidate_population = candidate_population_slider.value();
@@ -302,11 +309,12 @@ function select_tool(){
 }
 
 function get_results_elements(results, show_method=function (place){return place.get_p()}){
-  console.log(results);
+  // Returns the HTML element to be put into the results div
+
   let returned = createDiv();
   for (let i = 0; i < results.length; i++){
 
-    let subdiv = createDiv(int_to_str(i+1));
+    let subdiv = createDiv(int_to_serial_number(i+1));
     subdiv.addClass('place_div')
     let places = results[i];
 
@@ -320,6 +328,7 @@ function get_results_elements(results, show_method=function (place){return place
 }
 
 function display_votes(voter_maschine){
+  // Updates the results div and resets the stepping_box content
   stepping_box.delete_content();
 
   vote_result_div.html('Voting results:');
@@ -329,6 +338,7 @@ function display_votes(voter_maschine){
 }
 
 function simulate_voting(){
+  // Handles the voting process. Uses the selected voting_method
   max_votes = voters.length;
 
   count_supporters();
@@ -464,9 +474,11 @@ function setup() {
 }
 
 function draw() {
+  // Runs at every frame
   translate(-width/2, -height/2)
   let start = new Date().getTime();
 
+  // Order here is important
   remove_people();
   draw_background();
   extra_function();

@@ -1,6 +1,7 @@
 // Abstract base-classes
 
 class VotingMethod{
+  // ABC for every votingmethod
 
   constructor(candidates){
     ABC_constructor(this, VotingMethod);
@@ -11,39 +12,43 @@ class VotingMethod{
   }
 
   prepare_for_voting(){
+    // Called before registrating any votes
     throw new Error("You must implement a prepare_for_voting method to your VotingMethod class");
   }
 
-  registrate_honest_vote(voter){
-      throw new Error("You must implement a registrate_honest_vote method to your VotingMethod class");
-  }
-
-  registrate_strategic_vote(voter){
-      throw new Error("You must implement a registrate_strategic_vote method to your VotingMethod class");
-  }
-
   registrate_vote(voter){
-      throw new Error("You must implement a registrate_vote method to your VotingMethod class");
+    // Called to registrate the vote of a Voter
+    throw new Error("You must implement a registrate_vote method to your VotingMethod class");
   }
 
   count_votes(){
-      throw new Error("You must implement a count_votes method to your VotingMethod class");
+    /* Called to count the votes
+       Must return an array of arrays,
+       where every nth array contains the candidates who got nth place*/
+    throw new Error("You must implement a count_votes method to your VotingMethod class");
   }
 
   get_ballot_element(ballot){
+    /* Given any ballot of candidates must return an html element from that ballot.
+       This ellement is then used in the selected_div of voters*/
     throw new Error("You must implement a get_ballot_element method to your VotingMethod class");
   }
 
   extra_visualize(voters){
+    // An mehtod to be used for visualization. It is calles in every frame.
     return undefined;
   }
 
   stepping_box_func(steppig_box){
+    // This method is used for setting up a relationship between the votingmethod and the steppig_box
     stepping_box.set_content(createP('Step by step visualization is not avalable for this votingmethod'));
   }
 }
 
 function count_votes_for_ints(candidates, get_votes=function (cand){return cand.votes}){
+  /* Given an array of candidates and their votes (represented by numbers)
+     returns a ranking for these candidates in the form of VotingMethod.count_votes()*/
+
   let result = [];
   let used_votecounts = new Set();
 
@@ -69,6 +74,8 @@ function count_votes_for_ints(candidates, get_votes=function (cand){return cand.
 }
 
 class NumberVotecountVotingMethod extends VotingMethod{
+
+  // ABC for every votingmethod where tha candidates votes can be represented by numbers
   constructor(candidates){
     super(candidates);
     ABC_constructor(this, NumberVotecountVotingMethod);
@@ -98,6 +105,7 @@ class NumberVotecountVotingMethod extends VotingMethod{
   }
 
   extra_visualize(voters){
+    // Colors the voters based on who they voted for
     for (let i = 0; i<voters.length; i++){
       voters[i].color = voters[i].voted_for.color;
     }
@@ -105,6 +113,8 @@ class NumberVotecountVotingMethod extends VotingMethod{
 }
 
 class RankingVotingMethod extends VotingMethod{
+  // ABC for every votingmethod where the voters need to rank the candidates
+
   constructor(candidates){
     super(candidates);
     ABC_constructor(this,RankingVotingMethod);
@@ -121,15 +131,19 @@ class RankingVotingMethod extends VotingMethod{
   }
 
   best_candidate_tier_list(voter, candidates_=this.candidates){
+    // Given a voter and a list of candidates, retuns the voter's preference list for those candidates
     let returned = candidates_.concat([]);
     returned.sort(function (a,b){return voter.distance_to_candidate(a)-voter.distance_to_candidate(b)});
     return returned;
   }
 
   set_extra_funct(voters){
+    // Sets the extra_function ehat is used in visualizations and called in every frame
+
     extra_function = function(){
       if (typeof(clicked_selected) != 'undefined'){
         if (typeof(clicked_selected.voted_for) != 'undefined'){
+          // Highlight the candidates based on their place in the selected voter's preference ballot
           let voter = clicked_selected;
           for (let j = 0; j < voter.voted_for.length; j++){
             let candidate = voter.voted_for[j];
@@ -141,6 +155,7 @@ class RankingVotingMethod extends VotingMethod{
             candidate.grow_by(-candidate_size + 5 + thick_amount*10)
           }
         } else if (typeof(clicked_selected.votes) != 'undefined'){
+          // Highlight the voters based on where did tey put the selected candidate in their ballot
           let candidate = clicked_selected;
           for (let i = 0; i < voters.length; i++){
             let voter = voters[i];
@@ -168,7 +183,7 @@ class RankingVotingMethod extends VotingMethod{
   }
 
   extra_visualize(voters){
-
+    // Colors the voters based on their first choice and calls set_extra_funct()
     for (let i = 0; i < voters.length; i++){
       voters[i].color = voters[i].voted_for[0].color;
     }
@@ -458,6 +473,8 @@ class RunoffLike extends RankingVotingMethod{
 
 
 class CondorcetVotingMethod extends RankingVotingMethod{
+  // ABC for condorcet_methods
+
   constructor(candidates){
     super(candidates);
     ABC_constructor(this, CondorcetVotingMethod);
@@ -469,6 +486,7 @@ class CondorcetVotingMethod extends RankingVotingMethod{
       candidates[i].id = i;
     }
 
+    // Create outranking_matrix, with null-s in the main diagnal
     this.outranking_matrix = twoDMatrixWithZeros(this.candidates.length, this.candidates.length);
     set_diagnal(this.outranking_matrix, null);
 
@@ -480,6 +498,7 @@ class CondorcetVotingMethod extends RankingVotingMethod{
   }
 
   registrate_vote(voter){
+    // Refreshing the outranking matrix based on the voter's ballot
     let tier_list = this.best_candidate_tier_list(voter);
 
     for (let i = 0; i < tier_list.length; i++){
@@ -495,6 +514,7 @@ class CondorcetVotingMethod extends RankingVotingMethod{
   }
 
   get_outranking_matrix_from_ballot(ballot){
+    // Transform a ballot to an outranking matrix. Currently only used in visualization
     let returned = twoDMatrixWithZeros(this.candidates.length, this.candidates.length);
     set_diagnal(this.relative_strength_matrix, null);
 
@@ -509,6 +529,7 @@ class CondorcetVotingMethod extends RankingVotingMethod{
   }
 
   calc_relative_strength_matrix(){
+    // Creates a relative_strength_matrix based of the outranking_matrix
     this.relative_strength_matrix = twoDMatrixWithZeros(this.candidates.length, this.candidates.length);
     set_diagnal(this.relative_strength_matrix, null);
 
@@ -523,6 +544,10 @@ class CondorcetVotingMethod extends RankingVotingMethod{
   }
 
   get_condorcet_winner(){
+    /* Gets the condorcet winner from the relative_strength_matrix.
+       The voter_table_matrix must be calculated before calling this method.
+       If a condorcet winner doesn't exists returns null.*/
+
     for (let i = 0; i < this.candidates.length; i++){
         let winner = this.relative_strength_matrix[i].every(
           function(curr){
@@ -537,11 +562,15 @@ class CondorcetVotingMethod extends RankingVotingMethod{
           return this.candidates[i];
       }
     }
+    return null;
   }
 
   show_outranking_matrix(){
+    // First stepp in step_by_stepp visualization
+
     let voting_sytem = this.parent_box.visualized_system;
     this.random_voter = random(voters);
+    clicked_selected = this.random_voter;
     let voter_res = this.random_voter.voted_for;
     this.random_voter.color = honest_voter_color;
 
@@ -549,12 +578,13 @@ class CondorcetVotingMethod extends RankingVotingMethod{
     let voter_table = table_from_matrix(voter_table_matrix, voting_sytem.candidate_names, voting_sytem.candidate_names);
 
     let first_text = document.createElement("p");
-    first_text.innerHTML = `After we have recived every voters ballot, now we can get to work. Fot each voter's ballot we are going to count how many times has been each candidate placed before each candidate. For example let's see what does the ballot of the voter named ${this.random_voter.name} (marked with the default voter color) looks like`
+    first_text.innerHTML = `After we have recived every voters ballot, now we can get to work. Fot each voter's ballot we are going to count how many times has been each candidate placed before each candidate. For example let's see what does the ballot of the voter named ${this.random_voter.get_simple_name_p().outerHTML} (marked with the default voter color) looks like`
 
     let voter_res_list = voting_sytem.get_ballot_element(voter_res);
 
     let second_text = document.createElement("p");
-    second_text.innerHTML = `${voter_res[0].get_small_p().elt.outerHTML} defeated every candidate all the way to the last placed ${voter_res[voter_res.length-1].get_small_p().elt.outerHTML}.<br>${voter_res[1].get_small_p().elt.outerHTML} also defeated every candidate below them. But this candidate didn't beat ${voter_res[0].get_small_p().elt.outerHTML}. We can do this kind of calculation to every candidate in the ballot to get the following matrix:`
+
+    second_text.innerHTML = `${voter_res[0].get_simple_name_p().outerText} defeated every candidate all the way to the last placed ${voter_res[voter_res.length-1].get_simple_name_p().outerText}.<br>${voter_res[1].get_simple_name_p().outerHTML} also defeated every candidate below them. But this candidate didn't beat ${voter_res[0].get_simple_name_p().outerText}. We can do this kind of calculation to every candidate in the ballot to get the following matrix:`
 
     let third_text = document.createElement("p");
     third_text.innerHTML = "If we do this for every voter's ballot, than we will know that how many times has candidate X been placed before candidate Y. "+
@@ -575,6 +605,7 @@ class CondorcetVotingMethod extends RankingVotingMethod{
   }
 
   show_relative_strength_matrix(){
+    // Second stepp in step_by_stepp visualization
 
     this.random_voter.color = this.random_voter.voted_for[0].color;
     let voting_sytem = this.parent_box.visualized_system;
@@ -593,10 +624,13 @@ class CondorcetVotingMethod extends RankingVotingMethod{
   }
 
   show_first(){
+    // The first step_by_stepp visualization step which every class needs to define which inherits from CondorcetVotingMethod
     throw new Error("You must define a show_first method to your CondorcetVotingMethod class");
   }
 
   stepping_box_func(steppig_box){
+    // Sets up stepping_box
+
     this.stepping_box = steppig_box;
     steppig_box.visualized_system = this;
 

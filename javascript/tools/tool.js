@@ -1,37 +1,42 @@
 class Tool{
   constructor(){
-    if (this.constructor == Tool){
-      throw new Error("Abstract baseclass can't be initialized");
-    }
+    ABC_constructor(this, Tool);
   }
 
   on_click(){
+    // Defines what happens when the user clicks. Default behavior is nothing
     return undefined;
   }
 
   on_relase(){
+    // Defines what happens when the user relases the mouse. Default behavior is nothing
     return undefined;
   }
 
   on_drag(){
+    // Defines what happens when the user drags the mouse. Default behavior is nothing
     return undefined;
   }
 
   draw(){
-    throw new Error("You must implement an draw method to your Person class");
+    // Abstract mehod, Defines what happens in every frame
+    throw new Error("You must implement an draw method to your Tool class");
   }
 }
 
 class DrawTool extends Tool{
+  // ABC for a Tool which has effect inside of the circle with a radius of tool_size and with the midpoint of the cursor
+
   constructor(){
     super();
-    if (this.constructor == DrawTool){
-      throw new Error("Abstract baseclass can't be initialized");
-    }
+    ABC_constructor(this, DrawTool);
     this.weight = inactive_tool_stroke_weight;
+    // Every class which inherits from this class will have to define a color attribute
   }
 
   draw_outline(){
+    // Draws the circle around the cursor with te color of this.color
+
     stroke(this.color);
     strokeWeight(this.weight);
     noFill();
@@ -43,6 +48,7 @@ class DrawTool extends Tool{
       }
     }
   }
+
   on_click(){
     this.weight = activated_tool_stroke_weight;
   }
@@ -53,5 +59,6 @@ class DrawTool extends Tool{
 }
 
 function is_inside_tool(voter){
+  // Checks if a voter is inside of a DrawTool
   return (dist(voter.x, voter.y, mouseX, mouseY) <= tool_size.value());
 }

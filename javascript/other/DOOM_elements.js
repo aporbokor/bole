@@ -1,4 +1,6 @@
 function slider_with_name(name, min, max, value, step){
+  // Creates a div with a p and a slider
+
   let returned = createDiv();
   let text = createP(name + value);
   text.class('named_slider_title')
@@ -25,6 +27,10 @@ function slider_with_name(name, min, max, value, step){
 }
 
 function createProgress(name, value, max){
+  /* Creates a div with p and progress elements.
+     Value can be a number (result in 1 progress)
+     or an array of numbers (results in multiple proggresses)*/
+
   let returned = createDiv();
 
   if (typeof(value) === 'number'){
@@ -61,6 +67,8 @@ function createProgress(name, value, max){
 }
 
 function table_from_matrix(matrix, x_axis, y_axis, x_name='', y_name=''){
+  // Creates a table element from a 2d matrix
+
   let table = document.createElement("table");
   let first_row = document.createElement("tr");
 
@@ -104,6 +112,8 @@ function table_from_matrix(matrix, x_axis, y_axis, x_name='', y_name=''){
 }
 
 function createDivWithP(text){
+  // Creates a div with a p element
+
   let returned = createDiv();
   let p = createP(text);
 
@@ -117,6 +127,8 @@ function createDivWithP(text){
 }
 
 class SteppingBox{
+
+  // Class used for the stepping_box
   constructor(){
     this.main_div = createDivWithP('The voting method step by step');
     this.main_div.class('step_by_stepp');
@@ -162,25 +174,34 @@ class SteppingBox{
   }
 
   delete_content(){
+    // Removes the content from the stepping box
     this.content_div.inside.remove();
   }
 
   set_content(element){
+    // Sets the content from the stepping box
+
     this.delete_content();
     this.content_div.inside = element;
     this.content_div.child(element);
   }
 
   next_func(func){
+    /* The funtion to be executed when clicking the next button.
+       Used to set the content of the content box.
+       The this keyword in that function will return te button itself.
+       You can acess the stepping_box itself by saying: this.parent_box*/
     this.next_button.mousePressed(func);
   }
 
   hide_next(){
+    // Hides the next button
     frozen_sim = false;
     this.next_button.hide();
   }
 
   hide(){
+    // Hides the box itself
     this.main_div.hide();
   }
 

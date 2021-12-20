@@ -1,4 +1,7 @@
 function sum_of_natural_numbers(start, end, stepp=1){
+  /* Adding up natural numbers from start to end with the increase of stepp
+      example: sum_of_natural_numbers(0,100) = 0 + 1 + 2 + ... 100*/
+
   let range = end-start;
   return (range/2)*((2*start)+((range-1)*stepp));
 }
@@ -12,12 +15,26 @@ function faktorial(n){
 }
 
 function ABC_constructor(instance, class_){
+  /* Used in the constructor of abstract baseclasses (ABCs).
+     Makes sure that you can't create an instance of an ABC.
+     Usecase:
+      class MyABC{
+        constructor(any_args){
+          ABC_constructor(this, MyABC);
+          [other code]
+        }
+      }
+  */
+
   if (instance.constructor == class_){
     throw new Error("Abstract baseclass can't be initialized");
   }
 }
 
 function sum(arr){
+  /*Returns the sum of every item in an array
+    arr[0] + arr[1] + ... arr[len(arr)-1]*/
+
   let returned = 0;
 
   for (let i = 0; i < arr.length; i++){
@@ -27,6 +44,8 @@ function sum(arr){
 }
 
 function twoDMatrixWithZeros(dim1, dim2){
+  //Crates a 2d array with the dimensions of (dim1, dim2) and fills it with 0-s
+
   let returned = [];
   for (let i = 0; i < dim1; i++){
     let sub = [];
@@ -39,12 +58,17 @@ function twoDMatrixWithZeros(dim1, dim2){
 }
 
 function set_diagnal(matrix,value){
+  //Sets every item in the main diagnal of a 2d matrix equal to value
+
   for(let i = 0; i < matrix.length; i++){
     matrix[i][i] = value;
   }
 }
 
-function int_to_str(i){
+function int_to_serial_number(i){
+  /* Returns a string from an int containing the serial number of that int
+     examples: 1st, 2nd, 11th, 13th, 20th, 31st*/
+
   let str_int = '' + i;
 
   if ((str_int.length > 1)&(str_int.substr(-2,1) === '1')){
@@ -63,22 +87,28 @@ function int_to_str(i){
 }
 
 function random_bool(true_chance){
+  // Coinflip function. Returns a random bool
   return (random()<true_chance);
 }
 
 function rewrapp_index(arr,i){
+  // Returns the ith element of an infinite cylce where the elements of arr repeat themselves
   return arr[i%arr.length];
 }
 
 function inverse_filter_array_by_array(arr, filter_arr){
+  // Returns an array wich is the diffenence between the arr, and the filter_arr
   return arr.filter(function(x){return !(filter_arr.includes(x))});
 }
 
 function point_in_circle(point_x, point_y, circle_x, circle_y, radius){
+  // Checks if a point is inside of a circle
   return dist(point_x, point_y, circle_x, circle_y) <= radius;
 }
 
 function random_point_inside_circle(x, y, r){
+  //Generates a random point inside of a circle with a uniform distrubution
+
   let result = {};
 
   let r_ = Math.sqrt(random()) * r;
@@ -91,10 +121,12 @@ function random_point_inside_circle(x, y, r){
 }
 
 function is_point_inside_rect(x1, y1, x2, y2, px, py){
+  // Checks if a point is inside of a rectangle
   return !((px < x1)||(px > x2)||(py < y1)||(py > y2))
 }
 
 class Counter extends Map{
+  // A Map modified to be able to count and keep track of the counts of diferent objects
 
   constructor(start_value=0){
     super();
@@ -102,6 +134,7 @@ class Counter extends Map{
   }
 
   copy(){
+
     let returned = new Counter(this.start_value);
 
     for (const x of this.entries()){
@@ -111,6 +144,7 @@ class Counter extends Map{
   }
 
   count(object){
+    // Increases Counter[object] by one
     if (this.has(object)){
       this.set(object, this.get(object)+1)
       return;
@@ -119,6 +153,8 @@ class Counter extends Map{
   }
 
   mins(){
+    // Returns the array of minimums based on counts
+
     let min_val = Infinity;
     let returned = [];
 
@@ -139,6 +175,8 @@ class Counter extends Map{
   }
 
   maxs(){
+    // Returns the array of maximums based on counts
+
     let max_val = -Infinity;
     let returned = [];
 
@@ -159,6 +197,8 @@ class Counter extends Map{
   }
 
   min_count(){
+    // Returns the count of the object wich has the smallest count
+
     let min_val = Infinity;
 
     for (const x of this.entries()){
@@ -170,6 +210,8 @@ class Counter extends Map{
   }
 
   max_count(){
+    // Returns the count of the object wich has the largest count
+
     let max_val = -Infinity;
 
     for (const x of this.entries()){
@@ -181,6 +223,8 @@ class Counter extends Map{
   }
 
   sorted_array(){
+    // Returns an array of the counted objects, sorted by the counts of those objects
+
     let returned = Array.from(this);
     returned.sort(function (a, b){
       return b[1] - a[1];
