@@ -503,6 +503,8 @@ class CondorcetVotingMethod extends RankingVotingMethod{
 
   prepare_for_voting(){
     super.prepare_for_voting();
+
+    //Give every candidate an id, what contains their index in the matrixes
     for (let i = 0; i < this.candidates.length; i++){
       candidates[i].id = i;
     }
@@ -585,6 +587,64 @@ class CondorcetVotingMethod extends RankingVotingMethod{
     }
     return null;
   }
+
+  //The folowing 3 methods are untested, and I'm not sure if they work or not
+  get_candidates_beaten_by(candidate){
+    /*
+    Returns the candidates who are beaten by the selected candidate.
+    Have to call calc_relative_strength_matrix() first
+    */
+
+    let returned = []
+    for (let i = 0; i<this.relative_strength_matrix.length; i++){
+      let cand = this.candidates[i];
+      let score = this.relative_strength_matrix[candidate.id][i];
+
+      if (score > 0){
+        returned.push(cand);
+      }
+    }
+    return returned
+  }
+
+  get_candidates_won_against(candidate){
+    /*
+    Returns the candidates who have won against the selected candidate.
+    Have to call calc_relative_strength_matrix() first
+    */
+
+    let returned = []
+    for (let i = 0; i<this.relative_strength_matrix.length; i++){
+      let cand = this.candidates[i];
+      let score = this.relative_strength_matrix[candidate.id][i];
+
+      if (score < 0){
+        returned.push(cand);
+      }
+    }
+    return returned
+  }
+
+  get_candidates_tied_by(candidate){
+    /*
+    Returns the candidates who are tied by the selected candidate.
+    Have to call calc_relative_strength_matrix() first
+    */
+
+    let returned = []
+    for (let i = 0; i<this.relative_strength_matrix.length; i++){
+      let cand = this.candidates[i];
+      let score = this.relative_strength_matrix[candidate.id][i];
+
+      if (score == 0){
+        returned.push(cand);
+      }
+    }
+    return returned
+  }
+
+
+  //Visualization stuff below
 
   show_outranking_matrix(){
     // First stepp in step_by_stepp visualization

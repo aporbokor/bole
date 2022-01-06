@@ -84,7 +84,7 @@ const votingmethods = new Map([
   ['approval voting', ApprovalVoter],
   ['borda counting', BordaCounting],
   ['supplementary vote', SupplementaryVoter],
-  ['Sir Lankan Contingent vote', SirLankanContingentVoter],
+  ['Sri Lankan Contingent vote', SriLankanContingentVoter],
   ['contingent vote', ContingentVoter],
   ['instant runof', InstantRunOffVoter],
   ['coombs', CoombsVoting],
@@ -312,7 +312,7 @@ function select_tool(){
 function get_results_elements(results, show_method=function (place){return place.get_p()}){
   // Returns the HTML element to be put into the results div
 
-  let returned = createDiv();
+  let returned = document.createElement("ol");
   for (let i = 0; i < results.length; i++){
 
     let subdiv = createDiv(int_to_serial_number(i+1));
@@ -323,7 +323,7 @@ function get_results_elements(results, show_method=function (place){return place
       subdiv.child(show_method(places[j]));
     }
 
-    returned.child(subdiv);
+    subdiv.parent(returned);
   }
   return returned;
 }

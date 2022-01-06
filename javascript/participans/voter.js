@@ -17,6 +17,14 @@ class Voter extends Person{
     return Math.sqrt(x_dist*x_dist + y_dist*y_dist);
   }
 
+  prefers(candidate1, candidate2){
+    // Returns the candidate more prefered by the voter
+    if (this.distance_to_candidate(candidate1) > this.distance_to_candidate(candidate2)){
+      return true;
+    }
+    return false;
+  }
+
   show(){
     this.grow_to_size();
 

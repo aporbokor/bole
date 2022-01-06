@@ -61,7 +61,7 @@ class ContingentVoter extends SupplementaryVoter{
   }
 }
 
-class SirLankanContingentVoter extends ContingentVoter{
+class SriLankanContingentVoter extends ContingentVoter{
   constructor(candidates){
     super(candidates);
     if (this.candidates.length > 3){
