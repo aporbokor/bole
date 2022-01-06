@@ -3,7 +3,7 @@
   --primary: black;
   --secondary: white;
   --primary-lt: #222;
-  --accent: #F18F01;
+  --accent: lightgray;
 }
 
 /* Breakpoints */
