@@ -2,12 +2,9 @@ class Voter extends Person{
   // Representation of the voters
 
   constructor(x, y, strategic, color, name){
-    super(x, y, color, name);
+    super(x, y, color, name, voter_size);
     this.strategic = strategic;
     this.voted_for = undefined;
-    this.size = 0;
-    this.default_size = voter_size;
-    this.target_size = this.default_size;
     this.supports = [];
   }
 
@@ -15,6 +12,15 @@ class Voter extends Person{
     let x_dist = this.x - candidate.x;
     let y_dist = this.y - candidate.y;
     return Math.sqrt(x_dist*x_dist + y_dist*y_dist);
+  }
+
+  honest_preference(cands){
+    // Returns the voter's honest preference based on an array of candidates
+
+    let returned = cands.concat([]);
+    let voter = this;
+    returned.sort(function (a,b){return voter.distance_to_candidate(a)-voter.distance_to_candidate(b)});
+    return returned;
   }
 
   prefers(candidate1, candidate2){
@@ -43,6 +49,24 @@ class Voter extends Person{
     remove_specific_voter(this);
   }
 
+  get_honest_preference_div(){
+    let returned = document.createElement('div');
+    let text = document.createElement('p');
+    text.innerText = "Honest preference:";
+
+    let list = document.createElement('ol');
+    let preference = this.honest_preference(candidates);
+
+    for (let i = 0; i < preference.length; i++){
+      let li = document.createElement("li")
+      li.appendChild(preference[i].get_name_p())
+      list.appendChild(li);
+    }
+    returned.appendChild(text);
+    returned.appendChild(list);
+    return returned;
+  }
+
   get_extra_to_div(){
     let returned = createDiv();
     let strategic_p = createCheckbox('strategic', this.strategic);
@@ -51,7 +75,7 @@ class Voter extends Person{
     strategic_p.parent_voter = this;
     strategic_p.changed(strategic_changed);
 
-    let voted_for_d = createDiv('Voted_for:');
+    let voted_for_d = createDiv('Voted for:');
     if (Array.isArray(this.voted_for)){
       voted_for_d.child(this.last_voting_sytem.get_ballot_element(this.voted_for));
 
@@ -73,6 +97,7 @@ class Voter extends Person{
     returned.child(strategic_p);
     returned.child(voted_for_d);
     returned.child(supports_d);
+    returned.child(this.get_honest_preference_div());
     return returned;
   }
 }

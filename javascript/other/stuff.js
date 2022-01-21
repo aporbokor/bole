@@ -1,20 +1,20 @@
-function sum_of_natural_numbers(start, end, stepp=1){
+function sum_of_natural_numbers(start, end, stepp = 1) {
   /* Adding up natural numbers from start to end with the increase of stepp
       example: sum_of_natural_numbers(0,100) = 0 + 1 + 2 + ... 100*/
 
-  let range = end-start;
-  return (range/2)*((2*start)+((range-1)*stepp));
+  let range = end - start;
+  return (range / 2) * ((2 * start) + ((range - 1) * stepp));
 }
 
-function faktorial(n){
-  if (n == 0){
+function faktorial(n) {
+  if (n == 0) {
     return 1;
   }
 
-  return n * faktorial(n-1);
+  return n * faktorial(n - 1);
 }
 
-function ABC_constructor(instance, class_){
+function ABC_constructor(instance, class_) {
   /* Used in the constructor of abstract baseclasses (ABCs).
      Makes sure that you can't create an instance of an ABC.
      Usecase:
@@ -26,30 +26,46 @@ function ABC_constructor(instance, class_){
       }
   */
 
-  if (instance.constructor == class_){
+  if (instance.constructor == class_) {
     throw new Error("Abstract baseclass can't be initialized");
   }
 }
 
-function sum(arr){
+function sum(arr) {
   /*Returns the sum of every item in an array
     arr[0] + arr[1] + ... arr[len(arr)-1]*/
 
   let returned = 0;
 
-  for (let i = 0; i < arr.length; i++){
+  for (let i = 0; i < arr.length; i++) {
     returned += arr[i];
   }
   return returned;
 }
 
-function twoDMatrixWithZeros(dim1, dim2){
+function* combinations(array, n) {
+  // Returns every combination of array of length n
+  if (n === 1) {
+    for (const a of array) {
+      yield [a];
+    }
+    return;
+  }
+
+  for (let i = 0; i <= array.length - n; i++) {
+    for (const c of combinations(array.slice(i + 1), n - 1)) {
+      yield [array[i], ...c];
+    }
+  }
+}
+
+function twoDMatrixWithZeros(dim1, dim2) {
   //Crates a 2d array with the dimensions of (dim1, dim2) and fills it with 0-s
 
   let returned = [];
-  for (let i = 0; i < dim1; i++){
+  for (let i = 0; i < dim1; i++) {
     let sub = [];
-    for (let j = 0; j < dim2; j++){
+    for (let j = 0; j < dim2; j++) {
       sub.push(0);
     }
     returned.push(sub);
@@ -57,56 +73,56 @@ function twoDMatrixWithZeros(dim1, dim2){
   return returned;
 }
 
-function set_diagnal(matrix,value){
+function set_diagnal(matrix, value) {
   //Sets every item in the main diagnal of a 2d matrix equal to value
 
-  for(let i = 0; i < matrix.length; i++){
+  for (let i = 0; i < matrix.length; i++) {
     matrix[i][i] = value;
   }
 }
 
-function int_to_serial_number(i){
+function int_to_serial_number(i) {
   /* Returns a string from an int containing the serial number of that int
      examples: 1st, 2nd, 11th, 13th, 20th, 31st*/
 
   let str_int = '' + i;
 
-  if ((str_int.length > 1)&(str_int.substr(-2,1) === '1')){
+  if ((str_int.length > 1) & (str_int.substr(-2, 1) === '1')) {
     return str_int + 'th';
   }
-  if (str_int.slice(-1) === '1'){
+  if (str_int.slice(-1) === '1') {
     return str_int + 'st';
   }
-  if (str_int.slice(-1) === '2'){
+  if (str_int.slice(-1) === '2') {
     return str_int + 'nd';
   }
-  if (str_int.slice(-1) === '3'){
+  if (str_int.slice(-1) === '3') {
     return str_int + 'rd';
   }
   return str_int + 'th';
 }
 
-function random_bool(true_chance){
+function random_bool(true_chance) {
   // Coinflip function. Returns a random bool
-  return (random()<true_chance);
+  return (random() < true_chance);
 }
 
-function rewrapp_index(arr,i){
+function rewrapp_index(arr, i) {
   // Returns the ith element of an infinite cylce where the elements of arr repeat themselves
-  return arr[i%arr.length];
+  return arr[i % arr.length];
 }
 
-function inverse_filter_array_by_array(arr, filter_arr){
+function inverse_filter_array_by_array(arr, filter_arr) {
   // Returns an array wich is the diffenence between the arr, and the filter_arr
-  return arr.filter(function(x){return !(filter_arr.includes(x))});
+  return arr.filter(function (x) { return !(filter_arr.includes(x)) });
 }
 
-function point_in_circle(point_x, point_y, circle_x, circle_y, radius){
+function point_in_circle(point_x, point_y, circle_x, circle_y, radius) {
   // Checks if a point is inside of a circle
   return dist(point_x, point_y, circle_x, circle_y) <= radius;
 }
 
-function random_point_inside_circle(x, y, r){
+function random_point_inside_circle(x, y, r) {
   //Generates a random point inside of a circle with a uniform distrubution
 
   let result = {};
@@ -120,53 +136,95 @@ function random_point_inside_circle(x, y, r){
   return result;
 }
 
-function is_point_inside_rect(x1, y1, x2, y2, px, py){
-  // Checks if a point is inside of a rectangle
-  return !((px < x1)||(px > x2)||(py < y1)||(py > y2))
+function distance_from_line_segment(point, linestart, lineend) {
+
+  let x = point.x
+  let y = point.y
+
+  let x1 = linestart.x
+  let y1 = linestart.y
+
+  let x2 = lineend.x
+  let y2 = lineend.y
+
+  let A = x - x1;
+  let B = y - y1;
+  let C = x2 - x1;
+  let D = y2 - y1;
+
+  let dot = A * C + B * D;
+  let len_sq = C * C + D * D;
+  let param = -1;
+  if (len_sq != 0) //in case of 0 length line
+    param = dot / len_sq;
+
+  let xx, yy;
+
+  if (param < 0) {
+    xx = x1;
+    yy = y1;
+  }
+  else if (param > 1) {
+    xx = x2;
+    yy = y2;
+  }
+  else {
+    xx = x1 + param * C;
+    yy = y1 + param * D;
+  }
+
+  let dx = x - xx;
+  let dy = y - yy;
+  return Math.sqrt(dx * dx + dy * dy);
 }
 
-class Counter extends Map{
+function is_point_inside_rect(x1, y1, x2, y2, px, py) {
+  // Checks if a point is inside of a rectangle
+  return !((px < x1) || (px > x2) || (py < y1) || (py > y2))
+}
+
+class Counter extends Map {
   // A Map modified to be able to count and keep track of the counts of diferent objects
 
-  constructor(start_value=0){
+  constructor(start_value = 0) {
     super();
     this.start_value = start_value;
   }
 
-  copy(){
+  copy() {
 
     let returned = new Counter(this.start_value);
 
-    for (const x of this.entries()){
-      returned.set(x[0],x[1]);
+    for (const x of this.entries()) {
+      returned.set(x[0], x[1]);
     }
     return returned;
   }
 
-  count(object){
+  count(object) {
     // Increases Counter[object] by one
-    if (this.has(object)){
-      this.set(object, this.get(object)+1)
+    if (this.has(object)) {
+      this.set(object, this.get(object) + 1)
       return;
     }
-    this.set(object,this.start_value);
+    this.set(object, this.start_value);
   }
 
-  mins(){
+  mins() {
     // Returns the array of minimums based on counts
 
     let min_val = Infinity;
     let returned = [];
 
-    for (const x of this.entries()){
+    for (const x of this.entries()) {
       let value = x[1];
       let key = x[0];
 
-      if (value < min_val){
+      if (value < min_val) {
         min_val = value;
         returned = [];
       }
-      if (value == min_val){
+      if (value == min_val) {
         returned.push(key);
       }
 
@@ -174,21 +232,21 @@ class Counter extends Map{
     return returned;
   }
 
-  maxs(){
+  maxs() {
     // Returns the array of maximums based on counts
 
     let max_val = -Infinity;
     let returned = [];
 
-    for (const x of this.entries()){
+    for (const x of this.entries()) {
       let value = x[1];
       let key = x[0];
 
-      if (value > max_val){
+      if (value > max_val) {
         max_val = value;
         returned = [];
       }
-      if (value == max_val){
+      if (value == max_val) {
         returned.push(key);
       }
 
@@ -196,41 +254,41 @@ class Counter extends Map{
     return returned;
   }
 
-  min_count(){
+  min_count() {
     // Returns the count of the object wich has the smallest count
 
     let min_val = Infinity;
 
-    for (const x of this.entries()){
-      if (x[1] < min_val){
+    for (const x of this.entries()) {
+      if (x[1] < min_val) {
         min_val = x[1]
       }
     }
     return min_val;
   }
 
-  max_count(){
+  max_count() {
     // Returns the count of the object wich has the largest count
 
     let max_val = -Infinity;
 
-    for (const x of this.entries()){
-      if (x[1] > max_val){
+    for (const x of this.entries()) {
+      if (x[1] > max_val) {
         max_val = x[1]
       }
     }
     return max_val;
   }
 
-  sorted_array(){
+  sorted_array() {
     // Returns an array of the counted objects, sorted by the counts of those objects
 
     let returned = Array.from(this);
-    returned.sort(function (a, b){
+    returned.sort(function (a, b) {
       return b[1] - a[1];
     });
 
-    for (let i = 0; i < returned.length; i++){
+    for (let i = 0; i < returned.length; i++) {
       returned[i] = returned[i][0];
     }
 
