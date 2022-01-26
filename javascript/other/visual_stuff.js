@@ -14,6 +14,11 @@ class Drawable {
 
     this.text = null;
     this.text_label = null;
+
+    this.shown = true;
+    this.to_show = true;
+
+    this.hidden_size = 5;
   }
 
   reset_text() {
@@ -27,6 +32,18 @@ class Drawable {
     throw new Error("You must implement a show method to your Person class");
   }
 
+  appear() {
+    this.to_show = true;
+  }
+
+  hide() {
+    this.to_show = false;
+  }
+
+  toggle_hidden() {
+    this.to_show = !this.to_show;
+  }
+
 
   grow_to_size() {
     /* Method used for dynamic size-changes.
@@ -34,6 +51,16 @@ class Drawable {
        until it reaches its target_size. Resets the target_size in the end,
        so when we want that to change we need to maually set it every time
        before we call this method*/
+
+    if (!(this.to_show)) {
+      this.target_size = this.hidden_size;
+    }
+
+    if (this.size <= this.hidden_size) {
+      this.shown = false;
+    } else {
+      this.shown = true;
+    }
 
     let dif = Math.abs(this.size - this.target_size);
 
@@ -108,6 +135,7 @@ class Drawable {
 
     returned.child(name);
     returned.child(color_picker);
+    returned.child(this.get_hide_checkbox());
 
     return returned;
   }
@@ -136,6 +164,20 @@ class Drawable {
     return delete_button;
   }
 
+  get_hide_checkbox() {
+    let checkbox = createCheckbox(`Hide ${this.constructor.name}`, !this.to_show);
+    checkbox.parent = this;
+    checkbox.changed(function () {
+      if (this.checked()) {
+        this.parent.hide();
+      } else {
+        this.parent.appear();
+      }
+    })
+
+    return checkbox;
+  }
+
 }
 
 
@@ -162,7 +204,8 @@ class Arrow extends Drawable {
   // The arrow what can be drawn between 2 People instances
   constructor(color, name, start, end, endStyle = null, startStyle = null, lineStyle = null) {
     super(color, name, 0);
-    this.shown = false;
+    this.hidden_size = 0.01;
+    this.shown = true;
     this.end_person = end;
     this.start_person = start;
     this.closeness = 0.6;
@@ -241,8 +284,12 @@ class Arrow extends Drawable {
       this.remove();
     }
 
+    this.to_show = ((this.end_person.shown) & (this.start_person.shown))
+
+
     this.calc_vectors();
     this.grow_to_size();
+
 
     push();
     noStroke();
@@ -271,6 +318,10 @@ class Arrow extends Drawable {
 
   draw_text() {
     // Draws text inside Arrow
+
+    if (!this.shown) {
+      return
+    }
 
     if (this.text != null) {
 

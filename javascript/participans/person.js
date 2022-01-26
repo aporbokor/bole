@@ -14,6 +14,10 @@ class Person extends Drawable {
 
   // Visual methods
   default_show() {
+    // if (!(this.shown)) {
+    //   return
+    // }
+
     if (this.show_image) {
       texture(this.show_image);
     }

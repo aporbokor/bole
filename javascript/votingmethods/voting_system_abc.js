@@ -678,11 +678,14 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     // First stepp in step_by_stepp visualization
 
     let voting_sytem = this.parent_box.visualized_system;
+
+    delete_arrows();
     this.random_voter = random(voters);
     clicked_selected = this.random_voter;
     this.random_voter.color = honest_voter_color;
     clicked_selected.on_select();
     load_clicked_selected();
+
 
     let voter_res = this.random_voter.voted_for;
 
@@ -773,6 +776,9 @@ class CondorcetVotingMethod extends RankingVotingMethod {
   show_relative_strength_matrix() {
     // Second stepp in step_by_stepp visualization
     let voting_sytem = this.parent_box.visualized_system;
+    delete_arrows();
+
+    voters.forEach((v) => { v.hide() })
 
     voting_sytem.arrows_between_candidates();
     this.random_voter.color = this.random_voter.voted_for[0].color;
