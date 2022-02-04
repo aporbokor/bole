@@ -1,15 +1,15 @@
 class HonestyPainter extends DrawTool {
-  constructor(){
+  constructor() {
     super();
     this.color = 'gray';
   }
 
-  draw(){
+  draw() {
     this.draw_outline();
-    if (mouseIsPressed){
-      for (let i = 0; i < voters.length; i++){
+    if (mouseIsPressed & cursor_in_canvas()) {
+      for (let i = 0; i < voters.length; i++) {
         let voter = voters[i];
-        if (is_inside_tool(voter)){
+        if (is_inside_tool(voter)) {
           voter.strategic = false;
         }
       }
@@ -18,17 +18,17 @@ class HonestyPainter extends DrawTool {
 }
 
 class StrategyPainter extends DrawTool {
-  constructor(){
+  constructor() {
     super();
     this.color = 'white';
   }
 
-  draw(){
+  draw() {
     this.draw_outline();
-    if (mouseIsPressed){
-      for (let i = 0; i < voters.length; i++){
+    if (mouseIsPressed & cursor_in_canvas()) {
+      for (let i = 0; i < voters.length; i++) {
         let voter = voters[i];
-        if (is_inside_tool(voter)){
+        if (is_inside_tool(voter)) {
           voter.strategic = true;
         }
       }

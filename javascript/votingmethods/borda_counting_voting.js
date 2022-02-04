@@ -19,7 +19,7 @@ class BordaCounting extends RankingVotingMethod {
   }
 
   registrate_strategic_vote(voter) {
-    if (seems_win_candidates.length == 0) {
+    if (seems_win_candidates.length <= 1) {
       return this.registrate_honest_vote(voter);
     }
     let winner_tier_list = this.best_candidate_tier_list(voter, seems_win_candidates);

@@ -41,6 +41,7 @@ let strategic_chance_slider;
 let voter_population_slider;
 let reset_voter_color_buttton;
 let hide_voters_button;
+let delete_arrows_button;
 let candidate_population_slider;
 let reset_button;
 let simulate_button;
@@ -154,6 +155,10 @@ function reset_voter_color() {
   for (let i = 0; i < voters.length; i++) {
     voters[i].color = honest_voter_color;
   }
+}
+
+function toggle_voter_hide() {
+  voters.forEach((v) => { v.toggle_hidden() })
 }
 
 function remove_voter() {
@@ -435,7 +440,10 @@ function setup() {
   reset_voter_color_buttton.mousePressed(reset_voter_color);
 
   hide_voters_button = createButton('hide all voters');
-  hide_voters_button.mousePressed(() => { voters.forEach((v) => { v.toggle_hidden() }) })
+  hide_voters_button.mousePressed(toggle_voter_hide);
+
+  delete_arrows_button = createButton('delete all arrows');
+  delete_arrows_button.mousePressed(delete_arrows);
 
   add_candidate_button = createButton('add candidate');
   add_candidate_button.mousePressed(add_candidate);
@@ -488,6 +496,7 @@ function setup() {
   edit_enviroment_div.child(add_voter_button);
   edit_enviroment_div.child(reset_voter_color_buttton);
   edit_enviroment_div.child(hide_voters_button);
+  edit_enviroment_div.child(delete_arrows_button);
   edit_enviroment_div.child(add_candidate_button);
   edit_enviroment_div.child(delete_candidate_button);
   edit_enviroment_div.child(delete_voter_button);

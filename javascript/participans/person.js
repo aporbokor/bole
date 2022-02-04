@@ -68,7 +68,7 @@ class Person extends Drawable {
     })
   }
 
-  get_name_p() {
+  get_name_p(extra_text = '') {
     // Return a p element wich represents the person
 
     let returned = document.createElement("p");
@@ -76,7 +76,7 @@ class Person extends Drawable {
     returned.classList.add("person_name");
 
     if (!this.show_image) {
-      returned.innerText = `● ${this.name}`;
+      returned.innerText = `● ${this.name}${extra_text}`;
       return returned;
     }
 
