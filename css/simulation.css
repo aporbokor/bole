@@ -1,4 +1,4 @@
-:root{
+:root {
   --canvas-height: 660px;
   --canvas-width: 800px;
 }
@@ -6,14 +6,14 @@
 .canvas {
   grid-area: canvas;
 }
-.content_box{
+.content_box {
   background-color: var(--primary);
   padding: 1rem;
 }
 
 #sim_gombok,
 #vote_results,
-#selected{
+#selected {
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -23,31 +23,31 @@
   max-height: var(--canvas-height);
 }
 
-.sim-gombok-container{
+.sim-gombok-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
 }
 
-.sim-buttons-subdiv-container{
+.sim-buttons-subdiv-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.sim-buttons-subdiv{
+.sim-buttons-subdiv {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem
+  gap: 1rem;
 }
 
 .results_wrapper {
   grid-area: results;
 }
 
-#vote_results{
+#vote_results {
   position: sticky;
   top: var(--nav-height);
 }
@@ -63,9 +63,9 @@
 main {
   display: grid;
   grid-template-areas:
-    "sim-gombok canvas selected"
-    "sim-gombok canvas results"
-    "step       step   results";
+    'sim-gombok canvas selected'
+    'sim-gombok canvas results'
+    'step       step   results';
   grid-template-columns: 1fr min-content 1fr;
   grid-template-rows: 18rem calc(var(--canvas-height) - 19rem) auto;
 
@@ -83,7 +83,7 @@ body {
   text-transform: lowercase;
   font-size: 0.9rem;
   padding: 0.5rem;
-  font-family: "Crimson Pro", serif;
+  font-family: 'Crimson Pro', serif;
   text-align: center;
 }
 
@@ -104,24 +104,24 @@ main select {
 }
 
 ul,
-ol{
+ol {
   padding-left: 1.5rem;
 }
 
-#vote_results > ol{
+#vote_results > ol {
   padding-left: 0.5rem;
 }
 
-li::marker{
+li::marker {
   color: var(--accent);
   padding-right: 0.05em;
 }
 
-.tick-marker::marker{
-  content:"✔";
+.tick-marker::marker {
+  content: '✔';
 }
 
-.person_profile_pic{
+.person_profile_pic {
   height: 1em;
   width: 1em;
   border-radius: 50%;
@@ -129,11 +129,10 @@ li::marker{
   vertical-align: middle;
 }
 
-.explaining_p{
-
+.explaining_p {
 }
 
-.person_name{
+.person_name {
   display: inline;
   font-weight: bold;
 }
@@ -151,7 +150,6 @@ li::marker{
 
 .candidate_p {
   /* The candidates representation which only contains the candidates name and votes visualized by proggresbars*/
-
 }
 
 .progress_ {
@@ -159,7 +157,7 @@ li::marker{
   width: 80%;
 }
 
-.progress_::before{
+.progress_::before {
   content: attr(value);
   position: absolute;
   left: 105%;
@@ -173,8 +171,8 @@ li::marker{
   /* If the selected person is a voter, this is the style which the voter is gona appear in */
 }
 
-.voter-voted-for{
-  padding:1.5rem;
+.voter-voted-for {
+  padding: 1.5rem;
 }
 
 .candidate_div {
@@ -200,30 +198,30 @@ li::marker{
 }
 
 @media only screen and (max-width: 768px) {
-  main{
-    grid-template-areas: "sim-gombok" "canvas" "results";
+  main {
+    grid-template-areas: 'sim-gombok' 'canvas' 'results';
     grid-template-columns: 1fr;
     grid-template-rows: 40vh min-content 1fr;
     padding: 0;
   }
 
-  #sim_gombok{
+  #sim_gombok {
     overflow-y: hidden;
     overflow-x: auto;
   }
 
-  .sim-gombok-container{
+  .sim-gombok-container {
     flex-direction: row;
     width: 150rem;
     align-items: stretch;
   }
 
-  .sim-buttons-subdiv-container{
+  .sim-buttons-subdiv-container {
     max-height: 100%;
     align-items: stretch;
   }
 
-  .sim-buttons-subdiv{
+  .sim-buttons-subdiv {
     flex-direction: row;
     flex-wrap: wrap;
     flex-grow: 1;
@@ -233,11 +231,11 @@ li::marker{
     flex-grow: 1;
   }
 
-  #selected{
+  #selected {
     display: none;
   }
 
-  .step_by_stepp{
+  .step_by_stepp {
     display: none;
   }
 }

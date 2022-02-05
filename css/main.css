@@ -4,6 +4,15 @@ main {
   background: var(--primary-lt);
 }
 
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: 1;
+  padding-right: 2rem;
+}
+
 .spacer {
   aspect-ratio: 960/100;
   width: 100%;
@@ -28,14 +37,62 @@ main {
   background-image: url('/svg/green-bot.svg');
 }
 
+.red-peak {
+  background-image: url('/svg/red-peak.svg');
+}
+
+.red-bot {
+  background-image: url('/svg/red-bot.svg');
+}
+.orange-peak {
+  background-image: url('/svg/orange-peak.svg');
+}
+
+.orange-bot {
+  background-image: url('/svg/orange-bot.svg');
+}
+
+.brown-peak {
+  background-image: url('/svg/brown-peak.svg');
+}
+
+.brown-bot {
+  background-image: url('/svg/brown-bot.svg');
+}
+
+.purple-peak {
+  background-image: url('/svg/purple-peak.svg');
+}
+
+.purple-bot {
+  background-image: url('/svg/purple-bot.svg');
+}
+
+.yellow-peak {
+  background-image: url('/svg/yellow-peak.svg');
+}
+
+.yellow-bot {
+  background-image: url('/svg/yellow-bot.svg');
+}
+
+.turquoise-peak {
+  background-image: url('/svg/turquoise-peak.svg');
+}
+
 article {
   position: relative;
 }
 
+.light-sec {
+  color: var(--primary-lt) !important;
+  color: brown;
+}
+
 main section {
   width: 100%;
-  padding: 1rem;
   padding-left: 2rem;
+  padding: 1rem;
 }
 
 main h2 {
@@ -97,22 +154,24 @@ main h2 {
   margin-bottom: 1rem;
 }
 
+.docli {
+  padding: 2rem;
+}
+
 .canvas_img {
-  width: 100%;
-  max-width: 40rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  max-height: 35vh;
+  max-width: 40vw;
 }
 
 .flowchart_img {
+  height: 30vh;
   width: 100%;
-  max-width: 35rem;
+  max-width: 40vw;
 }
 
 .voteresult {
-  padding: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  height: 30vh;
+  width: 40vw;
   display: grid;
   align-items: center;
   gap: 1rem;
