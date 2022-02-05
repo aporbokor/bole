@@ -23,18 +23,6 @@
   box-sizing: border-box;
 }
 
-::-webkit-scrollbar {
-  width: 0.8rem;
-  background: var(--accent);
-  border-radius: 1rem;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 1rem;
-  border: 0.1rem solid var(--accent);
-}
-
 body {
   overflow-x: hidden;
   overflow-y: scroll;
@@ -137,4 +125,16 @@ th {
   color: var(--primary);
   font-weight: bold;
   border: 1px solid var(--primary);
+}
+
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.green {
+  background-color: green;
 }

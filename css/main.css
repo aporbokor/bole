@@ -4,6 +4,34 @@ main {
   background: var(--primary-lt);
 }
 
+.spacer {
+  aspect-ratio: 960/100;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.blue-peak {
+  background-image: url('/svg/blue-peak.svg');
+}
+
+.blue-bot {
+  background-image: url('/svg/blue-bot.svg');
+}
+
+.green-peak {
+  background-image: url('/svg/green-peak.svg');
+}
+
+.green-bot {
+  background-image: url('/svg/green-bot.svg');
+}
+
+article {
+  position: relative;
+}
+
 main section {
   width: 100%;
   padding: 1rem;
