@@ -39,6 +39,7 @@
 #vote_results {
 
 }
+
 #selected {
   border: 10px solid var(--primary);
   background: var(--primary);
@@ -217,4 +218,10 @@ li::marker{
 
 .next_stepp {
   /* The next button */
+}
+
+@media only screen and (max-width: 768px) {
+  main{
+    grid-template-areas: "sim-gombok" "canvas" "results-and-selected-div";
+  }
 }

@@ -415,9 +415,13 @@ function preload() {
   font = loadFont("../fonts/Comfortaa-VariableFont_wght.ttf");
 }
 
+function windowResized() {
+  resizeCanvas(constrain(WIDTH, 0, windowWidth), constrain(HEIGHT, 0, windowHeight));
+}
+
 function setup() {
 
-  canvas = createCanvas(constrain(WIDTH, 0, window.innerWidth), constrain(HEIGHT, 0, window.innerHeight), WEBGL);
+  canvas = createCanvas(constrain(WIDTH, 0, windowWidth), constrain(HEIGHT, 0, windowHeight), WEBGL);
   canvas.addClass('canvas');
 
   approval_range = Math.floor(dist(0, 0, WIDTH, HEIGHT) * approval_range_size);
