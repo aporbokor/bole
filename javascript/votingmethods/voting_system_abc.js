@@ -99,12 +99,13 @@ class NumberVotecountVotingMethod extends VotingMethod {
   }
 
   get_ballot_element(ballot) {
+    console.log(ballot)
     let returned = document.createElement("ul");
 
     for (let i = 0; i < ballot.length; i++) {
       let li = document.createElement("li");
       li.classList.add(this.ballot_marker);
-      li.appendChild(ballot[i].get_small_p().elt);
+      li.appendChild(ballot[i].get_name_p());
       returned.appendChild(li);
     }
     return returned;
@@ -211,7 +212,7 @@ class RankingVotingMethod extends VotingMethod {
 
     for (let i = 0; i < ballot.length; i++) {
       let li = document.createElement("li");
-      li.appendChild(ballot[i].get_small_p().elt);
+      li.appendChild(ballot[i].get_name_p());
       returned.appendChild(li);
     }
     return returned;

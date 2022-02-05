@@ -1,3 +1,10 @@
+function cursor_in_canvas() {
+  // returns wether the cursor is inside of the canvas or not
+  return !((mouseX < 0) || (mouseX > width) || (mouseY < 0) || (mouseY > height));
+}
+
+
+
 function sum_of_natural_numbers(start, end, stepp = 1) {
   /* Adding up natural numbers from start to end with the increase of stepp
       example: sum_of_natural_numbers(0,100) = 0 + 1 + 2 + ... 100*/

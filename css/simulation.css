@@ -193,6 +193,10 @@ li::marker{
   /* If the selected person is a voter, this is the style which the voter is gona appear in */
 }
 
+.voter-voted-for{
+  padding:1.5rem;
+}
+
 .candidate_div {
   /* If the selected person is a candidate, this is the style which the candidate is gona appear in */
 }

@@ -4,6 +4,7 @@ class Candidate extends Person {
     super(x, y, color, name, candidate_size);
     this.votes = undefined;
     this.supporters = 0;
+    this.seems_win = null;
   }
 
   show() {
@@ -56,6 +57,10 @@ class Candidate extends Person {
       extra_to_div.child(createP('Supporters: ' + this.supporters));
     }
 
+    if (this.seems_win) {
+      extra_to_div.child(createP('From the supporter count of this candidate, tactical voters have concluded that this candidate is likely to win. This might cause them to vote diferently than honest voters.'));
+    }
+
     return extra_to_div;
   }
 }
@@ -98,8 +103,10 @@ function calculate_seems_win_candidates() {
 
     if (candidate.supporters >= supporters_to_win) {
       seems_win_candidates.push(candidate);
+      candidate.seems_win = true;
       continue;
     }
     seems_lose_candidates.push(candidate);
+    candidate.seems_win = false;
   }
 }

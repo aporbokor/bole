@@ -52,7 +52,13 @@ class Drawable {
        so when we want that to change we need to maually set it every time
        before we call this method*/
 
-    if (!(this.to_show)) {
+    if (this.to_delete) {
+      this.target_size = 0;
+      if (this.size == 0) {
+        this.remove_self()
+        this.to_delete = false;
+      }
+    } else if (!(this.to_show)) {
       this.target_size = this.hidden_size;
     }
 
@@ -72,14 +78,6 @@ class Drawable {
 
     } else {
       this.size -= grow_speed;
-    }
-    if (this.to_delete) {
-      this.target_size = 0;
-      if (this.size == 0) {
-        this.remove_self()
-        this.to_delete = false;
-      }
-      return;
     }
 
     this.target_size = this.default_size;
@@ -284,7 +282,9 @@ class Arrow extends Drawable {
       this.remove();
     }
 
-    this.to_show = ((this.end_person.shown) & (this.start_person.shown))
+    if (!this.to_delete & !((this.end_person.shown) & (this.start_person.shown))) {
+      this.target_size = this.hidden_size;
+    }
 
 
     this.calc_vectors();
