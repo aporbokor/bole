@@ -1,4 +1,4 @@
-function slider_with_name(name, min, max, value, step){
+function slider_with_name(name, min, max, value, step) {
   // Creates a div with a p and a slider
 
   let returned = createDiv();
@@ -14,29 +14,29 @@ function slider_with_name(name, min, max, value, step){
 
   returned.class('named_slider');
 
-  returned.setValue = function(val){
+  returned.setValue = function (val) {
     slider.elt.value = val;
     this.value();
   }
 
-  returned.value = function(){
+  returned.value = function () {
     text.html(name + slider.value());
     return slider.value();
   }
   return returned;
 }
 
-function createProgress(name, value, max){
+function createProgress(name, value, max) {
   /* Creates a div with p and progress elements.
      Value can be a number (result in 1 progress)
      or an array of numbers (results in multiple proggresses)*/
 
   let returned = createDiv();
 
-  if (typeof(value) === 'number'){
+  if (typeof (value) === 'number') {
 
     let bar = document.createElement('progress');
-    bar.setAttribute("class","progress_");
+    bar.setAttribute("class", "progress_");
     bar.setAttribute("value", value);
     bar.setAttribute("max", max);
     bar.innerHTML = name;
@@ -47,13 +47,13 @@ function createProgress(name, value, max){
 
     returned.child(bar);
 
-  } else if (Array.isArray(value)){
+  } else if (Array.isArray(value)) {
     let p = createP(name + value.join(', '));
     returned.child(p);
     returned.label = p;
-    for (let i = 0; i < value.length; i++){
+    for (let i = 0; i < value.length; i++) {
       let bar = document.createElement('progress');
-      bar.setAttribute("class","progress_");
+      bar.setAttribute("class", "progress_");
       bar.setAttribute("value", value[i]);
       bar.setAttribute("max", max);
       bar.innerHTML = name;
@@ -66,7 +66,7 @@ function createProgress(name, value, max){
   return returned;
 }
 
-function table_from_matrix(matrix, x_axis, y_axis, x_name='', y_name=''){
+function table_from_matrix(matrix, x_axis, y_axis, x_name = '', y_name = '') {
   // Creates a table element from a 2d matrix
 
   let table = document.createElement("table");
@@ -83,7 +83,7 @@ function table_from_matrix(matrix, x_axis, y_axis, x_name='', y_name=''){
 
   first_row.appendChild(corner);
 
-  for (let i = 0; i < x_axis.length; i++){
+  for (let i = 0; i < x_axis.length; i++) {
     let cell = document.createElement("th");
     cell.classList.add("table-top");
 
@@ -93,7 +93,7 @@ function table_from_matrix(matrix, x_axis, y_axis, x_name='', y_name=''){
 
   table.appendChild(first_row);
 
-  for (let i = 0; i<matrix.length; i++){
+  for (let i = 0; i < matrix.length; i++) {
     let matrix_row = matrix[i];
     let row = document.createElement("tr");
     let table_left = document.createElement("th");
@@ -101,7 +101,7 @@ function table_from_matrix(matrix, x_axis, y_axis, x_name='', y_name=''){
     table_left.innerHTML = y_axis[i];
     row.appendChild(table_left);
 
-    for (let j = 0; j < matrix_row.length; j++){
+    for (let j = 0; j < matrix_row.length; j++) {
       let cell = document.createElement("td");
       cell.innerHTML = matrix_row[j];
       row.appendChild(cell);
@@ -111,7 +111,7 @@ function table_from_matrix(matrix, x_axis, y_axis, x_name='', y_name=''){
   return table;
 }
 
-function createDivWithP(text){
+function createDivWithP(text) {
   // Creates a div with a p element
 
   let returned = createDiv();
@@ -126,13 +126,13 @@ function createDivWithP(text){
   return returned;
 }
 
-class SteppingBox{
+class SteppingBox {
 
   // Class used for the stepping_box
-  constructor(){
+  constructor() {
     this.main_div = createDivWithP('The voting method step by step');
     this.main_div.class('step_by_stepp');
-    this.main_div.addClass('under_selected');
+    this.main_div.addClass('content_box');
     this.main_div.p.class('stepping_box_title');
 
     this.next_button = createButton('next step');
@@ -147,38 +147,38 @@ class SteppingBox{
     this.main_div.child(this.content_div);
     this.main_div.child(this.next_button);
 
-    this.main_div.parent(results_and_selected_d);
+    this.main_div.parent(main_element);
     this.hide_next();
 
     this.visualized_system = null;
 
-    hide_stepping_box = createButton('hide step by step box');
-    this.shown = true;
-    hide_stepping_box.parent_stepping_box = this;
+    // hide_stepping_box = createButton('hide step by step box');
+    // this.shown = true;
+    // hide_stepping_box.parent_stepping_box = this;
 
-    hide_stepping_box.mousePressed(function (){
-      if (this.parent_stepping_box.shown){
-        this.parent_stepping_box.hide();
-        vote_result_div.show();
-        this.html("show step by step box");
-      }else{
-        this.parent_stepping_box.show();
-        vote_result_div.hide();
-        this.html("hide step by step box");
-      }
-      this.parent_stepping_box.shown = !(this.parent_stepping_box.shown);
-    })
+    // hide_stepping_box.mousePressed(function () {
+    //   if (this.parent_stepping_box.shown) {
+    //     this.parent_stepping_box.hide();
+    //     vote_result_div.show();
+    //     this.html("show step by step box");
+    //   } else {
+    //     this.parent_stepping_box.show();
+    //     vote_result_div.hide();
+    //     this.html("hide step by step box");
+    //   }
+    //   this.parent_stepping_box.shown = !(this.parent_stepping_box.shown);
+    // })
 
-    szimulation_div.child(hide_stepping_box);
-    this.hide();
+    // szimulation_div.child(hide_stepping_box);
+    // this.hide();
   }
 
-  delete_content(){
+  delete_content() {
     // Removes the content from the stepping box
     this.content_div.inside.remove();
   }
 
-  set_content(element){
+  set_content(element) {
     // Sets the content from the stepping box
 
     this.delete_content();
@@ -186,7 +186,7 @@ class SteppingBox{
     this.content_div.child(element);
   }
 
-  next_func(func){
+  next_func(func) {
     /* The funtion to be executed when clicking the next button.
        Used to set the content of the content box.
        The this keyword in that function will return te button itself.
@@ -194,22 +194,22 @@ class SteppingBox{
     this.next_button.mousePressed(func);
   }
 
-  hide_next(){
+  hide_next() {
     // Hides the next button
     frozen_sim = false;
     this.next_button.hide();
   }
 
-  hide(){
+  hide() {
     // Hides the box itself
     this.main_div.hide();
   }
 
-  show(){
+  show() {
     this.main_div.show();
   }
 
-  show_next(){
+  show_next() {
     frozen_sim = true;
     this.next_button.show();
   }

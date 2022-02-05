@@ -1,100 +1,90 @@
 :root{
   --canvas-height: 660px;
-  --canvas-width: 780px;
+  --canvas-width: 800px;
 }
 
 .canvas {
   grid-area: canvas;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 1rem;
 }
 .content_box{
-  width: 280px;
-  height: var(--canvas-height);
-  margin-left: auto;
-  margin-right: auto;
+  background-color: var(--primary);
+  padding: 1rem;
+}
+
+#sim_gombok,
+#vote_results,
+#selected{
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 #sim_gombok {
   grid-area: sim-gombok;
-  overflow-y: scroll;
+  max-height: var(--canvas-height);
 }
 
-#results-and-selected-div {
-  grid-area: results-and-selected-div;
-  align-self: start;
-  --selected-height: 240px;
+.sim-gombok-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
-.under_selected{
-  height: calc(var(--canvas-height) - var(--selected-height) - 17px - 1rem);
-  border: 10px solid var(--primary);
-  margin-top: 17px;
-  overflow-y: scroll;
-  background: var(--primary);
-  padding: 1rem;
+.sim-buttons-subdiv-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#vote_results {
+.sim-buttons-subdiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem
+}
 
+.results_wrapper {
+  grid-area: results;
+}
+
+#vote_results{
+  position: sticky;
+  top: var(--nav-height);
 }
 
 #selected {
-  border: 10px solid var(--primary);
-  background: var(--primary);
-  margin-top: 1rem;
-  height: var(--selected-height);
-  overflow-y: scroll;
-  padding: 1rem;
+  grid-area: selected;
 }
 
 .step_by_stepp {
-  /* overflow-y: scroll; */
-  /* position: absolute; */
-  /* top: 800px; */
-  /* margin-top: 1rem;
-  padding: 1rem;
-  background: var(--primary); */
-  /* display: flex;
-  flex-direction: column;
-  align-self: center;
-  align-items: center;
-  justify-content: center; */
+  grid-area: step;
 }
 
 main {
   display: grid;
-  grid-template-areas: "sim-gombok canvas results-and-selected-div";
+  grid-template-areas:
+    "sim-gombok canvas selected"
+    "sim-gombok canvas results"
+    "step       step   results";
+  grid-template-columns: 1fr min-content 1fr;
+  grid-template-rows: 18rem calc(var(--canvas-height) - 19rem) auto;
+
+  align-items: stretch;
+  gap: 1rem;
+
+  padding: 1rem;
 }
 
 body {
-  overflow-y: hidden;
+  overflow-y: auto;
   background: var(--primary-lt);
 }
-
-#sim_gombok {
-  margin-top: 1rem;
-  padding: 1rem;
-  border: 1px solid var(--primary-lt);
-  display: grid;
-  justify-items: center;
-  background: var(--primary);
-}
-
 .p_div_p {
   text-transform: lowercase;
   font-size: 0.9rem;
   padding: 0.5rem;
   font-family: "Crimson Pro", serif;
   text-align: center;
-}
-#new_environment_div {
-  width: 100%;
-  border-top: 1px solid var(--primary-lt);
-  border-bottom: 1px solid var(--primary-lt);
-  text-align: center;
-  padding-bottom: 1rem;
 }
 
 .named_slider {
@@ -131,26 +121,6 @@ li::marker{
   content:"✔";
 }
 
-
-#edit_enviroment_div {
-  width: 10vw auto;
-  text-align: center;
-  border-bottom: 1px solid var(--primary-lt);
-  padding-bottom: 1rem;
-}
-
-#szimulation_div {
-  width: 100%;
-  text-align: center;
-  border-bottom: 1px solid var(--primary-lt);
-  padding-bottom: 1rem;
-}
-
-#tool_div {
-  width: 10vw auto;
-  text-align: center;
-}
-
 .person_profile_pic{
   height: 1em;
   width: 1em;
@@ -183,8 +153,17 @@ li::marker{
   /* The candidates representation which only contains the candidates name and votes visualized by proggresbars*/
 
 }
-.progress_ {
 
+.progress_ {
+  position: relative;
+  width: 80%;
+}
+
+.progress_::before{
+  content: attr(value);
+  position: absolute;
+  left: 105%;
+  line-height: 100%;
 }
 
 .selected {
@@ -222,6 +201,43 @@ li::marker{
 
 @media only screen and (max-width: 768px) {
   main{
-    grid-template-areas: "sim-gombok" "canvas" "results-and-selected-div";
+    grid-template-areas: "sim-gombok" "canvas" "results";
+    grid-template-columns: 1fr;
+    grid-template-rows: 40vh min-content 1fr;
+    padding: 0;
+  }
+
+  #sim_gombok{
+    overflow-y: hidden;
+    overflow-x: auto;
+  }
+
+  .sim-gombok-container{
+    flex-direction: row;
+    width: 150rem;
+    align-items: stretch;
+  }
+
+  .sim-buttons-subdiv-container{
+    max-height: 100%;
+    align-items: stretch;
+  }
+
+  .sim-buttons-subdiv{
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+  }
+
+  .sim-buttons-subdiv > button {
+    flex-grow: 1;
+  }
+
+  #selected{
+    display: none;
+  }
+
+  .step_by_stepp{
+    display: none;
   }
 }

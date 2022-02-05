@@ -25,7 +25,6 @@ let last_selected;
 let clicked_selected;
 let selected_div;
 
-let szim_gombok;
 let new_envitoment_div;
 let edit_enviroment_div;
 let simulation_div;
@@ -69,7 +68,7 @@ const inactive_tool_stroke_weight = 2;
 const voter_per_pixel = 0.001;
 
 let canvas;
-WIDTH = 780;
+WIDTH = 800;
 HEIGHT = 660;
 
 let approval_range;
@@ -99,7 +98,6 @@ const votingmethods = new Map([
 
 let stepping_box;
 let hide_stepping_box;
-let results_and_selected_d;
 
 const grow_speed = 1;
 const selected_size_adder = 5;
@@ -431,8 +429,6 @@ function setup() {
 
   stroke(default_stroke);
 
-  szim_gombok = select('#sim_gombok');
-
   strategic_chance_slider = slider_with_name('strategic voter chance: ', 0, 1, strategic_chance, 0.01);
   voter_population_slider = slider_with_name('number of voters: ', min_voters, max_voters, voter_population, 1);
   candidate_population_slider = slider_with_name('number of candidates: ', min_candidates, max_candidates, candidate_population, 1);
@@ -513,19 +509,13 @@ function setup() {
   tool_div.child(tool_selector);
   tool_div.child(tool_size);
 
-  szim_gombok.child(new_envitoment_div);
-  szim_gombok.child(edit_enviroment_div);
-  szim_gombok.child(szimulation_div);
-  szim_gombok.child(tool_div);
-
   vote_result_div = select('#vote_results');
 
-  results_and_selected_d = select('#results-and-selected-div');
-  results_and_selected_d.child(selected_div);
-  results_and_selected_d.child(vote_result_div);
+  // results_and_selected_d = select('#results-and-selected-div');
+  // results_and_selected_d.child(selected_div);
+  // results_and_selected_d.child(vote_result_div);
 
-  szim_gombok.parent(main_element);
-  results_and_selected_d.parent(main_element);
+  // results_and_selected_d.parent(main_element);
 
   make_voters(voter_population);
   make_candidates(candidate_population);

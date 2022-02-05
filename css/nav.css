@@ -1,9 +1,13 @@
+:root{
+  --nav-height: 3rem;
+}
+
 /*Navbar*/
 nav {
   position: sticky;
   top: 0;
   z-index: 1000;
-  height: 3rem;
+  height: var(--nav-height);
   background: var(--primary);
   display: flex;
   align-items: center;
