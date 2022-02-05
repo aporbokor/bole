@@ -9,8 +9,8 @@ main {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  flex-wrap: 1;
   padding-right: 2rem;
+  padding-bottom: 2rem;
 }
 
 .spacer {
@@ -92,7 +92,7 @@ article {
 main section {
   width: 100%;
   padding-left: 2rem;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 main h2 {
@@ -158,8 +158,15 @@ main h2 {
   padding: 2rem;
 }
 
+.vs {
+  font-size: 3rem !important;
+  padding: 2rem;
+  padding-bottom: 4rem;
+  line-height: 1;
+}
+
 .canvas_img {
-  max-height: 35vh;
+  max-height: 40vh;
   max-width: 40vw;
 }
 
@@ -170,11 +177,11 @@ main h2 {
 }
 
 .voteresult {
-  height: 30vh;
-  width: 40vw;
+  max-height: 50vh;
   display: grid;
   align-items: center;
   gap: 1rem;
+  grid-template-rows: 1fr 1fr;
   grid-template-areas: 'canvas_img voting_results';
 }
 
@@ -186,20 +193,20 @@ main h2 {
 
 .voteresult .voting_result {
   grid-area: voting_results;
-  height: 100%;
   margin-right: auto;
-
   background: var(--primary);
   padding: 1rem;
 }
 
-@media only screen and (max-width: 720px) {
-  .voteresult {
-    grid-template-areas:
-      'canvas_img'
-      'voting_results';
-  }
+@media only screen and (max-width: 900px) {
   .voting_result {
     width: 100%;
+  }
+  .container {
+    flex-direction: column;
+  }
+  .vs {
+    font-size: 2.5rem !important;
+    padding-left: 0;
   }
 }
