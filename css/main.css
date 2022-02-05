@@ -11,10 +11,9 @@ main section {
 }
 
 main h2 {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  text-decoration: 2px solid var(--secondary) underline;
 }
 
 #intro {
@@ -24,8 +23,6 @@ main h2 {
 #toc {
   padding: 2rem;
   width: 100vw;
-  border-top: 1px solid var(--accent);
-  border-bottom: 1px solid var(--accent);
 }
 #toc ul {
   list-style-type: disc;
@@ -33,11 +30,11 @@ main h2 {
   margin-bottom: 1rem;
 }
 
-.viewable_picture{
+.viewable_picture {
   cursor: pointer;
 }
 
-.pic_holder{
+.pic_holder {
   top: 0;
   left: 0;
   position: fixed;
@@ -45,24 +42,19 @@ main h2 {
   width: 100vw;
   display: grid;
   align-items: center;
-  background-color: rgba(0,0,0,.3);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
-.pic_holder img{
+.pic_holder img {
   max-height: 95vh;
   max-width: 95vw;
   margin: auto;
   opacity: 1;
 }
 
-.accent_border{
-  border: 1px solid var(--accent);
-}
-
 .doc {
   padding: 2rem;
   width: 100vw;
-  border-bottom: 1px solid var(--accent);
 }
 .doc ul {
   margin-left: 1.3rem;
@@ -70,43 +62,42 @@ main h2 {
   list-style-type: disc;
 }
 .docli h3 {
-  font-family: "Comfortaa", cursive;
+  font-family: 'Montserrat', sans-serif;
   color: var(--secondary);
   font-weight: bold;
   font-size: 1.1rem;
   margin-bottom: 1rem;
 }
 
-.canvas_img{
+.canvas_img {
   width: 100%;
   max-width: 40rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
-.flowchart_img{
+.flowchart_img {
   width: 100%;
   max-width: 35rem;
 }
 
-.voteresult{
+.voteresult {
   padding: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
   display: grid;
   align-items: center;
   gap: 1rem;
-  grid-template-areas:
-  "canvas_img voting_results";
+  grid-template-areas: 'canvas_img voting_results';
 }
 
-.voteresult .canvas_img{
+.voteresult .canvas_img {
   grid-area: canvas_img;
   margin-left: auto;
   padding: 0;
 }
 
-.voteresult .voting_result{
+.voteresult .voting_result {
   grid-area: voting_results;
   height: 100%;
   margin-right: auto;
@@ -115,13 +106,13 @@ main h2 {
   padding: 1rem;
 }
 
-@media only screen and (max-width: 720px){
-  .voteresult{
+@media only screen and (max-width: 720px) {
+  .voteresult {
     grid-template-areas:
-    "canvas_img"
-    "voting_results";
+      'canvas_img'
+      'voting_results';
   }
-  .voting_result{
+  .voting_result {
     width: 100%;
   }
 }

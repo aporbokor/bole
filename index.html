@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>globalize</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+      id="font"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Syne:wght@800&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
     <!--CSS stylesheets-->
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/nav.css" />
@@ -23,9 +23,9 @@
     <nav>
       <div class="center">
         <div class="company-name">BOLE</div>
-        <button class="simulate-btn" onclick="location.href='simulation.html';">
-          SIMULATE
-        </button>
+        <a class="run-btn" onclick="location.href='simulation.html';">
+          <div class="triangle-right"></div>
+        </a>
       </div>
     </nav>
     <main>
@@ -41,12 +41,6 @@
             <p>
               It is recommended that you read the entire documentation before
               you proceed to try the program out.
-            </p>
-          </li>
-          <li>
-            <p style="color:red">
-              The program is still in beta and it is not the finnished version.
-              The documentation is not by any means perfect, a lot of important things are still missing and it is all subject to change.<br>We are not experts by any means and this is just a little project of ours.
             </p>
           </li>
         </ul>
