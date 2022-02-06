@@ -22,62 +22,62 @@ main {
 }
 
 .blue-peak {
-  background-image: url('/svg/blue-peak.svg');
+  background-image: url('/image/svg/blue-peak.svg');
 }
 
 .blue-bot {
-  background-image: url('/svg/blue-bot.svg');
+  background-image: url('/image/svg/blue-bot.svg');
 }
 
 .green-peak {
-  background-image: url('/svg/green-peak.svg');
+  background-image: url('/image/svg/green-peak.svg');
 }
 
 .green-bot {
-  background-image: url('/svg/green-bot.svg');
+  background-image: url('/image/svg/green-bot.svg');
 }
 
 .red-peak {
-  background-image: url('/svg/red-peak.svg');
+  background-image: url('/image/svg/red-peak.svg');
 }
 
 .red-bot {
-  background-image: url('/svg/red-bot.svg');
+  background-image: url('/image/svg/red-bot.svg');
 }
 .orange-peak {
-  background-image: url('/svg/orange-peak.svg');
+  background-image: url('/image/svg/orange-peak.svg');
 }
 
 .orange-bot {
-  background-image: url('/svg/orange-bot.svg');
+  background-image: url('/image/svg/orange-bot.svg');
 }
 
 .brown-peak {
-  background-image: url('/svg/brown-peak.svg');
+  background-image: url('/image/svg/brown-peak.svg');
 }
 
 .brown-bot {
-  background-image: url('/svg/brown-bot.svg');
+  background-image: url('/image/svg/brown-bot.svg');
 }
 
 .purple-peak {
-  background-image: url('/svg/purple-peak.svg');
+  background-image: url('/image/svg/purple-peak.svg');
 }
 
 .purple-bot {
-  background-image: url('/svg/purple-bot.svg');
+  background-image: url('/image/svg/purple-bot.svg');
 }
 
 .yellow-peak {
-  background-image: url('/svg/yellow-peak.svg');
+  background-image: url('/image/svg/yellow-peak.svg');
 }
 
 .yellow-bot {
-  background-image: url('/svg/yellow-bot.svg');
+  background-image: url('/image/svg/yellow-bot.svg');
 }
 
 .turquoise-peak {
-  background-image: url('/svg/turquoise-peak.svg');
+  background-image: url('/image/svg/turquoise-peak.svg');
 }
 
 article {
