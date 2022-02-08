@@ -21,6 +21,7 @@
 #sim_gombok {
   grid-area: sim-gombok;
   max-height: var(--canvas-height);
+  position: relative;
 }
 
 .sim-gombok-container {
@@ -34,6 +35,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.sim-buttons-title{
+
+}
+
+.sim-buttons-title,
+.sub-buttons-subdiv-title{
+  background-color: var(--primary-lt);
+  z-index: 999;
+  padding: 1em 1.5em;
+  border-radius: 0.5em;
+}
+
+.sub-buttons-subdiv-title{
+  position: sticky;
+  top: 0;
 }
 
 .sim-buttons-subdiv {
@@ -197,17 +215,26 @@ li::marker {
   /* The next button */
 }
 
-@media only screen and (max-width: 768px) {
-  main {
-    grid-template-areas: 'sim-gombok' 'canvas' 'results';
-    grid-template-columns: 1fr;
-    grid-template-rows: 40vh min-content 1fr;
-    padding: 0;
+
+@media only screen and (max-width: 80em){
+
+  main{
+    grid-template-areas: 'sim-gombok sim-gombok'
+    'canvas selected'
+    'canvas results'
+    'step   results';
+
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: 21rem 21rem min-content;
   }
 
   #sim_gombok {
     overflow-y: hidden;
     overflow-x: auto;
+  }
+
+  .canvas{
+    margin: auto;
   }
 
   .sim-gombok-container {
@@ -231,11 +258,40 @@ li::marker {
     flex-grow: 1;
   }
 
+  .sub-buttons-subdiv-title{
+    left: 0;
+    flex-grow: 0;
+    width: fit-content;
+  }
+}
+
+@media only screen and (max-width: 65em){
+  main {
+    grid-template-areas: 'sim-gombok sim-gombok'
+    'canvas canvas'
+    'canvas canvas'
+    'step   results';
+
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 21rem min-content min-content;
+  }
+  
+  
   #selected {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 50em){
+  main {
+    grid-template-areas: 'sim-gombok' 'canvas' 'results';
+    grid-template-columns: 1fr;
+    grid-template-rows: 21rem min-content 1fr;
+    padding: 10px;
   }
 
   .step_by_stepp {
     display: none;
   }
+
 }

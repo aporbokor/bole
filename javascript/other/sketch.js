@@ -78,8 +78,8 @@ const support_per_approval_range = 1;
 let supporter_population;
 let supporter_per_candidate;
 let seems_win_percent = 1.1;
-let seems_win_candidates;
-let seems_lose_candidates;
+let seems_win_candidates = [];
+let seems_lose_candidates = [];
 
 const votingmethods = new Map([
   ['plurarity', PlurarityVoter],
@@ -414,12 +414,12 @@ function preload() {
 }
 
 function windowResized() {
-  resizeCanvas(constrain(WIDTH, 0, windowWidth), constrain(HEIGHT, 0, windowHeight));
+  resizeCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 20));
 }
 
 function setup() {
 
-  canvas = createCanvas(constrain(WIDTH, 0, windowWidth), constrain(HEIGHT, 0, windowHeight), WEBGL);
+  canvas = createCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 20), WEBGL);
   canvas.addClass('canvas');
 
   approval_range = Math.floor(dist(0, 0, WIDTH, HEIGHT) * approval_range_size);
