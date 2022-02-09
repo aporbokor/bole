@@ -137,7 +137,11 @@ class Voter extends Person {
 
 function strategic_changed() {
   // For the starategic checkbox in the selected_div
-  this.parent_voter.strategic = this.checked();
+
+  if (!frozen_sim) {
+    this.parent_voter.strategic = this.checked();
+    change_in_sim = true;
+  }
 }
 
 function delete_selected_voter() {

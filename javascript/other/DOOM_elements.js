@@ -171,6 +171,7 @@ class SteppingBox {
 
     // szimulation_div.child(hide_stepping_box);
     // this.hide();
+    this.next_button.mousePressed(freeze)
   }
 
   delete_content() {
@@ -191,12 +192,12 @@ class SteppingBox {
        Used to set the content of the content box.
        The this keyword in that function will return te button itself.
        You can acess the stepping_box itself by saying: this.parent_box*/
-    this.next_button.mousePressed(func);
+    this.next_button.mouseReleased(func);
   }
 
   hide_next() {
     // Hides the next button
-    frozen_sim = false;
+    melt();
     this.next_button.hide();
   }
 
@@ -210,7 +211,6 @@ class SteppingBox {
   }
 
   show_next() {
-    frozen_sim = true;
     this.next_button.show();
   }
 }

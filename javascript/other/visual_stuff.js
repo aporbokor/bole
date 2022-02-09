@@ -208,6 +208,8 @@ class Arrow extends Drawable {
     this.start_person = start;
     this.closeness = 0.6;
 
+    this.text_place = 0.4;
+
     this.start_person_data = null;
     this.end_person_data = null;
 
@@ -271,9 +273,9 @@ class Arrow extends Drawable {
 
     this.curr_end_vector = p5.Vector.add(this.start_vector, this.curr_distance_vector);
 
-    this.half_vector = this.curr_distance_vector.copy();
-    this.half_vector.mult(0.5);
-    this.half_vector = p5.Vector.add(this.half_vector, this.start_vector);
+    this.text_vector = this.curr_distance_vector.copy();
+    this.text_vector.mult(this.text_place);
+    this.text_vector = p5.Vector.add(this.text_vector, this.start_vector);
   }
 
   show() {
@@ -326,7 +328,7 @@ class Arrow extends Drawable {
     if (this.text != null) {
 
       push();
-      translate(this.half_vector.x, this.half_vector.y);
+      translate(this.text_vector.x, this.text_vector.y);
       textFont(font);
       textAlign(CENTER, CENTER);
 
@@ -369,11 +371,29 @@ class Arrow extends Drawable {
     return returned;
   }
 
+  text_place_slider() {
+    let returned = slider_with_name("text position: ", 0, 1, 0.5, 0.01);
+
+    let slider = returned.child()[1];
+    slider.parent_arrow = this;
+    slider.parent_ = returned;
+
+    console.log(slider)
+    slider.addEventListener('click', function () {
+      const val = parseFloat(this.value)
+      this.parent_arrow.text_place = val;
+      this.parent_.setValue(val)
+    })
+
+    return returned;
+  }
+
   get_div() {
     let returned = createDiv(this.constructor.name + ': ');
     returned.style('color', this.color);
 
     returned.child(this.edit_apperance_div());
+    returned.child(this.text_place_slider())
     returned.child(this.get_text());
     returned.child(createP(`Arrow length: ${round(this.person_disance.mag())}`))
     returned.child(this.get_ends_div());

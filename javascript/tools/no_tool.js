@@ -69,6 +69,7 @@ class SelectTool extends Tool {
       selected.x = constrain(mouseX, 0, width);
       selected.y = constrain(mouseY, 0, height);
       load_clicked_selected();
+      change_in_sim = true;
     }
   }
   on_relase() {

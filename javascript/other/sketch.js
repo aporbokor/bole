@@ -19,6 +19,7 @@ let results;
 let max_votes;
 
 let frozen_sim = false;
+let change_in_sim = true;
 
 let selected;
 let last_selected;
@@ -44,6 +45,8 @@ let delete_arrows_button;
 let candidate_population_slider;
 let reset_button;
 let simulate_button;
+let auto_simulate_check_box;
+let simfreezer;
 
 let add_voter_button;
 let delete_voter_button;
@@ -136,6 +139,7 @@ function add_voter() {
   if ((voters.length != max_voters) & (!(frozen_sim))) {
     voters.push(random_voter(voters.length));
     update_voter_population_slider();
+    change_in_sim = true;
   }
 }
 
@@ -146,6 +150,7 @@ function add_voter_to_position(x, y) {
 
     voters.push(new Voter(x_, y_, random_bool(strategic_chance), honest_voter_color));
     update_voter_population_slider();
+    change_in_sim = true;
   }
 }
 
@@ -198,6 +203,7 @@ function add_candidate() {
   if ((candidates.length != max_candidates) & (!(frozen_sim))) {
     candidates.push(random_candidate(candidates.length));
     update_candidate_poupulation();
+    change_in_sim = true;
   }
 }
 
@@ -218,6 +224,8 @@ function remove_people() {
 
     update_voter_population_slider();
     update_candidate_poupulation();
+
+    change_in_sim = true;
   }
 }
 
@@ -375,6 +383,20 @@ function display_votes(voter_maschine) {
   voter_maschine.extra_visualize(voters);
 }
 
+
+auto_simulate = empty_function;
+
+function freeze() {
+  frozen_sim = true;
+  console.log(simfreezer.elt)
+  simfreezer.child()[0].checked = true;
+}
+
+function melt() {
+  frozen_sim = false;
+  simfreezer.child()[0].checked = false;
+}
+
 function simulate_voting() {
   // Handles the voting process. Uses the selected voting_method
 
@@ -408,6 +430,15 @@ function simulate_voting() {
   voter_maschine.stepping_box_func(stepping_box);
   load_clicked_selected();
 }
+
+function auto_simulate_true() {
+  if (change_in_sim) {
+    simulate_voting();
+    change_in_sim = false;
+    delete_arrows();
+  }
+}
+
 
 function preload() {
   font = loadFont("../fonts/Comfortaa-VariableFont_wght.ttf");
@@ -480,6 +511,24 @@ function setup() {
   simulate_button.mousePressed(simulate_voting);
   simulate_button.addClass('simulate_button');
 
+  auto_simulate_check_box = createCheckbox('auto simulate', false);
+  auto_simulate_check_box.changed(function () {
+    if (this.checked()) {
+      auto_simulate = auto_simulate_true;
+    } else {
+      auto_simulate = empty_function;
+    }
+  })
+
+  simfreezer = createCheckbox('freeze visualization', false);
+  simfreezer.changed(function () {
+    if (this.checked()) {
+      freeze();
+    } else {
+      melt();
+    }
+  })
+
   new_envitoment_div = select('#new_environment_div');
 
   edit_enviroment_div = select('#edit_enviroment_div');
@@ -504,6 +553,8 @@ function setup() {
   szimulation_div.child(document.createElement('br'))
   szimulation_div.child(voting_type_selector);
   szimulation_div.child(simulate_button);
+  szimulation_div.child(auto_simulate_check_box);
+  szimulation_div.child(simfreezer);
 
   tool_div.child(document.createElement('br'))
   tool_div.child(tool_selector);
@@ -528,6 +579,7 @@ function draw() {
   translate(-width / 2, -height / 2)
 
   // Order here is important
+  auto_simulate();
   remove_people();
   draw_background();
   extra_function();

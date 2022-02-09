@@ -12,6 +12,7 @@ class HonestyPainter extends DrawTool {
         if (is_inside_tool(voter)) {
           voter.strategic = false;
         }
+        change_in_sim = true;
       }
     }
   }
@@ -31,6 +32,7 @@ class StrategyPainter extends DrawTool {
         if (is_inside_tool(voter)) {
           voter.strategic = true;
         }
+        change_in_sim = true;
       }
     }
   }
