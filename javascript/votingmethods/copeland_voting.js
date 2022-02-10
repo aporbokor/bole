@@ -63,6 +63,7 @@ class CopelandVoter extends CondorcetVotingMethod {
     content.appendChild(second_text);
     this.parent_box.set_content(content);
     this.parent_box.hide_next();
+    toggle_voter_hide();
   }
 
   extra_visualize(voters) {

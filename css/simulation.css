@@ -1,10 +1,12 @@
 :root {
-  --canvas-height: 660px;
-  --canvas-width: 800px;
+  --canvas-height: min(660px, 100vh - 30px);
+  --canvas-width: min(800px, 100vw - 20px);
 }
 
 .canvas {
   grid-area: canvas;
+  margin: auto;
+  touch-action: none;
 }
 .content_box {
   background-color: var(--primary);
@@ -76,6 +78,7 @@
 
 .step_by_stepp {
   grid-area: step;
+  overflow-x: auto;
 }
 
 main {
@@ -213,28 +216,50 @@ li::marker {
 
 .next_stepp {
   /* The next button */
+  text-decoration: none;
+  padding: 0.5em 1em;
+  outline: 2px solid var(--accent);
+  width: fit-content;
+  position: relative;
+  isolation: isolate;
+  background-color: transparent;
+  transition: color 250ms ease-in;
+}
+
+.next_stepp::after{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--accent);
+  clip-path: polygon(0% 0%, 0% 50%, 0% 100%, 0 100%, 0 0);
+  transition: clip-path 250ms ease-in;
+  z-index: -1;
+}
+
+.next_stepp:hover{
+  color: var(--primary);
+}
+.next_stepp:hover::after{
+  clip-path: polygon(100% 0%, 200% 50%, 100% 100%, 0 100%, 0 0);
 }
 
 
 @media only screen and (max-width: 80em){
 
   main{
-    grid-template-areas: 'sim-gombok sim-gombok'
+    grid-template-areas: 
+    'sim-gombok sim-gombok'
     'canvas selected'
     'canvas results'
     'step   results';
 
     grid-template-columns: min-content 1fr;
-    grid-template-rows: 21rem 21rem min-content;
+    grid-template-rows: 21rem 18rem calc(var(--canvas-height) - 19rem) min-content;
   }
 
   #sim_gombok {
     overflow-y: hidden;
     overflow-x: auto;
-  }
-
-  .canvas{
-    margin: auto;
   }
 
   .sim-gombok-container {
@@ -267,7 +292,7 @@ li::marker {
 
 @media only screen and (max-width: 65em){
   main {
-    grid-template-areas: 'sim-gombok sim-gombok'
+    grid-template-areas: 'sim-gombok selected'
     'canvas canvas'
     'canvas canvas'
     'step   results';
@@ -276,10 +301,6 @@ li::marker {
     grid-template-rows: 21rem min-content min-content;
   }
   
-  
-  #selected {
-    display: none;
-  }
 }
 
 @media only screen and (max-width: 50em){
@@ -290,6 +311,7 @@ li::marker {
     padding: 10px;
   }
 
+  #selected,
   .step_by_stepp {
     display: none;
   }

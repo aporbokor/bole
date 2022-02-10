@@ -135,7 +135,7 @@ class SteppingBox {
     this.main_div.addClass('content_box');
     this.main_div.p.class('stepping_box_title');
 
-    this.next_button = createButton('next step');
+    this.next_button = createA('#defaultCanvas0', 'next step');
     this.next_button.class('next_stepp');
     this.next_button.parent_box = this;
 
@@ -171,7 +171,8 @@ class SteppingBox {
 
     // szimulation_div.child(hide_stepping_box);
     // this.hide();
-    this.next_button.mousePressed(freeze)
+    this.next_button.mousePressed(freeze);
+    console.log(this.next_button.elt);
   }
 
   delete_content() {

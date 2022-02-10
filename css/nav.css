@@ -1,5 +1,6 @@
 :root{
   --nav-height: 3rem;
+  scroll-padding-top: var(--nav-height);
 }
 
 /*Navbar*/

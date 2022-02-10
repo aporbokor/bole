@@ -445,12 +445,12 @@ function preload() {
 }
 
 function windowResized() {
-  resizeCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 20));
+  resizeCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 30));
 }
 
 function setup() {
 
-  canvas = createCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 20), WEBGL);
+  canvas = createCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 30), WEBGL);
   canvas.addClass('canvas');
 
   approval_range = Math.floor(dist(0, 0, WIDTH, HEIGHT) * approval_range_size);
@@ -533,7 +533,7 @@ function setup() {
 
   edit_enviroment_div = select('#edit_enviroment_div');
 
-  szimulation_div = select('#szimulation_div');
+  Simulation_div = select('#Simulation_div');
 
   tool_div = select('#tool_div');
 
@@ -550,11 +550,11 @@ function setup() {
   edit_enviroment_div.child(delete_candidate_button);
   edit_enviroment_div.child(delete_voter_button);
 
-  szimulation_div.child(document.createElement('br'))
-  szimulation_div.child(voting_type_selector);
-  szimulation_div.child(simulate_button);
-  szimulation_div.child(auto_simulate_check_box);
-  szimulation_div.child(simfreezer);
+  Simulation_div.child(document.createElement('br'))
+  Simulation_div.child(voting_type_selector);
+  Simulation_div.child(simulate_button);
+  Simulation_div.child(auto_simulate_check_box);
+  Simulation_div.child(simfreezer);
 
   tool_div.child(document.createElement('br'))
   tool_div.child(tool_selector);
