@@ -376,14 +376,8 @@ class Arrow extends Drawable {
 
     let slider = returned.child()[1];
     slider.parent_arrow = this;
-    slider.parent_ = returned;
 
-    console.log(slider)
-    slider.addEventListener('click', function () {
-      const val = parseFloat(this.value)
-      this.parent_arrow.text_place = val;
-      this.parent_.setValue(val)
-    })
+    returned.input((val) => this.text_place = val);
 
     return returned;
   }

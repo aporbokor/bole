@@ -4,7 +4,8 @@ let font;
 let voters;
 let to_remove_voters = [];
 const min_voters = 1;
-const max_voters = 1000;
+let max_voters;
+const max_voters_per_pixel = 0.003;
 
 let candidates;
 let to_remove_candidates = [];
@@ -29,8 +30,9 @@ let selected_div;
 let new_envitoment_div;
 let edit_enviroment_div;
 let simulation_div;
+let visualization_div;
 
-let strategic_chance = 0.2;
+let strategic_chance = 0;
 let voter_population = 100;
 let candidate_population = 3;
 
@@ -47,6 +49,7 @@ let reset_button;
 let simulate_button;
 let auto_simulate_check_box;
 let simfreezer;
+let support_vis_checkbox;
 
 let add_voter_button;
 let delete_voter_button;
@@ -75,14 +78,18 @@ WIDTH = 800;
 HEIGHT = 660;
 
 let approval_range;
-const approval_range_size = 0.2;
+let approval_range_size = 0.2;
 let support_range;
-const support_per_approval_range = 1;
+let support_range_size = 0.2;
 let supporter_population;
 let supporter_per_candidate;
 let seems_win_percent = 1.1;
 let seems_win_candidates = [];
 let seems_lose_candidates = [];
+
+let approval_slider;
+let supporter_slider;
+let seems_win_slider;
 
 const votingmethods = new Map([
   ['plurarity', PlurarityVoter],
@@ -114,6 +121,7 @@ const strategic_voter_stroeke_weight = 3;
 const honest_voter_color = '#F18F01';
 const voter_size = 15;
 const voter_strokeWeight = 2;
+const support_circle_color = 111
 
 const candidate_colors = ['#FEFCFB', '#ED3907', '#7247FF', '#162CD9', '#2BB7DE', '#BF1160', '#0FFA42'];
 const candidate_size = 40;
@@ -293,6 +301,9 @@ function draw_background() {
   background(background_color);
 }
 
+
+supporter_draw = empty_function;
+
 function load_clicked_selected() {
   if (typeof (clicked_selected) != 'undefined') {
     let ch = selected_div.child();
@@ -448,13 +459,23 @@ function windowResized() {
   resizeCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 30));
 }
 
+function calc_approval_range() {
+  approval_range = Math.floor(dist(0, 0, WIDTH, HEIGHT) * approval_range_size);
+}
+
+function calc_supporter_range() {
+  support_range = Math.floor(dist(0, 0, WIDTH, HEIGHT) * support_range_size);
+}
+
 function setup() {
 
   canvas = createCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 30), WEBGL);
   canvas.addClass('canvas');
 
-  approval_range = Math.floor(dist(0, 0, WIDTH, HEIGHT) * approval_range_size);
-  support_range = Math.floor(support_per_approval_range * approval_range);
+  max_voters = width * height * max_voters_per_pixel;
+
+  calc_approval_range()
+  calc_supporter_range();
 
   selected_div = select("#selected")
 
@@ -475,6 +496,23 @@ function setup() {
 
   delete_arrows_button = createButton('delete all arrows');
   delete_arrows_button.mousePressed(delete_arrows);
+
+  support_vis_checkbox = createCheckbox('visualiza support ranges', false);
+  support_vis_checkbox.changed(function () {
+    if (this.checked()) {
+      supporter_draw = function () {
+        for (let i = 0; i < candidates.length; i++) {
+          push()
+          fill(support_circle_color);
+          let cand = candidates[i];
+          circle(cand.x, cand.y, support_range * 2);
+          pop()
+        }
+      };
+    } else {
+      supporter_draw = empty_function;
+    }
+  })
 
   add_candidate_button = createButton('add candidate');
   add_candidate_button.mousePressed(add_candidate);
@@ -529,6 +567,27 @@ function setup() {
     }
   })
 
+  approval_slider = slider_with_name('approval range: ', 0.1, 1, approval_range_size, 0.01);
+  approval_slider.input((val) => {
+    approval_range_size = val;
+    calc_approval_range();
+    change_in_sim = true;
+  });
+
+  supporter_slider = slider_with_name('support range: ', 0.1, 1, support_range_size, 0.01);
+  supporter_slider.input((val) => {
+    support_range_size = val;
+    calc_supporter_range();
+    change_in_sim = true;
+  })
+
+  seems_win_slider = slider_with_name('winner prediction percentage: ', 0.9, 2, seems_win_percent, 0.02);
+  seems_win_slider.input((val) => {
+    seems_win_percent = val;
+    change_in_sim = true;
+  })
+
+
   new_envitoment_div = select('#new_environment_div');
 
   edit_enviroment_div = select('#edit_enviroment_div');
@@ -537,15 +596,16 @@ function setup() {
 
   tool_div = select('#tool_div');
 
+  advanced = select('#advanced');
+
+  visualization_div = select('#visualization');
+
   new_envitoment_div.child(strategic_chance_slider);
   new_envitoment_div.child(voter_population_slider);
   new_envitoment_div.child(candidate_population_slider);
   new_envitoment_div.child(reset_button);
 
   edit_enviroment_div.child(add_voter_button);
-  edit_enviroment_div.child(reset_voter_color_buttton);
-  edit_enviroment_div.child(hide_voters_button);
-  edit_enviroment_div.child(delete_arrows_button);
   edit_enviroment_div.child(add_candidate_button);
   edit_enviroment_div.child(delete_candidate_button);
   edit_enviroment_div.child(delete_voter_button);
@@ -559,6 +619,16 @@ function setup() {
   tool_div.child(document.createElement('br'))
   tool_div.child(tool_selector);
   tool_div.child(tool_size);
+
+  advanced.child(approval_slider);
+  advanced.child(supporter_slider);
+  advanced.child(seems_win_slider);
+
+  visualization_div.child(reset_voter_color_buttton);
+  visualization_div.child(hide_voters_button);
+  visualization_div.child(delete_arrows_button);
+  visualization_div.child(support_vis_checkbox);
+
 
   vote_result_div = select('#vote_results');
 
@@ -583,6 +653,7 @@ function draw() {
   remove_people();
   draw_background();
   extra_function();
+  supporter_draw();
   current_tool.draw();
   draw_everyone();
 

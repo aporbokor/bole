@@ -23,6 +23,15 @@ function slider_with_name(name, min, max, value, step) {
     text.html(name + slider.value());
     return slider.value();
   }
+
+  returned.input = (func) => {
+    slider.elt.addEventListener('input', function () {
+      const val = parseFloat(this.value);
+      returned.setValue(val);
+      func(val);
+    })
+  }
+
   return returned;
 }
 
