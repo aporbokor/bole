@@ -302,3 +302,9 @@ class Counter extends Map {
     return returned;
   }
 }
+
+function get_progress(speed) {
+  // Returns the progress based on some speed and the time passed (in milliseconds) between frames
+
+  return deltaTime * speed
+}

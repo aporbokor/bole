@@ -111,16 +111,20 @@ class NumberVotecountVotingMethod extends VotingMethod {
     return returned;
   }
 
-  extra_visualize(voters) {
-    // Colors the voters based on who they voted for
-    for (let i = 0; i < voters.length; i++) {
-      voters[i].color = voters[i].voted_for.color;
-    }
-
+  display_votes() {
     //Displays the votes of the candidates
     for (let i = 0; i < candidates.length; i++) {
       candidates[i].text = candidates[i].votes;
     }
+  }
+
+  extra_visualize(voters) {
+    // Colors the voters based on who they voted for
+    for (let i = 0; i < voters.length; i++) {
+      voters[i].set_color(voters[i].voted_for.color);
+    }
+
+    this.display_votes();
   }
 }
 
@@ -221,7 +225,7 @@ class RankingVotingMethod extends VotingMethod {
   extra_visualize(voters) {
     // Colors the voters based on their first choice and calls set_extra_funct()
     for (let i = 0; i < voters.length; i++) {
-      voters[i].color = voters[i].voted_for[0].color;
+      voters[i].set_color(voters[i].voted_for[0].color);
     }
 
     this.set_extra_funct(voters);
@@ -406,11 +410,11 @@ class RunoffLike extends RankingVotingMethod {
     for (let i = 0; i < voters.length; i++) {
       let chosen_candidate = this.votes_for(voters[i], this.elliminated_visualization);
       if (chosen_candidate === undefined) {
-        voters[i].color = honest_voter_color;
+        voters[i].set_color(honest_voter_color);
         continue;
       }
 
-      voters[i].color = chosen_candidate.color;
+      voters[i].set_color(chosen_candidate.color);
     }
   }
 
@@ -515,7 +519,7 @@ class RunoffLike extends RankingVotingMethod {
     }
 
     for (let i = 0; i < voters.length; i++) {
-      voters[i].color = this.votes_for(voters[i], this.elliminated_visualization).color;
+      voters[i].set_color(this.votes_for(voters[i], this.elliminated_visualization).color);
     }
     super.set_extra_funct(voters);
   }
@@ -683,7 +687,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     delete_arrows();
     this.random_voter = random(voters);
     clicked_selected = this.random_voter;
-    this.random_voter.color = honest_voter_color;
+    this.random_voter.set_color(honest_voter_color);
     clicked_selected.on_select();
     load_clicked_selected();
 
@@ -782,7 +786,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     voters.forEach((v) => { v.hide() })
 
     voting_sytem.arrows_between_candidates();
-    this.random_voter.color = this.random_voter.voted_for[0].color;
+    this.random_voter.set_color(this.random_voter.voted_for[0].color);
     let content = document.createElement("div");
 
     let text = document.createElement("p");

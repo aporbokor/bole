@@ -5,7 +5,7 @@ let voters;
 let to_remove_voters = [];
 const min_voters = 1;
 let max_voters;
-const max_voters_per_pixel = 0.003;
+const max_voters_per_pixel = 0.002;
 
 let candidates;
 let to_remove_candidates = [];
@@ -109,7 +109,7 @@ const votingmethods = new Map([
 let stepping_box;
 let hide_stepping_box;
 
-const grow_speed = 1;
+const grow_speed = 0.02;
 const selected_size_adder = 5;
 const clicked_selected_size_adder = 15;
 const clicked_selected_laser_color = 'rgb(0, 0, 0)'
@@ -164,7 +164,7 @@ function add_voter_to_position(x, y) {
 
 function reset_voter_color() {
   for (let i = 0; i < voters.length; i++) {
-    voters[i].color = honest_voter_color;
+    voters[i].set_color(honest_voter_color);
   }
 }
 
@@ -353,11 +353,13 @@ function reset_enviroment() {
   make_candidates(candidate_population);
   stepping_box.delete_content();
   stepping_box.hide_next();
+  change_in_sim = true;
 }
 
 function select_voting() {
   votingmethod = votingmethods.get(voting_type_selector.value());
   extra_function = empty_function
+  change_in_sim = true;
 }
 
 function select_tool() {
@@ -444,6 +446,7 @@ function simulate_voting() {
 
 function auto_simulate_true() {
   if (change_in_sim) {
+    stepping_box.hide_next();
     simulate_voting();
     change_in_sim = false;
     delete_arrows();
@@ -468,6 +471,7 @@ function calc_supporter_range() {
 }
 
 function setup() {
+  colorMode(RGB);
 
   canvas = createCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 30), WEBGL);
   canvas.addClass('canvas');
@@ -497,7 +501,7 @@ function setup() {
   delete_arrows_button = createButton('delete all arrows');
   delete_arrows_button.mousePressed(delete_arrows);
 
-  support_vis_checkbox = createCheckbox('visualiza support ranges', false);
+  support_vis_checkbox = createCheckbox('visualize support ranges', false);
   support_vis_checkbox.changed(function () {
     if (this.checked()) {
       supporter_draw = function () {
@@ -659,4 +663,12 @@ function draw() {
 
 
   handle_elements();
+
+  push()
+  fill('red');
+  textSize(14);
+  textFont(font);
+  textAlign(LEFT, TOP)
+  text(round(frameRate()) + ' FPS', 0, 0);
+  pop()
 }

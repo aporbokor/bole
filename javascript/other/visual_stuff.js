@@ -4,6 +4,11 @@ class Drawable {
     ABC_constructor(this, Drawable);
 
     this.color = color;
+    this.start_color = this.color;
+    this.target_color = this.color;
+    this.color_progress = 0;
+    this.color_animation_speed = 0.006;
+
     this.name = name;
 
     this.size = 0;
@@ -18,7 +23,7 @@ class Drawable {
     this.shown = true;
     this.to_show = true;
 
-    this.hidden_size = 5;
+    this.hidden_size = 3;
   }
 
   reset_text() {
@@ -44,6 +49,27 @@ class Drawable {
     this.to_show = !this.to_show;
   }
 
+  set_color(col) {
+
+    if (this.target_color.toString() == col.toString()) {
+      return;
+    }
+
+    this.start_color = color(this.color);
+    this.target_color = color(col);
+    this.color_progress = 0;
+  }
+
+  update_color() {
+    /* Method used to dynamicly lerp between colors*/
+    if (this.color_animation_time > 1) {
+      return
+    }
+    this.color = lerpColor(color(this.start_color), color(this.target_color), get_progress(this.color_progress));
+    this.color_progress += this.color_animation_speed;
+
+  }
+
 
   grow_to_size() {
     /* Method used for dynamic size-changes.
@@ -51,6 +77,8 @@ class Drawable {
        until it reaches its target_size. Resets the target_size in the end,
        so when we want that to change we need to maually set it every time
        before we call this method*/
+
+    this.update_color();
 
     if (this.to_delete) {
       this.target_size = 0;
@@ -70,14 +98,14 @@ class Drawable {
 
     let dif = Math.abs(this.size - this.target_size);
 
-    if (dif <= grow_speed) {
+    if (dif <= get_progress(grow_speed)) {
       this.size = this.target_size;
 
     } else if (this.size < this.target_size) {
-      this.size += grow_speed;
+      this.size += get_progress(grow_speed);
 
     } else {
-      this.size -= grow_speed;
+      this.size -= get_progress(grow_speed);
     }
 
     this.target_size = this.default_size;
