@@ -72,7 +72,7 @@ class Person extends Drawable {
     // Return a p element wich represents the person
 
     let returned = document.createElement("p");
-    returned.style.color = this.color;
+    returned.style.color = this.target_color;
     returned.classList.add("person_name");
 
     if (!this.show_image) {
@@ -89,7 +89,7 @@ class Person extends Drawable {
   get_simple_name_p() {
     // Return a p elemetn with the person's name
     let returned = document.createElement("p");
-    returned.style.color = this.color;
+    returned.style.color = this.target_color;
     returned.classList.add("person_name");
     returned.innerText = this.name;
     this.show_on_event(returned);
@@ -109,7 +109,7 @@ class Person extends Drawable {
       load_clicked_selected();
     });
     returned.mouseMoved(function () { selected = this.candidate_parent });
-    returned.label.style('color', this.color);
+    returned.label.style('color', this.target_color);
     returned.class('candidate_p');
 
     this.show_on_event(returned.elt);
@@ -136,7 +136,7 @@ class Person extends Drawable {
        Must define an extra_to_div abstractmethod for this to work*/
 
     let returned = createDiv(this.constructor.name + ': ');
-    returned.style('color', this.color);
+    returned.style('color', this.target_color);
 
     let edit_app = this.edit_apperance_div()
 

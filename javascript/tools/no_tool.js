@@ -47,6 +47,12 @@ class SelectTool extends Tool {
       }
     }
 
+    if (point_in_circle(mouseX, mouseY, average_voter.x, average_voter.y, voter_size)) {
+      selected = average_voter;
+      last_selected = selected;
+      return undefined;
+    }
+
 
     selected = undefined;
 

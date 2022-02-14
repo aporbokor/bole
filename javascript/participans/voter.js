@@ -67,15 +67,7 @@ class Voter extends Person {
     return returned;
   }
 
-  get_extra_to_div() {
-    let returned = createDiv();
-    let strategic_p = createCheckbox('strategic', this.strategic);
-    let supports_d = document.createElement('ul');
-
-
-    strategic_p.parent_voter = this;
-    strategic_p.changed(strategic_changed);
-
+  get_votes_div() {
     let voted_for_d = createDiv();
     voted_for_d.child(createP('Voted for:'));
 
@@ -89,6 +81,18 @@ class Voter extends Person {
     }
 
     voted_for_d.elt.querySelector(':nth-child(2)').classList.add('voter-voted-for');
+
+    return voted_for_d;
+  }
+
+  get_extra_to_div() {
+    let returned = createDiv();
+    let strategic_p = createCheckbox('strategic', this.strategic);
+    let supports_d = document.createElement('ul');
+
+
+    strategic_p.parent_voter = this;
+    strategic_p.changed(strategic_changed);
 
     if (this.supports.length != 0) {
       for (let i = 0; i < this.supports.length; i++) {
@@ -104,7 +108,7 @@ class Voter extends Person {
 
     returned.child(strategic_p);
     returned.child(this.get_honest_preference_div());
-    returned.child(voted_for_d);
+    returned.child(this.get_votes_div());
     returned.child(createP('Supports:'));
     returned.child(supports_d);
 
@@ -147,4 +151,34 @@ function strategic_changed() {
 function delete_selected_voter() {
   this.parent_voter.remove();
   selected_div.child()[0].remove();
+}
+
+class Average extends Voter {
+  get_extra_to_div() {
+    return this.get_honest_preference_div();
+  }
+
+  remove_self() {
+    return;
+  }
+  show() {
+    this.replace();
+    super.show();
+  }
+
+  replace() {
+    let x_avg = 0;
+    let y_avg = 0;
+
+    for (const i of voters) {
+      x_avg += i.x;
+      y_avg += i.y;
+    }
+
+    x_avg = x_avg / voters.length;
+    y_avg = y_avg / voters.length;
+
+    this.x = x_avg;
+    this.y = y_avg;
+  }
 }

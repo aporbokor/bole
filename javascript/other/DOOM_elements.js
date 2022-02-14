@@ -75,7 +75,7 @@ function createProgress(name, value, max) {
   return returned;
 }
 
-function table_from_matrix(matrix, x_axis, y_axis, x_name = '', y_name = '') {
+function table_from_matrix(matrix, x_axis, y_axis) {
   // Creates a table element from a 2d matrix
 
   let table = document.createElement("table");
@@ -139,7 +139,7 @@ class SteppingBox {
 
   // Class used for the stepping_box
   constructor() {
-    this.main_div = createDivWithP('The voting method step by step');
+    this.main_div = createDivWithP('The voting process:');
     this.main_div.class('step_by_stepp');
     this.main_div.addClass('content_box');
     this.main_div.p.class('stepping_box_title');

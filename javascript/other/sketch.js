@@ -3,7 +3,7 @@ let font;
 
 let voters;
 let to_remove_voters = [];
-const min_voters = 1;
+const min_voters = 2;
 let max_voters;
 const max_voters_per_pixel = 0.002;
 
@@ -73,23 +73,30 @@ const activated_tool_stroke_weight = 5;
 const inactive_tool_stroke_weight = 2;
 const voter_per_pixel = 0.001;
 
+let average_voter;
+let average_voter_checkbox;
+
 let canvas;
-WIDTH = 800;
+WIDTH = 780;
 HEIGHT = 660;
 
 let approval_range;
-let approval_range_size = 0.2;
+const default_approval_size = 0.2;
+let approval_range_size = default_approval_size;
 let support_range;
-let support_range_size = 0.2;
+const default_support_size = 0.2;
+let support_range_size = default_support_size;
 let supporter_population;
 let supporter_per_candidate;
-let seems_win_percent = 1.1;
+const default_seems_win_percent = 1.1;
+let seems_win_percent = default_seems_win_percent;
 let seems_win_candidates = [];
 let seems_lose_candidates = [];
 
 let approval_slider;
 let supporter_slider;
 let seems_win_slider;
+let reset_to_default_button;
 
 const votingmethods = new Map([
   ['plurarity', PlurarityVoter],
@@ -354,6 +361,8 @@ function reset_enviroment() {
   stepping_box.delete_content();
   stepping_box.hide_next();
   change_in_sim = true;
+  clicked_selected = undefined;
+  selected = undefined;
 }
 
 function select_voting() {
@@ -414,6 +423,7 @@ function simulate_voting() {
   // Handles the voting process. Uses the selected voting_method
 
   reset_on_select();
+  delete_arrows();
   max_votes = voters.length;
 
   candidates.forEach((cand) => { cand.reset_text() })
@@ -449,18 +459,9 @@ function auto_simulate_true() {
     stepping_box.hide_next();
     simulate_voting();
     change_in_sim = false;
-    delete_arrows();
   }
 }
 
-
-function preload() {
-  font = loadFont("../fonts/Comfortaa-VariableFont_wght.ttf");
-}
-
-function windowResized() {
-  resizeCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 30));
-}
 
 function calc_approval_range() {
   approval_range = Math.floor(dist(0, 0, WIDTH, HEIGHT) * approval_range_size);
@@ -468,6 +469,14 @@ function calc_approval_range() {
 
 function calc_supporter_range() {
   support_range = Math.floor(dist(0, 0, WIDTH, HEIGHT) * support_range_size);
+}
+
+function preload() {
+  font = loadFont("../fonts/Comfortaa-VariableFont_wght.ttf");
+}
+
+function windowResized() {
+  resizeCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 30));
 }
 
 function setup() {
@@ -515,6 +524,18 @@ function setup() {
       };
     } else {
       supporter_draw = empty_function;
+    }
+  })
+
+  average_voter_checkbox = createCheckbox('show average voter', false);
+  average_voter_checkbox.changed(function () {
+    if (this.checked()) {
+      average_voter.appear();
+      clicked_selected = average_voter;
+      average_voter.on_select();
+      load_clicked_selected();
+    } else {
+      average_voter.hide();
     }
   })
 
@@ -591,6 +612,19 @@ function setup() {
     change_in_sim = true;
   })
 
+  reset_to_default_button = createButton('reset advanced settings to default');
+  reset_to_default_button.mousePressed(() => {
+    seems_win_slider.setValue(default_seems_win_percent);
+    approval_slider.setValue(default_approval_size);
+    supporter_slider.setValue(default_support_size);
+    approval_range_size = default_approval_size;
+    support_range_size = default_support_size;
+    seems_win_percent = default_seems_win_percent;
+    calc_supporter_range();
+    calc_approval_range();
+    change_in_sim = true;
+  })
+
 
   new_envitoment_div = select('#new_environment_div');
 
@@ -627,11 +661,13 @@ function setup() {
   advanced.child(approval_slider);
   advanced.child(supporter_slider);
   advanced.child(seems_win_slider);
+  advanced.child(reset_to_default_button);
 
   visualization_div.child(reset_voter_color_buttton);
   visualization_div.child(hide_voters_button);
   visualization_div.child(delete_arrows_button);
   visualization_div.child(support_vis_checkbox);
+  visualization_div.child(average_voter_checkbox);
 
 
   vote_result_div = select('#vote_results');
@@ -644,6 +680,9 @@ function setup() {
 
   make_voters(voter_population);
   make_candidates(candidate_population);
+  average_voter = new Average(0, 0, true, 160, 'average voter');
+  average_voter.hidden_size = 0;
+  average_voter.hide();
 
   stepping_box = new SteppingBox();
 }
@@ -660,6 +699,7 @@ function draw() {
   supporter_draw();
   current_tool.draw();
   draw_everyone();
+  average_voter.show();
 
 
   handle_elements();

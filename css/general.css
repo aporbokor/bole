@@ -33,6 +33,10 @@ body {
   line-height: 1.5rem;
 }
 
+strong{
+  font-weight: bold;
+}
+
 /*Fonts*/
 
 a,
