@@ -151,7 +151,7 @@ function update_candidate_poupulation() {
 }
 
 function add_voter() {
-  if ((voters.length != max_voters) & (!(frozen_sim))) {
+  if ((voters.length < max_voters) & (!(frozen_sim))) {
     voters.push(random_voter(voters.length));
     update_voter_population_slider();
     change_in_sim = true;
@@ -159,7 +159,7 @@ function add_voter() {
 }
 
 function add_voter_to_position(x, y) {
-  if ((voters.length != max_voters) & (!(frozen_sim))) {
+  if ((voters.length < max_voters) & (!(frozen_sim))) {
     let x_ = constrain(round(x), 0, width);
     let y_ = constrain(round(y), 0, height);
 
@@ -504,7 +504,7 @@ function setup() {
   reset_voter_color_buttton = createButton('reset voter colors');
   reset_voter_color_buttton.mousePressed(reset_voter_color);
 
-  hide_voters_button = createButton('hide all voters');
+  hide_voters_button = createButton('toggle voter hide');
   hide_voters_button.mousePressed(toggle_voter_hide);
 
   delete_arrows_button = createButton('delete all arrows');

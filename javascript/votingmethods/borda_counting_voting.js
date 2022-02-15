@@ -101,7 +101,7 @@ class BordaCounting extends RankingVotingMethod {
     let table = table_from_matrix(matrix, ["place in voter's div", "borda score increment"], names);
 
     let last_text = document.createElement("p");
-    last_text.innerText = "We do this to each voter, so in the end, we get how much borda score does each candidate have. The candidate with the highest borda score wins."
+    last_text.innerText = "We do this to each voter, so in the end, we get how much borda score each candidate has. The candidate with the highest borda score wins."
 
     stepp_div.appendChild(start_text);
     stepp_div.appendChild(second_text);

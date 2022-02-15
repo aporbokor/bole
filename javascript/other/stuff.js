@@ -131,16 +131,18 @@ function point_in_circle(point_x, point_y, circle_x, circle_y, radius) {
 
 function random_point_inside_circle(x, y, r) {
   //Generates a random point inside of a circle with a uniform distrubution
+  let ans_x = Infinity;
+  let ans_y = Infinity;
 
-  let result = {};
+  const corner_x = (x - (r));
+  const corner_y = (y - (r));
 
-  let r_ = Math.sqrt(random()) * r;
-  let ang = random(TWO_PI);
+  while (!point_in_circle(ans_x, ans_y, x, y, r)) {
+    ans_x = random(2 * r) + corner_x;
+    ans_y = random(2 * r) + corner_y;
+  }
 
-  result.x = x + (r_ * cos(ang))
-  result.y = y + (r_ * sin(ang))
-
-  return result;
+  return { x: ans_x, y: ans_y };
 }
 
 function distance_from_line_segment(point, linestart, lineend) {
