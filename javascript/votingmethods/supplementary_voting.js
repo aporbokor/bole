@@ -81,7 +81,7 @@ class ContingentVoter extends SuplementaryLike {
 class SriLankanContingentVoter extends SuplementaryLike {
   constructor(candidates) {
     let len = 2;
-    if (candidates.length > 3) {
+    if (candidates.length >= 3) {
       len = 3;
     }
     super(candidates, len);

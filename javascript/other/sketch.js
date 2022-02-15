@@ -5,7 +5,7 @@ let voters;
 let to_remove_voters = [];
 const min_voters = 2;
 let max_voters;
-const max_voters_per_pixel = 0.002;
+const max_voters_per_pixel = 0.0015;
 
 let candidates;
 let to_remove_candidates = [];

@@ -181,4 +181,8 @@ class Average extends Voter {
     this.x = x_avg;
     this.y = y_avg;
   }
+
+  get_delete_button() {
+    return null;
+  }
 }
