@@ -220,7 +220,7 @@ function update_drawable_name() {
 
 function set_color() {
   let val = this.value();
-  this.parent_person.color = this.value();
+  this.parent_person.set_color(this.value());
   this.parent_div.style('color', val);
   this.parent_person.show_image = null;
 }
