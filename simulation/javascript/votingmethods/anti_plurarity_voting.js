@@ -26,21 +26,28 @@ class AntiPlurarityVoter extends NumberVotecountVotingMethod {
         min_distance = distance;
         min_candidate = curr_cand;
       }
-      if (min_candidate != seems_win_candidates[0]) {
-        seems_win_candidates[0].votes += 1;
-        voter.voted_for = seems_win_candidates[0];
-      } else {
-        seems_win_candidates[1].votes += 1;
-        voter.voted_for = seems_win_candidates[1];
-      }
+      min_candidate.votes += 1;
+      voter.voted_for = min_candidate;
     }
   }
 
   registrate_vote(voter) {
-    this.registrate_honest_vote(voter);
+    if (voter.strategic & (seems_win_candidates.length >= 2)) {
+      this.registrate_strategic_vote(voter);
+    } else {
+      this.registrate_honest_vote(voter);
+    }
   }
 
   count_votes() {
     return super.count_votes().reverse();
+  }
+
+  stepping_box_func(stepping_box) {
+    stepping_box.set_content(
+      createP(
+        'Anti-plurarity voting works like the following: every voter votes for their most hated candidate, and then we count the votes. The candidate with the least votes wins.'
+      )
+    );
   }
 }

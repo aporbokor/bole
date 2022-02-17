@@ -60,11 +60,13 @@ let voting_type_selector;
 
 let tool_div;
 let current_tool;
-let tools = new Map([['select tool', SelectTool],
-['delete tool', DeleteTool],
-['voter painter', VoterPainter],
-['honesty painter', HonestyPainter],
-['strategy painter', StrategyPainter]]);
+let tools = new Map([
+  ['select tool', SelectTool],
+  ['delete tool', DeleteTool],
+  ['voter painter', VoterPainter],
+  ['honesty painter', HonestyPainter],
+  ['strategy painter', StrategyPainter],
+]);
 let tool_selector;
 let tool_size;
 let max_tool_size = 200;
@@ -98,22 +100,20 @@ let supporter_slider;
 let seems_win_slider;
 let reset_to_default_button;
 
-const votingmethods = new Map(
-  [
-    ['plurarity', PlurarityVoter],
-    ['anti-plurarity', AntiPlurarityVoter],
-    // ['theoretical perfect', PerfectVoter],
-    ['approval voting', ApprovalVoter],
-    ['borda counting', BordaCounting],
-    ['supplementary vote', SupplementaryVoter],
-    ['Sri Lankan Contingent vote', SriLankanContingentVoter],
-    ['contingent vote', ContingentVoter],
-    ['instant runof', InstantRunOffVoter],
-    ['coombs', CoombsVoting],
-    ['copleland', CopelandVoter]
-    // ['tideman', TideMan]
-  ]
-);
+const votingmethods = new Map([
+  ['plurarity', PlurarityVoter],
+  ['anti-plurarity', AntiPlurarityVoter],
+  // ['theoretical perfect', PerfectVoter],
+  ['approval voting', ApprovalVoter],
+  ['borda counting', BordaCounting],
+  ['supplementary vote', SupplementaryVoter],
+  ['Sri Lankan Contingent vote', SriLankanContingentVoter],
+  ['contingent vote', ContingentVoter],
+  ['instant runof', InstantRunOffVoter],
+  ['coombs', CoombsVoting],
+  ['copleland', CopelandVoter],
+  // ['tideman', TideMan]
+]);
 
 let stepping_box;
 let hide_stepping_box;
@@ -121,18 +121,26 @@ let hide_stepping_box;
 const grow_speed = 0.02;
 const selected_size_adder = 5;
 const clicked_selected_size_adder = 15;
-const clicked_selected_laser_color = 'rgb(0, 0, 0)'
+const clicked_selected_laser_color = 'rgb(0, 0, 0)';
 const clicked_selected_stroke_weight = 4;
 
-const default_stroke = 'rgb(0,0,0)'
+const default_stroke = 'rgb(0,0,0)';
 const strategic_voter_color = 'rgb(0, 0, 0)';
 const strategic_voter_stroeke_weight = 3;
 const honest_voter_color = '#F18F01';
 const voter_size = 15;
 const voter_strokeWeight = 2;
-const support_circle_color = 111
+const support_circle_color = 111;
 
-const candidate_colors = ['#FEFCFB', '#ED3907', '#7247FF', '#162CD9', '#2BB7DE', '#BF1160', '#0FFA42'];
+const candidate_colors = [
+  '#FEFCFB',
+  '#ED3907',
+  '#7247FF',
+  '#162CD9',
+  '#2BB7DE',
+  '#BF1160',
+  '#0FFA42',
+];
 const candidate_size = 40;
 const candidate_strokeWeight = 5;
 
@@ -141,7 +149,13 @@ const background_color = 0;
 const selected_size = 5;
 
 function random_voter(i) {
-  return new Voter(round(random(width)), round(random(height)), random_bool(strategic_chance), honest_voter_color, 'voter#' + i);
+  return new Voter(
+    round(random(width)),
+    round(random(height)),
+    random_bool(strategic_chance),
+    honest_voter_color,
+    'voter#' + i
+  );
 }
 
 function update_voter_population_slider() {
@@ -153,7 +167,7 @@ function update_candidate_poupulation() {
 }
 
 function add_voter() {
-  if ((voters.length < max_voters) & (!(frozen_sim))) {
+  if ((voters.length < max_voters) & !frozen_sim) {
     voters.push(random_voter(voters.length));
     update_voter_population_slider();
     change_in_sim = true;
@@ -161,11 +175,13 @@ function add_voter() {
 }
 
 function add_voter_to_position(x, y) {
-  if ((voters.length < max_voters) & (!(frozen_sim))) {
+  if ((voters.length < max_voters) & !frozen_sim) {
     let x_ = constrain(round(x), 0, width);
     let y_ = constrain(round(y), 0, height);
 
-    voters.push(new Voter(x_, y_, random_bool(strategic_chance), honest_voter_color));
+    voters.push(
+      new Voter(x_, y_, random_bool(strategic_chance), honest_voter_color)
+    );
     update_voter_population_slider();
     change_in_sim = true;
   }
@@ -178,11 +194,13 @@ function reset_voter_color() {
 }
 
 function toggle_voter_hide() {
-  voters.forEach((v) => { v.toggle_hidden() })
+  voters.forEach(v => {
+    v.toggle_hidden();
+  });
 }
 
 function remove_voter() {
-  if ((voters.length != min_voters) & (!(frozen_sim))) {
+  if ((voters.length != min_voters) & !frozen_sim) {
     delete voters[voters.length - 1].remove();
     update_voter_population_slider();
   }
@@ -200,24 +218,32 @@ function delete_arrows() {
 
 function remove_specific_voter(voter) {
   // voters = voters.filter(function(curval){return curval != voter})
-  if ((voters.length - to_remove_voters.length != min_voters) & (!(frozen_sim))) {
+  if ((voters.length - to_remove_voters.length != min_voters) & !frozen_sim) {
     to_remove_voters.push(voter);
   }
 }
 
 function remove_specific_candidate(candidate) {
   // candidates = candidates.filter(function(curval){return curval != candidate})
-  if ((candidates.length - to_remove_candidates != min_candidates) & (!(frozen_sim))) {
+  if (
+    (candidates.length - to_remove_candidates != min_candidates) &
+    !frozen_sim
+  ) {
     to_remove_candidates.push(candidate);
   }
 }
 
 function random_candidate(i) {
-  return new Candidate(round(random(width)), round(random(height)), rewrapp_index(candidate_colors, i), 'candidate#' + i);
+  return new Candidate(
+    round(random(width)),
+    round(random(height)),
+    rewrapp_index(candidate_colors, i),
+    'candidate#' + i
+  );
 }
 
 function add_candidate() {
-  if ((candidates.length != max_candidates) & (!(frozen_sim))) {
+  if ((candidates.length != max_candidates) & !frozen_sim) {
     candidates.push(random_candidate(candidates.length));
     update_candidate_poupulation();
     change_in_sim = true;
@@ -225,15 +251,21 @@ function add_candidate() {
 }
 
 function remove_candidate() {
-  if ((candidates.length != min_candidates) & (!(frozen_sim))) {
+  if ((candidates.length != min_candidates) & !frozen_sim) {
     candidates[candidates.length - 1].remove();
     update_candidate_poupulation();
   }
 }
 
 function remove_people() {
-  if (((to_remove_candidates.length != 0) || (to_remove_voters.length != 0)) & (!(frozen_sim))) {
-    candidates = inverse_filter_array_by_array(candidates, to_remove_candidates);
+  if (
+    (to_remove_candidates.length != 0 || to_remove_voters.length != 0) &
+    !frozen_sim
+  ) {
+    candidates = inverse_filter_array_by_array(
+      candidates,
+      to_remove_candidates
+    );
     voters = inverse_filter_array_by_array(voters, to_remove_voters);
 
     to_remove_candidates = [];
@@ -254,7 +286,7 @@ function delete_everything() {
 
 function make_voters(db) {
   // Add voters to the sim
-  if (!(frozen_sim)) {
+  if (!frozen_sim) {
     voters = [];
     for (let i = 0; i < db; i++) {
       voters.push(random_voter(i));
@@ -265,7 +297,7 @@ function make_voters(db) {
 
 function make_candidates(db) {
   // Add candidates to the sim
-  if (!(frozen_sim)) {
+  if (!frozen_sim) {
     candidates = [];
     for (let i = 0; i < db; i++) {
       candidates.push(random_candidate(i));
@@ -302,7 +334,6 @@ function draw_everyone() {
   for (i = 0; i < arrows.length; i++) {
     arrows[i].show();
   }
-
 }
 
 function draw_background() {
@@ -310,11 +341,10 @@ function draw_background() {
   background(background_color);
 }
 
-
 supporter_draw = empty_function;
 
 function load_clicked_selected() {
-  if (typeof (clicked_selected) != 'undefined') {
+  if (typeof clicked_selected != 'undefined') {
     let ch = selected_div.child();
     if (ch.length != 0) {
       ch[0].remove();
@@ -369,23 +399,27 @@ function reset_enviroment() {
 
 function select_voting() {
   votingmethod = votingmethods.get(voting_type_selector.value());
-  extra_function = empty_function
+  extra_function = empty_function;
   change_in_sim = true;
 }
 
 function select_tool() {
   let current_tool_class = tools.get(tool_selector.value());
-  current_tool = new current_tool_class()
+  current_tool = new current_tool_class();
 }
 
-function get_results_elements(results, show_method = function (place) { return place.get_p() }) {
+function get_results_elements(
+  results,
+  show_method = function (place) {
+    return place.get_p();
+  }
+) {
   // Returns the HTML element to be put into the results div
 
-  let returned = document.createElement("ol");
+  let returned = document.createElement('ol');
   for (let i = 0; i < results.length; i++) {
-
     let subdiv = createDiv(int_to_serial_number(i + 1));
-    subdiv.addClass('place_div')
+    subdiv.addClass('place_div');
     let places = results[i];
 
     for (let j = 0; j < places.length; j++) {
@@ -402,17 +436,16 @@ function display_votes(voter_maschine) {
   stepping_box.delete_content();
 
   vote_result_div.html('Voting results:');
-  vote_result_div.child(get_results_elements(voting_results))
+  vote_result_div.child(get_results_elements(voting_results));
 
   voter_maschine.extra_visualize(voters);
 }
-
 
 auto_simulate = empty_function;
 
 function freeze() {
   frozen_sim = true;
-  console.log(simfreezer.elt)
+  console.log(simfreezer.elt);
   simfreezer.child()[0].checked = true;
 }
 
@@ -432,7 +465,9 @@ function simulate_voting() {
   }
   max_votes = voters.length;
 
-  candidates.forEach((cand) => { cand.reset_text() })
+  candidates.forEach(cand => {
+    cand.reset_text();
+  });
 
   count_supporters();
   calculate_seems_win_candidates();
@@ -445,7 +480,7 @@ function simulate_voting() {
     voter_maschine.registrate_vote(voters[i]);
   }
 
-  voting_results = voter_maschine.count_votes()
+  voting_results = voter_maschine.count_votes();
   console.log('The voting machine:');
   console.log(voter_maschine);
 
@@ -468,7 +503,6 @@ function auto_simulate_true() {
   }
 }
 
-
 function calc_approval_range() {
   approval_range = Math.floor(dist(0, 0, WIDTH, HEIGHT) * approval_range_size);
 }
@@ -478,31 +512,56 @@ function calc_supporter_range() {
 }
 
 function preload() {
-  font = loadFont("../fonts/Comfortaa-VariableFont_wght.ttf");
+  font = loadFont('../fonts/Comfortaa-VariableFont_wght.ttf');
 }
 
 function windowResized() {
-  resizeCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 30));
+  resizeCanvas(
+    constrain(WIDTH, 0, windowWidth - 20),
+    constrain(HEIGHT, 0, windowHeight - 30)
+  );
 }
 
 function setup() {
   colorMode(RGB);
 
-  canvas = createCanvas(constrain(WIDTH, 0, windowWidth - 20), constrain(HEIGHT, 0, windowHeight - 30), WEBGL);
+  canvas = createCanvas(
+    constrain(WIDTH, 0, windowWidth - 20),
+    constrain(HEIGHT, 0, windowHeight - 30),
+    WEBGL
+  );
   canvas.addClass('canvas');
 
   max_voters = width * height * max_voters_per_pixel;
 
-  calc_approval_range()
+  calc_approval_range();
   calc_supporter_range();
 
-  selected_div = select("#selected")
+  selected_div = select('#selected');
 
   stroke(default_stroke);
 
-  strategic_chance_slider = slider_with_name('strategic voter chance: ', 0, 1, strategic_chance, 0.01);
-  voter_population_slider = slider_with_name('number of voters: ', min_voters, max_voters, voter_population, 1);
-  candidate_population_slider = slider_with_name('number of candidates: ', min_candidates, max_candidates, candidate_population, 1);
+  strategic_chance_slider = slider_with_name(
+    'strategic voter chance: ',
+    0,
+    1,
+    strategic_chance,
+    0.01
+  );
+  voter_population_slider = slider_with_name(
+    'number of voters: ',
+    min_voters,
+    max_voters,
+    voter_population,
+    1
+  );
+  candidate_population_slider = slider_with_name(
+    'number of candidates: ',
+    min_candidates,
+    max_candidates,
+    candidate_population,
+    1
+  );
 
   add_voter_button = createButton('add voter');
   add_voter_button.mousePressed(add_voter);
@@ -521,17 +580,17 @@ function setup() {
     if (this.checked()) {
       supporter_draw = function () {
         for (let i = 0; i < candidates.length; i++) {
-          push()
+          push();
           fill(support_circle_color);
           let cand = candidates[i];
           circle(cand.x, cand.y, support_range * 2);
-          pop()
+          pop();
         }
       };
     } else {
       supporter_draw = empty_function;
     }
-  })
+  });
 
   average_voter_checkbox = createCheckbox('show average voter', false);
   average_voter_checkbox.changed(function () {
@@ -543,7 +602,7 @@ function setup() {
     } else {
       average_voter.hide();
     }
-  })
+  });
 
   add_candidate_button = createButton('add candidate');
   add_candidate_button.mousePressed(add_candidate);
@@ -587,7 +646,7 @@ function setup() {
     } else {
       auto_simulate = empty_function;
     }
-  })
+  });
 
   simfreezer = createCheckbox('freeze visualization', false);
   simfreezer.changed(function () {
@@ -596,27 +655,45 @@ function setup() {
     } else {
       melt();
     }
-  })
+  });
 
-  approval_slider = slider_with_name('approval range: ', 0.1, 1, approval_range_size, 0.01);
-  approval_slider.input((val) => {
+  approval_slider = slider_with_name(
+    'approval range: ',
+    0.1,
+    1,
+    approval_range_size,
+    0.01
+  );
+  approval_slider.input(val => {
     approval_range_size = val;
     calc_approval_range();
     change_in_sim = true;
   });
 
-  supporter_slider = slider_with_name('support range: ', 0.1, 1, support_range_size, 0.01);
-  supporter_slider.input((val) => {
+  supporter_slider = slider_with_name(
+    'support range: ',
+    0.1,
+    1,
+    support_range_size,
+    0.01
+  );
+  supporter_slider.input(val => {
     support_range_size = val;
     calc_supporter_range();
     change_in_sim = true;
-  })
+  });
 
-  seems_win_slider = slider_with_name('winner prediction percentage: ', 0.9, 2, seems_win_percent, 0.02);
-  seems_win_slider.input((val) => {
+  seems_win_slider = slider_with_name(
+    'winner prediction percentage: ',
+    0.9,
+    2,
+    seems_win_percent,
+    0.02
+  );
+  seems_win_slider.input(val => {
     seems_win_percent = val;
     change_in_sim = true;
-  })
+  });
 
   reset_to_default_button = createButton('reset advanced settings to default');
   reset_to_default_button.mousePressed(() => {
@@ -629,8 +706,7 @@ function setup() {
     calc_supporter_range();
     calc_approval_range();
     change_in_sim = true;
-  })
-
+  });
 
   new_envitoment_div = select('#new_environment_div');
 
@@ -654,13 +730,13 @@ function setup() {
   edit_enviroment_div.child(delete_candidate_button);
   edit_enviroment_div.child(delete_voter_button);
 
-  Simulation_div.child(document.createElement('br'))
+  Simulation_div.child(document.createElement('br'));
   Simulation_div.child(voting_type_selector);
   Simulation_div.child(simulate_button);
   Simulation_div.child(auto_simulate_check_box);
   Simulation_div.child(simfreezer);
 
-  tool_div.child(document.createElement('br'))
+  tool_div.child(document.createElement('br'));
   tool_div.child(tool_selector);
   tool_div.child(tool_size);
 
@@ -674,7 +750,6 @@ function setup() {
   visualization_div.child(delete_arrows_button);
   visualization_div.child(support_vis_checkbox);
   visualization_div.child(average_voter_checkbox);
-
 
   vote_result_div = select('#vote_results');
 
@@ -695,7 +770,7 @@ function setup() {
 
 function draw() {
   // Runs at every frame
-  translate(-width / 2, -height / 2)
+  translate(-width / 2, -height / 2);
 
   // Order here is important
   auto_simulate();
@@ -707,14 +782,13 @@ function draw() {
   draw_everyone();
   average_voter.show();
 
-
   handle_elements();
 
-  push()
+  push();
   fill('red');
   textSize(14);
   textFont(font);
-  textAlign(LEFT, TOP)
+  textAlign(LEFT, TOP);
   text(round(frameRate()) + ' FPS', 0, 0);
-  pop()
+  pop();
 }
