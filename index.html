@@ -18,26 +18,26 @@
   <link rel="stylesheet" href="css/general.css" />
   <link rel="stylesheet" href="css/main.css" />
   <!--HTML sheets-->
-  <link rel="stylesheet" href="simulation.html" />
+  <!-- <link rel="stylesheet" href="simulation.html" /> -->
 </head>
 
 <body>
   <nav>
     <div class="center">
-      <div class="company-name" translate="no">BOLE</div>
-      <a class="run-btn" onclick="location.href='simulation.html';">
+      <a href="#intro" class="company-name" translate="no">BOLE</a>
+      <a class="run-btn" onclick="location.href='simulation';">
         <div class="triangle-right"></div>
       </a>
     </div>
   </nav>
   <main>
     <section id="intro">
-      <ul>
+      <ul class="intro-text">
         <li>
-          <h3>
+          <p>
             This is a visualization of the current single-winner voting
             systems in the world.
-          </h3>
+          </p>
         </li>
         <li>
           <p>
@@ -45,35 +45,41 @@
             you proceed to try the program out.
           </p>
         </li>
+        <li>
+          <p>We are not experts in social choice theory, we are just highschool students. What you will see in the
+            documentation and in the videos is not an expert advice but rather our personal opinion. Any feedback is
+            appriciated.
+          </p>
+        </li>
       </ul>
+
+
     </section>
     <div class="spacer blue-peak"></div>
     <section id="toc" class="blue">
       <h2>Table of Contents</h2>
       <ul>
-        <li><a>Visualization</a></li>
+        <li><a href="#visualization">Visualization</a></li>
         <li>
-          <a>Voter Types</a>
+          <a href="#voter_types">Voter Types</a>
           <ul>
-            <li><a>Honest</a></li>
-            <li><a>Strategic</a></li>
+            <li><a href="#voter-not-smort">Honest</a></li>
+            <li><a href="#voter-smort">Tactical</a></li>
           </ul>
         </li>
 
         <li>
-          <a>Voting Systems</a>
+          <a href="#voting_systems">Voting Systems</a>
           <ul translate="no">
-            <li><a>Plurality</a></li>
-            <li><a>Approval</a></li>
-            <li><a>Supplementary vote</a></li>
-            <li><a>Sri Lankan contingent vote</a></li>
-            <li><a>Contingent vote</a></li>
-            <li><a>Instant-runoff</a></li>
-            <li><a>Coombs</a></li>
-            <li><a>Borda counting</a></li>
-            <li><a>Tideman</a></li>
-            <li><a>Copeland's method</a></li>
-            <li><a>Theoretical Perfect</a></li>
+            <li><a href="#sys-plurality">Plurality</a></li>
+            <li><a href="#sys-approval">Approval</a></li>
+            <li><a href="#sys-sup">Supplementary vote</a></li>
+            <li><a href="#sys-sri-cont">Sri Lankan contingent vote</a></li>
+            <li><a href="#sys-cont">Contingent vote</a></li>
+            <li><a href="#sys-IRV">Instant-runoff</a></li>
+            <li><a href="#sys-coombs">Coombs</a></li>
+            <li><a href="#sys-borda">Borda counting</a></li>
+            <li><a href="#sys-copeland">Copeland's method</a></li>
           </ul>
         </li>
         <li>
@@ -107,7 +113,7 @@
             going to need a way to visualize the voters' and the candidates'
             opinions. To put it simply: in our visualization if two people are
             close to each other, than their opinion is similar. If they are
-            far away, than teir opinion is quite different. So we can place
+            far away, than their opinion is quite different. So we can place
             these lovely people into an opinion plane, where everyone's
             coordinate coresponds to their opinion.
           </p>
@@ -143,12 +149,12 @@
         their opinions are.
       </p>
       <p>
-        There are two types of voters, strategic and honest ones. You can find
+        There are two types of voters, tactical and honest ones. You can find
         detailed information about them below.
       </p>
       <ul>
         <li>
-          <section class="docli">
+          <section id="voter-not-smort" class="docli">
             <h3>Honest</h3>
             <p>
               Honest voters vote for the candidate with whom their views align
@@ -159,13 +165,13 @@
           </section>
         </li>
         <li>
-          <section class="docli">
-            <h3>Strategic</h3>
+          <section id="voter-smort" class="docli">
+            <h3>Tactical</h3>
             <p>
-              Strategic voters, also called insincere or sophisticated voters
+              Tactical voters, also called insincere or sophisticated voters
               may support another candidate more strongly than their sincere
               preference in order to prevent an undesirable outcome. They are
-              represented with a darker outline in the simulation.
+              represented with a filled circle in the visualization.
             </p>
           </section>
         </li>
@@ -184,7 +190,7 @@
       </p>
     </article>
     <div class="spacer red-peak"></div>
-    <section class="docli red">
+    <section id="sys-plurality" class="docli red">
       <h3 class="light-sec vs" translate="no">Plurality</h3>
       <div class="container">
         <div class="text-wrapper">
@@ -373,7 +379,7 @@
       </div>
     </section>
     <div class="spacer red-bot"></div>
-    <section class="docli">
+    <section id="sys-approval" class="docli">
       <h3 class="vs" translate="no">Approval</h3>
       <p>
         Approval voting systems are the first of multiple choice voting
@@ -670,7 +676,7 @@
       </p>
     </section>
     <div class="spacer orange-peak"></div>
-    <section class="docli orange">
+    <section id="sys-sup" class="docli orange">
       <h3 class="light-sec vs" translate="no">Supplementary vote</h3>
       <p class="light-sec">
         Supplementary vote is a voting system where each voter submits their
@@ -684,17 +690,20 @@
       </p>
     </section>
     <div class="spacer orange-bot"></div>
-    <section class="docli">
+    <section id="sys-sri-cont" class="docli">
       <h3 class="vs" translate="no" translate="no">Sri Lankan Contingent vote</h3>
-      <p>[placeholder text]</p>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui numquam at perferendis sint rerum nam, deleniti
+        voluptate error possimus enim vero voluptates placeat dolores iure illo commodi aliquam iste magni.</p>
     </section>
     <div class="spacer brown-peak"></div>
-    <section class="docli brown">
+    <section id="sys-cont" class="docli brown">
       <h3 class="vs" translate="no">Contingent vote</h3>
-      <p>[placeholder text]</p>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe rerum pariatur soluta quis maxime et,
+        reprehenderit ex necessitatibus nisi ea iusto corrupti tenetur minima nihil harum. Minus inventore accusantium
+        ratione.</p>
     </section>
     <div class="spacer brown-bot"></div>
-    <section class="docli">
+    <section id="sys-IRV" class="docli">
       <h3 class="vs" translate="no">Instant-runoff</h3>
       <p>
         Instant-runoff voting(IRV) is a type of ranked preferential voting
@@ -717,7 +726,7 @@
       </p>
     </section>
     <div class="spacer purple-peak"></div>
-    <section class="docli purple">
+    <section id="sys-coombs" class="docli purple">
       <h3 class="vs" translate="no">Coombs method</h3>
       <p>
         Coomb's method is a ranked preferentialvoting method quite similar to
@@ -728,7 +737,7 @@
       </p>
     </section>
     <div class="spacer purple-bot"></div>
-    <section class="docli">
+    <section id="sys-borda" class="docli">
       <h3 class="vs" translate="no">Borda counting</h3>
       <p>
         Borda counting is ranked preferential votingmethod. Each voter ranks
@@ -744,7 +753,7 @@
       </p>
     </section>
     <div class="spacer yellow-peak"></div>
-    <section class="docli yellow">
+    <section id="sys-copeland" class="docli yellow">
       <h3 class="light-sec vs" translate="no">Copeland's method</h3>
       <p class="light-sec">Copeland's method systems are...</p>
     </section>
@@ -756,7 +765,7 @@
     <div class="spacer turquoise-peak"></div>
 
   </main>
-  <script src="javascript/other/view_picture.js"></script>
+  <script src="javascript/view_picture.js"></script>
 </body>
 
 </html>

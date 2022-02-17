@@ -15,6 +15,10 @@ nav {
   justify-content: center;
 }
 
+.company-name{
+  text-decoration: none;
+}
+
 .run-btn {
   cursor: pointer;
   position: relative;

@@ -98,19 +98,21 @@ let supporter_slider;
 let seems_win_slider;
 let reset_to_default_button;
 
-const votingmethods = new Map([
-  ['plurarity', PlurarityVoter],
-  ['anti-plurarity', AntiPlurarityVoter],
-  // ['theoretical perfect', PerfectVoter],
-  ['approval voting', ApprovalVoter],
-  ['borda counting', BordaCounting],
-  ['supplementary vote', SupplementaryVoter],
-  ['Sri Lankan Contingent vote', SriLankanContingentVoter],
-  ['contingent vote', ContingentVoter],
-  ['instant runof', InstantRunOffVoter],
-  ['coombs', CoombsVoting],
-  ['copleland', CopelandVoter],
-  ['tideman', TideMan]]
+const votingmethods = new Map(
+  [
+    ['plurarity', PlurarityVoter],
+    ['anti-plurarity', AntiPlurarityVoter],
+    // ['theoretical perfect', PerfectVoter],
+    ['approval voting', ApprovalVoter],
+    ['borda counting', BordaCounting],
+    ['supplementary vote', SupplementaryVoter],
+    ['Sri Lankan Contingent vote', SriLankanContingentVoter],
+    ['contingent vote', ContingentVoter],
+    ['instant runof', InstantRunOffVoter],
+    ['coombs', CoombsVoting],
+    ['copleland', CopelandVoter]
+    // ['tideman', TideMan]
+  ]
 );
 
 let stepping_box;
@@ -424,6 +426,10 @@ function simulate_voting() {
 
   reset_on_select();
   delete_arrows();
+
+  for (const cand of candidates) {
+    cand.appear();
+  }
   max_votes = voters.length;
 
   candidates.forEach((cand) => { cand.reset_text() })
