@@ -15,10 +15,6 @@ nav {
   justify-content: center;
 }
 
-.company-name{
-  text-decoration: none;
-}
-
 .run-btn {
   cursor: pointer;
   position: relative;
@@ -79,4 +75,5 @@ nav {
   color: var(--secondary);
   font-family: 'Syne', sans-serif;
   font-size: 1.2rem;
+  text-decoration: none;
 }

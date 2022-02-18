@@ -30,7 +30,7 @@
 body {
   overflow-x: hidden;
   overflow-y: scroll;
-  line-height: 1.5rem;
+  line-height: 1.6rem;
 }
 
 strong{
@@ -51,6 +51,7 @@ button {
 
 button {
   color: var(--primary);
+  cursor: pointer;
 }
 
 h1,
