@@ -23,7 +23,7 @@
   box-sizing: border-box;
 }
 
-:root{
+:root {
   scroll-behavior: smooth;
 }
 
@@ -33,7 +33,7 @@ body {
   line-height: 1.6rem;
 }
 
-strong{
+strong {
   font-weight: bold;
 }
 
@@ -134,14 +134,6 @@ th {
   color: var(--primary);
   font-weight: bold;
   border: 1px solid var(--primary);
-}
-
-.red {
-  background-color: red;
-}
-
-.blue {
-  background-color: blue;
 }
 
 .green {
