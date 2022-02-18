@@ -245,6 +245,73 @@ li::marker {
 }
 
 
+
+@media only screen and (min-width: 90em){
+  
+  
+  .sim-gombok-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    align-items: stretch;
+    grid-auto-flow: row;
+  }
+
+  .sim-buttons-subdiv-container{
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    place-items: stretch;
+  }
+
+  .sim-buttons-subdiv{
+    justify-content: space-evenly;
+    align-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sim-buttons-subdiv > *{
+    flex-grow: 1;
+  }
+
+  .sim-buttons-subdiv-container:nth-last-child(2){
+    grid-row-end: span 2;
+  }
+
+  .sim-buttons-subdiv-container:last-child{
+    grid-column: 1 / -2;
+  }
+}
+
+
+@media only screen and (min-width: 110em){
+  main{
+    grid-template-areas:
+    'sim-gombok canvas selected results'
+    'step       step   step     results';
+
+    grid-template-columns: 2fr min-content 16rem 1.1fr;
+    grid-template-rows: var(--canvas-height) min-content;
+  }
+}
+
+@media only screen and (min-width: 190em){
+
+  .sim-buttons-subdiv-container:nth-last-child(2){
+    grid-row-end: auto;
+    grid-column: -3/-1;
+  }
+
+  .sim-buttons-subdiv-container:nth-last-child(3){
+    grid-column: span 2;
+  }
+
+  .sim-buttons-subdiv-container:last-child{
+    grid-column: -2/-1;
+  }
+}
+
+
+
 @media only screen and (max-width: 80em){
 
   main{
