@@ -49,6 +49,19 @@ button {
   color: var(--secondary);
 }
 
+a{
+  transition: color 100ms ease-in-out;
+}
+
+
+a:visited:not(.company-name){
+  color:chocolate;
+}
+
+a:hover:hover{
+  color: orange;
+}
+
 button {
   color: var(--primary);
   cursor: pointer;

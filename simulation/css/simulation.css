@@ -289,7 +289,7 @@ li::marker {
     'sim-gombok canvas selected results'
     'step       step   step     results';
 
-    grid-template-columns: 2fr min-content 16rem 1.1fr;
+    grid-template-columns: 2fr min-content 1fr 1.1fr;
     grid-template-rows: var(--canvas-height) min-content;
   }
 }

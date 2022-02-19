@@ -784,11 +784,11 @@ function draw() {
 
   handle_elements();
 
-  push();
-  fill('red');
-  textSize(14);
-  textFont(font);
-  textAlign(LEFT, TOP);
-  text(round(frameRate()) + ' FPS', 0, 0);
-  pop();
+  // push();
+  // fill('red');
+  // textSize(14);
+  // textFont(font);
+  // textAlign(LEFT, TOP);
+  // text(round(frameRate()) + ' FPS', 0, 0);
+  // pop();
 }

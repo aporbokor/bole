@@ -193,6 +193,39 @@ h1.company-name {
   margin-bottom: 1rem;
 }
 
+#toc a{
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--secondary);
+  transition: color 250ms ease-out;
+}
+
+#toc a::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: orange;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+
+  transition: transform 250ms ease-out;
+}
+
+#toc a:visited{
+  color: chocolate;
+}
+
+#toc a:hover::before{
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+#toc a:hover{
+  color: black;
+}
+
 .viewable_picture {
   cursor: pointer;
 }
