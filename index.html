@@ -24,8 +24,8 @@
 <body>
   <nav>
     <div class="center">
-      <a href="#intro" class="company-name" translate="no">BOLE</a>
-      <a class="run-btn" href="simulation">
+      <a href="#intro" class="company-name" translate="no" tabindex="1">BOLE</a>
+      <a class="run-btn" href="simulation" tabindex="2">
         <div class="triangle-right"></div>
       </a>
     </div>
@@ -93,8 +93,8 @@
               <li>
                 <a>Creators</a>
                 <ul>
-                  <li><a>Apor Bokor</a></li>
-                  <li><a>Bence Juhasz</a></li>
+                  <li><a href="https://github.com/aporbokor" target="_blank">Apor Bokor</a></li>
+                  <li><a href="https://github.com/UnicodeError0041" target="_blank">Bence Juhasz</a></li>
                 </ul>
               </li>
               <li>
@@ -105,12 +105,12 @@
               </li>
             </ul>
           </li>
-          <li><a>Contributing</a></li>
+          <li><a href="https://github.com/aporbokor/bole-visualization" target="_blank">Contributing</a></li>
         </ul>
       </section>
       <div class="toc-preview"></div>
     </div>
-    <script src="javascript/preview.js"></script>
+
     <div class="spacer green-bot"></div>
     <article id="visualization" class="doc">
       <div class="section-starter-content">
@@ -188,7 +188,7 @@
             way. But nothing says that we can't vote differently.
           </p>
           <img src="pictures/voter_types/voter_types.png" alt="An image where we can see some voters voting tactically"
-            class="section-starter-picture canvas_img view_picture">
+            class="section-starter-picture canvas_img viewable_picture">
         </div>
       </div>
       <p class="light-sec">
@@ -208,7 +208,7 @@
                   They are represented with a lighter color in the simulation.
                 </p>
                 <img src="pictures/voter_types/honest_voters.png" alt="An image with honest voters only"
-                  class="canvas_img viewable_image section-starter-picture">
+                  class="canvas_img viewable_picture section-starter-picture">
               </div>
             </div>
           </section>
@@ -226,7 +226,7 @@
                 </p>
                 <img src="pictures/voter_types/tactical_voting.png"
                   alt="an image where tactical voters are trying to avoid an undesirable outcome"
-                  class="canvas_img viewable_image section-starter-picture">
+                  class="canvas_img viewable_picture section-starter-picture">
               </div>
             </div>
           </section>
@@ -265,7 +265,7 @@
             Pretty straightforward, isn't it?
           </p>
           <img src="pictures/system-starters/plurality.png" alt="visualization of the plurality votingsystem"
-            class="section-starter-picture canvas_img viewable_image">
+            class="section-starter-picture canvas_img viewable_picture">
         </div>
       </div>
     </section>
@@ -281,7 +281,7 @@
             dicta consectetur repellat impedit quos.
           </p>
           <img src="pictures/system-starters/anti-plurality.png" alt="visualization of the anti plurality voting system"
-            class="section-starter-picture canvas_img viewable_image">
+            class="section-starter-picture canvas_img viewable_picture">
         </div>
       </div>
     </section>
@@ -299,7 +299,7 @@
             choices are not limited to one candidate.
           </p>
           <img src="pictures/system-starters/approval.png" alt="visualization of the approval voting system"
-            class="section-starter-picture canvas_img viewable_image">
+            class="section-starter-picture canvas_img viewable_picture">
         </div>
       </div>
 
@@ -320,7 +320,7 @@
             winner.
           </p>
           <img src="pictures/system-starters/supplementary.png" alt="visualization of the supplementary voting system"
-            class="section-starter-picture canvas_img viewable_image">
+            class="section-starter-picture canvas_img viewable_picture">
         </div>
       </div>
     </section>
@@ -338,7 +338,7 @@
           </p>
           <img src="pictures/system-starters/sri-lankan-contingent.png"
             alt="visualization of the Sri Lankan Contingent vote voting system"
-            class="section-starter-picture canvas_img viewable_image">
+            class="section-starter-picture canvas_img viewable_picture">
         </div>
       </div>
     </section>
@@ -354,7 +354,7 @@
             accusantium ratione.
           </p>
           <img src="pictures/system-starters/contingent.png" alt="visualization of the Contingent vote voting system"
-            class="section-starter-picture canvas_img viewable_image">
+            class="section-starter-picture canvas_img viewable_picture">
         </div>
       </div>
     </section>
@@ -383,7 +383,7 @@
             Award for Best Picture goes down like this.
           </p>
           <img src="pictures/system-starters/instant-runoff.png" alt="visualization of the Instant-runoff voting system"
-            class="section-starter-picture canvas_img viewable_image">
+            class="section-starter-picture canvas_img viewable_picture">
         </div>
       </div>
     </section>
@@ -400,7 +400,7 @@
             candidates). This process continues until there is only one candidate left.
           </p>
           <img src="pictures/system-starters/coombs.png" alt="visualization of the Coombs voting system"
-            class="section-starter-picture canvas_img viewable_image">
+            class="section-starter-picture canvas_img viewable_picture">
         </div>
       </div>
     </section>
@@ -422,7 +422,7 @@
             with the most points wins.
           </p>
           <img src="pictures/system-starters/borda-counting.png" alt="visualization of the Borda counting voting system"
-            class="section-starter-picture canvas_img viewable_image">
+            class="section-starter-picture canvas_img viewable_picture">
         </div>
       </div>
     </section>
@@ -437,7 +437,7 @@
             sit. Iusto dolore possimus veniam at odit ipsa illum. Eveniet totam natus tempora culpa eum.
           </p>
           <img src="pictures/system-starters/copeland.png" alt="visualization of the Copeland voting system"
-            class="section-starter-picture canvas_img viewable_image">
+            class="section-starter-picture canvas_img viewable_picture">
         </div>
       </div>
     </section>
@@ -449,6 +449,7 @@
     <div class="spacer turquoise-peak"></div>
   </main>
   <script src="javascript/view_picture.js"></script>
+  <script src="javascript/preview.js"></script>
 </body>
 
 </html>

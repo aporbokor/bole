@@ -109,7 +109,7 @@ const votingmethods = new Map([
   ['supplementary vote', SupplementaryVoter],
   ['Sri Lankan Contingent vote', SriLankanContingentVoter],
   ['contingent vote', ContingentVoter],
-  ['instant runof', InstantRunOffVoter],
+  ['instant runoff', InstantRunOffVoter],
   ['coombs', CoombsVoting],
   ['copleland', CopelandVoter],
   // ['tideman', TideMan]

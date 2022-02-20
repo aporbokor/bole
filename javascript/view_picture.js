@@ -1,8 +1,7 @@
 const body = document.body;
-const pictures = document.querySelectorAll('.viewable_picture');
 let holder = document.createElement('div');
 holder.classList.remove('pic_holder');
-holder.classList.add('hidden')
+holder.classList.add('hidden');
 
 body.appendChild(holder);
 
@@ -29,6 +28,12 @@ function show_picture(p) {
     })
 }
 
-for (const p of pictures) {
-    p.addEventListener('click', () => { show_picture(p) });
+
+function make_viewables(element) {
+    const pictures = element.querySelectorAll('.viewable_picture');
+    for (const p of pictures) {
+        p.addEventListener('click', () => { show_picture(p) });
+    }
 }
+
+make_viewables(body);

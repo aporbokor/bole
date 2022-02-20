@@ -53,6 +53,7 @@ button {
 
 a{
   transition: color 100ms ease-in-out;
+  position: relative;
 }
 
 
@@ -62,6 +63,25 @@ a:visited:not(.company-name){
 
 a:hover:hover{
   color: orange;
+}
+
+a:not(.company-name)::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: orange;
+  transform: scaleX(0);
+  transform-origin: right;
+
+  transition: transform 250ms ease-in;
+}
+
+a:not(.company-name):hover::before{
+  transform-origin: left;
+  transform: scaleX(1);
 }
 
 button {
