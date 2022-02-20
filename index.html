@@ -1,455 +1,512 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>bole</title>
+    <link rel="shortcut icon" type="image/x-icon" href="bole-favicon.png" ; />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      id="font"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Syne:wght@800&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!--CSS stylesheets-->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <!--HTML sheets-->
+    <!-- <link rel="stylesheet" href="simulation.html" /> -->
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>bole</title>
-  <link rel="shortcut icon" type="image/x-icon" href="bole-favicon.png" ; />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link id="font"
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Syne:wght@800&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet" />
-  <!--CSS stylesheets-->
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/general.css" />
-  <link rel="stylesheet" href="css/nav.css" />
-  <link rel="stylesheet" href="css/main.css" />
-  <!--HTML sheets-->
-  <!-- <link rel="stylesheet" href="simulation.html" /> -->
-</head>
+  <body>
+    <nav>
+      <div class="center">
+        <a href="#intro" class="company-name" translate="no" tabindex="1"
+          >BOLE</a
+        >
+        <a class="run-btn" href="simulation" tabindex="2">
+          <div class="triangle-right"></div>
+        </a>
+      </div>
+    </nav>
+    <main>
+      <div class="landing landing-1">
+        <div class="intro-cnt">
+          <div class="welcome">
+            <h3>Welcome to BOLE!</h3>
+            <p>It's great having you here.</p>
+          </div>
+          <section id="intro">
+        </div>
+      </div>
+      <script src="javascript/intro.js"></script>
+      <div class="spacer green-peak"></div>
 
-<body>
-  <nav>
-    <div class="center">
-      <a href="#intro" class="company-name" translate="no" tabindex="1">BOLE</a>
-      <a class="run-btn" href="simulation" tabindex="2">
-        <div class="triangle-right"></div>
-      </a>
-    </div>
-  </nav>
-  <main>
-    <div class="landing landing-1">
-      <section id="intro">
-        <h1 class="company-name">BOLE</h1>
-        <ul class="intro-text">
-          <li>
+      <div class="toc-container overflower-flex green">
+        <section id="toc">
+          <h2 class="section-title">Table of Contents</h2>
+          <ul>
+            <li><a href="#visualization">Visualization</a></li>
+            <li>
+              <a href="#voter_types">Voter Types</a>
+              <ul>
+                <li><a href="#voter-not-smort">Honest</a></li>
+                <li><a href="#voter-smort">Tactical</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#voting_systems">Voting Systems</a>
+              <ul translate="no">
+                <li><a href="#sys-plurality">Plurality</a></li>
+                <li><a href="#sys-anti-plurality">Anti Plurality</a></li>
+                <li><a href="#sys-approval">Approval</a></li>
+                <li><a href="#sys-sup">Supplementary vote</a></li>
+                <li><a href="#sys-sri-cont">Sri Lankan contingent vote</a></li>
+                <li><a href="#sys-cont">Contingent vote</a></li>
+                <li><a href="#sys-IRV">Instant-runoff</a></li>
+                <li><a href="#sys-coombs">Coombs</a></li>
+                <li><a href="#sys-borda">Borda counting</a></li>
+                <li><a href="#sys-copeland">Copeland's method</a></li>
+              </ul>
+            </li>
+            <li>
+              <a>Credits</a>
+              <ul>
+                <li>
+                  <a>Creators</a>
+                  <ul>
+                    <li>
+                      <a href="https://github.com/aporbokor" target="_blank"
+                        >Apor Bokor</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="https://github.com/UnicodeError0041"
+                        target="_blank"
+                        >Bence Juhasz</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a>Collaborators</a>
+                  <ul>
+                    <li><a>Patrik Lestar</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="https://github.com/aporbokor/bole-visualization"
+                target="_blank"
+                >Contributing</a
+              >
+            </li>
+          </ul>
+        </section>
+        <div class="toc-preview"></div>
+      </div>
+
+      <div class="spacer green-bot"></div>
+      <article id="visualization" class="doc">
+        <div class="section-starter-content">
+          <h2 class="section-title">Visualization</h2>
+
+          <div class="overflower-flex reverse_even_flex">
+            <div class="section-starter-text">
+              <p>
+                If we want to visualize diferent voting systems, than first we
+                are going to need a way to visualize the voters' and the
+                candidates' opinions. Inside the simulation, the placement of a
+                voter on the x and y axis represents their opinion. This stands
+                for the candidates, too, meaning the closer the voter is to a
+                candidate's position, the more similar their opinions are.
+              </p>
+              <p>
+                Or in other words: in our visualization if two people are close
+                to each other, than their opinion is similar. If they are far
+                away, than their opinion is quite different. So we can place
+                these lovely people into an opinion plane, where everyone's
+                coordinate coresponds to their opinion.
+              </p>
+            </div>
+            <img
+              src="pictures/opinion_example_2.png"
+              alt="opinion visualization example with arrows"
+              class="canvas_img viewable_picture section-starter-picture"
+            />
+          </div>
+        </div>
+
+        <div class="overflower-flex">
+          <div>
             <p>
-              This is a visualization of the current single-winner voting
-              systems in the world.
+              In our visualization the voters are marked with a smaller circle,
+              and the candidates are marked with a bigger circle.
             </p>
-          </li>
-          <li>
+            <p>Take the following picture for example:</p>
             <p>
-              It is recommended that you read the entire documentation before
-              you proceed to try the program out.
-            </p>
-          </li>
-          <li>
-            <p>
-              We are not experts in social choice theory, we are just
-              highschool students. What you will see in the documentation is not an expert advice but rather our
-              personal opinion. Any feedback is appriciated.
-            </p>
-          </li>
-        </ul>
-      </section>
-    </div>
-    <script src="javascript/intro.js"></script>
-    <div class="spacer green-peak"></div>
-
-    <div class="toc-container overflower-flex green">
-      <section id="toc">
-        <h2 class="section-title">Table of Contents</h2>
-        <ul>
-          <li><a href="#visualization">Visualization</a></li>
-          <li>
-            <a href="#voter_types">Voter Types</a>
-            <ul>
-              <li><a href="#voter-not-smort">Honest</a></li>
-              <li><a href="#voter-smort">Tactical</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#voting_systems">Voting Systems</a>
-            <ul translate="no">
-              <li><a href="#sys-plurality">Plurality</a></li>
-              <li><a href="#sys-anti-plurality">Anti Plurality</a></li>
-              <li><a href="#sys-approval">Approval</a></li>
-              <li><a href="#sys-sup">Supplementary vote</a></li>
-              <li><a href="#sys-sri-cont">Sri Lankan contingent vote</a></li>
-              <li><a href="#sys-cont">Contingent vote</a></li>
-              <li><a href="#sys-IRV">Instant-runoff</a></li>
-              <li><a href="#sys-coombs">Coombs</a></li>
-              <li><a href="#sys-borda">Borda counting</a></li>
-              <li><a href="#sys-copeland">Copeland's method</a></li>
-            </ul>
-          </li>
-          <li>
-            <a>Credits</a>
-            <ul>
-              <li>
-                <a>Creators</a>
-                <ul>
-                  <li><a href="https://github.com/aporbokor" target="_blank">Apor Bokor</a></li>
-                  <li><a href="https://github.com/UnicodeError0041" target="_blank">Bence Juhasz</a></li>
-                </ul>
-              </li>
-              <li>
-                <a>Collaborators</a>
-                <ul>
-                  <li><a>Patrik Lestar</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><a href="https://github.com/aporbokor/bole-visualization" target="_blank">Contributing</a></li>
-        </ul>
-      </section>
-      <div class="toc-preview"></div>
-    </div>
-
-    <div class="spacer green-bot"></div>
-    <article id="visualization" class="doc">
-      <div class="section-starter-content">
-
-        <h2 class="section-title">Visualization</h2>
-
-        <div class="overflower-flex reverse_even_flex">
-          <div class="section-starter-text">
-            <p>
-              If we want to visualize diferent voting systems, than first we are
-              going to need a way to visualize the voters' and the candidates'
-              opinions.
-              Inside the simulation, the placement of a voter on the x and y axis
-              represents their opinion. This stands for the candidates, too, meaning
-              the closer the voter is to a candidate's position, the more similar
-              their opinions are.
+              There are 2 candidates and one voter in this picture. The orange
+              voter is closer to the red candidate, than the white candidate.
+              This means that if the orange voter has to chose between these two
+              candidates, it will chose red.
             </p>
             <p>
-              Or in other words: in our visualization if two people are close to each other, than their opinion is
-              similar. If they are
-              far away, than their opinion is quite different. So we can place
-              these lovely people into an opinion plane, where everyone's
-              coordinate coresponds to their opinion.
+              So when there is an election every voters' dream is that, the
+              candidate closest to it gets elected. Our goal is to make sure,
+              that the candidate, who is the closest to the average opinion gets
+              elected.
             </p>
           </div>
-          <img src="pictures/opinion_example_2.png" alt="opinion visualization example with arrows"
-            class="canvas_img viewable_picture section-starter-picture">
+          <img
+            src="pictures/opinion_example.png"
+            alt="opinion visualization example"
+            class="canvas_img viewable_picture"
+          />
 
+          <div>
+            <p>
+              But remember, this is just a simplified visualization. In real
+              life there is no such thing as 2 different and independent
+              oppinion axes. Also, in the visualization voters know every
+              candidates' exact coordinates. This might not be that accurate in
+              real life, because sometimes it's in a candidate's best interest
+              to lie about their opinion. So in today's world
+              <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank"
+                >we don't know who we can trust</a
+              >.
+            </p>
+          </div>
         </div>
-      </div>
+      </article>
 
-      <div class="overflower-flex">
-        <div>
-          <p>
-            In our visualization the voters are marked with a smaller circle,
-            and the candidates are marked with a bigger circle.
-          </p>
-          <p>Take the following picture for example:</p>
-          <p>
-            There are 2 candidates and one voter in this picture. The orange
-            voter is closer to the red candidate, than the white candidate.
-            This means that if the orange voter has to chose between these two
-            candidates, it will chose red.
-          </p>
-          <p>
-            So when there is an election every voters' dream is that, the
-            candidate closest to it gets elected. Our goal is to make sure,
-            that the candidate, who is the closest to the average opinion gets
-            elected.
-          </p>
+      <div class="spacer orange-peak"></div>
+      <article id="voter_types" class="doc orange">
+        <div class="section-starter-content">
+          <h2 class="light-sec section-title">Voter Types</h2>
+          <div class="overflower-flex reverse_even_flex">
+            <p class="light-sec section-starter-text">
+              So now that everyone has an oppinion, we can vote. But how are we
+              going to vote? Well one way is the intended way. But nothing says
+              that we can't vote differently.
+            </p>
+            <img
+              src="pictures/voter_types/voter_types.png"
+              alt="An image where we can see some voters voting tactically"
+              class="section-starter-picture canvas_img viewable_picture"
+            />
+          </div>
         </div>
-        <img src="pictures/opinion_example.png" alt="opinion visualization example"
-          class="canvas_img viewable_picture" />
-
-        <div>
-          <p>But remember, this is just a simplified visualization. In real life there is no such thing as 2 different
-            and independent oppinion axes. Also, in the visualization voters know every candidates' exact coordinates.
-            This might not be
-            that accurate in real life, because sometimes it's in a candidate's best interest to lie about their
-            opinion. So in today's world <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank">we don't know who we can
-              trust</a>.</p>
-        </div>
-      </div>
-    </article>
-
-    <div class="spacer orange-peak"></div>
-    <article id="voter_types" class="doc orange">
-
-      <div class="section-starter-content">
-        <h2 class="light-sec section-title">Voter Types</h2>
-        <div class="overflower-flex reverse_even_flex">
-          <p class="light-sec section-starter-text">
-            So now that everyone has an oppinion, we can vote. But how are we going to vote? Well one way is the
-            intended
-            way. But nothing says that we can't vote differently.
-          </p>
-          <img src="pictures/voter_types/voter_types.png" alt="An image where we can see some voters voting tactically"
-            class="section-starter-picture canvas_img viewable_picture">
-        </div>
-      </div>
-      <p class="light-sec">
-        Based on this simple fact there are two types of voters: tactical and honest ones. You can find
-        detailed information about them below.
-      </p>
-      <ul class="light-sec">
-        <li>
-          <section id="voter-not-smort" class="docli">
-            <div class="section-starter-content">
-              <h3 class="light-sec section-title">Honest</h3>
-              <div class="overflower-flex reverse_odd_flex">
-                <p class="light-sec section-starter-text">
-                  Honest voters vote for the candidate with whom their views align
-                  with the most. They do not consider the candidate's chances of
-                  winning, and they do not change their preference based on that.
-                  They are represented with a lighter color in the simulation.
-                </p>
-                <img src="pictures/voter_types/honest_voters.png" alt="An image with honest voters only"
-                  class="canvas_img viewable_picture section-starter-picture">
-              </div>
-            </div>
-          </section>
-        </li>
-        <li>
-          <section id="voter-smort" class="docli">
-            <div class="section-starter-content">
-              <h3 class="light-sec section-title">Tactical</h3>
-              <div class="overflower-flex reverse_odd_flex">
-                <p class="light-sec  section-starter-text">
-                  Tactical voters, also called insincere or sophisticated voters
-                  may support another candidate more strongly than their sincere
-                  preference in order to prevent an undesirable outcome. They are
-                  represented with a filled circle in the visualization.
-                </p>
-                <img src="pictures/voter_types/tactical_voting.png"
-                  alt="an image where tactical voters are trying to avoid an undesirable outcome"
-                  class="canvas_img viewable_picture section-starter-picture">
-              </div>
-            </div>
-          </section>
-        </li>
-      </ul>
-    </article>
-    <div class="spacer orange-bot"></div>
-
-    <article id="voting_systems" class="doc">
-      <div class="section-starter-content">
-        <h2 class="section-title">Voting Systems</h2>
-        <p class="section-starter-text">
-          The ideal electoral system is the one that straightforwardly and most
-          accurately represents the preferences of voters. This is the goal
-          every voting system strives for. You can find detailed information
-          about the most used voting systems below. They are listed with
-          increasing complexity.
+        <p class="light-sec">
+          Based on this simple fact there are two types of voters: tactical and
+          honest ones. You can find detailed information about them below.
         </p>
-        <p class="section-starter-text">
-          But remember, it <a href="https://en.wikipedia.org/wiki/Arrow%27s_impossibility_theorem" target="_blank">has
-            been proved</a>,
-          that a perfect voting system does not exist.
-        </p>
-      </div>
-    </article>
-    <div class="spacer brown-peak"></div>
-    <section id="sys-plurality" class="docli brown">
-      <div class="section-starter-content">
-        <h3 class="vs section-title" translate="no">Plurality</h3>
-        <div class="overflower-flex reverse_even_flex">
-          <p class="section-starter-text">
-            First let's take a look at the most known, most used voting system
-            in the word: plurality voting. The rules are simple: every voter
-            votes for exactly one candidate. We will count the total number of
-            votes of each candidate. The candidate with the most votes wins.
-            Pretty straightforward, isn't it?
-          </p>
-          <img src="pictures/system-starters/plurality.png" alt="visualization of the plurality votingsystem"
-            class="section-starter-picture canvas_img viewable_picture">
-        </div>
-      </div>
-    </section>
-    <div class="spacer brown-bot"></div>
-    <section id="sys-anti-plurality" class="docli">
-      <div class="section-starter-content">
-        <h3 class="vs section-title">Anti Plurality</h3>
-        <div class="overflower-flex reverse_odd_flex">
-          <p class="section-starter-text">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. In eveniet omnis iure
-            placeat debitis cupiditate totam. Architecto nulla voluptatum rerum voluptates unde consequuntur!
-            Repudiandae et
-            dicta consectetur repellat impedit quos.
-          </p>
-          <img src="pictures/system-starters/anti-plurality.png" alt="visualization of the anti plurality voting system"
-            class="section-starter-picture canvas_img viewable_picture">
-        </div>
-      </div>
-    </section>
-    <section id="sys-approval" class="docli">
-      <div class="section-starter-content">
-        <h3 class="vs section-title" translate="no">Approval</h3>
-        <div class="overflower-flex reverse_even_flex">
-          <p class="section-starter-text">
-            Approval voting systems are the first of multiple choice voting
-            systems in our list. In this voting system basicly every voter can
-            vote to as many candidates as they like. So for example if a voter
-            would be satisfied if either ● candidate#1 or ● candidate#2 won the
-            election, than the voter would vote for both ● candidate#1 and ●
-            candidate#2. So it's almost like plurality, but here the voters'
-            choices are not limited to one candidate.
-          </p>
-          <img src="pictures/system-starters/approval.png" alt="visualization of the approval voting system"
-            class="section-starter-picture canvas_img viewable_picture">
-        </div>
-      </div>
+        <ul class="light-sec">
+          <li>
+            <section id="voter-not-smort" class="docli">
+              <div class="section-starter-content">
+                <h3 class="light-sec section-title">Honest</h3>
+                <div class="overflower-flex reverse_odd_flex">
+                  <p class="light-sec section-starter-text">
+                    Honest voters vote for the candidate with whom their views
+                    align with the most. They do not consider the candidate's
+                    chances of winning, and they do not change their preference
+                    based on that. They are represented with a lighter color in
+                    the simulation.
+                  </p>
+                  <img
+                    src="pictures/voter_types/honest_voters.png"
+                    alt="An image with honest voters only"
+                    class="canvas_img viewable_picture section-starter-picture"
+                  />
+                </div>
+              </div>
+            </section>
+          </li>
+          <li>
+            <section id="voter-smort" class="docli">
+              <div class="section-starter-content">
+                <h3 class="light-sec section-title">Tactical</h3>
+                <div class="overflower-flex reverse_odd_flex">
+                  <p class="light-sec section-starter-text">
+                    Tactical voters, also called insincere or sophisticated
+                    voters may support another candidate more strongly than
+                    their sincere preference in order to prevent an undesirable
+                    outcome. They are represented with a filled circle in the
+                    visualization.
+                  </p>
+                  <img
+                    src="pictures/voter_types/tactical_voting.png"
+                    alt="an image where tactical voters are trying to avoid an undesirable outcome"
+                    class="canvas_img viewable_picture section-starter-picture"
+                  />
+                </div>
+              </div>
+            </section>
+          </li>
+        </ul>
+      </article>
+      <div class="spacer orange-bot"></div>
 
-    </section>
-    <div class="spacer purple-peak"></div>
-    <section id="sys-sup" class="docli purple">
-      <div class="section-starter-content">
-        <h3 class="vs section-title" translate="no">Supplementary vote</h3>
-        <div class="overflower-flex reverse_odd_flex">
+      <article id="voting_systems" class="doc">
+        <div class="section-starter-content">
+          <h2 class="section-title">Voting Systems</h2>
           <p class="section-starter-text">
-            Supplementary vote is a voting system where each voter submits their
-            first and second fauvorite candidate. First we count the first choices
-            and then we elliminate every candidate except for the top two based on
-            the votecounts. And then we re-run the election counting every voter's
-            first choices. But this time, if a voter's first choice is an already
-            elliminated candidate, then we will count their second choice. The
-            candidate with the most votes based on this votecounting will be the
-            winner.
+            The ideal electoral system is the one that straightforwardly and
+            most accurately represents the preferences of voters. This is the
+            goal every voting system strives for. You can find detailed
+            information about the most used voting systems below. They are
+            listed with increasing complexity.
           </p>
-          <img src="pictures/system-starters/supplementary.png" alt="visualization of the supplementary voting system"
-            class="section-starter-picture canvas_img viewable_picture">
-        </div>
-      </div>
-    </section>
-    <div class="spacer purple-bot"></div>
-    <section id="sys-sri-cont" class="docli">
-      <div class="section-starter-content">
-        <h3 class="vs section-title" translate="no" translate="no">
-          Sri Lankan Contingent vote
-        </h3>
-        <div class="overflower-flex reverse_even_flex">
           <p class="section-starter-text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui numquam
-            at perferendis sint rerum nam, deleniti voluptate error possimus enim
-            vero voluptates placeat dolores iure illo commodi aliquam iste magni.
+            But remember, it
+            <a
+              href="https://en.wikipedia.org/wiki/Arrow%27s_impossibility_theorem"
+              target="_blank"
+              >has been proved</a
+            >, that a perfect voting system does not exist.
           </p>
-          <img src="pictures/system-starters/sri-lankan-contingent.png"
-            alt="visualization of the Sri Lankan Contingent vote voting system"
-            class="section-starter-picture canvas_img viewable_picture">
         </div>
-      </div>
-    </section>
-    <div class="spacer yellow-peak"></div>
-    <section id="sys-cont" class="docli yellow">
-      <div class="section-starter-content">
-        <h3 class="vs light-sec section-title" translate="no">Contingent vote</h3>
-        <div class="overflower-flex reverse_odd_flex">
-          <p class="section-starter-text light-sec">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe rerum
-            pariatur soluta quis maxime et, reprehenderit ex necessitatibus nisi
-            ea iusto corrupti tenetur minima nihil harum. Minus inventore
-            accusantium ratione.
-          </p>
-          <img src="pictures/system-starters/contingent.png" alt="visualization of the Contingent vote voting system"
-            class="section-starter-picture canvas_img viewable_picture">
+      </article>
+      <div class="spacer brown-peak"></div>
+      <section id="sys-plurality" class="docli brown">
+        <div class="section-starter-content">
+          <h3 class="vs section-title" translate="no">Plurality</h3>
+          <div class="overflower-flex reverse_even_flex">
+            <p class="section-starter-text">
+              First let's take a look at the most known, most used voting system
+              in the word: plurality voting. The rules are simple: every voter
+              votes for exactly one candidate. We will count the total number of
+              votes of each candidate. The candidate with the most votes wins.
+              Pretty straightforward, isn't it?
+            </p>
+            <img
+              src="pictures/system-starters/plurality.png"
+              alt="visualization of the plurality votingsystem"
+              class="section-starter-picture canvas_img viewable_picture"
+            />
+          </div>
         </div>
-      </div>
-    </section>
-    <div class="spacer yellow-bot"></div>
-    <section id="sys-IRV" class="docli">
-      <div class="section-starter-content">
-        <h3 class="vs section-title" translate="no">Instant-runoff</h3>
-        <div class="overflower-flex reverse_even_flex">
-          <p class="section-starter-text">
-            Instant-runoff voting(IRV) is a type of ranked preferential voting
-            counting method used in single-winner elections with more than two
-            candidates. IRV is also sometimes referred to as preferential voting.
-            Like any ranked ballot voting systems, instead of indicating supprot
-            for only one candidate, voters can rank the candidates in order of
-            preference. Ballots are initially counted for each voter's top choice.
-            If a candidate has more than 50% of the vote based on first-choices,
-            that candidate wins. If not, the candidate with the fewest number of
-            votes is eliminated, and the voters who chose that candidate as their
-            first preference have their second preference votes considered, and
-            added to the totals of the respective candidate's votes. This process
-            is repeated until a candidate has more than half of the votes. If the
-            field is reduced to two, an instant runoff is held, that allows the
-            comparison of the top two candidates head-to-head.Instant-runoff
-            voting is used in national elections in several countries, political
-            parties, and private associations. For example, choosing the Academy
-            Award for Best Picture goes down like this.
-          </p>
-          <img src="pictures/system-starters/instant-runoff.png" alt="visualization of the Instant-runoff voting system"
-            class="section-starter-picture canvas_img viewable_picture">
+      </section>
+      <div class="spacer brown-bot"></div>
+      <section id="sys-anti-plurality" class="docli">
+        <div class="section-starter-content">
+          <h3 class="vs section-title">Anti Plurality</h3>
+          <div class="overflower-flex reverse_odd_flex">
+            <p class="section-starter-text">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. In
+              eveniet omnis iure placeat debitis cupiditate totam. Architecto
+              nulla voluptatum rerum voluptates unde consequuntur! Repudiandae
+              et dicta consectetur repellat impedit quos.
+            </p>
+            <img
+              src="pictures/system-starters/anti-plurality.png"
+              alt="visualization of the anti plurality voting system"
+              class="section-starter-picture canvas_img viewable_picture"
+            />
+          </div>
         </div>
-      </div>
-    </section>
-    <div class="spacer turquoise-peak"></div>
-    <section id="sys-coombs" class="docli turquoise">
-      <div class="section-starter-content">
-        <h3 class="vs light-sec section-title" translate="no">Coombs method</h3>
-        <div class="overflower-flex reverse_odd_flex">
-          <p class="section-starter-text light-sec">
-            Coomb's method is a ranked preferentialvoting method quite similar to
-            Instant Runoff. We initially count the top votes of each voters'
-            ballot. After we have counted the votes we elliminate the candidate,
-            who the majority of voters have ranked last (among non elliminated
-            candidates). This process continues until there is only one candidate left.
-          </p>
-          <img src="pictures/system-starters/coombs.png" alt="visualization of the Coombs voting system"
-            class="section-starter-picture canvas_img viewable_picture">
+      </section>
+      <section id="sys-approval" class="docli">
+        <div class="section-starter-content">
+          <h3 class="vs section-title" translate="no">Approval</h3>
+          <div class="overflower-flex reverse_even_flex">
+            <p class="section-starter-text">
+              Approval voting systems are the first of multiple choice voting
+              systems in our list. In this voting system basicly every voter can
+              vote to as many candidates as they like. So for example if a voter
+              would be satisfied if either ● candidate#1 or ● candidate#2 won
+              the election, than the voter would vote for both ● candidate#1 and
+              ● candidate#2. So it's almost like plurality, but here the voters'
+              choices are not limited to one candidate.
+            </p>
+            <img
+              src="pictures/system-starters/approval.png"
+              alt="visualization of the approval voting system"
+              class="section-starter-picture canvas_img viewable_picture"
+            />
+          </div>
         </div>
-      </div>
-    </section>
-    <div class="spacer purple-bot"></div>
-    <section id="sys-borda" class="docli">
-      <div class="section-starter-content">
-        <h3 class="vs section-title" translate="no">Borda counting</h3>
-        <div class="overflower-flex reverse_even_flex">
-          <p class="section-starter-text">
-            Borda counting is ranked preferential votingmethod. Each voter ranks
-            the candidates in a way, that the candidate who they the most want to
-            win takes up the first place. And the candidate, who they the least
-            want to win takes up the last place. Based on this tier-list every
-            candidate gets points. For every first place in a tier-list the
-            candidate gets as many points, as many candidates there are. For every
-            second place in a tier-list, the candidate gets one less points, than
-            the total number of candidates and so on. Each candidate gets one
-            point from each last place in a tier-list. In the end the candidate
-            with the most points wins.
-          </p>
-          <img src="pictures/system-starters/borda-counting.png" alt="visualization of the Borda counting voting system"
-            class="section-starter-picture canvas_img viewable_picture">
+      </section>
+      <div class="spacer purple-peak"></div>
+      <section id="sys-sup" class="docli purple">
+        <div class="section-starter-content">
+          <h3 class="vs section-title" translate="no">Supplementary vote</h3>
+          <div class="overflower-flex reverse_odd_flex">
+            <p class="section-starter-text">
+              Supplementary vote is a voting system where each voter submits
+              their first and second fauvorite candidate. First we count the
+              first choices and then we elliminate every candidate except for
+              the top two based on the votecounts. And then we re-run the
+              election counting every voter's first choices. But this time, if a
+              voter's first choice is an already elliminated candidate, then we
+              will count their second choice. The candidate with the most votes
+              based on this votecounting will be the winner.
+            </p>
+            <img
+              src="pictures/system-starters/supplementary.png"
+              alt="visualization of the supplementary voting system"
+              class="section-starter-picture canvas_img viewable_picture"
+            />
+          </div>
         </div>
-      </div>
-    </section>
-    <div class="spacer green-peak"></div>
-    <section id="sys-copeland" class="docli green">
-      <div class="section-starter-content">
-        <h3 class="vs section-title" translate="no">Copeland's method</h3>
-        <div class="overflower-flex reverse_odd_flex">
-          <p class="section-starter-text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore quae corporis quasi! Saepe dolore
-            repudiandae
-            sit. Iusto dolore possimus veniam at odit ipsa illum. Eveniet totam natus tempora culpa eum.
-          </p>
-          <img src="pictures/system-starters/copeland.png" alt="visualization of the Copeland voting system"
-            class="section-starter-picture canvas_img viewable_picture">
+      </section>
+      <div class="spacer purple-bot"></div>
+      <section id="sys-sri-cont" class="docli">
+        <div class="section-starter-content">
+          <h3 class="vs section-title" translate="no" translate="no">
+            Sri Lankan Contingent vote
+          </h3>
+          <div class="overflower-flex reverse_even_flex">
+            <p class="section-starter-text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui
+              numquam at perferendis sint rerum nam, deleniti voluptate error
+              possimus enim vero voluptates placeat dolores iure illo commodi
+              aliquam iste magni.
+            </p>
+            <img
+              src="pictures/system-starters/sri-lankan-contingent.png"
+              alt="visualization of the Sri Lankan Contingent vote voting system"
+              class="section-starter-picture canvas_img viewable_picture"
+            />
+          </div>
         </div>
-      </div>
-    </section>
-    <div class="spacer green-bot"></div>
-    <section class="docli">
-      <h3 class="vs section-title" translate="no">Tideman</h3>
-      <p>Tideman voting systems are...</p>
-    </section>
-    <div class="spacer turquoise-peak"></div>
-  </main>
-  <script src="javascript/view_picture.js"></script>
-  <script src="javascript/preview.js"></script>
-</body>
-
+      </section>
+      <div class="spacer yellow-peak"></div>
+      <section id="sys-cont" class="docli yellow">
+        <div class="section-starter-content">
+          <h3 class="vs light-sec section-title" translate="no">
+            Contingent vote
+          </h3>
+          <div class="overflower-flex reverse_odd_flex">
+            <p class="section-starter-text light-sec">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe
+              rerum pariatur soluta quis maxime et, reprehenderit ex
+              necessitatibus nisi ea iusto corrupti tenetur minima nihil harum.
+              Minus inventore accusantium ratione.
+            </p>
+            <img
+              src="pictures/system-starters/contingent.png"
+              alt="visualization of the Contingent vote voting system"
+              class="section-starter-picture canvas_img viewable_picture"
+            />
+          </div>
+        </div>
+      </section>
+      <div class="spacer yellow-bot"></div>
+      <section id="sys-IRV" class="docli">
+        <div class="section-starter-content">
+          <h3 class="vs section-title" translate="no">Instant-runoff</h3>
+          <div class="overflower-flex reverse_even_flex">
+            <p class="section-starter-text">
+              Instant-runoff voting(IRV) is a type of ranked preferential voting
+              counting method used in single-winner elections with more than two
+              candidates. IRV is also sometimes referred to as preferential
+              voting. Like any ranked ballot voting systems, instead of
+              indicating supprot for only one candidate, voters can rank the
+              candidates in order of preference. Ballots are initially counted
+              for each voter's top choice. If a candidate has more than 50% of
+              the vote based on first-choices, that candidate wins. If not, the
+              candidate with the fewest number of votes is eliminated, and the
+              voters who chose that candidate as their first preference have
+              their second preference votes considered, and added to the totals
+              of the respective candidate's votes. This process is repeated
+              until a candidate has more than half of the votes. If the field is
+              reduced to two, an instant runoff is held, that allows the
+              comparison of the top two candidates head-to-head.Instant-runoff
+              voting is used in national elections in several countries,
+              political parties, and private associations. For example, choosing
+              the Academy Award for Best Picture goes down like this.
+            </p>
+            <img
+              src="pictures/system-starters/instant-runoff.png"
+              alt="visualization of the Instant-runoff voting system"
+              class="section-starter-picture canvas_img viewable_picture"
+            />
+          </div>
+        </div>
+      </section>
+      <div class="spacer turquoise-peak"></div>
+      <section id="sys-coombs" class="docli turquoise">
+        <div class="section-starter-content">
+          <h3 class="vs light-sec section-title" translate="no">
+            Coombs method
+          </h3>
+          <div class="overflower-flex reverse_odd_flex">
+            <p class="section-starter-text light-sec">
+              Coomb's method is a ranked preferentialvoting method quite similar
+              to Instant Runoff. We initially count the top votes of each
+              voters' ballot. After we have counted the votes we elliminate the
+              candidate, who the majority of voters have ranked last (among non
+              elliminated candidates). This process continues until there is
+              only one candidate left.
+            </p>
+            <img
+              src="pictures/system-starters/coombs.png"
+              alt="visualization of the Coombs voting system"
+              class="section-starter-picture canvas_img viewable_picture"
+            />
+          </div>
+        </div>
+      </section>
+      <div class="spacer purple-bot"></div>
+      <section id="sys-borda" class="docli">
+        <div class="section-starter-content">
+          <h3 class="vs section-title" translate="no">Borda counting</h3>
+          <div class="overflower-flex reverse_even_flex">
+            <p class="section-starter-text">
+              Borda counting is ranked preferential votingmethod. Each voter
+              ranks the candidates in a way, that the candidate who they the
+              most want to win takes up the first place. And the candidate, who
+              they the least want to win takes up the last place. Based on this
+              tier-list every candidate gets points. For every first place in a
+              tier-list the candidate gets as many points, as many candidates
+              there are. For every second place in a tier-list, the candidate
+              gets one less points, than the total number of candidates and so
+              on. Each candidate gets one point from each last place in a
+              tier-list. In the end the candidate with the most points wins.
+            </p>
+            <img
+              src="pictures/system-starters/borda-counting.png"
+              alt="visualization of the Borda counting voting system"
+              class="section-starter-picture canvas_img viewable_picture"
+            />
+          </div>
+        </div>
+      </section>
+      <div class="spacer green-peak"></div>
+      <section id="sys-copeland" class="docli green">
+        <div class="section-starter-content">
+          <h3 class="vs section-title" translate="no">Copeland's method</h3>
+          <div class="overflower-flex reverse_odd_flex">
+            <p class="section-starter-text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore
+              quae corporis quasi! Saepe dolore repudiandae sit. Iusto dolore
+              possimus veniam at odit ipsa illum. Eveniet totam natus tempora
+              culpa eum.
+            </p>
+            <img
+              src="pictures/system-starters/copeland.png"
+              alt="visualization of the Copeland voting system"
+              class="section-starter-picture canvas_img viewable_picture"
+            />
+          </div>
+        </div>
+      </section>
+      <div class="spacer green-bot"></div>
+      <section class="docli">
+        <h3 class="vs section-title" translate="no">Tideman</h3>
+        <p>Tideman voting systems are...</p>
+      </section>
+      <div class="spacer turquoise-peak"></div>
+    </main>
+    <script src="javascript/view_picture.js"></script>
+    <script src="javascript/preview.js"></script>
+  </body>
 </html>
