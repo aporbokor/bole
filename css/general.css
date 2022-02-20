@@ -49,6 +49,8 @@ button {
   color: var(--secondary);
 }
 
+/* General element style */
+
 a{
   transition: color 100ms ease-in-out;
 }
@@ -149,6 +151,8 @@ th {
   border: 1px solid var(--primary);
 }
 
+/* Color classes */
+
 .green {
   background-color: green;
 }
@@ -171,4 +175,49 @@ th {
 
 .turquoise {
   background-color: turquoise;
+}
+
+.light-sec.light-sec,
+.light-sec.light-sec li::marker {
+  color: var(--primary-lt);
+}
+
+/* Layout classes */
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
+}
+
+.overflower-flex{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+  max-width: 100vw;
+
+  /* Sets the ideal size of it's children */
+  --ideal-size: 30rem;
+
+  padding-block: 2rem;
+}
+
+.overflower-flex > * {
+  flex-basis: var(--ideal-size);
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.reverse_even_flex:nth-child(even){
+  flex-direction: row-reverse;
+}
+
+.reverse_odd_flex:nth-child(odd){
+  flex-direction: row-reverse;
 }

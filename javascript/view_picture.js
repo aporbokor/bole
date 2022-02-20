@@ -23,6 +23,7 @@ function show_picture(p) {
             return
         }
 
+        holder.removeChild(pic);
         holder.classList.add('hidden')
         holder.classList.remove('pic_holder');
     })
