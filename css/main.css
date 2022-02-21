@@ -9,13 +9,14 @@ main {
 main section {
   width: 100%;
   padding-left: 2rem;
-  padding: 2rem;
+  padding-top: 2rem;
 }
 
 main h2 {
-  font-size: clamp(1rem, 1.8rem, 2rem);
+  font-size: clamp(1rem, 5vw + 1.3rem, 2.3rem);
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
+  margin-top: 4rem;
 }
 
 article {
@@ -60,8 +61,8 @@ h3 {
 }
 
 .vs.vs.vs {
-  font-size: clamp(1.5rem, 5vw + 1rem, 2rem);
-  padding: clamp(1rem, 5vw + 1rem, 2rem);
+  font-size: clamp(1.5rem, 5vw + 2rem, 3rem);
+  padding: clamp(1rem, 5vw + 2rem, 3rem);
   padding-bottom: 4rem;
   line-height: 1;
 }
@@ -75,18 +76,18 @@ h3 {
   z-index: 1;
   position: relative;
   left: 0;
-  width: 50%;
-  height: 15%;
+  width: 100%;
+  height: 8rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   padding-left: 1rem;
   flex-direction: column;
-  background: white;
+  background: var(--primary-lt);
 }
 
 .welcome > * {
-  color: black;
+  color: var(--secondary);
 }
 /* Intro */
 #intro {
@@ -224,6 +225,8 @@ h1.company-name {
 /* SVG stuff */
 
 .spacer {
+  z-index: 1;
+  position: relative;
   aspect-ratio: 960/100;
   width: 100%;
   background-repeat: no-repeat;
@@ -273,6 +276,11 @@ h1.company-name {
 
 .turquoise-peak {
   background-image: url('/image/svg/turquoise-peak.svg');
+}
+
+.landing-grey {
+  background-image: url('/image/svg/landing-grey.svg');
+  height: auto;
 }
 
 /* Pictures */

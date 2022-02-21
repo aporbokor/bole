@@ -51,35 +51,35 @@ button {
 
 /* General element style */
 
-a{
+a {
   transition: color 100ms ease-in-out;
   position: relative;
+  text-decoration: none;
 }
 
-
-a:visited:not(.company-name){
-  color:chocolate;
+a:visited:not(.company-name) {
+  color: var(--accent);
 }
 
-a:hover:hover{
-  color: orange;
+a:hover:hover {
+  color: var(--secondary);
 }
 
-a:not(.company-name)::before{
+a:not(.company-name)::before {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   height: 2px;
-  background-color: orange;
   transform: scaleX(0);
   transform-origin: right;
+  background-color: var(--secondary);
 
   transition: transform 250ms ease-in;
 }
 
-a:not(.company-name):hover::before{
+a:not(.company-name):hover::before {
   transform-origin: left;
   transform: scaleX(1);
 }
@@ -213,7 +213,7 @@ th {
   padding-bottom: 2rem;
 }
 
-.overflower-flex{
+.overflower-flex {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -232,12 +232,4 @@ th {
   flex-basis: var(--ideal-size);
   flex-grow: 1;
   flex-shrink: 1;
-}
-
-.reverse_even_flex:nth-child(even){
-  flex-direction: row-reverse;
-}
-
-.reverse_odd_flex:nth-child(odd){
-  flex-direction: row-reverse;
 }
