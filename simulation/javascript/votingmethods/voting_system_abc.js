@@ -161,6 +161,14 @@ class RankingVotingMethod extends VotingMethod {
     }
   }
 
+  registrate_honest_vote(voter) {
+    return this.best_candidate_tier_list(voter, this.candidates);
+  }
+
+  registrate_strategic_vote(voter) {
+    return this.registrate_honest_vote(voter);
+  }
+
   registrate_vote(voter) {
     let ballot;
 
@@ -176,14 +184,6 @@ class RankingVotingMethod extends VotingMethod {
     voter.voted_for = ballot;
   }
 
-  registrate_honest_vote(voter) {
-    return this.best_candidate_tier_list(voter, this.candidates);
-  }
-
-  registrate_strategic_vote(voter) {
-    return this.registrate_honest_vote(voter);
-  }
-
   best_candidate_tier_list(voter, candidates_ = this.candidates) {
     // Given a voter and a list of candidates, retuns the voter's preference list for those candidates
     return voter.honest_preference(candidates_);
@@ -191,7 +191,6 @@ class RankingVotingMethod extends VotingMethod {
 
   update_votecounts(ballot) {
     // Updates the candidates' votecounts based on a ballot
-
     for (let i = 0; i < ballot.length; i++) {
       ballot[i].votes[i] += 1;
     }
@@ -303,7 +302,7 @@ class RunoffLike extends RankingVotingMethod {
       this.candidates[i].sub_votes_for_visualization = [];
     }
   }
-  
+
   winner_by_majority(sub_votes) {
     // console.log(sub_votes.max_count);
     return sub_votes.max_count() > voters.length / 2;
