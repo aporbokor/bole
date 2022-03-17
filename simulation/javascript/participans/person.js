@@ -2,7 +2,6 @@ class Person extends Drawable {
   // ABC for the voters and candidates
 
   constructor(x, y, color, name, default_size) {
-
     super(color, name, default_size);
     ABC_constructor(this, Person);
 
@@ -35,9 +34,9 @@ class Person extends Drawable {
       textFont(font);
       textAlign(CENTER, CENTER);
 
-      let size = this.size * 0.4
+      let size = this.size * 0.4;
       textSize(size);
-      let box = font.textBounds(this.text.toString(), this.x, this.y)
+      let box = font.textBounds(this.text.toString(), this.x, this.y);
 
       fill(255);
       stroke(255);
@@ -53,7 +52,7 @@ class Person extends Drawable {
     // Removes every arrow which starts at this person
 
     for (let i = 0; i < this.arrows_from.length; i++) {
-      this.arrows_from[i].remove()
+      this.arrows_from[i].remove();
     }
   }
 
@@ -63,12 +62,12 @@ class Person extends Drawable {
     element.select_on = this;
 
     element.addEventListener(event, function () {
-      console.log(this.select_on)
+      console.log(this.select_on);
       clicked_selected = this.select_on;
-    })
+    });
   }
 
-  get_name_p(extra_text = '') {
+  get_name_p(extra_text = "") {
     // Return a p element wich represents the person
 
     let returned = document.createElement("p");
@@ -80,7 +79,8 @@ class Person extends Drawable {
       return returned;
     }
 
-    returned.innerText = this.profile_pic.outerHTML + ` ${this.name}`;
+    returned.innerHTML =
+      this.profile_pic.outerHTML + ` ${this.name}${extra_text}`;
 
     this.show_on_event(returned);
     return returned;
@@ -96,21 +96,23 @@ class Person extends Drawable {
     return returned;
   }
 
-  get_custom_p(progress_data, text_after_name = '|votes: ') {
+  get_custom_p(progress_data, text_after_name = "|votes: ") {
     // Creates a DOM element with the person's name and progresses made of thee proggres_data
 
-    let text = this.get_name_p().innerText + text_after_name;
+    let text = this.get_name_p().innerHTML + text_after_name;
     let returned = createProgress(text, progress_data, max_votes);
 
-    returned.style('color', this.color);
+    returned.style("color", this.color);
     returned.candidate_parent = this;
     returned.mousePressed(function () {
       clicked_selected = this.candidate_parent;
       load_clicked_selected();
     });
-    returned.mouseMoved(function () { selected = this.candidate_parent });
-    returned.label.style('color', this.target_color);
-    returned.class('candidate_p');
+    returned.mouseMoved(function () {
+      selected = this.candidate_parent;
+    });
+    returned.label.style("color", this.target_color);
+    returned.class("candidate_p");
 
     this.show_on_event(returned.elt);
     return returned;
@@ -121,41 +123,43 @@ class Person extends Drawable {
       return null;
     }
 
-    let returned = createButton(`Remove arrows pointing from this ${this.constructor.name}`);
+    let returned = createButton(
+      `Remove arrows pointing from this ${this.constructor.name}`
+    );
     returned.parent = this;
 
     returned.mousePressed(function () {
       this.parent.remove_arrows_from();
-    })
+    });
 
-    return returned
+    return returned;
   }
 
   get_div() {
     /* Creates a div representing the person to be used in the selected div.
        Must define an extra_to_div abstractmethod for this to work*/
 
-    let returned = createDiv(this.constructor.name + ': ');
-    returned.style('color', this.target_color);
+    let returned = createDiv(this.constructor.name + ": ");
+    returned.style("color", this.target_color);
 
-    let edit_app = this.edit_apperance_div()
+    let edit_app = this.edit_apperance_div();
 
-    let xp = createP('x: ' + round(this.x));
-    let yp = createP('y: ' + round(this.y));
+    let xp = createP("x: " + round(this.x));
+    let yp = createP("y: " + round(this.y));
 
     let extra_to_div = this.get_extra_to_div();
 
     let this_ = this;
 
     let image_input = createFileInput(function (file) {
-      if (file.type === 'image') {
-        this_.profile_pic = document.createElement('img');
+      if (file.type === "image") {
+        this_.profile_pic = document.createElement("img");
         this_.profile_pic.src = file.data;
         this_.profile_pic.setAttribute("class", "person_profile_pic");
         this_.show_image = loadImage(file.data);
         this_.show_image.resize(35, 35);
       }
-    })
+    });
 
     let delete_button = this.get_delete_button();
 
@@ -170,7 +174,6 @@ class Person extends Drawable {
       returned.child(text);
     }
 
-
     returned.child(extra_to_div);
 
     if (del_arr != null) {
@@ -178,13 +181,15 @@ class Person extends Drawable {
     }
     returned.child(delete_button);
 
-    returned.class(this.constructor.name + '_div');
+    returned.class(this.constructor.name + "_div");
 
     return returned;
   }
 
   get_extra_to_div() {
     // Must define this for get_div to work
-    throw new Error("You must implement an get_extra_to_div method to your Person class");
+    throw new Error(
+      "You must implement an get_extra_to_div method to your Person class"
+    );
   }
 }

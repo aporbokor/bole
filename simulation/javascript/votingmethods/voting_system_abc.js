@@ -290,7 +290,6 @@ class RunoffLike extends RankingVotingMethod {
   constructor(candidates) {
     super(candidates);
     ABC_constructor(this, RunoffLike);
-    this.voters = [];
     this.explaining_text = "[placeholder text]";
   }
 
@@ -411,8 +410,8 @@ class RunoffLike extends RankingVotingMethod {
     while (elliminated.size < this.candidates.length) {
       let sub_votes = new Counter(1);
 
-      for (let i = 0; i < this.voters.length; i++) {
-        let vote = this.votes_for(this.voters[i], elliminated);
+      for (let i = 0; i < voters.length; i++) {
+        let vote = this.votes_for(voters[i], elliminated);
         if (vote != undefined) {
           sub_votes.count(vote);
         }

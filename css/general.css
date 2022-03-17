@@ -3,7 +3,7 @@
   --primary: black;
   --secondary: white;
   --primary-lt: #222;
-  --accent: lightgray;
+  --accent: rgb(243, 240, 255);
 }
 
 /* Breakpoints */
@@ -39,13 +39,12 @@ strong {
 
 /*Fonts*/
 
-a,
 li,
 span,
 div,
 p,
 button {
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
   color: var(--secondary);
 }
 
@@ -54,11 +53,12 @@ button {
 a {
   transition: color 100ms ease-in-out;
   position: relative;
-  text-decoration: none;
+  color: inherit;
+  white-space: nowrap;
 }
 
 a:visited:not(.company-name) {
-  color: var(--accent);
+  color: rgb(152, 200, 255);
 }
 
 a:hover:hover {
@@ -66,7 +66,7 @@ a:hover:hover {
 }
 
 a:not(.company-name)::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
@@ -91,7 +91,7 @@ button {
 
 h1,
 h2 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: white;
 }
 
@@ -124,7 +124,7 @@ button {
 }
 
 button::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
