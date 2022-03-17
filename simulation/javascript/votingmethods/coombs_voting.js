@@ -1,8 +1,8 @@
 class CoombsVoting extends RunoffLike {
-
   constructor(candidates) {
     super(candidates);
-    this.explaining_text = 'Now we are going to elliminate the candidates, who the most voters have putted to last place'
+    this.explaining_text =
+      "Now we are going to elliminate the candidates, who the most voters have putted to last place";
   }
 
   votes_for(voter, eliminated) {
@@ -20,8 +20,8 @@ class CoombsVoting extends RunoffLike {
 
   elliminate_canidates(sub_votes, elliminated) {
     let last_places = new Counter();
-    for (let i = 0; i < this.voters.length; i++) {
-      last_places.count(this.get_last_valid_preference(this.voters[i], elliminated));
+    for (let i = 0; i < voters.length; i++) {
+      last_places.count(this.get_last_valid_preference(voters[i], elliminated));
     }
     console.log(last_places);
     return last_places.maxs();
@@ -38,22 +38,24 @@ class CoombsVoting extends RunoffLike {
 
     subresult.sort(function (a, b) {
       return a[0][1] - b[0][1];
-    })
+    });
 
-    let res = get_results_elements(subresult,
-      function (cand) {
-        let candidate = cand[0];
-        // let returned = createProgress(cand[0].name + ': ',cand[1],voters.length);
-        // returned.label.style('color',cand[0].color);
-        return candidate.get_custom_p(candidate.sub_votes_for_visualization[0]);
-      })
+    let res = get_results_elements(subresult, function (cand) {
+      let candidate = cand[0];
+      // let returned = createProgress(cand[0].name + ': ',cand[1],voters.length);
+      // returned.label.style('color',cand[0].color);
+      return candidate.get_custom_p(candidate.sub_votes_for_visualization[0]);
+    });
 
     return res;
   }
 
   get_reasoning_text(elliminated_candidates) {
-    let votes = Array.from(elliminated_candidates.entries())[0][1].sub_votes_for_visualization[0];
+    let votes = Array.from(elliminated_candidates.entries())[0][1]
+      .sub_votes_for_visualization[0];
     let vote = votes[votes.length - 1];
-    return createP(`The elliminated candidates in this votecounting had the most votes in the last place. They all had ${vote}`);
+    return createP(
+      `The elliminated candidates in this votecounting had the most votes in the last place. They all had ${vote}`
+    );
   }
 }
