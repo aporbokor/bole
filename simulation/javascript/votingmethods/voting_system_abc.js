@@ -95,6 +95,39 @@ function count_votes_for_ints(
   return result;
 }
 
+class cardinalVotingMethod extends VotingMethod {
+  constructor(candidates) {
+    super(candidates);
+    ABC_constructor(this, cardinalVotingMethod);
+    this.ballot_marker = 'tick-marker';
+    this.upper_bound = 1;
+    this.lower_bound = 0;
+  }
+
+  prepare_for_voting() {
+    for (let i = 0; i < this.candidates.length; i++) {
+      this.candidates[i].votes = [];
+    }
+  }
+
+  registrate_vote(voter) {
+    let ballot;
+
+    if (voter.strategic) {
+      ballot = this.registrate_honest_vote;
+    } else {
+      ballot = this.registrate_strategic_vote;
+    }
+
+    this.update_votecounts(ballot);
+    voter.voted_for = ballot;
+  }
+
+  count_votes() {
+    return count_votes_for_ints(this.candidates);
+  }
+}
+
 class NumberVotecountVotingMethod extends VotingMethod {
   // ABC for every votingmethod where tha candidates votes can be represented by numbers
   constructor(candidates) {
@@ -305,6 +338,7 @@ class RunoffLike extends RankingVotingMethod {
     // console.log(sub_votes.max_count);
     return sub_votes.max_count() > voters.length / 2;
   }
+
   get_majority_losers(sub_votes) {
     if (this.winner_by_majority(sub_votes) & (sub_votes.size > 1)) {
       const winner_votes = sub_votes.max_count();
