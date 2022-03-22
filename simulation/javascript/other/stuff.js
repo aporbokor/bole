@@ -1,16 +1,14 @@
 function cursor_in_canvas() {
   // returns wether the cursor is inside of the canvas or not
-  return !((mouseX < 0) || (mouseX > width) || (mouseY < 0) || (mouseY > height));
+  return !(mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height);
 }
-
-
 
 function sum_of_natural_numbers(start, end, stepp = 1) {
   /* Adding up natural numbers from start to end with the increase of stepp
       example: sum_of_natural_numbers(0,100) = 0 + 1 + 2 + ... 100*/
 
   let range = end - start;
-  return (range / 2) * ((2 * start) + ((range - 1) * stepp));
+  return (range / 2) * (2 * start + (range - 1) * stepp);
 }
 
 function faktorial(n) {
@@ -92,26 +90,26 @@ function int_to_serial_number(i) {
   /* Returns a string from an int containing the serial number of that int
      examples: 1st, 2nd, 11th, 13th, 20th, 31st*/
 
-  let str_int = '' + i;
+  let str_int = "" + i;
 
-  if ((str_int.length > 1) & (str_int.substr(-2, 1) === '1')) {
-    return str_int + 'th';
+  if ((str_int.length > 1) & (str_int.substr(-2, 1) === "1")) {
+    return str_int + "th";
   }
-  if (str_int.slice(-1) === '1') {
-    return str_int + 'st';
+  if (str_int.slice(-1) === "1") {
+    return str_int + "st";
   }
-  if (str_int.slice(-1) === '2') {
-    return str_int + 'nd';
+  if (str_int.slice(-1) === "2") {
+    return str_int + "nd";
   }
-  if (str_int.slice(-1) === '3') {
-    return str_int + 'rd';
+  if (str_int.slice(-1) === "3") {
+    return str_int + "rd";
   }
-  return str_int + 'th';
+  return str_int + "th";
 }
 
 function random_bool(true_chance) {
   // Coinflip function. Returns a random bool
-  return (random() < true_chance);
+  return random() < true_chance;
 }
 
 function rewrapp_index(arr, i) {
@@ -121,7 +119,9 @@ function rewrapp_index(arr, i) {
 
 function inverse_filter_array_by_array(arr, filter_arr) {
   // Returns an array wich is the diffenence between the arr, and the filter_arr
-  return arr.filter(function (x) { return !(filter_arr.includes(x)) });
+  return arr.filter(function (x) {
+    return !filter_arr.includes(x);
+  });
 }
 
 function point_in_circle(point_x, point_y, circle_x, circle_y, radius) {
@@ -134,8 +134,8 @@ function random_point_inside_circle(x, y, r) {
   let ans_x = Infinity;
   let ans_y = Infinity;
 
-  const corner_x = (x - (r));
-  const corner_y = (y - (r));
+  const corner_x = x - r;
+  const corner_y = y - r;
 
   while (!point_in_circle(ans_x, ans_y, x, y, r)) {
     ans_x = random(2 * r) + corner_x;
@@ -146,15 +146,14 @@ function random_point_inside_circle(x, y, r) {
 }
 
 function distance_from_line_segment(point, linestart, lineend) {
+  let x = point.x;
+  let y = point.y;
 
-  let x = point.x
-  let y = point.y
+  let x1 = linestart.x;
+  let y1 = linestart.y;
 
-  let x1 = linestart.x
-  let y1 = linestart.y
-
-  let x2 = lineend.x
-  let y2 = lineend.y
+  let x2 = lineend.x;
+  let y2 = lineend.y;
 
   let A = x - x1;
   let B = y - y1;
@@ -164,7 +163,8 @@ function distance_from_line_segment(point, linestart, lineend) {
   let dot = A * C + B * D;
   let len_sq = C * C + D * D;
   let param = -1;
-  if (len_sq != 0) //in case of 0 length line
+  if (len_sq != 0)
+    //in case of 0 length line
     param = dot / len_sq;
 
   let xx, yy;
@@ -172,12 +172,10 @@ function distance_from_line_segment(point, linestart, lineend) {
   if (param < 0) {
     xx = x1;
     yy = y1;
-  }
-  else if (param > 1) {
+  } else if (param > 1) {
     xx = x2;
     yy = y2;
-  }
-  else {
+  } else {
     xx = x1 + param * C;
     yy = y1 + param * D;
   }
@@ -189,7 +187,7 @@ function distance_from_line_segment(point, linestart, lineend) {
 
 function is_point_inside_rect(x1, y1, x2, y2, px, py) {
   // Checks if a point is inside of a rectangle
-  return !((px < x1) || (px > x2) || (py < y1) || (py > y2))
+  return !(px < x1 || px > x2 || py < y1 || py > y2);
 }
 
 class Counter extends Map {
@@ -200,8 +198,17 @@ class Counter extends Map {
     this.start_value = start_value;
   }
 
-  copy() {
+  static from_array(arr) {
+    let returned = new Counter(0);
 
+    for (const x of arr) {
+      returned.count(x);
+    }
+
+    return returned;
+  }
+
+  copy() {
     let returned = new Counter(this.start_value);
 
     for (const x of this.entries()) {
@@ -213,7 +220,7 @@ class Counter extends Map {
   count(object) {
     // Increases Counter[object] by one
     if (this.has(object)) {
-      this.set(object, this.get(object) + 1)
+      this.set(object, this.get(object) + 1);
       return;
     }
     this.set(object, this.start_value);
@@ -236,7 +243,6 @@ class Counter extends Map {
       if (value == min_val) {
         returned.push(key);
       }
-
     }
     return returned;
   }
@@ -258,7 +264,6 @@ class Counter extends Map {
       if (value == max_val) {
         returned.push(key);
       }
-
     }
     return returned;
   }
@@ -270,7 +275,7 @@ class Counter extends Map {
 
     for (const x of this.entries()) {
       if (x[1] < min_val) {
-        min_val = x[1]
+        min_val = x[1];
       }
     }
     return min_val;
@@ -283,7 +288,7 @@ class Counter extends Map {
 
     for (const x of this.entries()) {
       if (x[1] > max_val) {
-        max_val = x[1]
+        max_val = x[1];
       }
     }
     return max_val;
@@ -308,5 +313,5 @@ class Counter extends Map {
 function get_progress(speed) {
   // Returns the progress based on some speed and the time passed (in milliseconds) between frames
 
-  return deltaTime * speed
+  return deltaTime * speed;
 }

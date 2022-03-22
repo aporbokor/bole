@@ -408,7 +408,12 @@ class RunoffLike extends RankingVotingMethod {
     this.sub_votes_for_visualization = [];
 
     while (elliminated.size < this.candidates.length) {
-      let sub_votes = new Counter(1);
+      let not_elliminated = this.candidates.filter((c) => {
+        return !elliminated.has(c);
+      });
+
+      let sub_votes = Counter.from_array(not_elliminated);
+      console.log(elliminated, not_elliminated);
 
       for (let i = 0; i < voters.length; i++) {
         let vote = this.votes_for(voters[i], elliminated);
@@ -426,7 +431,7 @@ class RunoffLike extends RankingVotingMethod {
       for (const x of sub_votes.entries()) {
         sub_result.push(x);
       }
-      console.log(sub_result);
+      console.log({ sub_result, sub_votes });
 
       this.sub_results.push(
         count_votes_for_ints(sub_result, function (cand) {
