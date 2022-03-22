@@ -5,29 +5,37 @@ class Bucklin extends RankingVotingMethod {
   }
 
   set_max(candidates) {
-    for (let i = 0; i < length(this.candidates); i++) {
+    for (let i = 0; i < this.candidates.length; i++) {
       candidates[i].final = 0;
     }
   }
 
   count_votes() {
     this.set_max(candidates);
-    let done = False;
-    for (let i = 0; i < length(this.candidates); i++) {
-      for (let j = 0; j < length(this.candidates); j++) {
+    let done = false;
+    for (let i = 0; i < this.candidates.length; i++) {
+      for (let j = 0; j < this.candidates.length; j++) {
         this.candidates[j].final += this.candidates[j].votes[i];
         if (this.candidates[j].final > max_votes / 2) {
-          done = True;
+          done = true;
         }
       }
       if (done) {
-        count_votes_for_ints(
+        return count_votes_for_ints(
           candidates,
-          (get_votes = function (cand) {
+          (this.get_votes = function (cand) {
             return cand.final;
           })
         );
       }
+    }
+  }
+
+  extra_visualize(voters) {
+    super.extra_visualize(voters);
+    for (const cand of this.candidates) {
+      cand.text = cand.final;
+      cand.text_label = 'final vote count';
     }
   }
 }

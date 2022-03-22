@@ -14,14 +14,14 @@ class VotingMethod {
   prepare_for_voting() {
     // Called before registrating any votes
     throw new Error(
-      "You must implement a prepare_for_voting method to your VotingMethod class"
+      'You must implement a prepare_for_voting method to your VotingMethod class'
     );
   }
 
   registrate_vote(voter) {
     // Called to registrate the vote of a Voter
     throw new Error(
-      "You must implement a registrate_vote method to your VotingMethod class"
+      'You must implement a registrate_vote method to your VotingMethod class'
     );
   }
 
@@ -30,7 +30,7 @@ class VotingMethod {
        Must return an array of arrays,
        where every nth array contains the candidates who got nth place*/
     throw new Error(
-      "You must implement a count_votes method to your VotingMethod class"
+      'You must implement a count_votes method to your VotingMethod class'
     );
   }
 
@@ -38,13 +38,13 @@ class VotingMethod {
     /* Given any ballot of candidates must return an html element from that ballot.
        This ellement is then used in the selected_div of voters*/
     throw new Error(
-      "You must implement a get_ballot_element method to your VotingMethod class"
+      'You must implement a get_ballot_element method to your VotingMethod class'
     );
   }
 
   get_results_data(cand) {
     // Defines what data should be displayed in the results_div
-    return [cand.votes, "|votes: "];
+    return [cand.votes, '|votes: '];
   }
 
   extra_visualize(voters) {
@@ -56,7 +56,7 @@ class VotingMethod {
     // This method is used for setting up a relationship between the votingmethod and the steppig_box
     stepping_box.set_content(
       createP(
-        "Step by step visualization is not avalable for this votingmethod"
+        'Step by step visualization is not avalable for this votingmethod'
       )
     );
   }
@@ -95,12 +95,45 @@ function count_votes_for_ints(
   return result;
 }
 
+class cardinalVotingMethod extends VotingMethod {
+  constructor(candidates) {
+    super(candidates);
+    ABC_constructor(this, cardinalVotingMethod);
+    this.ballot_marker = 'tick-marker';
+    this.upper_bound = 1;
+    this.lower_bound = 0;
+  }
+
+  prepare_for_voting() {
+    for (let i = 0; i < this.candidates.length; i++) {
+      this.candidates[i].votes = [];
+    }
+  }
+
+  registrate_vote(voter) {
+    let ballot;
+
+    if (voter.strategic) {
+      ballot = this.registrate_honest_vote;
+    } else {
+      ballot = this.registrate_strategic_vote;
+    }
+
+    this.update_votecounts(ballot);
+    voter.voted_for = ballot;
+  }
+
+  count_votes() {
+    return count_votes_for_ints(this.candidates);
+  }
+}
+
 class NumberVotecountVotingMethod extends VotingMethod {
   // ABC for every votingmethod where tha candidates votes can be represented by numbers
   constructor(candidates) {
     super(candidates);
     ABC_constructor(this, NumberVotecountVotingMethod);
-    this.ballot_marker = "tick-marker";
+    this.ballot_marker = 'tick-marker';
   }
 
   prepare_for_voting() {
@@ -115,10 +148,10 @@ class NumberVotecountVotingMethod extends VotingMethod {
 
   get_ballot_element(ballot) {
     console.log(ballot);
-    let returned = document.createElement("ul");
+    let returned = document.createElement('ul');
 
     for (let i = 0; i < ballot.length; i++) {
-      let li = document.createElement("li");
+      let li = document.createElement('li');
       li.classList.add(this.ballot_marker);
       li.appendChild(ballot[i].get_name_p());
       returned.appendChild(li);
@@ -222,8 +255,8 @@ class RankingVotingMethod extends VotingMethod {
     }
 
     extra_function = function () {
-      if (typeof clicked_selected != "undefined") {
-        if (typeof clicked_selected.voted_for != "undefined") {
+      if (typeof clicked_selected != 'undefined') {
+        if (typeof clicked_selected.voted_for != 'undefined') {
           // Highlight the candidates based on their place in the selected voter's preference ballot
           let voter = clicked_selected;
           for (let j = 0; j < voter.voted_for.length; j++) {
@@ -238,7 +271,7 @@ class RankingVotingMethod extends VotingMethod {
 
             candidate.grow_by(-candidate_size + 5 + thick_amount * 10);
           }
-        } else if (typeof clicked_selected.votes != "undefined") {
+        } else if (typeof clicked_selected.votes != 'undefined') {
           // Highlight the voters based on where did tey put the selected candidate in their ballot
           let candidate = clicked_selected;
           for (let i = 0; i < voters.length; i++) {
@@ -266,10 +299,10 @@ class RankingVotingMethod extends VotingMethod {
   }
 
   get_ballot_element(ballot) {
-    let returned = document.createElement("ol");
+    let returned = document.createElement('ol');
 
     for (let i = 0; i < ballot.length; i++) {
-      let li = document.createElement("li");
+      let li = document.createElement('li');
       li.appendChild(ballot[i].get_name_p());
       returned.appendChild(li);
     }
@@ -290,7 +323,7 @@ class RunoffLike extends RankingVotingMethod {
   constructor(candidates) {
     super(candidates);
     ABC_constructor(this, RunoffLike);
-    this.explaining_text = "[placeholder text]";
+    this.explaining_text = '[placeholder text]';
   }
 
   prepare_for_voting() {
@@ -305,6 +338,7 @@ class RunoffLike extends RankingVotingMethod {
     // console.log(sub_votes.max_count);
     return sub_votes.max_count() > voters.length / 2;
   }
+
   get_majority_losers(sub_votes) {
     if (this.winner_by_majority(sub_votes) & (sub_votes.size > 1)) {
       const winner_votes = sub_votes.max_count();
@@ -392,12 +426,12 @@ class RunoffLike extends RankingVotingMethod {
 
   elliminate_canidates(sub_votes, elliminated) {
     throw new Error(
-      "You must implement an elliminate_canidates method to your RankingVotingMethod class"
+      'You must implement an elliminate_canidates method to your RankingVotingMethod class'
     );
   }
 
   get_reasoning_text(elliminated_candidates) {
-    return createP("[placeholder text]");
+    return createP('[placeholder text]');
   }
 
   count_votes() {
@@ -497,9 +531,9 @@ class RunoffLike extends RankingVotingMethod {
 
     content.child(
       createP(
-        "This is the " +
+        'This is the ' +
           int_to_serial_number(voting_sytem.visualization_stepp) +
-          " step"
+          ' step'
       )
     );
 
@@ -511,7 +545,7 @@ class RunoffLike extends RankingVotingMethod {
 
       let explaining_p = createP(voting_sytem.explaining_text);
       content.child(explaining_p);
-      explaining_p.class("explaining_p");
+      explaining_p.class('explaining_p');
 
       let subresult =
         voting_sytem.sub_results[voting_sytem.visualization_stepp];
@@ -525,7 +559,7 @@ class RunoffLike extends RankingVotingMethod {
         voting_sytem.elliminated_visualization
       );
       let elliminated_div = createDivWithP(
-        "These candidate(s) were elliminated:"
+        'These candidate(s) were elliminated:'
       );
 
       for (const x of voting_sytem.elliminated_visualization.values()) {
@@ -553,7 +587,7 @@ class RunoffLike extends RankingVotingMethod {
 
       voting_sytem.stepp_in_visualization();
     } else {
-      content.child(createP("The winner has been chosen"));
+      content.child(createP('The winner has been chosen'));
       voting_sytem.set_final_extra_function();
       this.parent_box.hide_next();
     }
@@ -779,12 +813,12 @@ class CondorcetVotingMethod extends RankingVotingMethod {
       voting_sytem.candidate_names
     );
 
-    let first_text = document.createElement("p");
+    let first_text = document.createElement('p');
     first_text.innerHTML = `After we have recived every voters ballot, now we can get to work. For each voter's ballot we are going to count how many times has been each candidate placed before each candidate. For example let's see what does the ballot of the voter named ${voter_p} (marked with the default voter color) looks like`;
 
     let voter_res_list = voting_sytem.get_ballot_element(voter_res);
 
-    let second_text = document.createElement("p");
+    let second_text = document.createElement('p');
 
     let first_choice = voter_res[0].get_simple_name_p().outerHTML;
     let second_choice = voter_res[1].get_simple_name_p().outerHTML;
@@ -793,7 +827,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
 
     second_text.innerHTML = `${first_choice} defeated every candidate all the way to the last placed ${last_choice}.<br>${second_choice} also defeated every candidate below them. But this candidate didn't beat ${first_choice}. We can do this kind of calculation to every candidate in the ballot to get the following matrix:`;
 
-    let third_text = document.createElement("p");
+    let third_text = document.createElement('p');
     third_text.innerHTML = `This table is the outranking matrix. This shows the preferences of ${voter_p}. As you can see, if we look at the row of ${first_choice} and the column of ${second_choice} we can see a one. This means that ${first_choice} is <strong>prefered</strong> over ${second_choice} by exactly one voter. If we do this for every voter's ballot, than we will know that how many times has candidate X been placed before candidate Y. We can place these findings in a table like so: `;
     let table = table_from_matrix(
       voting_sytem.outranking_matrix,
@@ -806,10 +840,10 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     const preference2 =
       voting_sytem.outranking_matrix[voter_res[1].id][voter_res[0].id];
 
-    let last_text = document.createElement("p");
+    let last_text = document.createElement('p');
     last_text.innerHTML = `This is the outranking matrix (O) of every voter. We can strore our <strong>preferences</strong> here. For example, we can see that ${first_choice} has been prefered over ${second_choice} by exactly ${preference} voters, and ${second_choice} has been prefered over ${first_choice} by exactly ${preference2} voters. This information (as we will see) is really useful for us.`;
 
-    let content = document.createElement("div");
+    let content = document.createElement('div');
     content.appendChild(first_text);
     content.appendChild(voter_res_list);
     content.appendChild(second_text);
@@ -878,17 +912,17 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     let voting_sytem = this.parent_box.visualized_system;
     delete_arrows();
 
-    voters.forEach((v) => {
+    voters.forEach(v => {
       v.hide();
     });
 
     voting_sytem.arrows_between_candidates();
     this.random_voter.set_color(this.random_voter.voted_for[0].color);
-    let content = document.createElement("div");
+    let content = document.createElement('div');
 
-    let text = document.createElement("p");
+    let text = document.createElement('p');
     text.innerHTML =
-      "From the outranking matrix we can create a relative strength matrix (R). Basicly every R(i,j) equals O(i,j) - O(j,i). This kind of matrix shows us, that how by how many times did each candidate i beat candidate j. If this number is negative than j has beaten i more times.";
+      'From the outranking matrix we can create a relative strength matrix (R). Basicly every R(i,j) equals O(i,j) - O(j,i). This kind of matrix shows us, that how by how many times did each candidate i beat candidate j. If this number is negative than j has beaten i more times.';
 
     let table = table_from_matrix(
       voting_sytem.relative_strength_matrix,
@@ -906,7 +940,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
   show_first() {
     // The first step_by_stepp visualization step which every class needs to define which inherits from CondorcetVotingMethod
     throw new Error(
-      "You must define a show_first method to your CondorcetVotingMethod class"
+      'You must define a show_first method to your CondorcetVotingMethod class'
     );
   }
 
