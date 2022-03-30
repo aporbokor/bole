@@ -100,32 +100,69 @@ class cardinalVotingMethod extends VotingMethod {
     super(candidates);
     ABC_constructor(this, cardinalVotingMethod);
     this.ballot_marker = 'tick-marker';
-    this.upper_bound = 1;
-    this.lower_bound = 0;
+    this.ranges = []
   }
 
   prepare_for_voting() {
     for (let i = 0; i < this.candidates.length; i++) {
       this.candidates[i].votes = [];
+      for (let j = 0; j < this.ranges.length; j++) {
+        this.candidates[i].votes.push(0)
+      } 
+    }
+  }
+
+  registrate_honest_vote(voter) {
+    let arr = [];
+    for (let i = 0; i < this.candidates.length; i++) {
+      if (voter.distance_to_candidate(this.candidates[i]) <= approval_range) {
+        this.candidates[i].votes[0] += 1;
+        arr.push(this.candidates[i]);
+      } else {
+        this.candidates[i].votes[1] += 1;
+      }
+    }
+    voter.voted_for = arr;
+  }
+
+  registrate_strategic_vote(voter) {
+    let prefs = voter.honest_preference(this.candidates);
+    prefs[0].votes[0] += 1;
+    voter.voted_for = [prefs[0]];
+    let k = this.ranges.length;
+    for (let i = 1; i < prefs.length; i++) {
+      prefs[i].votes[k] += 1;
     }
   }
 
   registrate_vote(voter) {
-    let ballot;
-
     if (voter.strategic) {
-      ballot = this.registrate_honest_vote;
+      this.registrate_honest_vote(voter);
     } else {
-      ballot = this.registrate_strategic_vote;
+      this.registrate_strategic_vote(voter);
     }
-
-    this.update_votecounts(ballot);
-    voter.voted_for = ballot;
+    if (voter.voted_for.length == 0) {
+      let pref = voter.honest_preference(this.candidates);
+      for (let i = 1; i < pref.length; i++) {
+        pref[i].votes[1] += 1;
+      }
+      pref[0].votes[0] += 1;
+      voter.voted_for = [pref[0]];
+    }
   }
 
   count_votes() {
-    return count_votes_for_ints(this.candidates);
+    return count_votes_for_ints(
+      this.candidates,
+      (this.get_votes = function (c) {
+        return c.votes[0];
+      })
+    );
   }
+
+  get_ballot_element(length)
+
+
 }
 
 class NumberVotecountVotingMethod extends VotingMethod {
@@ -442,7 +479,7 @@ class RunoffLike extends RankingVotingMethod {
     this.sub_votes_for_visualization = [];
 
     while (elliminated.size < this.candidates.length) {
-      let not_elliminated = this.candidates.filter((c) => {
+      let not_elliminated = this.candidates.filter(c => {
         return !elliminated.has(c);
       });
 
