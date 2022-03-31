@@ -1,4 +1,4 @@
-const main_element = document.getElementsByTagName('main')[0];
+const main_element = document.getElementsByTagName("main")[0];
 let font;
 
 const min_voters = 2;
@@ -54,16 +54,16 @@ let voting_type_selector;
 let tool_div;
 let current_tool;
 let tools = new Map([
-  ['select tool', SelectTool],
-  ['delete tool', DeleteTool],
-  ['voter painter', VoterPainter],
-  ['honesty painter', HonestyPainter],
-  ['strategy painter', StrategyPainter],
+  ["select tool", SelectTool],
+  ["delete tool", DeleteTool],
+  ["voter painter", VoterPainter],
+  ["honesty painter", HonestyPainter],
+  ["strategy painter", StrategyPainter],
 ]);
 let tool_selector;
 let tool_size;
 let max_tool_size = 200;
-let tool_color = 'green';
+let tool_color = "green";
 const activated_tool_stroke_weight = 5;
 const inactive_tool_stroke_weight = 2;
 const voter_per_pixel = 0.001;
@@ -76,7 +76,7 @@ WIDTH = 780;
 HEIGHT = 660;
 
 let approval_range;
-const default_approval_size = 0.2;
+const default_approval_size = 0.28;
 let approval_range_size = default_approval_size;
 let support_range;
 const default_support_size = 0.2;
@@ -99,25 +99,25 @@ let hide_stepping_box;
 const grow_speed = 0.02;
 const selected_size_adder = 5;
 const clicked_selected_size_adder = 15;
-const clicked_selected_laser_color = 'rgb(0, 0, 0)';
+const clicked_selected_laser_color = "rgb(0, 0, 0)";
 const clicked_selected_stroke_weight = 4;
 
-const default_stroke = 'rgb(0,0,0)';
-const strategic_voter_color = 'rgb(0, 0, 0)';
+const default_stroke = "rgb(0,0,0)";
+const strategic_voter_color = "rgb(0, 0, 0)";
 const strategic_voter_stroeke_weight = 3;
-const honest_voter_color = '#F18F01';
+const honest_voter_color = "#F18F01";
 const voter_size = 15;
 const voter_strokeWeight = 2;
 const support_circle_color = 111;
 
 const candidate_colors = [
-  '#FEFCFB',
-  '#ED3907',
-  '#7247FF',
-  '#162CD9',
-  '#2BB7DE',
-  '#BF1160',
-  '#0FFA42',
+  "#FEFCFB",
+  "#ED3907",
+  "#7247FF",
+  "#162CD9",
+  "#2BB7DE",
+  "#BF1160",
+  "#0FFA42",
 ];
 const candidate_size = 40;
 const candidate_strokeWeight = 5;
@@ -132,7 +132,7 @@ function random_voter(i) {
     round(random(height)),
     random_bool(strategic_chance),
     honest_voter_color,
-    'voter#' + i
+    "voter#" + i
   );
 }
 
@@ -172,7 +172,7 @@ function reset_voter_color() {
 }
 
 function toggle_voter_hide() {
-  voters.forEach(v => {
+  voters.forEach((v) => {
     v.toggle_hidden();
   });
 }
@@ -216,7 +216,7 @@ function random_candidate(i) {
     round(random(width)),
     round(random(height)),
     rewrapp_index(candidate_colors, i),
-    'candidate#' + i
+    "candidate#" + i
   );
 }
 
@@ -297,7 +297,7 @@ function draw_everyone() {
   // Draws the voters and the candidates onto the canvas
   stroke(default_stroke);
 
-  if (typeof selected != 'undefined') {
+  if (typeof selected != "undefined") {
     selected.grow_by(selected_size_adder);
   }
 
@@ -322,7 +322,7 @@ function draw_background() {
 supporter_draw = empty_function;
 
 function load_clicked_selected() {
-  if (typeof clicked_selected != 'undefined') {
+  if (typeof clicked_selected != "undefined") {
     let ch = selected_div.child();
     if (ch.length != 0) {
       ch[0].remove();
@@ -388,10 +388,10 @@ function get_results_elements(
 ) {
   // Returns the HTML element to be put into the results div
 
-  let returned = document.createElement('ol');
+  let returned = document.createElement("ol");
   for (let i = 0; i < results.length; i++) {
     let subdiv = createDiv(int_to_serial_number(i + 1));
-    subdiv.addClass('place_div');
+    subdiv.addClass("place_div");
     let places = results[i];
 
     for (let j = 0; j < places.length; j++) {
@@ -407,7 +407,7 @@ function display_votes(voter_maschine) {
   // Updates the results div and resets the stepping_box content
   stepping_box.delete_content();
 
-  vote_result_div.html('Voting results:');
+  vote_result_div.html("Voting results:");
   vote_result_div.child(get_results_elements(voting_results));
 
   voter_maschine.extra_visualize(voters);
@@ -443,7 +443,7 @@ function calc_supporter_range() {
 }
 
 function preload() {
-  font = loadFont('../fonts/Comfortaa-VariableFont_wght.ttf');
+  font = loadFont("../fonts/Comfortaa-VariableFont_wght.ttf");
 }
 
 function windowResized() {
@@ -461,52 +461,52 @@ function setup() {
     constrain(HEIGHT, 0, windowHeight - 30),
     WEBGL
   );
-  canvas.addClass('canvas');
+  canvas.addClass("canvas");
 
   max_voters = width * height * max_voters_per_pixel;
 
   calc_approval_range();
   calc_supporter_range();
 
-  selected_div = select('#selected');
+  selected_div = select("#selected");
 
   stroke(default_stroke);
 
   strategic_chance_slider = slider_with_name(
-    'strategic voter chance: ',
+    "strategic voter chance: ",
     0,
     1,
     strategic_chance,
     0.01
   );
   voter_population_slider = slider_with_name(
-    'number of voters: ',
+    "number of voters: ",
     min_voters,
     max_voters,
     voter_population,
     1
   );
   candidate_population_slider = slider_with_name(
-    'number of candidates: ',
+    "number of candidates: ",
     min_candidates,
     max_candidates,
     candidate_population,
     1
   );
 
-  add_voter_button = createButton('add voter');
+  add_voter_button = createButton("add voter");
   add_voter_button.mousePressed(add_voter);
 
-  reset_voter_color_buttton = createButton('reset voter colors');
+  reset_voter_color_buttton = createButton("reset voter colors");
   reset_voter_color_buttton.mousePressed(reset_voter_color);
 
-  hide_voters_button = createButton('toggle voter hide');
+  hide_voters_button = createButton("toggle voter hide");
   hide_voters_button.mousePressed(toggle_voter_hide);
 
-  delete_arrows_button = createButton('delete all arrows');
+  delete_arrows_button = createButton("delete all arrows");
   delete_arrows_button.mousePressed(delete_arrows);
 
-  support_vis_checkbox = createCheckbox('visualize support ranges', false);
+  support_vis_checkbox = createCheckbox("visualize support ranges", false);
   support_vis_checkbox.changed(function () {
     if (this.checked()) {
       supporter_draw = function () {
@@ -523,7 +523,7 @@ function setup() {
     }
   });
 
-  average_voter_checkbox = createCheckbox('show average voter', false);
+  average_voter_checkbox = createCheckbox("show average voter", false);
   average_voter_checkbox.changed(function () {
     if (this.checked()) {
       average_voter.appear();
@@ -535,16 +535,16 @@ function setup() {
     }
   });
 
-  add_candidate_button = createButton('add candidate');
+  add_candidate_button = createButton("add candidate");
   add_candidate_button.mousePressed(add_candidate);
 
-  delete_candidate_button = createButton('delete candidate');
+  delete_candidate_button = createButton("delete candidate");
   delete_candidate_button.mousePressed(remove_candidate);
 
-  delete_voter_button = createButton('delete voter');
+  delete_voter_button = createButton("delete voter");
   delete_voter_button.mousePressed(remove_voter);
 
-  reset_button = createButton('reset enviroment');
+  reset_button = createButton("reset enviroment");
   reset_button.mousePressed(reset_enviroment);
 
   voting_type_selector = createSelect();
@@ -564,13 +564,13 @@ function setup() {
   tool_selector.changed(select_tool);
   select_tool();
 
-  tool_size = slider_with_name('tool size: ', 0, max_tool_size, 0, 1);
+  tool_size = slider_with_name("tool size: ", 0, max_tool_size, 0, 1);
 
-  simulate_button = createButton('simulate');
+  simulate_button = createButton("simulate");
   simulate_button.mousePressed(simulate_voting);
-  simulate_button.addClass('simulate_button');
+  simulate_button.addClass("simulate_button");
 
-  auto_simulate_check_box = createCheckbox('auto simulate', false);
+  auto_simulate_check_box = createCheckbox("auto simulate", false);
   auto_simulate_check_box.changed(function () {
     if (this.checked()) {
       auto_simulate = auto_simulate_true;
@@ -579,7 +579,7 @@ function setup() {
     }
   });
 
-  simfreezer = createCheckbox('freeze visualization', false);
+  simfreezer = createCheckbox("freeze visualization", false);
   simfreezer.changed(function () {
     if (this.checked()) {
       freeze();
@@ -589,44 +589,44 @@ function setup() {
   });
 
   approval_slider = slider_with_name(
-    'approval range: ',
+    "approval range: ",
     0.1,
     1,
     approval_range_size,
     0.01
   );
-  approval_slider.input(val => {
+  approval_slider.input((val) => {
     approval_range_size = val;
     calc_approval_range();
     change_in_sim = true;
   });
 
   supporter_slider = slider_with_name(
-    'support range: ',
+    "support range: ",
     0.1,
     1,
     support_range_size,
     0.01
   );
-  supporter_slider.input(val => {
+  supporter_slider.input((val) => {
     support_range_size = val;
     calc_supporter_range();
     change_in_sim = true;
   });
 
   seems_win_slider = slider_with_name(
-    'winner prediction percentage: ',
+    "winner prediction percentage: ",
     0.9,
     2,
     seems_win_percent,
     0.02
   );
-  seems_win_slider.input(val => {
+  seems_win_slider.input((val) => {
     seems_win_percent = val;
     change_in_sim = true;
   });
 
-  reset_to_default_button = createButton('reset advanced settings to default');
+  reset_to_default_button = createButton("reset advanced settings to default");
   reset_to_default_button.mousePressed(() => {
     seems_win_slider.setValue(default_seems_win_percent);
     approval_slider.setValue(default_approval_size);
@@ -639,17 +639,17 @@ function setup() {
     change_in_sim = true;
   });
 
-  new_envitoment_div = select('#new_environment_div');
+  new_envitoment_div = select("#new_environment_div");
 
-  edit_enviroment_div = select('#edit_enviroment_div');
+  edit_enviroment_div = select("#edit_enviroment_div");
 
-  Simulation_div = select('#Simulation_div');
+  Simulation_div = select("#Simulation_div");
 
-  tool_div = select('#tool_div');
+  tool_div = select("#tool_div");
 
-  advanced = select('#advanced');
+  advanced = select("#advanced");
 
-  visualization_div = select('#visualization');
+  visualization_div = select("#visualization");
 
   new_envitoment_div.child(strategic_chance_slider);
   new_envitoment_div.child(voter_population_slider);
@@ -661,13 +661,13 @@ function setup() {
   edit_enviroment_div.child(delete_candidate_button);
   edit_enviroment_div.child(delete_voter_button);
 
-  Simulation_div.child(document.createElement('br'));
+  Simulation_div.child(document.createElement("br"));
   Simulation_div.child(voting_type_selector);
   Simulation_div.child(simulate_button);
   Simulation_div.child(auto_simulate_check_box);
   Simulation_div.child(simfreezer);
 
-  tool_div.child(document.createElement('br'));
+  tool_div.child(document.createElement("br"));
   tool_div.child(tool_selector);
   tool_div.child(tool_size);
 
@@ -682,7 +682,7 @@ function setup() {
   visualization_div.child(support_vis_checkbox);
   visualization_div.child(average_voter_checkbox);
 
-  vote_result_div = select('#vote_results');
+  vote_result_div = select("#vote_results");
 
   // results_and_selected_d = select('#results-and-selected-div');
   // results_and_selected_d.child(selected_div);
@@ -692,7 +692,7 @@ function setup() {
 
   make_voters(voter_population);
   make_candidates(candidate_population);
-  average_voter = new Average(0, 0, true, 160, 'average voter');
+  average_voter = new Average(0, 0, true, 160, "average voter");
   average_voter.hidden_size = 0;
   average_voter.hide();
 

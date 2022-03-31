@@ -3,29 +3,29 @@ class ApprovalVoter extends cardinalVotingMethod {
     super(candidates);
     this.ranges = [approval_range, max_range];
   }
+
+  vote_to_text(vote) {
+    if (vote == 0) {
+      return "approved with";
+    }
+    return "disapproved with";
+  }
+
   extra_visualize(voters) {
-    for (let i = 0; i < voters.length; i++) {
-      for (let j = 0; j < this.ranges.length; j++) {
-        if (voters[i].voted_for[j].length != 0) {
-          voters[i].set_color(voters[i].voted_for[j][0].color);
-          break;
-        }
-      }
+    this.paint_voters();
+
+    for (const cand of candidates) {
+      cand.text = cand.votes[0];
+      cand.text_label = "approves";
     }
 
     extra_function = function () {
-      noFill();
       for (let i = 0; i < candidates.length; i++) {
-        stroke(candidates[i].color);
-        circle(candidates[i].x, candidates[i].y, approval_range * 2);
+        voter_maschine.draw_circles_around_candidate(candidates[i]);
       }
-      stroke(default_stroke);
+
       if (candidates.some(isin)) {
-        for (let i = 0; i < voters.length; i++) {
-          if (voters[i].voted_for.some(isin)) {
-            voters[i].target_size += selected_size_adder;
-          }
-        }
+        voter_maschine.resize_voters(clicked_selected);
       }
     };
   }

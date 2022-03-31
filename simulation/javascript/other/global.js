@@ -7,18 +7,19 @@ let max_votes;
 const max_range = Infinity;
 
 const votingmethods = new Map([
-  ['plurarity', PlurarityVoter],
-  ['anti-plurarity', AntiPlurarityVoter],
+  ["plurarity", PlurarityVoter],
+  ["anti-plurarity", AntiPlurarityVoter],
   // ['theoretical perfect', PerfectVoter],
-  ['approval voting', ApprovalVoter],
-  ['borda counting', BordaCounting],
-  ['bucklin', Bucklin],
-  ['supplementary vote', SupplementaryVoter],
-  ['Sri Lankan Contingent vote', SriLankanContingentVoter],
-  ['contingent vote', ContingentVoter],
-  ['instant runoff', InstantRunOffVoter],
-  ['coombs', CoombsVoting],
-  ['copleland', CopelandVoter],
+  ["approval voting", ApprovalVoter],
+  ["evaluative voting", evaluativeVoter],
+  ["borda counting", BordaCounting],
+  ["bucklin", Bucklin],
+  ["supplementary vote", SupplementaryVoter],
+  ["Sri Lankan Contingent vote", SriLankanContingentVoter],
+  ["contingent vote", ContingentVoter],
+  ["instant runoff", InstantRunOffVoter],
+  ["coombs", CoombsVoting],
+  ["copleland", CopelandVoter],
   // ['tideman', TideMan]
 ]);
 
@@ -39,7 +40,7 @@ function simulate_voting() {
   }
   max_votes = voters.length;
 
-  candidates.forEach(cand => {
+  candidates.forEach((cand) => {
     cand.reset_text();
   });
 
@@ -51,17 +52,18 @@ function simulate_voting() {
   voter_maschine.prepare_for_voting();
 
   for (let i = 0; i < voters.length; i++) {
+    voters[i].set_color(honest_voter_color);
     voter_maschine.registrate_vote(voters[i]);
   }
 
   voting_results = voter_maschine.count_votes();
-  console.log('The voting machine:');
+  console.log("The voting machine:");
   console.log(voter_maschine);
 
-  console.log('The results:');
+  console.log("The results:");
   console.log(voting_results);
 
-  console.log('The voters:');
+  console.log("The voters:");
   console.log(voters);
 
   display_votes(voter_maschine);
