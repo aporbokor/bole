@@ -49,7 +49,7 @@ article {
   list-style-type: disc;
 }
 h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: var(--secondary);
   font-weight: bold;
   font-size: clamp(1rem, 1.5rem, 2rem);
@@ -123,12 +123,12 @@ h3 {
 }
 
 #intro::before {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
 
-  background-image: url('../pictures/intro.png');
+  background-image: url("../pictures/intro.png");
   background-size: cover;
   background-position: center, center;
   opacity: 0;
@@ -156,7 +156,7 @@ h3 {
 }
 
 .intro-text::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background-color: black;
@@ -235,51 +235,51 @@ h1.company-name {
 }
 
 .green-peak {
-  background-image: url('/image/svg/green-peak.svg');
+  background-image: url("/image/svg/green-peak.svg");
 }
 
 .green-bot {
-  background-image: url('/image/svg/green-bot.svg');
+  background-image: url("/image/svg/green-bot.svg");
 }
 
 .orange-peak {
-  background-image: url('/image/svg/orange-peak.svg');
+  background-image: url("/image/svg/orange-peak.svg");
 }
 
 .orange-bot {
-  background-image: url('/image/svg/orange-bot.svg');
+  background-image: url("/image/svg/orange-bot.svg");
 }
 
 .brown-peak {
-  background-image: url('/image/svg/brown-peak.svg');
+  background-image: url("/image/svg/brown-peak.svg");
 }
 
 .brown-bot {
-  background-image: url('/image/svg/brown-bot.svg');
+  background-image: url("/image/svg/brown-bot.svg");
 }
 
 .purple-peak {
-  background-image: url('/image/svg/purple-peak.svg');
+  background-image: url("/image/svg/purple-peak.svg");
 }
 
 .purple-bot {
-  background-image: url('/image/svg/purple-bot.svg');
+  background-image: url("/image/svg/purple-bot.svg");
 }
 
 .yellow-peak {
-  background-image: url('/image/svg/yellow-peak.svg');
+  background-image: url("/image/svg/yellow-peak.svg");
 }
 
 .yellow-bot {
-  background-image: url('/image/svg/yellow-bot.svg');
+  background-image: url("/image/svg/yellow-bot.svg");
 }
 
 .turquoise-peak {
-  background-image: url('/image/svg/turquoise-peak.svg');
+  background-image: url("/image/svg/turquoise-peak.svg");
 }
 
 .landing-grey {
-  background-image: url('/image/svg/landing-grey.svg');
+  background-image: url("/image/svg/landing-grey.svg");
   height: auto;
 }
 
@@ -298,6 +298,7 @@ h1.company-name {
   display: grid;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: 99999999999999999999;
 }
 
 .pic_holder img {
