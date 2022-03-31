@@ -1,7 +1,16 @@
 class ApprovalVoter extends cardinalVotingMethod {
+  constructor(candidates) {
+    super(candidates);
+    this.ranges = [approval_range, max_range];
+  }
   extra_visualize(voters) {
     for (let i = 0; i < voters.length; i++) {
-      voters[i].set_color(voters[i].voted_for[0].color);
+      for (let j = 0; j < this.ranges.length; j++) {
+        if (voters[i].voted_for[j].length != 0) {
+          voters[i].set_color(voters[i].voted_for[j][0].color);
+          break;
+        }
+      }
     }
 
     extra_function = function () {
@@ -26,6 +35,14 @@ class ApprovalVoter extends cardinalVotingMethod {
       createP(
         "Approval voting works like the following: every voter votes for n number of candidates who they approve with. In the end the candidate with the most approves wins. In our visualization every honest voter inside a candidate's approval range will approve with that candidate."
       )
+    );
+  }
+  count_votes() {
+    return count_votes_for_ints(
+      this.candidates,
+      (this.get_votes = function (c) {
+        return c.votes[0];
+      })
     );
   }
 }

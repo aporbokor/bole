@@ -100,26 +100,39 @@ class cardinalVotingMethod extends VotingMethod {
     super(candidates);
     ABC_constructor(this, cardinalVotingMethod);
     this.ballot_marker = 'tick-marker';
-    this.ranges = []
+    this.ranges = [];
   }
 
   prepare_for_voting() {
     for (let i = 0; i < this.candidates.length; i++) {
       this.candidates[i].votes = [];
       for (let j = 0; j < this.ranges.length; j++) {
-        this.candidates[i].votes.push(0)
-      } 
+        this.candidates[i].votes[j] = 0;
+      }
     }
   }
 
   registrate_honest_vote(voter) {
     let arr = [];
+    for (let k = 0; k < this.ranges.length; k++) {
+      arr[k] = [];
+    }
     for (let i = 0; i < this.candidates.length; i++) {
-      if (voter.distance_to_candidate(this.candidates[i]) <= approval_range) {
-        this.candidates[i].votes[0] += 1;
-        arr.push(this.candidates[i]);
-      } else {
-        this.candidates[i].votes[1] += 1;
+      for (let j = 0; j < this.ranges.length; j++) {
+        if (j == 0) {
+          if (
+            voter.distance_to_candidate(this.candidates[i]) <= this.ranges[j]
+          ) {
+            this.candidates[i].votes[j] += 1;
+            arr[j].push(this.candidates[i]);
+          }
+        } else {
+          let dist = voter.distance_to_candidate(this.candidates[i]);
+          if (dist <= this.ranges[j] && dist > this.ranges[j - 1]) {
+            this.candidates[i].votes[j] += 1;
+            arr[j].push(this.candidates[i]);
+          }
+        }
       }
     }
     voter.voted_for = arr;
@@ -137,9 +150,9 @@ class cardinalVotingMethod extends VotingMethod {
 
   registrate_vote(voter) {
     if (voter.strategic) {
-      this.registrate_honest_vote(voter);
-    } else {
       this.registrate_strategic_vote(voter);
+    } else {
+      this.registrate_honest_vote(voter);
     }
     if (voter.voted_for.length == 0) {
       let pref = voter.honest_preference(this.candidates);
@@ -151,18 +164,20 @@ class cardinalVotingMethod extends VotingMethod {
     }
   }
 
-  count_votes() {
-    return count_votes_for_ints(
-      this.candidates,
-      (this.get_votes = function (c) {
-        return c.votes[0];
-      })
-    );
+  get_ballot_element(vf) {
+    console.log(vf);
+    let returned = document.createElement('ul');
+
+    for (let i = 0; i < vf.length; i++) {
+      for (let j = 0; j < vf[i].length; j++) {
+        let li = document.createElement('li');
+        li.classList.add(this.ballot_marker);
+        li.appendChild(ballot[i].get_name_p());
+        returned.appendChild(li);
+      }
+    }
+    return returned;
   }
-
-  get_ballot_element(length)
-
-
 }
 
 class NumberVotecountVotingMethod extends VotingMethod {
