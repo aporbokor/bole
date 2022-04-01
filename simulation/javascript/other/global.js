@@ -52,7 +52,6 @@ function simulate_voting() {
   voter_maschine.prepare_for_voting();
 
   for (let i = 0; i < voters.length; i++) {
-    voters[i].set_color(honest_voter_color);
     voter_maschine.registrate_vote(voters[i]);
   }
 

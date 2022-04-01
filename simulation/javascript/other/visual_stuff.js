@@ -7,7 +7,7 @@ class Drawable {
     this.start_color = this.color;
     this.target_color = this.color;
     this.color_progress = 0;
-    this.color_animation_speed = 0.006;
+    this.color_animation_speed = 0.005;
 
     this.name = name;
 
@@ -50,7 +50,7 @@ class Drawable {
   }
 
   set_color(col) {
-
+    this.changing_color = true;
     if (this.target_color.toString() == col.toString()) {
       return;
     }
@@ -62,14 +62,23 @@ class Drawable {
 
   update_color() {
     /* Method used to dynamicly lerp between colors*/
-    if (this.color_animation_time > 1) {
-      return
+    // if (this.color_progress > 1) {
+    //   return;
+    // }
+    this.color = lerpColor(
+      color(this.start_color),
+      color(this.target_color),
+      get_progress(this.color_progress)
+    );
+    this.color_progress = min(
+      this.color_progress + this.color_animation_speed,
+      1
+    );
+
+    if (this.color_progress == 1) {
+      this.changing_color = false;
     }
-    this.color = lerpColor(color(this.start_color), color(this.target_color), get_progress(this.color_progress));
-    this.color_progress += this.color_animation_speed;
-
   }
-
 
   grow_to_size() {
     /* Method used for dynamic size-changes.
@@ -83,10 +92,10 @@ class Drawable {
     if (this.to_delete) {
       this.target_size = 0;
       if (this.size == 0) {
-        this.remove_self()
+        this.remove_self();
         this.to_delete = false;
       }
-    } else if (!(this.to_show)) {
+    } else if (!this.to_show) {
       this.target_size = this.hidden_size;
     }
 
@@ -100,16 +109,13 @@ class Drawable {
 
     if (dif <= get_progress(grow_speed)) {
       this.size = this.target_size;
-
     } else if (this.size < this.target_size) {
       this.size += get_progress(grow_speed);
-
     } else {
       this.size -= get_progress(grow_speed);
     }
 
     this.target_size = this.default_size;
-
   }
 
   grow_by(value) {
@@ -129,22 +135,24 @@ class Drawable {
 
   on_select() {
     // Runs when the drawable gets selected. Default behavior is nothing
-
   }
 
   remove() {
     this.to_delete = true;
   }
 
-
   remove_self() {
     // This is what the delete button will call
-    throw new Error("You must implement a remove_self method to your Drawable class");
+    throw new Error(
+      "You must implement a remove_self method to your Drawable class"
+    );
   }
 
   // DOM methods
   get_div() {
-    throw new Error("You must implement a get_div method for your Drawable class");
+    throw new Error(
+      "You must implement a get_div method for your Drawable class"
+    );
   }
 
   edit_apperance_div() {
@@ -166,7 +174,6 @@ class Drawable {
     return returned;
   }
 
-
   get_text() {
     /* Returns the p representation of the text what is currently being displayed inside the person.
        If this.text_label is null, than it returns null*/
@@ -176,22 +183,23 @@ class Drawable {
     }
 
     let returned = document.createElement("p");
-    returned.innerHTML = `${this.text_label}: ${this.text}`
+    returned.innerHTML = `${this.text_label}: ${this.text}`;
     return returned;
   }
 
-
-
   get_delete_button() {
-    let delete_button = createButton('Delete');
+    let delete_button = createButton("Delete");
     delete_button.parent_person = this;
     delete_button.mousePressed(delete_selected_drawable);
-    delete_button.class('delete_person');
+    delete_button.class("delete_person");
     return delete_button;
   }
 
   get_hide_checkbox() {
-    let checkbox = createCheckbox(`Hide ${this.constructor.name}`, !this.to_show);
+    let checkbox = createCheckbox(
+      `Hide ${this.constructor.name}`,
+      !this.to_show
+    );
     checkbox.parent = this;
     checkbox.changed(function () {
       if (this.checked()) {
@@ -199,14 +207,11 @@ class Drawable {
       } else {
         this.parent.appear();
       }
-    })
+    });
 
     return checkbox;
   }
-
 }
-
-
 
 // Functions for input elements and buttons in the selected div
 function delete_selected_drawable() {
@@ -221,14 +226,21 @@ function update_drawable_name() {
 function set_color() {
   let val = this.value();
   this.parent_person.set_color(this.value());
-  this.parent_div.style('color', val);
+  this.parent_div.style("color", val);
   this.parent_person.show_image = null;
 }
 
-
 class Arrow extends Drawable {
   // The arrow what can be drawn between 2 People instances
-  constructor(color, name, start, end, endStyle = null, startStyle = null, lineStyle = null) {
+  constructor(
+    color,
+    name,
+    start,
+    end,
+    endStyle = null,
+    startStyle = null,
+    lineStyle = null
+  ) {
     super(color, name, 0);
     this.hidden_size = 0.01;
     this.shown = true;
@@ -251,16 +263,21 @@ class Arrow extends Drawable {
     }
     this.lineStyle.parent = this;
 
-
     if (endStyle === null) {
-      this.endStyle = new TriArrowHead(this.lineStyle.lineweight * 5, this.lineStyle.lineweight * 5);
+      this.endStyle = new TriArrowHead(
+        this.lineStyle.lineweight * 5,
+        this.lineStyle.lineweight * 5
+      );
     } else {
       this.endStyle = endStyle;
     }
     this.endStyle.parent = this;
 
     if (startStyle === null) {
-      this.startStyle = new CutArrowHead(this.lineStyle.lineweight, this.lineStyle.lineweight);
+      this.startStyle = new CutArrowHead(
+        this.lineStyle.lineweight,
+        this.lineStyle.lineweight
+      );
     } else {
       this.startStyle = startStyle;
     }
@@ -277,29 +294,48 @@ class Arrow extends Drawable {
   }
 
   calc_vectors() {
-    this.start_person_vector = createVector(this.start_person.x, this.start_person.y);
+    this.start_person_vector = createVector(
+      this.start_person.x,
+      this.start_person.y
+    );
     this.end_person_vector = createVector(this.end_person.x, this.end_person.y);
-    this.person_disance = p5.Vector.sub(this.end_person_vector, this.start_person_vector);
+    this.person_disance = p5.Vector.sub(
+      this.end_person_vector,
+      this.start_person_vector
+    );
 
     this.start_vector_offset = this.person_disance.copy();
-    this.start_vector_offset.setMag((this.start_person.size * this.closeness) + this.startStyle.width);
+    this.start_vector_offset.setMag(
+      this.start_person.size * this.closeness + this.startStyle.width
+    );
 
-    this.start_vector = p5.Vector.add(this.start_person_vector, this.start_vector_offset);
+    this.start_vector = p5.Vector.add(
+      this.start_person_vector,
+      this.start_vector_offset
+    );
 
     this.end_vector_offset = this.person_disance.copy();
     this.end_vector_offset.mult(-1);
     this.end_vector_offset.setMag(this.end_person.size * this.closeness);
 
-    this.end_vector = p5.Vector.add(this.end_person_vector, this.end_vector_offset);
+    this.end_vector = p5.Vector.add(
+      this.end_person_vector,
+      this.end_vector_offset
+    );
 
     this.arrow_distance = p5.Vector.sub(this.end_vector, this.start_vector);
     this.default_size = this.arrow_distance.mag() * 0.05;
 
     this.curr_distance_vector = this.arrow_distance.copy();
     this.curr_distance_vector.setMag(this.size * 20);
-    this.curr_distance_vector.limit((this.default_size * 20) - this.endStyle.width);
+    this.curr_distance_vector.limit(
+      this.default_size * 20 - this.endStyle.width
+    );
 
-    this.curr_end_vector = p5.Vector.add(this.start_vector, this.curr_distance_vector);
+    this.curr_end_vector = p5.Vector.add(
+      this.start_vector,
+      this.curr_distance_vector
+    );
 
     this.text_vector = this.curr_distance_vector.copy();
     this.text_vector.mult(this.text_place);
@@ -307,19 +343,16 @@ class Arrow extends Drawable {
   }
 
   show() {
-
-    if ((this.end_person.to_delete) || (this.start_person.to_delete)) {
+    if (this.end_person.to_delete || this.start_person.to_delete) {
       this.remove();
     }
 
-    if (!this.to_delete & !((this.end_person.shown) & (this.start_person.shown))) {
+    if (!this.to_delete & !(this.end_person.shown & this.start_person.shown)) {
       this.target_size = this.hidden_size;
     }
 
-
     this.calc_vectors();
     this.grow_to_size();
-
 
     push();
     noStroke();
@@ -339,29 +372,27 @@ class Arrow extends Drawable {
     push();
     rotate(PI + this.curr_distance_vector.heading());
     this.startStyle.show();
-    pop()
+    pop();
 
     pop();
     this.draw_text();
-
   }
 
   draw_text() {
     // Draws text inside Arrow
 
     if (!this.shown) {
-      return
+      return;
     }
 
     if (this.text != null) {
-
       push();
       translate(this.text_vector.x, this.text_vector.y);
       textFont(font);
       textAlign(CENTER, CENTER);
 
       textSize(14);
-      let box = font.textBounds(this.text.toString(), this.x, this.y)
+      let box = font.textBounds(this.text.toString(), this.x, this.y);
 
       fill(255);
       stroke(255);
@@ -375,7 +406,10 @@ class Arrow extends Drawable {
   }
 
   remove_self() {
-    this.start_person.arrows_from.splice(this.start_person.arrows_from.indexOf(this), 1);
+    this.start_person.arrows_from.splice(
+      this.start_person.arrows_from.indexOf(this),
+      1
+    );
     arrows.splice(arrows.indexOf(this), 1);
   }
 
@@ -384,13 +418,13 @@ class Arrow extends Drawable {
 
     let start = createDiv();
 
-    start.child(createP("Arrow start:"))
+    start.child(createP("Arrow start:"));
     start.child(this.start_person.get_name_p());
     start.child(createP(this.start_person_data));
 
     let end = createDiv();
 
-    end.child(createP("Arrow end:"))
+    end.child(createP("Arrow end:"));
     end.child(this.end_person.get_name_p());
     end.child(createP(this.end_person_data));
 
@@ -405,23 +439,25 @@ class Arrow extends Drawable {
     let slider = returned.child()[1];
     slider.parent_arrow = this;
 
-    returned.input((val) => this.text_place = val);
+    returned.input((val) => (this.text_place = val));
 
     return returned;
   }
 
   get_div() {
-    let returned = createDiv(this.constructor.name + ': ');
-    returned.style('color', this.color);
+    let returned = createDiv(this.constructor.name + ": ");
+    returned.style("color", this.color);
 
     returned.child(this.edit_apperance_div());
-    returned.child(this.text_place_slider())
+    returned.child(this.text_place_slider());
     returned.child(this.get_text());
-    returned.child(createP(`Arrow length: ${round(this.person_disance.mag())}`))
+    returned.child(
+      createP(`Arrow length: ${round(this.person_disance.mag())}`)
+    );
     returned.child(this.get_ends_div());
     returned.child(this.get_delete_button());
 
-    returned.class(this.constructor.name + '_div');
+    returned.class(this.constructor.name + "_div");
 
     return returned;
   }
@@ -437,10 +473,9 @@ class ArrowHead {
   }
 
   show() {
-    throw new Error("You must define a show method for your ArrowHead class!")
+    throw new Error("You must define a show method for your ArrowHead class!");
   }
 }
-
 
 class TriArrowHead extends ArrowHead {
   show() {
@@ -482,7 +517,7 @@ class ArrowLineStyle {
   }
 
   show() {
-    throw new Error("You must define a show method for your ArrowHead class!")
+    throw new Error("You must define a show method for your ArrowHead class!");
   }
 }
 

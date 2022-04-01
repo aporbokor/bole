@@ -228,11 +228,16 @@ class cardinalVotingMethod extends VotingMethod {
 
   paint_voters() {
     for (let i = 0; i < voters.length; i++) {
+      let color_setted = false;
       for (let j = 0; j < this.ranges.length - 1; j++) {
         if (voters[i].voted_for[j].length != 0) {
           voters[i].set_color(voters[i].voted_for[j][0].color);
+          color_setted = true;
           break;
         }
+      }
+      if (!color_setted) {
+        voters[i].set_color(honest_voter_color);
       }
     }
   }
