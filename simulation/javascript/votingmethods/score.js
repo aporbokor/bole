@@ -13,6 +13,9 @@ class scoreVoter extends cardinalVotingMethod {
       (approval_range * 5) / 3,
       max_range,
     ];
+
+    max_votes = 10 * voters.length;
+    this.vote_to_text = (n) => int_to_serial_number(n + 1);
   }
 
   count_votes() {
@@ -31,13 +34,19 @@ class scoreVoter extends cardinalVotingMethod {
     );
   }
 
+  get_results_data(cand) {
+    return [cand.score, "| score: "];
+  }
+
   extra_visualize(voters) {
     this.paint_voters();
 
     for (const cand of candidates) {
       cand.text = cand.score;
-      cand.text_label = 'score';
+      cand.text_label = "score";
     }
+
+    this.set_up_voter_arrows();
 
     extra_function = function () {
       for (let i = 0; i < candidates.length; i++) {

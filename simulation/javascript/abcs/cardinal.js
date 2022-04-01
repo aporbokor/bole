@@ -13,6 +13,25 @@ class cardinalVotingMethod extends VotingMethod {
         this.candidates[i].votes[j] = 0;
       }
     }
+    for (const cand of this.candidates) {
+      if (
+        cand.ranges != undefined &&
+        cand.ranges.length == this.ranges.length - 1
+      ) {
+        for (let i = 0; i < cand.ranges.length; i++) {
+          cand.ranges[i].default_size = this.ranges[i];
+        }
+        continue;
+      }
+      cand.ranges = [];
+      let acc = 0;
+      for (let i = 0; i < this.ranges.length - 1; i++) {
+        let range_color = lerpColor(color(cand.color), color("black"), acc);
+        let range = new Range(range_color, undefined, this.ranges[i], cand);
+        acc += 1 / this.ranges.length;
+        cand.ranges.push(range);
+      }
+    }
   }
 
   registrate_honest_vote(voter) {
@@ -79,18 +98,18 @@ class cardinalVotingMethod extends VotingMethod {
 
   get_ballot_element(vf) {
     console.log(vf);
-    let returned = document.createElement('ul');
+    let returned = document.createElement("ul");
 
     for (let i = 0; i < vf.length; i++) {
-      let sub_ul = document.createElement('ul');
-      let sub_li = document.createElement('li');
-      let sub_text = document.createElement('li');
+      let sub_ul = document.createElement("ul");
+      let sub_li = document.createElement("li");
+      let sub_text = document.createElement("li");
       sub_text.innerText = this.vote_to_text(i);
       returned.appendChild(sub_text);
       sub_li.appendChild(sub_ul);
 
       for (let j = 0; j < vf[i].length; j++) {
-        let li = document.createElement('li');
+        let li = document.createElement("li");
         li.appendChild(vf[i][j].get_name_p());
         sub_ul.appendChild(li);
       }
@@ -100,14 +119,9 @@ class cardinalVotingMethod extends VotingMethod {
   }
 
   draw_circles_around_candidate(candidate) {
-    noFill();
-    let acc = 0;
-    for (let i = 0; i < this.ranges.length - 1; i++) {
-      stroke(lerpColor(color(candidate.color), color('black'), acc));
-      circle(candidate.x, candidate.y, this.ranges[i] * 2);
-      acc += 1 / this.ranges.length;
+    for (const range of candidate.ranges) {
+      range.show();
     }
-    stroke(default_stroke);
   }
 
   resize_voters(candidate) {
@@ -131,12 +145,45 @@ class cardinalVotingMethod extends VotingMethod {
 
   paint_voters() {
     for (let i = 0; i < voters.length; i++) {
+      let color_setted = false;
       for (let j = 0; j < this.ranges.length - 1; j++) {
         if (voters[i].voted_for[j].length != 0) {
           voters[i].set_color(voters[i].voted_for[j][0].color);
+          color_setted = true;
           break;
         }
       }
+      if (!color_setted) {
+        voters[i].set_color(honest_voter_color);
+      }
+    }
+  }
+
+  set_up_voter_arrows() {
+    for (let i = 0; i < voters.length; i++) {
+      voters[i].on_select = function () {
+        if (this.arrows_from.length > 0) {
+          return null;
+        }
+
+        for (let j = 0; j < this.voted_for.length; j++) {
+          for (let l = 0; l < this.voted_for[j].length; l++) {
+            const cand = this.voted_for[j][l];
+
+            let arr = new Arrow(
+              cand.color,
+              `${this.name}'s ballot arrow`,
+              this,
+              cand
+            );
+
+            arr.text = voter_maschine.vote_to_text(j);
+            arr.text_label = `${cand.get_name_p().outerHTML}'s rank in ${
+              this.get_name_p().outerHTML
+            }'s ballot`;
+          }
+        }
+      };
     }
   }
 }

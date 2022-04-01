@@ -23,9 +23,9 @@ class starVoter extends cardinalVotingMethod {
   prefers(vf, c1, c2) {
     for (const v in vf) {
       if (v.includes(c1)) {
-        return 'one';
+        return "one";
       } else if (v.includes(c2)) {
-        return 'two';
+        return "two";
       }
     }
   }
@@ -41,16 +41,16 @@ class starVoter extends cardinalVotingMethod {
     let tops = [];
     let f = this.find_top(candidates);
     tops.push(f);
-    let cands = this.candidates.filter(c => c != top);
+    let cands = this.candidates.filter((c) => c != top);
     let s = this.find_top(cands);
     tops.push(s);
     tops[0].final = 0;
     tops[1].final = 0;
     for (let i = 0; i < voters.length; i++) {
       let pref = this.prefers(voters[i].voted_for, tops[0], tops[1]);
-      if (pref == 'one') {
+      if (pref == "one") {
         tops[0].final += 1;
-      } else if (pref == 'two') {
+      } else if (pref == "two") {
         tops[1].final += 1;
       }
     }
@@ -61,5 +61,9 @@ class starVoter extends cardinalVotingMethod {
         return c.final;
       })
     );
+  }
+
+  get_results_data(cand) {
+    return [cand.score, "| score: "];
   }
 }

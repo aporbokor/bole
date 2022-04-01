@@ -32,6 +32,10 @@ class evaluativeVoter extends cardinalVotingMethod {
     return "against";
   }
 
+  get_results_data(cand) {
+    return [cand.score, "| score: "];
+  }
+
   extra_visualize(voters) {
     this.paint_voters();
 

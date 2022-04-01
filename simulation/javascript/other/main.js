@@ -96,7 +96,7 @@ let reset_to_default_button;
 let stepping_box;
 let hide_stepping_box;
 
-const grow_speed = 0.02;
+let grow_speed = 0.02;
 const selected_size_adder = 5;
 const clicked_selected_size_adder = 15;
 const clicked_selected_laser_color = "rgb(0, 0, 0)";
@@ -373,6 +373,7 @@ function reset_enviroment() {
   change_in_sim = true;
   clicked_selected = undefined;
   selected = undefined;
+  extra_function = empty_function;
 }
 
 function select_tool() {

@@ -6,9 +6,9 @@ class ApprovalVoter extends cardinalVotingMethod {
 
   vote_to_text(vote) {
     if (vote == 0) {
-      return "approved with";
+      return "approve";
     }
-    return "disapproved with";
+    return "disapprove";
   }
 
   extra_visualize(voters) {
@@ -18,6 +18,8 @@ class ApprovalVoter extends cardinalVotingMethod {
       cand.text = cand.votes[0];
       cand.text_label = "approves";
     }
+
+    this.set_up_voter_arrows();
 
     extra_function = function () {
       for (let i = 0; i < candidates.length; i++) {
