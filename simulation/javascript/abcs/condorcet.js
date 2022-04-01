@@ -1,16 +1,15 @@
 class Pair {
-  constructor(c1, c2) {
-    let res = this.decide_winner(c1, c2);
-    if (res == c1) {
+  constructor(c1, c2, m) {
+    if (m[c1][c2] > 0) {
       this.winner = c1;
+      this.diff = m[c1][c2];
       this.loser = c2;
-    } else if (res == c2) {
+    } else if (m[c1][c2] < 0) {
       this.winner = c2;
+      this.diff = m[c1][c2];
       this.loser = c1;
     }
   }
-
-  decide_winner(c1, c2) {}
 }
 class CondorcetVotingMethod extends RankingVotingMethod {
   // ABC for condorcet_methods
@@ -18,6 +17,11 @@ class CondorcetVotingMethod extends RankingVotingMethod {
   constructor(candidates) {
     super(candidates);
     ABC_constructor(this, CondorcetVotingMethod);
+    this.pairs = [];
+    this.locked = [];
+    for (let i = 0; i < this.candidates.length; i++) {
+      this.locked.push([]);
+    }
   }
 
   prepare_for_voting() {
@@ -42,6 +46,30 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     }
   }
 
+  add_pairs() {
+    for (let i = 0; i < this.candidates.length; i++) {
+      for (let j = 0; j < this.candidates.length; j++) {
+        let res = new Pair(i, j, this.relative_strength_matrix);
+        if (res.winner != null) {
+          this.pairs.push(res);
+        }
+      }
+    }
+  }
+
+  sort_pairs() {
+    this.pairs = this.pairs.sort((a, b) => {
+      return b.diff - a.diff;
+    });
+    console.log(this.pairs);
+  }
+
+  create_graph() {
+    for (const pair in this.pairs) {
+      return true;
+    }
+  }
+
   registrate_vote(voter) {
     // Refreshing the outranking matrix based on the voter's ballot
     let tier_list = this.best_candidate_tier_list(voter);
@@ -54,7 +82,6 @@ class CondorcetVotingMethod extends RankingVotingMethod {
       }
       tier_list[i].votes[i] += 1;
     }
-    console.log(this.outranking_matrix);
     voter.voted_for = tier_list;
   }
 

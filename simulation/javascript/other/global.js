@@ -22,7 +22,7 @@ const votingmethods = new Map([
   ['instant runoff', InstantRunOffVoter],
   ['coombs', CoombsVoting],
   ['copleland', CopelandVoter],
-  // ['tideman', TideMan]
+  ['tideman', TideMan],
 ]);
 
 function select_voting() {
