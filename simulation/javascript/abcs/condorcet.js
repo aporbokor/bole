@@ -1,3 +1,4 @@
+// Must calculate relative_strength_matrix in order for it to work
 class Pair {
   constructor(c1, c2, m) {
     if (m[c1][c2] > 0) {
@@ -18,10 +19,10 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     super(candidates);
     ABC_constructor(this, CondorcetVotingMethod);
     this.pairs = [];
-    this.locked = [];
-    for (let i = 0; i < this.candidates.length; i++) {
-      this.locked.push([]);
-    }
+    this.locked = tdBooleanArray(
+      this.candidates.length,
+      this.candidates.length
+    );
   }
 
   prepare_for_voting() {
@@ -61,13 +62,17 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     this.pairs = this.pairs.sort((a, b) => {
       return b.diff - a.diff;
     });
-    console.log(this.pairs);
   }
 
   create_graph() {
-    for (const pair in this.pairs) {
-      return true;
+    let visited = [];
+    for (const pair of this.pairs) {
+      if (!visited.includes(pair.loser)) {
+        visited.push(pair.winner);
+        this.locked[pair.winner][pair.loser] = true;
+      }
     }
+    console.log(this.locked);
   }
 
   registrate_vote(voter) {
