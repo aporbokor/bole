@@ -1,8 +1,9 @@
 /* Colors */
 :root {
   --primary: black;
+  --primary-lt: #111;
+  --surface: #222;
   --secondary: white;
-  --primary-lt: #222;
   --accent: white;
 }
 
@@ -75,15 +76,8 @@ a:not(.company-name)::before {
   transform: scaleX(0);
   transform-origin: right;
   background-color: var(--secondary);
-
   transition: transform 250ms ease-in;
 }
-
-a:not(.company-name):hover::before {
-  transform-origin: left;
-  transform: scaleX(1);
-}
-
 button {
   color: var(--primary);
   cursor: pointer;
@@ -173,30 +167,6 @@ th {
 
 /* Color classes */
 
-.green {
-  background-color: green;
-}
-
-.orange {
-  background-color: orange;
-}
-
-.brown {
-  background-color: brown;
-}
-
-.purple {
-  background-color: purple;
-}
-
-.yellow {
-  background-color: yellow;
-}
-
-.turquoise {
-  background-color: turquoise;
-}
-
 .light-sec.light-sec,
 .light-sec.light-sec li::marker {
   color: var(--primary-lt);
@@ -218,18 +188,25 @@ th {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-around;
+  justify-content: left;
   gap: 2rem;
   max-width: 100vw;
 
   /* Sets the ideal size of it's children */
-  --ideal-size: 30rem;
+  --ideal-size: 10rem;
 
   padding-block: 2rem;
 }
 
 .overflower-flex > * {
   flex-basis: var(--ideal-size);
+  max-width: 50%;
   flex-grow: 1;
   flex-shrink: 1;
+}
+
+@media only screen and (max-width: 900px) {
+  .overflower-flex > * {
+    max-width: 95vw;
+  }
 }

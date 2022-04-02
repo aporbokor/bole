@@ -13,12 +13,17 @@ class TideMan extends CondorcetVotingMethod {
         } else if (this.locked[i][j] == true) {
           if (j == this.candidates.length - 1) {
             winner = this.candidates[i];
-            return winner;
           }
         } else {
           break;
         }
       }
     }
+    return [
+      [winner],
+      this.candidates.filter(function (c) {
+        c = !winner;
+      }),
+    ];
   }
 }
