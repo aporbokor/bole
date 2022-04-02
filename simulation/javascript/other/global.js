@@ -7,22 +7,22 @@ let max_votes;
 const max_range = Infinity;
 
 const votingmethods = new Map([
-  ['plurarity', PlurarityVoter],
-  ['anti-plurarity', AntiPlurarityVoter],
+  ['Plurality voting', PlurarityVoter],
+  ['Anti-plurality voting', AntiPlurarityVoter],
   // ['theoretical perfect', PerfectVoter],
-  ['approval voting', ApprovalVoter],
-  ['evaluative voting', evaluativeVoter],
-  ['score voting', scoreVoter],
+  ['Approval voting', ApprovalVoter],
+  ['Evaluative voting', evaluativeVoter],
+  ['Score voting', scoreVoter],
   ['STAR voting', starVoter],
-  ['borda counting', BordaCounting],
-  ['bucklin', Bucklin],
-  ['supplementary vote', SupplementaryVoter],
-  ['Sri Lankan Contingent vote', SriLankanContingentVoter],
-  ['contingent vote', ContingentVoter],
-  ['instant runoff', InstantRunOffVoter],
-  ['coombs', CoombsVoting],
-  ['copleland', CopelandVoter],
-  ['tideman', TideMan],
+  ['Bucklin voting', Bucklin],
+  ['Instant-runoff voting', InstantRunOffVoter],
+  ["Coombs's method", CoombsVoting],
+  ['Supplementary vote', SupplementaryVoter],
+  ['Contingent vote', ContingentVoter],
+  ['Sri Lankan contingent vote', SriLankanContingentVoter],
+  ['Borda count', BordaCounting],
+  ["Copeland's method", CopelandVoter],
+  ['Tideman (RP)', TideMan],
 ]);
 
 function select_voting() {
