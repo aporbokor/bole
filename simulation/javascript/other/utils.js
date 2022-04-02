@@ -78,6 +78,19 @@ function twoDMatrixWithZeros(dim1, dim2) {
   return returned;
 }
 
+// create a 2d boolean array, initially filling everything with false
+function tdBooleanArray(d1, d2) {
+  let arr = [];
+  for (let i = 0; i < d1; i++) {
+    let subarr = [];
+    for (let j = 0; j < d2; j++) {
+      subarr.push(false);
+    }
+    arr.push(subarr);
+  }
+  return arr;
+}
+
 function set_diagnal(matrix, value) {
   //Sets every item in the main diagnal of a 2d matrix equal to value
 
@@ -90,21 +103,21 @@ function int_to_serial_number(i) {
   /* Returns a string from an int containing the serial number of that int
      examples: 1st, 2nd, 11th, 13th, 20th, 31st*/
 
-  let str_int = "" + i;
+  let str_int = '' + i;
 
-  if ((str_int.length > 1) & (str_int.substr(-2, 1) === "1")) {
-    return str_int + "th";
+  if ((str_int.length > 1) & (str_int.substr(-2, 1) === '1')) {
+    return str_int + 'th';
   }
-  if (str_int.slice(-1) === "1") {
-    return str_int + "st";
+  if (str_int.slice(-1) === '1') {
+    return str_int + 'st';
   }
-  if (str_int.slice(-1) === "2") {
-    return str_int + "nd";
+  if (str_int.slice(-1) === '2') {
+    return str_int + 'nd';
   }
-  if (str_int.slice(-1) === "3") {
-    return str_int + "rd";
+  if (str_int.slice(-1) === '3') {
+    return str_int + 'rd';
   }
-  return str_int + "th";
+  return str_int + 'th';
 }
 
 function random_bool(true_chance) {
