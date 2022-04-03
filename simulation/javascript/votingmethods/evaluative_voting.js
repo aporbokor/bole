@@ -53,4 +53,11 @@ class evaluativeVoter extends cardinalVotingMethod {
       }
     };
   }
+  stepping_box_func(stepping_box) {
+    stepping_box.set_content(
+      createP(
+        "Evaulative voting works like the following: every voter votes ranks every candidate using 3 scores: for (1), abstain (0) and against (-1). In the end we evaulate the scores for each caniddate and the candidate with the most points wins."
+      )
+    );
+  }
 }

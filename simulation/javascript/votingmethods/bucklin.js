@@ -1,12 +1,12 @@
 class Bucklin extends RankingVotingMethod {
   prepare_for_voting() {
     super.prepare_for_voting();
-    this.results_per_round = [];
   }
 
   set_max(candidates) {
     for (let i = 0; i < this.candidates.length; i++) {
       candidates[i].final = 0;
+      candidates[i].vote_count_for_visualization = [];
     }
   }
 
@@ -16,6 +16,9 @@ class Bucklin extends RankingVotingMethod {
     for (let i = 0; i < this.candidates.length; i++) {
       for (let j = 0; j < this.candidates.length; j++) {
         this.candidates[j].final += this.candidates[j].votes[i];
+        this.candidates[j].vote_count_for_visualization.push(
+          this.candidates[j].final
+        );
         if (this.candidates[j].final > max_votes / 2) {
           done = true;
         }
@@ -31,11 +34,94 @@ class Bucklin extends RankingVotingMethod {
     }
   }
 
+  get_results_data(cand) {
+    return [cand.final, "| final vote count: "];
+  }
+
   extra_visualize(voters) {
     super.extra_visualize(voters);
     for (const cand of this.candidates) {
       cand.text = cand.final;
-      cand.text_label = 'final vote count';
+      cand.text_label = "final vote count";
     }
+  }
+
+  describe_process() {
+    let description = document.createElement("div");
+    description.innerText =
+      "As the first step, we collect the voters preferences.";
+    this.parent_box.set_content(description);
+    this.parent_box.next_func(voter_maschine.visualize_step);
+  }
+
+  visualize_step() {
+    let step_div = document.createElement("div");
+    let first_text = document.createElement("p");
+    let second_text = document.createElement("p");
+    let last_text = document.createElement("div");
+    const step = voter_maschine.step + 1;
+
+    voter_maschine.color_voters_based_on_nth_preference(step - 1);
+
+    first_text.innerText = `As the ${int_to_serial_number(
+      step
+    )} step, we count each voter's ${int_to_serial_number(step)} preferences.`;
+
+    if (step > 1) {
+      second_text.innerText =
+        "We will add these to the prewious votecounts, to get the following result:";
+    }
+
+    let res = count_votes_for_ints(candidates, (cand) => {
+      return cand.vote_count_for_visualization[step - 1];
+    });
+
+    console.log(res);
+
+    let result_element = get_results_elements(res, (cand) => {
+      return cand.get_custom_p(cand.vote_count_for_visualization[step - 1]);
+    });
+
+    if (step == candidates[0].vote_count_for_visualization.length) {
+      this.parent_box.hide_next();
+      let last_first_p = document.createElement("p");
+      last_first_p.innerText =
+        "In this round at least one candidate had a majority, which means that this was the last round. We just need to count the final votes, to determent the winners:";
+
+      let cands = document.createElement("div");
+      for (const candidate of voting_results[0]) {
+        cands.appendChild(candidate.get_p().elt);
+      }
+      let last_last_p = document.createElement("p");
+      last_last_p.innerText =
+        "So they will be the winner of this election, because they have the highest final votecount.";
+
+      last_text.appendChild(last_first_p);
+      last_text.appendChild(cands);
+      last_text.appendChild(last_last_p);
+    } else {
+      last_text.innerText = `In this round nobody had a majority (> ${ceil(
+        max_votes / 2
+      )} voters) so this process continues.`;
+    }
+
+    step_div.appendChild(first_text);
+    step_div.appendChild(second_text);
+    step_div.appendChild(result_element);
+    step_div.appendChild(last_text);
+
+    this.parent_box.set_content(step_div);
+
+    voter_maschine.step += 1;
+  }
+
+  stepping_box_func(steppig_box) {
+    this.stepping_box = steppig_box;
+    steppig_box.visualized_system = this;
+
+    stepping_box.show_next();
+
+    this.step = 0;
+    steppig_box.next_func(this.describe_process);
   }
 }

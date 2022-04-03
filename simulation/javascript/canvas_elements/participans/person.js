@@ -30,7 +30,7 @@ class Person extends Drawable {
   draw_text() {
     // Draws text inside person
 
-    if (this.text != null) {
+    if (this.text != null && (clicked_selected === this || !this.show_image)) {
       textFont(font);
       textAlign(CENTER, CENTER);
 

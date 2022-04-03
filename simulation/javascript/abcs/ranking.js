@@ -77,8 +77,8 @@ class RankingVotingMethod extends VotingMethod {
     }
 
     extra_function = function () {
-      if (typeof clicked_selected != 'undefined') {
-        if (typeof clicked_selected.voted_for != 'undefined') {
+      if (typeof clicked_selected != "undefined") {
+        if (typeof clicked_selected.voted_for != "undefined") {
           // Highlight the candidates based on their place in the selected voter's preference ballot
           let voter = clicked_selected;
           for (let j = 0; j < voter.voted_for.length; j++) {
@@ -93,7 +93,7 @@ class RankingVotingMethod extends VotingMethod {
 
             candidate.grow_by(-candidate_size + 5 + thick_amount * 10);
           }
-        } else if (typeof clicked_selected.votes != 'undefined') {
+        } else if (typeof clicked_selected.votes != "undefined") {
           // Highlight the voters based on where did tey put the selected candidate in their ballot
           let candidate = clicked_selected;
           for (let i = 0; i < voters.length; i++) {
@@ -121,10 +121,10 @@ class RankingVotingMethod extends VotingMethod {
   }
 
   get_ballot_element(ballot) {
-    let returned = document.createElement('ol');
+    let returned = document.createElement("ol");
 
     for (let i = 0; i < ballot.length; i++) {
-      let li = document.createElement('li');
+      let li = document.createElement("li");
       li.appendChild(ballot[i].get_name_p());
       returned.appendChild(li);
     }
@@ -138,5 +138,11 @@ class RankingVotingMethod extends VotingMethod {
     }
 
     this.set_extra_funct(voters);
+  }
+
+  color_voters_based_on_nth_preference(n) {
+    for (const voter of voters) {
+      voter.set_color(voter.voted_for[n].target_color);
+    }
   }
 }
