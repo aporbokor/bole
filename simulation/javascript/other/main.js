@@ -474,40 +474,40 @@ function setup() {
   stroke(default_stroke);
 
   strategic_chance_slider = slider_with_name(
-    'strategic voter chance: ',
+    'Tactical voter chance: ',
     0,
     1,
     strategic_chance,
     0.01
   );
   voter_population_slider = slider_with_name(
-    'number of voters: ',
+    'Number of voters: ',
     min_voters,
     max_voters,
     voter_population,
     1
   );
   candidate_population_slider = slider_with_name(
-    'number of candidates: ',
+    'Number of candidates: ',
     min_candidates,
     max_candidates,
     candidate_population,
     1
   );
 
-  add_voter_button = createButton('add voter');
+  add_voter_button = createButton('Add voter');
   add_voter_button.mousePressed(add_voter);
 
-  reset_voter_color_buttton = createButton('reset voter colors');
+  reset_voter_color_buttton = createButton('Reset voter colors');
   reset_voter_color_buttton.mousePressed(reset_voter_color);
 
-  hide_voters_button = createButton('toggle voter hide');
+  hide_voters_button = createButton('Toggle voter hide');
   hide_voters_button.mousePressed(toggle_voter_hide);
 
-  delete_arrows_button = createButton('delete all arrows');
+  delete_arrows_button = createButton('Delete all arrows');
   delete_arrows_button.mousePressed(delete_arrows);
 
-  support_vis_checkbox = createCheckbox('visualize support ranges', false);
+  support_vis_checkbox = createCheckbox('Visualize support ranges', false);
   support_vis_checkbox.changed(function () {
     if (this.checked()) {
       supporter_draw = function () {
@@ -524,7 +524,7 @@ function setup() {
     }
   });
 
-  average_voter_checkbox = createCheckbox('show average voter', false);
+  average_voter_checkbox = createCheckbox('Show average voter', false);
   average_voter_checkbox.changed(function () {
     if (this.checked()) {
       average_voter.appear();
@@ -536,16 +536,16 @@ function setup() {
     }
   });
 
-  add_candidate_button = createButton('add candidate');
+  add_candidate_button = createButton('Add candidate');
   add_candidate_button.mousePressed(add_candidate);
 
-  delete_candidate_button = createButton('delete candidate');
+  delete_candidate_button = createButton('Delete candidate');
   delete_candidate_button.mousePressed(remove_candidate);
 
-  delete_voter_button = createButton('delete voter');
+  delete_voter_button = createButton('Delete voter');
   delete_voter_button.mousePressed(remove_voter);
 
-  reset_button = createButton('reset enviroment');
+  reset_button = createButton('Reset environment');
   reset_button.mousePressed(reset_enviroment);
 
   voting_type_selector = createSelect();
@@ -565,7 +565,7 @@ function setup() {
   tool_selector.changed(select_tool);
   select_tool();
 
-  tool_size = slider_with_name('tool size: ', 0, max_tool_size, 0, 1);
+  tool_size = slider_with_name('Tool size: ', 0, max_tool_size, 0, 1);
 
   simulate_button = createButton('Run');
   simulate_button.mousePressed(simulate_voting);
@@ -627,7 +627,7 @@ function setup() {
     change_in_sim = true;
   });
 
-  reset_to_default_button = createButton('Reset advanced settings to default');
+  reset_to_default_button = createButton('Reset advanced settings');
   reset_to_default_button.mousePressed(() => {
     seems_win_slider.setValue(default_seems_win_percent);
     approval_slider.setValue(default_approval_size);
@@ -663,7 +663,12 @@ function setup() {
   edit_enviroment_div.child(delete_voter_button);
 
   Simulation_div.child(document.createElement('br'));
-  Simulation_div.child(voting_type_selector);
+
+  const custom_select = document.createElement('div');
+  custom_select.classList.add('custom-select');
+  custom_select.appendChild(voting_type_selector.elt);
+  Simulation_div.child(custom_select);
+
   Simulation_div.child(simulate_button);
   Simulation_div.child(auto_simulate_check_box);
   Simulation_div.child(simfreezer);

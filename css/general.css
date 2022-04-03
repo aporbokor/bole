@@ -97,12 +97,6 @@ input {
   accent-color: var(--accent);
 }
 
-select {
-  background-color: var(--primary);
-  color: var(--accent);
-  border: 1px solid var(--accent);
-}
-
 button {
   height: 2rem;
   margin-left: 0.5rem;
