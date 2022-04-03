@@ -1,6 +1,7 @@
 class TideMan extends CondorcetVotingMethod {
   count_votes() {
     this.calc_relative_strength_matrix();
+    console.log(this.relative_strength_matrix);
     this.add_pairs();
     this.sort_pairs();
     console.log(this.pairs);

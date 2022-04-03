@@ -64,11 +64,26 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     });
   }
 
+  invalid_edge(pair) {
+    let l = pair.loser;
+    while (true) {
+      for (let i = 0; i < this.candidates.length; i++) {
+        if (i == l) {
+          continue;
+        } else if (this.locked[l][i] == true) {
+          if (i == pair.winner) {
+            return true;
+          }
+          l = i;
+        } else {
+          return false;
+        }
+      }
+    }
+  }
   create_graph() {
-    let visited = [];
     for (const pair of this.pairs) {
-      if (!visited.includes(pair.loser)) {
-        visited.push(pair.winner);
+      if (!this.invalid_edge(pair)) {
         this.locked[pair.winner][pair.loser] = true;
       }
     }
