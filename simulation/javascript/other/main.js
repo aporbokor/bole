@@ -666,6 +666,7 @@ function setup() {
 
   const custom_select = document.createElement('div');
   custom_select.classList.add('custom-select');
+  custom_select.classList.add('voting-sel');
   custom_select.appendChild(voting_type_selector.elt);
   Simulation_div.child(custom_select);
 
@@ -674,6 +675,12 @@ function setup() {
   Simulation_div.child(simfreezer);
 
   tool_div.child(document.createElement('br'));
+
+  // const tl_select = document.createElement('div');
+  // tl_select.classList.add('custom-select');
+  // tl_select.classList.add('tool-sel');
+  // tl_select.appendChild(tool_selector.elt);
+  // tool_div.child(tl_select);
   tool_div.child(tool_selector);
   tool_div.child(tool_size);
 
