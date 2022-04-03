@@ -2,7 +2,7 @@
   position: relative;
   background-color: var(--primary-lt);
   width: 10rem;
-  height: 2rem;
+  margin-left: -0.5rem;
 }
 
 .custom-select select {
@@ -10,7 +10,7 @@
 }
 
 .select-selected {
-  background-color: blue;
+  background-color: var(--primary-lt);
 }
 
 .select-selected:after {
@@ -40,7 +40,7 @@
 
 .select-items {
   position: absolute;
-  background-color: blue;
+  background-color: var(--surface);
   top: 100%;
   left: 0;
   right: 0;
@@ -53,5 +53,5 @@
 
 .select-items div:hover,
 .same-as-selected {
-  background-color: var(--primary);
+  background-color: var(--primary-lt);
 }

@@ -46,7 +46,7 @@
 .sim-buttons-title,
 .sub-buttons-subdiv-title {
   background-color: var(--primary-lt);
-  z-index: 999;
+  z-index: 2;
   padding: 1em 1.5em;
   border-radius: 0.5em;
 }
@@ -372,5 +372,11 @@ li::marker {
   #selected,
   .step_by_stepp {
     display: none;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .sub-buttons-subdiv-title {
+    position: initial;
   }
 }
