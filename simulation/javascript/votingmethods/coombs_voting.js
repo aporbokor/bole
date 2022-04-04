@@ -27,6 +27,10 @@ class CoombsVoting extends RunoffLike {
     return last_places.maxs();
   }
 
+  sub_votes_visualization_data(sub) {
+    return [sub[0][sub[0].length - 1], "| sub-results: "];
+  }
+
   visualize_for_stepping_box(subresult) {
     for (let i = 0; i < subresult.length; i++) {
       for (let j = 0; j < subresult[i].length; j++) {
@@ -44,7 +48,11 @@ class CoombsVoting extends RunoffLike {
       let candidate = cand[0];
       // let returned = createProgress(cand[0].name + ': ',cand[1],voters.length);
       // returned.label.style('color',cand[0].color);
-      return candidate.get_custom_p(candidate.sub_votes_for_visualization[0]);
+      return candidate.get_custom_p(
+        ...voter_maschine.sub_votes_visualization_data(
+          candidate.sub_votes_for_visualization
+        )
+      );
     });
 
     return res;

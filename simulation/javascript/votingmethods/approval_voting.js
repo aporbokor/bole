@@ -11,6 +11,10 @@ class ApprovalVoter extends cardinalVotingMethod {
     return "disapprove";
   }
 
+  get_results_data(cand) {
+    return [cand.votes[0], "| Approves: "];
+  }
+
   extra_visualize(voters) {
     this.paint_voters();
 

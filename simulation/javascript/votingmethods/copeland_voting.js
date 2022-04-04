@@ -39,22 +39,22 @@ class CopelandVoter extends CondorcetVotingMethod {
   }
 
   get_results_data(cand) {
-    return [cand.copeland_score, '|copeland score: '];
+    return [cand.copeland_score, "| Copeland Score: "];
   }
 
   show_first() {
     let voting_sytem = this.parent_box.visualized_system;
-    let content = document.createElement('div');
+    let content = document.createElement("div");
 
-    let text = document.createElement('p');
+    let text = document.createElement("p");
     text.innerHTML =
       "From the relative strength matrix we can calculate a copeland score for each candidate. Every candidate's copeland score equals to the number of candidates defeated plus half of the number of candidates tied" +
-      'So basicly if:<ul>' +
+      "So basicly if:<ul>" +
       "<li>R(i,j) > 0 : i's score is incremented by one</li>" +
       "<li>R(i,j) < 0 : i's score is not changed</li>" +
       "<li>R(i,j) = 0 : i's score is incremented by a half</li>" +
       "<li>R(i,i) : i's score is not changed</li></ul>" +
-      'We do this for every candidate i, and in the end we get this:';
+      "We do this for every candidate i, and in the end we get this:";
 
     let table = table_from_matrix(
       voting_sytem.copeland_matrix,
@@ -62,9 +62,9 @@ class CopelandVoter extends CondorcetVotingMethod {
       voting_sytem.candidate_names
     );
 
-    let second_text = document.createElement('p');
+    let second_text = document.createElement("p");
     second_text.innerHTML =
-      'From this, we can determent the winner with ease: just count which candidate has the most score!';
+      "From this, we can determent the winner with ease: just count which candidate has the most score!";
 
     content.appendChild(text);
     content.appendChild(table);
@@ -79,7 +79,7 @@ class CopelandVoter extends CondorcetVotingMethod {
 
     for (let i = 0; i < candidates.length; i++) {
       candidates[i].text = candidates[i].copeland_score;
-      candidates[i].text_label = 'Copeland score';
+      candidates[i].text_label = "Copeland score";
     }
   }
 }

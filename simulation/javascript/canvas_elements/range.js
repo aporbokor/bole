@@ -18,12 +18,41 @@ class Range extends Drawable {
 
     this.size = 0;
     this.grow_speed = 1;
+
+    this.max_offset = this.size / 5;
+    this.moving_speed = 2;
+
+    this.x = this.parent_cand.x;
+    this.y = this.parent_cand.y;
+  }
+
+  update_position() {
+    this.target_x = this.parent_cand.x;
+    this.target_y = this.parent_cand.y;
+
+    let target_vector = createVector(this.target_x, this.target_y);
+    let current_vector = createVector(this.x, this.y);
+
+    let difference_vector = p5.Vector.sub(current_vector, target_vector);
+    difference_vector.limit(this.max_offset);
+
+    if (difference_vector.mag < this.moving_speed * 0.5) {
+      this.x = this.target_x;
+      this.y = this.target_y;
+      return;
+    }
+    difference_vector.normalize();
+
+    current_vector.add(difference_vector.mult(-this.moving_speed));
+
+    this.x = current_vector.x;
+    this.y = current_vector.y;
   }
 
   show() {
     noFill();
     stroke(this.color);
-    circle(this.parent_cand.x, this.parent_cand.y, this.size * 2);
+    circle(this.x, this.y, this.size * 2);
 
     this.draw_text();
     stroke(default_stroke);
@@ -36,6 +65,8 @@ class Range extends Drawable {
     grow_speed = this.grow_speed;
     this.grow_to_size();
     grow_speed = og_growspeed;
+
+    this.update_position();
   }
 
   draw_text() {

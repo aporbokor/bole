@@ -21,16 +21,16 @@ class Candidate extends Person {
 
   get_small_p() {
     let returned;
-    if (typeof (this.votes) === 'undefined') {
-      returned = createP(this.name + '|no votes yet');
+    if (typeof this.votes === "undefined") {
+      returned = createP(this.name + "|no votes yet");
     } else if (Array.isArray(this.votes)) {
-      returned = createP(this.name + '|votes: ' + this.votes.join(', '));
+      returned = createP(this.name + "| Votes: " + this.votes.join(", "));
     } else {
-      returned = createP(this.name + '|votes: ' + this.votes);
+      returned = createP(this.name + "| Votes: " + this.votes);
     }
 
-    returned.class('candidate_p');
-    returned.style('color', this.color);
+    returned.class("candidate_p");
+    returned.style("color", this.color);
 
     return returned;
   }
@@ -43,22 +43,27 @@ class Candidate extends Person {
     let extra_to_div = createDiv();
 
     if (Array.isArray(this.votes)) {
-      extra_to_div.child(createP('Votes:' + this.votes.toString()));
-
-    } else if (typeof this.votes === 'undefined') {
-      extra_to_div.child(createP('No votes yet'))
+      extra_to_div.child(createP("Votes:" + this.votes.toString()));
+    } else if (typeof this.votes === "undefined") {
+      extra_to_div.child(createP("No votes yet"));
     } else {
-      extra_to_div.child(createP('Votes: ' + this.votes));
+      extra_to_div.child(createP("Votes: " + this.votes));
     }
 
     if (this.supporters == 0) {
-      extra_to_div.child(createP('Supporters: not avelable until a simulation has run'));
+      extra_to_div.child(
+        createP("Supporters: not avelable until a simulation has run")
+      );
     } else {
-      extra_to_div.child(createP('Supporters: ' + this.supporters));
+      extra_to_div.child(createP("Supporters: " + this.supporters));
     }
 
     if (this.seems_win) {
-      extra_to_div.child(createP('From the supporter count of this candidate, tactical voters have concluded that this candidate is likely to win. This might cause them to vote diferently than honest voters.'));
+      extra_to_div.child(
+        createP(
+          "From the supporter count of this candidate, tactical voters have concluded that this candidate is likely to win. This might cause them to vote diferently than honest voters."
+        )
+      );
     }
 
     return extra_to_div;
@@ -79,7 +84,8 @@ function count_supporters() {
     voter.supports = [];
     for (let j = 0; j < candidates.length; j++) {
       let candidate = candidates[j];
-      let res = (dist(candidate.x, candidate.y, voter.x, voter.y) <= support_range);
+      let res =
+        dist(candidate.x, candidate.y, voter.x, voter.y) <= support_range;
 
       if (res) {
         supporter_population += 1;

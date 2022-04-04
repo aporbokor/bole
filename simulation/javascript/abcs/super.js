@@ -14,14 +14,14 @@ class VotingMethod {
   prepare_for_voting() {
     // Called before registrating any votes
     throw new Error(
-      'You must implement a prepare_for_voting method to your VotingMethod class'
+      "You must implement a prepare_for_voting method to your VotingMethod class"
     );
   }
 
   registrate_vote(voter) {
     // Called to registrate the vote of a Voter
     throw new Error(
-      'You must implement a registrate_vote method to your VotingMethod class'
+      "You must implement a registrate_vote method to your VotingMethod class"
     );
   }
 
@@ -30,7 +30,7 @@ class VotingMethod {
        Must return an array of arrays,
        where every nth array contains the candidates who got nth place*/
     throw new Error(
-      'You must implement a count_votes method to your VotingMethod class'
+      "You must implement a count_votes method to your VotingMethod class"
     );
   }
 
@@ -38,13 +38,13 @@ class VotingMethod {
     /* Given any ballot of candidates must return an html element from that ballot.
        This ellement is then used in the selected_div of voters*/
     throw new Error(
-      'You must implement a get_ballot_element method to your VotingMethod class'
+      "You must implement a get_ballot_element method to your VotingMethod class"
     );
   }
 
   get_results_data(cand) {
     // Defines what data should be displayed in the results_div
-    return [cand.votes, '|votes: '];
+    return [cand.votes, "| Votes: "];
   }
 
   extra_visualize(voters) {
@@ -56,7 +56,7 @@ class VotingMethod {
     // This method is used for setting up a relationship between the votingmethod and the steppig_box
     stepping_box.set_content(
       createP(
-        'Step by step visualization is not avalable for this votingmethod'
+        "Step by step visualization is not avalable for this votingmethod"
       )
     );
   }

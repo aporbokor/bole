@@ -84,9 +84,9 @@
 main {
   display: grid;
   grid-template-areas:
-    'sim-gombok canvas selected'
-    'sim-gombok canvas results'
-    'step       step   results';
+    "sim-gombok canvas selected"
+    "sim-gombok canvas results"
+    "step       step   results";
   grid-template-columns: 1fr min-content 1fr;
   grid-template-rows: 18rem calc(var(--canvas-height) - 19rem) auto;
 
@@ -104,7 +104,7 @@ body {
   text-transform: lowercase;
   font-size: 0.9rem;
   padding: 0.5rem;
-  font-family: 'Crimson Pro', serif;
+  font-family: "Crimson Pro", serif;
   text-align: center;
 }
 
@@ -139,7 +139,7 @@ li::marker {
 }
 
 .tick-marker::marker {
-  content: '✔';
+  content: "✔";
 }
 
 .person_profile_pic {
@@ -227,7 +227,7 @@ li::marker {
 }
 
 .next_stepp::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background-color: var(--accent);
@@ -280,8 +280,8 @@ li::marker {
 @media only screen and (min-width: 110em) {
   main {
     grid-template-areas:
-      'sim-gombok canvas selected results'
-      'step       step   step     results';
+      "sim-gombok canvas selected results"
+      "step       step   step     results";
 
     grid-template-columns: 2fr min-content 1fr 1.1fr;
     grid-template-rows: var(--canvas-height) min-content;
@@ -304,12 +304,16 @@ li::marker {
 }
 
 @media only screen and (max-width: 80em) {
+  :root:root {
+    --drop-down-height: 10rem;
+  }
+
   main {
     grid-template-areas:
-      'sim-gombok sim-gombok'
-      'canvas selected'
-      'canvas results'
-      'step   results';
+      "sim-gombok sim-gombok"
+      "canvas selected"
+      "canvas results"
+      "step   results";
 
     grid-template-columns: min-content 1fr;
     grid-template-rows: 21rem 18rem calc(var(--canvas-height) - 19rem) min-content;
@@ -351,10 +355,10 @@ li::marker {
 @media only screen and (max-width: 65em) {
   main {
     grid-template-areas:
-      'sim-gombok selected'
-      'canvas canvas'
-      'canvas canvas'
-      'step   results';
+      "sim-gombok selected"
+      "canvas canvas"
+      "canvas canvas"
+      "step   results";
 
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 21rem min-content min-content;
@@ -363,7 +367,7 @@ li::marker {
 
 @media only screen and (max-width: 50em) {
   main {
-    grid-template-areas: 'sim-gombok' 'canvas' 'results';
+    grid-template-areas: "sim-gombok" "canvas" "results";
     grid-template-columns: 1fr;
     grid-template-rows: 21rem min-content 1fr;
     padding: 10px;

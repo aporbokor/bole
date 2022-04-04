@@ -96,7 +96,7 @@ class Person extends Drawable {
     return returned;
   }
 
-  get_custom_p(progress_data, text_after_name = "|votes: ") {
+  get_custom_p(progress_data, text_after_name = "| Votes: ") {
     // Creates a DOM element with the person's name and progresses made of thee proggres_data
 
     let text = this.get_name_p().innerHTML + text_after_name;

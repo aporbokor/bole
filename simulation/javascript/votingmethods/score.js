@@ -35,7 +35,7 @@ class scoreVoter extends cardinalVotingMethod {
   }
 
   get_results_data(cand) {
-    return [cand.score, "| score: "];
+    return [cand.score, "| Score: "];
   }
 
   extra_visualize(voters) {

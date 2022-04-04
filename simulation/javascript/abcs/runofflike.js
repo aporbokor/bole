@@ -2,7 +2,7 @@ class RunoffLike extends RankingVotingMethod {
   constructor(candidates) {
     super(candidates);
     ABC_constructor(this, RunoffLike);
-    this.explaining_text = '[placeholder text]';
+    this.explaining_text = "[placeholder text]";
   }
 
   prepare_for_voting() {
@@ -105,12 +105,12 @@ class RunoffLike extends RankingVotingMethod {
 
   elliminate_canidates(sub_votes, elliminated) {
     throw new Error(
-      'You must implement an elliminate_canidates method to your RankingVotingMethod class'
+      "You must implement an elliminate_canidates method to your RankingVotingMethod class"
     );
   }
 
   get_reasoning_text(elliminated_candidates) {
-    return createP('[placeholder text]');
+    return createP("[placeholder text]");
   }
 
   count_votes() {
@@ -121,7 +121,7 @@ class RunoffLike extends RankingVotingMethod {
     this.sub_votes_for_visualization = [];
 
     while (elliminated.size < this.candidates.length) {
-      let not_elliminated = this.candidates.filter(c => {
+      let not_elliminated = this.candidates.filter((c) => {
         return !elliminated.has(c);
       });
 
@@ -179,6 +179,10 @@ class RunoffLike extends RankingVotingMethod {
     }
   }
 
+  sub_votes_visualization_data(sub) {
+    return [sub[0][0], "| sub-results: "];
+  }
+
   visualize_for_stepping_box(subresult) {
     for (let i = 0; i < subresult.length; i++) {
       for (let j = 0; j < subresult[i].length; j++) {
@@ -190,7 +194,11 @@ class RunoffLike extends RankingVotingMethod {
       let candidate = cand[0];
       // let returned = createProgress(cand[0].name + ': ',cand[1],voters.length);
       // returned.label.style('color',cand[0].color);
-      return candidate.get_custom_p(candidate.sub_votes_for_visualization[0]);
+      return candidate.get_custom_p(
+        ...voter_maschine.sub_votes_visualization_data(
+          candidate.sub_votes_for_visualization
+        )
+      );
     });
 
     return res;
@@ -210,9 +218,9 @@ class RunoffLike extends RankingVotingMethod {
 
     content.child(
       createP(
-        'This is the ' +
+        "This is the " +
           int_to_serial_number(voting_sytem.visualization_stepp) +
-          ' step'
+          " step"
       )
     );
 
@@ -224,7 +232,7 @@ class RunoffLike extends RankingVotingMethod {
 
       let explaining_p = createP(voting_sytem.explaining_text);
       content.child(explaining_p);
-      explaining_p.class('explaining_p');
+      explaining_p.class("explaining_p");
 
       let subresult =
         voting_sytem.sub_results[voting_sytem.visualization_stepp];
@@ -238,7 +246,7 @@ class RunoffLike extends RankingVotingMethod {
         voting_sytem.elliminated_visualization
       );
       let elliminated_div = createDivWithP(
-        'These candidate(s) were elliminated:'
+        "These candidate(s) were elliminated:"
       );
 
       for (const x of voting_sytem.elliminated_visualization.values()) {
@@ -266,7 +274,7 @@ class RunoffLike extends RankingVotingMethod {
 
       voting_sytem.stepp_in_visualization();
     } else {
-      content.child(createP('The winner has been chosen'));
+      content.child(createP("The winner has been chosen"));
       voting_sytem.set_final_extra_function();
       this.parent_box.hide_next();
     }

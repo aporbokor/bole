@@ -1,8 +1,14 @@
+:root {
+  --drop-down-height: 100vh;
+}
+
 .custom-select {
   position: relative;
   background-color: var(--primary-lt);
   width: 10rem;
   margin-left: -0.5rem;
+  isolation: isolate;
+  z-index: 99999999;
 }
 
 .custom-select select {
@@ -15,7 +21,7 @@
 
 .select-selected:after {
   position: absolute;
-  content: '';
+  content: "";
   top: 14px;
   right: 10px;
   width: 0;
@@ -45,6 +51,8 @@
   left: 0;
   right: 0;
   z-index: 99;
+  max-height: var(--drop-down-height);
+  overflow-y: auto;
 }
 
 .select-hide {
