@@ -3,7 +3,7 @@ function slider_with_name(name, min, max, value, step) {
 
   let returned = createDiv();
   let text = createP(name + value);
-  text.class('named_slider_title')
+  text.class("named_slider_title");
 
   let slider = createSlider(min, max, value, step);
 
@@ -12,25 +12,26 @@ function slider_with_name(name, min, max, value, step) {
 
   returned.child(slider);
 
-  returned.class('named_slider');
+  returned.class("named_slider");
 
   returned.setValue = function (val) {
     slider.elt.value = val;
     this.value();
-  }
+  };
 
   returned.value = function () {
     text.html(name + slider.value());
     return slider.value();
-  }
+  };
 
   returned.input = (func) => {
-    slider.elt.addEventListener('input', function () {
+    slider.elt.addEventListener("input", function () {
       const val = parseFloat(this.value);
       returned.setValue(val);
       func(val);
-    })
-  }
+    });
+  };
+  returned.slider = slider;
 
   return returned;
 }
@@ -42,35 +43,32 @@ function createProgress(name, value, max) {
 
   let returned = createDiv();
 
-  if (typeof (value) === 'number') {
-
-    let bar = document.createElement('progress');
+  if (typeof value === "number") {
+    let bar = document.createElement("progress");
     bar.setAttribute("class", "progress_");
     bar.setAttribute("value", value);
     bar.setAttribute("max", max);
     bar.innerHTML = name;
 
-    let p = createP(name + value)
+    let p = createP(name + value);
     returned.child(p);
     returned.label = p;
 
     returned.child(bar);
-
   } else if (Array.isArray(value)) {
-    let p = createP(name + value.join(', '));
+    let p = createP(name + value.join(", "));
     returned.child(p);
     returned.label = p;
     for (let i = 0; i < value.length; i++) {
-      let bar = document.createElement('progress');
+      let bar = document.createElement("progress");
       bar.setAttribute("class", "progress_");
       bar.setAttribute("value", value[i]);
       bar.setAttribute("max", max);
       bar.innerHTML = name;
 
-      returned.child(bar)
-      returned.child(document.createElement('br'));
+      returned.child(bar);
+      returned.child(document.createElement("br"));
     }
-
   }
   return returned;
 }
@@ -126,31 +124,30 @@ function createDivWithP(text) {
   let returned = createDiv();
   let p = createP(text);
 
-  p.class('p_div_p');
+  p.class("p_div_p");
   returned.child(p);
 
-  returned.class('div_w_p')
+  returned.class("div_w_p");
   returned.p = p;
 
   return returned;
 }
 
 class SteppingBox {
-
   // Class used for the stepping_box
   constructor() {
-    this.main_div = createDivWithP('The voting process:');
-    this.main_div.class('step_by_stepp');
-    this.main_div.addClass('content_box');
-    this.main_div.p.class('stepping_box_title');
+    this.main_div = createDivWithP("The voting process:");
+    this.main_div.class("step_by_stepp");
+    this.main_div.addClass("content_box");
+    this.main_div.p.class("stepping_box_title");
 
-    this.next_button = createA('#defaultCanvas0', 'next step');
-    this.next_button.class('next_stepp');
+    this.next_button = createA("#defaultCanvas0", "next step");
+    this.next_button.class("next_stepp");
     this.next_button.parent_box = this;
 
     this.content_div = createDiv();
-    this.content_div.class('stepping_content_div');
-    this.content_div.inside = createP('No voting yet');
+    this.content_div.class("stepping_content_div");
+    this.content_div.inside = createP("No voting yet");
     this.content_div.child(this.content_div.inside);
 
     this.main_div.child(this.content_div);

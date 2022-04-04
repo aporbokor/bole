@@ -19,11 +19,11 @@ class Range extends Drawable {
     this.size = 0;
     this.grow_speed = 1;
 
-    this.max_offset = this.size / 5;
-    this.moving_speed = 2;
+    this.max_offset = this.target_size;
+    this.moving_speed = 9;
 
-    this.x = this.parent_cand.x;
-    this.y = this.parent_cand.y;
+    this.x = width / 2;
+    this.y = height / 2;
   }
 
   update_position() {
@@ -33,17 +33,19 @@ class Range extends Drawable {
     let target_vector = createVector(this.target_x, this.target_y);
     let current_vector = createVector(this.x, this.y);
 
-    let difference_vector = p5.Vector.sub(current_vector, target_vector);
+    let difference_vector = p5.Vector.sub(target_vector, current_vector);
+
+    difference_vector.setMag(difference_vector.mag() - this.moving_speed);
+
     difference_vector.limit(this.max_offset);
 
-    if (difference_vector.mag < this.moving_speed * 0.5) {
+    if (difference_vector.mag() < this.moving_speed) {
       this.x = this.target_x;
       this.y = this.target_y;
       return;
     }
-    difference_vector.normalize();
 
-    current_vector.add(difference_vector.mult(-this.moving_speed));
+    current_vector = p5.Vector.sub(target_vector, difference_vector);
 
     this.x = current_vector.x;
     this.y = current_vector.y;
