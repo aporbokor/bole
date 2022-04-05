@@ -24,6 +24,8 @@ class Drawable {
     this.to_show = true;
 
     this.hidden_size = 3;
+
+    this.hidden_text = false;
   }
 
   reset_text() {
@@ -167,9 +169,17 @@ class Drawable {
     color_picker.parent_div = returned;
     color_picker.input(set_color);
 
+    let text_hide = createCheckbox("Hide text", this.hidden_text);
+    text_hide.parent_person = this;
+
+    text_hide.changed(() => {
+      this.hidden_text = text_hide.checked();
+    });
+
     returned.child(name);
     returned.child(color_picker);
     returned.child(this.get_hide_checkbox());
+    returned.child(text_hide);
 
     return returned;
   }

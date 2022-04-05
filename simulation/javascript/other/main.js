@@ -1,7 +1,7 @@
 const main_element = document.getElementsByTagName("main")[0];
 let font;
 
-const min_voters = 2;
+const min_voters = 1;
 let max_voters;
 let to_remove_voters = [];
 const max_voters_per_pixel = 0.0015;
@@ -54,11 +54,11 @@ let voting_type_selector;
 let tool_div;
 let current_tool;
 let tools = new Map([
-  ["Select Tool", SelectTool],
-  ["Delete Tool", DeleteTool],
-  ["Voter Painter", VoterPainter],
-  ["Honesty Painter", HonestyPainter],
-  ["Strategy Painter", StrategyPainter],
+  ["Select tool", SelectTool],
+  ["Delete tool", DeleteTool],
+  ["Voter painter", VoterPainter],
+  ["Honesty painter", HonestyPainter],
+  ["Strategy painter", StrategyPainter],
 ]);
 let tool_selector;
 let tool_size;
@@ -158,7 +158,13 @@ function add_voter_to_position(x, y) {
     let y_ = constrain(round(y), 0, height);
 
     voters.push(
-      new Voter(x_, y_, random_bool(strategic_chance), honest_voter_color)
+      new Voter(
+        x_,
+        y_,
+        random_bool(strategic_chance),
+        honest_voter_color,
+        `voter#${voters.length}`
+      )
     );
     update_voter_population_slider();
     change_in_sim = true;
@@ -562,7 +568,12 @@ function setup() {
   }
 
   tool_selector.changed(select_tool);
+
   select_tool();
+
+  const custom_tool = document.createElement("div");
+  custom_tool.classList.add("custom-select");
+  custom_tool.appendChild(tool_selector.elt);
 
   tool_size = slider_with_name("Tool size: ", 0, max_tool_size, 0, 1);
 
@@ -665,7 +676,7 @@ function setup() {
 
   const custom_select = document.createElement("div");
   custom_select.classList.add("custom-select");
-  custom_select.classList.add("voting-sel");
+  custom_select.func_type = "voting-select";
   custom_select.appendChild(voting_type_selector.elt);
   Simulation_div.child(custom_select);
 
@@ -680,7 +691,7 @@ function setup() {
   // tl_select.classList.add('tool-sel');
   // tl_select.appendChild(tool_selector.elt);
   // tool_div.child(tl_select);
-  Simulation_div.child(tool_selector);
+  Simulation_div.child(custom_tool);
   Simulation_div.child(tool_size);
 
   advanced.child(approval_slider);
