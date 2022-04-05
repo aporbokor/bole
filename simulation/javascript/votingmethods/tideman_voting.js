@@ -9,9 +9,7 @@ class TideMan extends CondorcetVotingMethod {
     let winner;
     for (let i = 0; i < this.candidates.length; i++) {
       for (let j = 0; j < this.candidates.length; j++) {
-        if (i == j) {
-          continue;
-        } else if (this.locked[i][j] == true) {
+        if (this.locked[j][i] == false) {
           if (j == this.candidates.length - 1) {
             winner = this.candidates[i];
           }
