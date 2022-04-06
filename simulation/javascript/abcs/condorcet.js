@@ -19,6 +19,11 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     super(candidates);
     ABC_constructor(this, CondorcetVotingMethod);
     this.pairs = [];
+    this.locked = tdBooleanArray(
+      this.candidates.length,
+      this.candidates.length
+    );
+    console.log(this.locked);
   }
 
   prepare_for_voting() {
@@ -63,6 +68,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
   invalid_edge(pair) {
     let l = pair.loser;
     while (true) {
+      console.log(this.locked);
       for (let i = 0; i < this.candidates.length; i++) {
         if (i == l) {
           continue;

@@ -7,22 +7,22 @@ let max_votes;
 const max_range = Infinity;
 
 const votingmethods = new Map([
-  ["Plurality voting", PlurarityVoter],
-  ["Anti-plurality voting", AntiPlurarityVoter],
+  ['Plurality voting', PlurarityVoter],
+  ['Anti-plurality voting', AntiPlurarityVoter],
   // ['theoretical perfect', PerfectVoter],
-  ["Approval voting", ApprovalVoter],
-  ["Evaluative voting", evaluativeVoter],
-  ["Score voting", scoreVoter],
-  ["STAR voting", starVoter],
-  ["Bucklin voting", Bucklin],
-  ["Instant-runoff voting", InstantRunOffVoter],
+  ['Approval voting', ApprovalVoter],
+  ['Evaluative voting', evaluativeVoter],
+  ['Score voting', scoreVoter],
+  ['STAR voting', starVoter],
+  ['Bucklin voting', Bucklin],
+  ['Instant-runoff voting', InstantRunOffVoter],
   ["Coombs's method", CoombsVoting],
-  ["Supplementary vote", SupplementaryVoter],
-  ["Contingent vote", ContingentVoter],
-  ["Sri Lankan contingent vote", SriLankanContingentVoter],
-  ["Borda count", BordaCounting],
+  ['Supplementary vote', SupplementaryVoter],
+  ['Contingent vote', ContingentVoter],
+  ['Sri Lankan contingent vote', SriLankanContingentVoter],
+  ['Borda count', BordaCounting],
   ["Copeland's method", CopelandVoter],
-  ["Tideman (RP)", TideMan],
+  ['Tideman (RP)', TideMan],
 ]);
 
 let first = false;
@@ -36,8 +36,10 @@ function select_voting() {
   for (const voter of voters) {
     voter.size = 2;
   }
-
-  simulate_voting();
+  if (change_in_sim) {
+    simulate_voting();
+    change_in_sim = false;
+  }
 }
 
 function simulate_voting() {
@@ -51,7 +53,7 @@ function simulate_voting() {
   }
   max_votes = voters.length;
 
-  candidates.forEach((cand) => {
+  candidates.forEach(cand => {
     cand.reset_text();
   });
 
@@ -67,13 +69,13 @@ function simulate_voting() {
   }
 
   voting_results = voter_maschine.count_votes();
-  console.log("The voting machine:");
+  console.log('The voting machine:');
   console.log(voter_maschine);
 
-  console.log("The results:");
+  console.log('The results:');
   console.log(voting_results);
 
-  console.log("The voters:");
+  console.log('The voters:');
   console.log(voters);
 
   display_votes(voter_maschine);
