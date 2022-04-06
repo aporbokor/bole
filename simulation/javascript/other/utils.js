@@ -88,6 +88,7 @@ function tdBooleanArray(d1, d2) {
     }
     arr.push(subarr);
   }
+  console.log(arr);
   return arr;
 }
 

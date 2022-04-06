@@ -5,6 +5,12 @@ class TideMan extends CondorcetVotingMethod {
     this.add_pairs();
     this.sort_pairs();
     console.log(this.pairs);
+    this.locked = tdBooleanArray(
+      this.candidates.length,
+      this.candidates.length
+    );
+    console.log('work pls');
+    console.log(this.locked);
     this.create_graph();
     let winner;
     for (let i = 0; i < this.candidates.length; i++) {
