@@ -50,6 +50,7 @@ function initialize_select() {
       this.nextSibling.classList.toggle("select-hide");
       this.classList.toggle("select-arrow-active");
       select_voting();
+      select_tool();
     });
   }
 

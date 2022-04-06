@@ -153,7 +153,7 @@ class Arrow extends Drawable {
       return;
     }
 
-    if (this.text != null) {
+    if (this.text != null && !this.hidden_text) {
       push();
       translate(this.text_vector.x, this.text_vector.y);
       textFont(font);
