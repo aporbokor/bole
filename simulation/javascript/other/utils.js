@@ -5,7 +5,7 @@ function cursor_in_canvas() {
 
 function sum_of_natural_numbers(start, end, stepp = 1) {
   /* Adding up natural numbers from start to end with the increase of stepp
-      example: sum_of_natural_numbers(0,100) = 0 + 1 + 2 + ... 100*/
+      example: sum_of_natural_numbers(0, 100) = 0 + 1 + 2 + ... 100*/
 
   let range = end - start;
   return (range / 2) * (2 * start + (range - 1) * stepp);
@@ -104,21 +104,21 @@ function int_to_serial_number(i) {
   /* Returns a string from an int containing the serial number of that int
      examples: 1st, 2nd, 11th, 13th, 20th, 31st*/
 
-  let str_int = '' + i;
+  let str_int = "" + i;
 
-  if ((str_int.length > 1) & (str_int.substr(-2, 1) === '1')) {
-    return str_int + 'th';
+  if ((str_int.length > 1) & (str_int.substr(-2, 1) === "1")) {
+    return str_int + "th";
   }
-  if (str_int.slice(-1) === '1') {
-    return str_int + 'st';
+  if (str_int.slice(-1) === "1") {
+    return str_int + "st";
   }
-  if (str_int.slice(-1) === '2') {
-    return str_int + 'nd';
+  if (str_int.slice(-1) === "2") {
+    return str_int + "nd";
   }
-  if (str_int.slice(-1) === '3') {
-    return str_int + 'rd';
+  if (str_int.slice(-1) === "3") {
+    return str_int + "rd";
   }
-  return str_int + 'th';
+  return str_int + "th";
 }
 
 function random_bool(true_chance) {

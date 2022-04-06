@@ -102,7 +102,7 @@ const clicked_selected_size_adder = 15;
 const clicked_selected_laser_color = "rgb(0, 0, 0)";
 const clicked_selected_stroke_weight = 4;
 
-const default_stroke = "rgb(0,0,0)";
+const default_stroke = "rgb(0, 0, 0)";
 const strategic_voter_color = "rgb(0, 0, 0)";
 const strategic_voter_stroeke_weight = 3;
 const honest_voter_color = "#F18F01";

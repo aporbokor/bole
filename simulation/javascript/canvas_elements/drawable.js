@@ -85,7 +85,7 @@ class Drawable {
   grow_to_size() {
     /* Method used for dynamic size-changes.
          When called in every frame the voter will grow by grow_speed per frame
-         until it reaches its target_size. Resets the target_size in the end,
+         until it reaches its target_size. Resets the target_size in the end, 
          so when we want that to change we need to maually set it every time
          before we call this method*/
 

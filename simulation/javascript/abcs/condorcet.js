@@ -248,12 +248,12 @@ class CondorcetVotingMethod extends RankingVotingMethod {
       voting_sytem.candidate_names
     );
 
-    let first_text = document.createElement('p');
-    first_text.innerHTML = `After we have recived every voters ballot, now we can get to work. For each voter's ballot we are going to count how many times has been each candidate placed before each candidate. For example let's see what does the ballot of the voter named ${voter_p} (marked with the default voter color) looks like`;
+    let first_text = document.createElement("p");
+    first_text.innerHTML = `After we have received every voter's ballot, now we can get to work. For each voter's ballot, we are going to count how many times has been each candidate placed before each candidate. For example, let's see what does the ballot of the voter named ${voter_p} (marked with the default voter color) looks like`;
 
     let voter_res_list = voting_sytem.get_ballot_element(voter_res);
 
-    let second_text = document.createElement('p');
+    let second_text = document.createElement("p");
 
     let first_choice = voter_res[0].get_simple_name_p().outerHTML;
     let second_choice = voter_res[1].get_simple_name_p().outerHTML;
@@ -262,8 +262,8 @@ class CondorcetVotingMethod extends RankingVotingMethod {
 
     second_text.innerHTML = `${first_choice} defeated every candidate all the way to the last placed ${last_choice}.<br>${second_choice} also defeated every candidate below them. But this candidate didn't beat ${first_choice}. We can do this kind of calculation to every candidate in the ballot to get the following matrix:`;
 
-    let third_text = document.createElement('p');
-    third_text.innerHTML = `This table is the outranking matrix. This shows the preferences of ${voter_p}. As you can see, if we look at the row of ${first_choice} and the column of ${second_choice} we can see a one. This means that ${first_choice} is <strong>prefered</strong> over ${second_choice} by exactly one voter. If we do this for every voter's ballot, than we will know that how many times has candidate X been placed before candidate Y. We can place these findings in a table like so: `;
+    let third_text = document.createElement("p");
+    third_text.innerHTML = `This table is the outranking matrix. This shows the preferences of ${voter_p}. As you can see, if we look at the row of ${first_choice} and the column of ${second_choice} we can see a one. This means that ${first_choice} is <strong>preferred</strong> over ${second_choice} by exactly one voter. If we do this for every voter's ballot, then we will know that how many times has candidate X been placed before candidate Y. We can place these findings in a table like so: `;
     let table = table_from_matrix(
       voting_sytem.outranking_matrix,
       voting_sytem.candidate_names,
@@ -275,10 +275,10 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     const preference2 =
       voting_sytem.outranking_matrix[voter_res[1].id][voter_res[0].id];
 
-    let last_text = document.createElement('p');
-    last_text.innerHTML = `This is the outranking matrix (O) of every voter. We can strore our <strong>preferences</strong> here. For example, we can see that ${first_choice} has been prefered over ${second_choice} by exactly ${preference} voters, and ${second_choice} has been prefered over ${first_choice} by exactly ${preference2} voters. This information (as we will see) is really useful for us.`;
+    let last_text = document.createElement("p");
+    last_text.innerHTML = `This is the outranking matrix (O) of every voter. We can store our <strong>preferences</strong> here. For example, we can see that ${first_choice} has been preferred over ${second_choice} by exactly ${preference} voters, and ${second_choice} has been preferred over ${first_choice} by exactly ${preference2} voters. This information (as we will see) is really useful for us.`;
 
-    let content = document.createElement('div');
+    let content = document.createElement("div");
     content.appendChild(first_text);
     content.appendChild(voter_res_list);
     content.appendChild(second_text);
@@ -327,17 +327,17 @@ class CondorcetVotingMethod extends RankingVotingMethod {
           winner.get_name_p().outerHTML
         }`;
 
-      arr.start_person_data = `This candidate is prefered over ${
+      arr.start_person_data = `This candidate is preferred over ${
         loser.get_name_p().outerHTML
       } by ${this.outranking_matrix[winner.id][loser.id]} voters.`;
-      arr.end_person_data = `This candidate is prefered over ${
+      arr.end_person_data = `This candidate is preferred over ${
         winner.get_name_p().outerHTML
       } by ${this.outranking_matrix[loser.id][winner.id]} voters.`;
 
       if (strength == 0) {
         let endStyle = new HalfTriArrowHead(20, 20);
         arr.set_end_styles(endStyle, endStyle);
-        arr.name = `${winner.name} and ${loser.name} are equaly prefered`;
+        arr.name = `${winner.name} and ${loser.name} are equaly preferred`;
       }
     }
   }
@@ -347,17 +347,17 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     let voting_sytem = this.parent_box.visualized_system;
     delete_arrows();
 
-    voters.forEach(v => {
+    voters.forEach((v) => {
       v.hide();
     });
 
     voting_sytem.arrows_between_candidates();
     this.random_voter.set_color(this.random_voter.voted_for[0].color);
-    let content = document.createElement('div');
+    let content = document.createElement("div");
 
-    let text = document.createElement('p');
+    let text = document.createElement("p");
     text.innerHTML =
-      'From the outranking matrix we can create a relative strength matrix (R). Basicly every R(i,j) equals O(i,j) - O(j,i). This kind of matrix shows us, that how by how many times did each candidate i beat candidate j. If this number is negative than j has beaten i more times.';
+      "From the outranking matrix we can create a relative strength matrix (R). Basically every R(i, j) equals O(i, j) - O(j, i). This kind of matrix shows us, that how by how many times did each candidate i beat candidate j. If this number is negative, then j has beaten i more times.";
 
     let table = table_from_matrix(
       voting_sytem.relative_strength_matrix,
@@ -375,7 +375,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
   show_first() {
     // The first step_by_stepp visualization step which every class needs to define which inherits from CondorcetVotingMethod
     throw new Error(
-      'You must define a show_first method to your CondorcetVotingMethod class'
+      "You must define a show_first method to your CondorcetVotingMethod class"
     );
   }
 

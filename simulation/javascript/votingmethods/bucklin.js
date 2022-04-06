@@ -69,7 +69,7 @@ class Bucklin extends RankingVotingMethod {
 
     if (step > 1) {
       second_text.innerText =
-        "We will add these to the prewious votecounts, to get the following result:";
+        "We will add these to the previous vote counts, to get the following result:";
     }
 
     let res = count_votes_for_ints(candidates, (cand) => {
@@ -86,7 +86,7 @@ class Bucklin extends RankingVotingMethod {
       this.parent_box.hide_next();
       let last_first_p = document.createElement("p");
       last_first_p.innerText =
-        "In this round at least one candidate had a majority, which means that this was the last round. We just need to count the final votes, to determent the winners:";
+        "In this round, at least one candidate had a majority, which means that this was the last round. We just need to count the final votes, to determent the winners:";
 
       let cands = document.createElement("div");
       for (const candidate of voting_results[0]) {
@@ -94,7 +94,7 @@ class Bucklin extends RankingVotingMethod {
       }
       let last_last_p = document.createElement("p");
       last_last_p.innerText =
-        "So they will be the winner of this election, because they have the highest final votecount.";
+        "So they will be the winner of this election, because they have the highest final  vote count.";
 
       last_text.appendChild(last_first_p);
       last_text.appendChild(cands);

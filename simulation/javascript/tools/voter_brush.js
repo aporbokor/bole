@@ -1,7 +1,7 @@
 class VoterPainter extends DrawTool {
   constructor() {
     super();
-    this.color = 'green';
+    this.color = "green";
   }
   draw() {
     this.draw_outline();

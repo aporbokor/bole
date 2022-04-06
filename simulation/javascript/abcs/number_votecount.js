@@ -3,7 +3,7 @@ class NumberVotecountVotingMethod extends VotingMethod {
   constructor(candidates) {
     super(candidates);
     ABC_constructor(this, NumberVotecountVotingMethod);
-    this.ballot_marker = 'tick-marker';
+    this.ballot_marker = "tick-marker";
   }
 
   prepare_for_voting() {
@@ -18,10 +18,10 @@ class NumberVotecountVotingMethod extends VotingMethod {
 
   get_ballot_element(ballot) {
     console.log(ballot);
-    let returned = document.createElement('ul');
+    let returned = document.createElement("ul");
 
     for (let i = 0; i < ballot.length; i++) {
-      let li = document.createElement('li');
+      let li = document.createElement("li");
       li.classList.add(this.ballot_marker);
       li.appendChild(ballot[i].get_name_p());
       returned.appendChild(li);

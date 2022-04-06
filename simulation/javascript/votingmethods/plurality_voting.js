@@ -1,5 +1,4 @@
-class PlurarityVoter extends NumberVotecountVotingMethod {
-
+class PluralityVoter extends NumberVotecountVotingMethod {
   registrate_honest_vote(voter) {
     let min_tav = Infinity;
     let min_candidate = this.candidates[0];
@@ -33,7 +32,7 @@ class PlurarityVoter extends NumberVotecountVotingMethod {
   }
 
   registrate_vote(voter) {
-    if ((voter.strategic) & (seems_win_candidates.length >= 2)) {
+    if (voter.strategic & (seems_win_candidates.length >= 2)) {
       this.registrate_strategic_vote(voter);
       return;
     }
@@ -41,17 +40,20 @@ class PlurarityVoter extends NumberVotecountVotingMethod {
   }
 
   stepping_box_func(stepping_box) {
-    stepping_box.set_content(createP('Plurarity voting works like the following: every voter votes for their fauvorite candidate, and then we count the votes. The candidate with the most votes wins.'))
+    stepping_box.set_content(
+      createP(
+        "Plurality voting works like the following: every voter votes for their favorite  candidate, and then we count the votes. The candidate with the most votes wins."
+      )
+    );
   }
 }
 
-
 // Testing stuff
-// let voters = [new Voter(0,0,false), new Voter(1,1,false), new Voter(0.5,0.5,false), new Voter(0.1,0.1,false)];
+// let voters = [new Voter(0, 0, false), new Voter(1, 1, false), new Voter(0.5, 0.5, false), new Voter(0.1, 0.1, false)];
 //
-// let candidates = [new Candidate(0,0,undefined), new Candidate(0.5,0.5,undefined), new Candidate(1,1,undefined)];
+// let candidates = [new Candidate(0, 0, undefined), new Candidate(0.5, 0.5, undefined), new Candidate(1, 1, undefined)];
 //
-// let votings = new PlurarityVoter(candidates);
+// let votings = new PluralityVoter(candidates);
 // votings.prepare_for_voting()
 //
 // console.log(votings);

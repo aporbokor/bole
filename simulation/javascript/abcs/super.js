@@ -27,7 +27,7 @@ class VotingMethod {
 
   count_votes() {
     /* Called to count the votes
-       Must return an array of arrays,
+       Must return an array of arrays, 
        where every nth array contains the candidates who got nth place*/
     throw new Error(
       "You must implement a count_votes method to your VotingMethod class"

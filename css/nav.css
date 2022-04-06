@@ -42,7 +42,7 @@ nav {
 
 .run-btn::after,
 .run-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   opacity: 0.3;
   background: var(--secondary);
@@ -73,7 +73,7 @@ nav {
 }
 .company-name {
   color: var(--secondary);
-  font-family: 'Syne', sans-serif;
+  font-family: "Syne", sans-serif;
   font-size: 1.2rem;
   text-decoration: none;
 }

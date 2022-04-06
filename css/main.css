@@ -57,7 +57,7 @@ article {
   list-style-type: disc;
 }
 h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: var(--secondary);
   font-weight: bold;
   font-size: clamp(1rem, 1.5rem, 2rem);

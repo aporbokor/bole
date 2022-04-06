@@ -7,7 +7,7 @@ class RunoffLike extends RankingVotingMethod {
 
   prepare_for_voting() {
     super.prepare_for_voting();
-    this.elliminated_visualization = new Set();
+    this.eliminated_visualization = new Set();
     for (let i = 0; i < this.candidates.length; i++) {
       this.candidates[i].sub_votes_for_visualization = [];
     }
@@ -49,33 +49,33 @@ class RunoffLike extends RankingVotingMethod {
     return returned;
   }
 
-  get_last_valid_preference(voter, elliminated) {
+  get_last_valid_preference(voter, eliminated) {
     let tier_list = voter.voted_for.concat([]);
     let index = tier_list.length - 1;
     let returned = tier_list[index];
 
-    while (elliminated.has(returned)) {
+    while (eliminated.has(returned)) {
       index--;
       returned = tier_list[index];
     }
     return returned;
   }
 
-  best_valid_candidate_tier_list(voter, elliminated) {
+  best_valid_candidate_tier_list(voter, eliminated) {
     let tier_list = voter.voted_for.concat([]);
     for (let i = tier_list.length - 1; i >= 0; i--) {
       let item = tier_list[i];
-      if (elliminated.has(item)) {
+      if (eliminated.has(item)) {
         tier_list.splice(i, 1);
       }
     }
     return tier_list;
   }
 
-  set_candidate_votes(elliminated) {
+  set_candidate_votes(eliminated) {
     for (let i = 0; i < this.candidates.length; i++) {
       let pushed = [];
-      for (let j = 0; j < this.candidates.length - elliminated.size; j++) {
+      for (let j = 0; j < this.candidates.length - eliminated.size; j++) {
         pushed.push(0);
       }
 
@@ -85,7 +85,7 @@ class RunoffLike extends RankingVotingMethod {
     for (let i = 0; i < voters.length; i++) {
       let tier_list = this.best_valid_candidate_tier_list(
         voters[i],
-        elliminated
+        eliminated
       );
 
       for (let j = 0; j < tier_list.length; j++) {
@@ -103,39 +103,39 @@ class RunoffLike extends RankingVotingMethod {
     }
   }
 
-  elliminate_canidates(sub_votes, elliminated) {
+  eliminate_canidates(sub_votes, eliminated) {
     throw new Error(
-      "You must implement an elliminate_canidates method to your RankingVotingMethod class"
+      "You must implement an eliminate_canidates method to your RankingVotingMethod class"
     );
   }
 
-  get_reasoning_text(elliminated_candidates) {
+  get_reasoning_text(eliminated_candidates) {
     return createP("[placeholder text]");
   }
 
   count_votes() {
     let result = [];
-    let elliminated = new Set();
+    let eliminated = new Set();
 
     this.sub_results = [];
     this.sub_votes_for_visualization = [];
 
-    while (elliminated.size < this.candidates.length) {
-      let not_elliminated = this.candidates.filter((c) => {
-        return !elliminated.has(c);
+    while (eliminated.size < this.candidates.length) {
+      let not_eliminated = this.candidates.filter((c) => {
+        return !eliminated.has(c);
       });
 
-      let sub_votes = Counter.from_array(not_elliminated);
-      console.log(elliminated, not_elliminated);
+      let sub_votes = Counter.from_array(not_eliminated);
+      console.log(eliminated, not_eliminated);
 
       for (let i = 0; i < voters.length; i++) {
-        let vote = this.votes_for(voters[i], elliminated);
+        let vote = this.votes_for(voters[i], eliminated);
         if (vote != undefined) {
           sub_votes.count(vote);
         }
       }
 
-      this.set_candidate_votes(elliminated);
+      this.set_candidate_votes(eliminated);
 
       this.sub_votes_for_visualization.push(sub_votes.copy());
 
@@ -152,12 +152,12 @@ class RunoffLike extends RankingVotingMethod {
         })
       );
 
-      let new_ellimination = this.elliminate_canidates(sub_votes, elliminated);
+      let new_ellimination = this.eliminate_canidates(sub_votes, eliminated);
 
       result.unshift(new_ellimination);
 
       for (let j = 0; j < new_ellimination.length; j++) {
-        elliminated.add(new_ellimination[j]);
+        eliminated.add(new_ellimination[j]);
       }
     }
     console.log(this.sub_votes_for_visualization);
@@ -168,7 +168,7 @@ class RunoffLike extends RankingVotingMethod {
     for (let i = 0; i < voters.length; i++) {
       let chosen_candidate = this.votes_for(
         voters[i],
-        this.elliminated_visualization
+        this.eliminated_visualization
       );
       if (chosen_candidate === undefined) {
         voters[i].set_color(honest_voter_color);
@@ -192,8 +192,8 @@ class RunoffLike extends RankingVotingMethod {
 
     let res = get_results_elements(subresult, function (cand) {
       let candidate = cand[0];
-      // let returned = createProgress(cand[0].name + ': ',cand[1],voters.length);
-      // returned.label.style('color',cand[0].color);
+      // let returned = createProgress(cand[0].name + ': ', cand[1], voters.length);
+      // returned.label.style('color', cand[0].color);
       return candidate.get_custom_p(
         ...voter_maschine.sub_votes_visualization_data(
           candidate.sub_votes_for_visualization
@@ -210,7 +210,7 @@ class RunoffLike extends RankingVotingMethod {
 
     if (voting_sytem.visualization_stepp == 0) {
       extra_function = function () {
-        for (const y of stepping_box.visualized_system.elliminated_visualization.values()) {
+        for (const y of stepping_box.visualized_system.eliminated_visualization.values()) {
           y.grow_by(-0.4 * candidate_size);
         }
       };
@@ -239,38 +239,38 @@ class RunoffLike extends RankingVotingMethod {
 
       let res = voting_sytem.visualize_for_stepping_box(subresult);
 
-      let elliminated_candidates = voting_sytem.elliminate_canidates(
+      let eliminated_candidates = voting_sytem.eliminate_canidates(
         voting_sytem.sub_votes_for_visualization[
           voting_sytem.visualization_stepp
         ],
-        voting_sytem.elliminated_visualization
+        voting_sytem.eliminated_visualization
       );
-      let elliminated_div = createDivWithP(
-        "These candidate(s) were elliminated:"
+      let eliminated_div = createDivWithP(
+        "These candidate(s) were eliminated:"
       );
 
-      for (const x of voting_sytem.elliminated_visualization.values()) {
+      for (const x of voting_sytem.eliminated_visualization.values()) {
         x.hide();
       }
 
-      for (let i = 0; i < elliminated_candidates.length; i++) {
-        elliminated_div.child(
-          elliminated_candidates[i].get_custom_p(
-            elliminated_candidates[i].sub_votes_for_visualization[0]
+      for (let i = 0; i < eliminated_candidates.length; i++) {
+        eliminated_div.child(
+          eliminated_candidates[i].get_custom_p(
+            eliminated_candidates[i].sub_votes_for_visualization[0]
           )
         );
       }
 
-      elliminated_div.child(
-        voting_sytem.get_reasoning_text(elliminated_candidates)
+      eliminated_div.child(
+        voting_sytem.get_reasoning_text(eliminated_candidates)
       );
 
-      for (let i = 0; i < elliminated_candidates.length; i++) {
-        voting_sytem.elliminated_visualization.add(elliminated_candidates[i]);
+      for (let i = 0; i < eliminated_candidates.length; i++) {
+        voting_sytem.eliminated_visualization.add(eliminated_candidates[i]);
       }
 
       content.child(res);
-      content.child(elliminated_div);
+      content.child(eliminated_div);
 
       voting_sytem.stepp_in_visualization();
     } else {
@@ -294,10 +294,10 @@ class RunoffLike extends RankingVotingMethod {
   }
 
   set_final_extra_function() {
-    this.elliminated_visualization.forEach(function (candidate) {
+    this.eliminated_visualization.forEach(function (candidate) {
       candidate.appear();
     });
-    this.elliminated_visualization.clear();
+    this.eliminated_visualization.clear();
     this.extra_visualize(voters);
   }
 
@@ -308,7 +308,7 @@ class RunoffLike extends RankingVotingMethod {
 
     for (let i = 0; i < voters.length; i++) {
       voters[i].set_color(
-        this.votes_for(voters[i], this.elliminated_visualization).color
+        this.votes_for(voters[i], this.eliminated_visualization).color
       );
     }
     super.set_extra_funct(voters);

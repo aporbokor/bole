@@ -16,8 +16,8 @@ you proceed to try the program out.
 
 We are not experts in social choice theory, we are just
 highschool students. What you will see in the main page is not an expert advice but rather our
-personal opinion. This is the first big project that we are doing together, so any feedback is appriciated.
+personal opinion. This is the first big project that we are doing together, so any feedback is appreciated.
 
 ## Usage <a name = "usage"></a>
 
-Go to getbole.com/simulation and start exploring the wonderful world of voting! 
+Go to getbole.com/simulation and start exploring the wonderful world of voting!

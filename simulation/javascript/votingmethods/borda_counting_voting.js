@@ -78,7 +78,7 @@ class BordaCounting extends RankingVotingMethod {
     let stepp_div = document.createElement("div");
     let start_text = document.createElement("p");
     start_text.innerHTML =
-      "In borda counting every voter ranks every candidate in order of preference. Then we assign scores to each candidate based on these preferences. Let's assume that the total number of candidates is n. For every k-th candidate in every voters' ballot, we are going to increment the k-th candidate's borda score by <strong>(n-k+1)</strong>. In this case this looks like the following:";
+      "In borda counting, every voter ranks every candidate in order of preference. Then we assign scores to each candidate based on these preferences. Let's assume that the total number of candidates is n. For every k-th candidate in every voters' ballot, we are going to increment the k-th candidate's borda score by <strong>(n-k+1)</strong>. In this case, this looks like the following:";
 
     let random_voter = random(voters);
     random_voter.set_color(honest_voter_color);
@@ -93,7 +93,7 @@ class BordaCounting extends RankingVotingMethod {
     let second_text = document.createElement("p");
     second_text.innerHTML = `${
       random_voter.get_simple_name_p().outerHTML
-    }'s ballot looks like the this:`;
+    }'s ballot looks like this:`;
 
     let third_text = document.createElement("p");
     third_text.innerHTML = `The total number of candidates (n) is ${
@@ -111,7 +111,7 @@ class BordaCounting extends RankingVotingMethod {
     }</strong>.`;
 
     let fifth_text = document.createElement("p");
-    fifth_text.innerHTML = `So every candidate after the frist choice will have 1 less score increment. All the way to the last place (in this case ${
+    fifth_text.innerHTML = `Thus, every candidate after the first choice will have 1 less score increment. All the way to the last place (in this case ${
       preference[candidates.length - 1].get_simple_name_p().outerHTML
     }). The last place will get 1 score increment.`;
 

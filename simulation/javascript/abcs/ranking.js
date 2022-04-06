@@ -44,7 +44,7 @@ class RankingVotingMethod extends VotingMethod {
   }
 
   update_votecounts(ballot) {
-    // Updates the candidates' votecounts based on a ballot
+    // Updates the candidates' vote counts based on a ballot
     for (let i = 0; i < ballot.length; i++) {
       ballot[i].votes[i] += 1;
     }

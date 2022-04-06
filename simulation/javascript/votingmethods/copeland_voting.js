@@ -48,12 +48,12 @@ class CopelandVoter extends CondorcetVotingMethod {
 
     let text = document.createElement("p");
     text.innerHTML =
-      "From the relative strength matrix we can calculate a copeland score for each candidate. Every candidate's copeland score equals to the number of candidates defeated plus half of the number of candidates tied" +
-      "So basicly if:<ul>" +
-      "<li>R(i,j) > 0 : i's score is incremented by one</li>" +
-      "<li>R(i,j) < 0 : i's score is not changed</li>" +
-      "<li>R(i,j) = 0 : i's score is incremented by a half</li>" +
-      "<li>R(i,i) : i's score is not changed</li></ul>" +
+      "From the relative strength matrix we can calculate a Copeland score for each candidate. Every candidate's Copeland score equals to the number of candidates defeated plus half of the number of candidates tied. " +
+      "So basically if:<ul>" +
+      "<li>R(i, j) > 0 : i's score is incremented by one</li>" +
+      "<li>R(i, j) < 0 : i's score is not changed</li>" +
+      "<li>R(i, j) = 0 : i's score is incremented by a half</li>" +
+      "<li>R(i, i) : i's score is not changed</li></ul>" +
       "We do this for every candidate i, and in the end we get this:";
 
     let table = table_from_matrix(
@@ -64,7 +64,7 @@ class CopelandVoter extends CondorcetVotingMethod {
 
     let second_text = document.createElement("p");
     second_text.innerHTML =
-      "From this, we can determent the winner with ease: just count which candidate has the most score!";
+      "From this, we can determine the winner with ease: just count which candidate has the most score!";
 
     content.appendChild(text);
     content.appendChild(table);

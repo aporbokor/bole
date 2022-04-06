@@ -1,4 +1,4 @@
-class AntiPlurarityVoter extends NumberVotecountVotingMethod {
+class AntiPluralityVoter extends NumberVotecountVotingMethod {
   registrate_honest_vote(voter) {
     let max_distance = 0;
     let max_candidate = this.candidates[0];
@@ -46,7 +46,7 @@ class AntiPlurarityVoter extends NumberVotecountVotingMethod {
   stepping_box_func(stepping_box) {
     stepping_box.set_content(
       createP(
-        'Anti-plurarity voting works like the following: every voter votes for their most hated candidate, and then we count the votes. The candidate with the least votes wins.'
+        "Anti-plurality voting works like the following: every voter votes for their most hated candidate, and then we count the votes. The candidate with the least votes wins."
       )
     );
   }
