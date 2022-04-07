@@ -22,11 +22,23 @@ class TideMan extends CondorcetVotingMethod {
         }
       }
     }
+    // TODO
+    if (winner == undefined) {
+      winner = this.candidates[this.pairs[0].winner];
+    }
     return [
       [winner],
       this.candidates.filter(function (c) {
         c = !winner;
       }),
     ];
+  }
+  show_first() {
+    let content = document.createElement("p");
+
+    content.innerText =
+      "Sorry, further step by step visualization is not currently available for this voting method, but we are working on it!";
+    this.parent_box.set_content(content);
+    this.parent_box.hide_next();
   }
 }
