@@ -13,7 +13,7 @@ const votingmethods = new Map([
   ["Approval voting", ApprovalVoter],
   ["Evaluative voting", evaluativeVoter],
   ["Score voting", scoreVoter],
-  ["STAR voting", starVoter],
+  // ["STAR voting", starVoter],
   ["Bucklin voting", Bucklin],
   ["Instant-runoff voting", InstantRunOffVoter],
   ["Coombs's method", CoombsVoting],
