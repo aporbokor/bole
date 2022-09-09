@@ -62,7 +62,7 @@ function simulate_voting() {
   voter_maschine.prepare_for_voting();
 
   for (let i = 0; i < voters.length; i++) {
-    voter_maschine.registrate_vote(voters[i]);
+    voter_maschine.register_vote(voters[i]);
   }
 
   voting_results = voter_maschine.count_votes();

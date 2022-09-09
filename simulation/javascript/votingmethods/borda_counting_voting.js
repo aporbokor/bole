@@ -16,13 +16,13 @@ class BordaCounting extends RankingVotingMethod {
     return [cand.borda_count, "| Borda Score: "];
   }
 
-  registrate_honest_vote(voter) {
+  register_honest_vote(voter) {
     return this.best_candidate_tier_list(voter);
   }
 
-  registrate_strategic_vote(voter) {
+  register_strategic_vote(voter) {
     if (seems_win_candidates.length <= 1) {
-      return this.registrate_honest_vote(voter);
+      return this.register_honest_vote(voter);
     }
     let winner_tier_list = this.best_candidate_tier_list(
       voter,
@@ -42,13 +42,13 @@ class BordaCounting extends RankingVotingMethod {
     return returned;
   }
 
-  registrate_vote(voter) {
+  register_vote(voter) {
     let tier_list;
 
     if (voter.strategic) {
-      tier_list = this.registrate_strategic_vote(voter);
+      tier_list = this.register_strategic_vote(voter);
     } else {
-      tier_list = this.registrate_honest_vote(voter);
+      tier_list = this.register_honest_vote(voter);
     }
 
     for (let i = 0; i < tier_list.length; i++) {

@@ -34,7 +34,7 @@ class cardinalVotingMethod extends VotingMethod {
     }
   }
 
-  registrate_honest_vote(voter) {
+  register_honest_vote(voter) {
     let arr = [];
     for (let k = 0; k < this.ranges.length; k++) {
       arr[k] = [];
@@ -60,7 +60,7 @@ class cardinalVotingMethod extends VotingMethod {
     voter.voted_for = arr;
   }
 
-  registrate_strategic_vote(voter) {
+  register_strategic_vote(voter) {
     let arr = [];
     for (let k = 0; k < this.ranges.length; k++) {
       arr[k] = [];
@@ -78,11 +78,11 @@ class cardinalVotingMethod extends VotingMethod {
     voter.voted_for = arr;
   }
 
-  registrate_vote(voter) {
+  register_vote(voter) {
     if (voter.strategic) {
-      this.registrate_strategic_vote(voter);
+      this.register_strategic_vote(voter);
     } else {
-      this.registrate_honest_vote(voter);
+      this.register_honest_vote(voter);
     }
     if (voter.voted_for.length == 0) {
       let pref = voter.honest_preference(this.candidates);

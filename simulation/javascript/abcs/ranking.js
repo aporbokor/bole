@@ -16,21 +16,21 @@ class RankingVotingMethod extends VotingMethod {
     }
   }
 
-  registrate_honest_vote(voter) {
+  register_honest_vote(voter) {
     return this.best_candidate_tier_list(voter, this.candidates);
   }
 
-  registrate_strategic_vote(voter) {
-    return this.registrate_honest_vote(voter);
+  register_strategic_vote(voter) {
+    return this.register_honest_vote(voter);
   }
 
-  registrate_vote(voter) {
+  register_vote(voter) {
     let ballot;
 
     if (voter.strategic) {
-      ballot = this.registrate_strategic_vote(voter);
+      ballot = this.register_strategic_vote(voter);
     } else {
-      ballot = this.registrate_honest_vote(voter);
+      ballot = this.register_honest_vote(voter);
     }
 
     this.update_votecounts(ballot);

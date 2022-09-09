@@ -1,5 +1,5 @@
 class PluralityVoter extends NumberVotecountVotingMethod {
-  registrate_honest_vote(voter) {
+  register_honest_vote(voter) {
     let min_tav = Infinity;
     let min_candidate = this.candidates[0];
 
@@ -15,7 +15,7 @@ class PluralityVoter extends NumberVotecountVotingMethod {
     voter.voted_for = min_candidate;
   }
 
-  registrate_strategic_vote(voter) {
+  register_strategic_vote(voter) {
     let min_tav = Infinity;
     let min_candidate = seems_win_candidates[0];
 
@@ -31,12 +31,12 @@ class PluralityVoter extends NumberVotecountVotingMethod {
     voter.voted_for = min_candidate;
   }
 
-  registrate_vote(voter) {
+  register_vote(voter) {
     if (voter.strategic & (seems_win_candidates.length >= 2)) {
-      this.registrate_strategic_vote(voter);
+      this.register_strategic_vote(voter);
       return;
     }
-    this.registrate_honest_vote(voter);
+    this.register_honest_vote(voter);
   }
 
   stepping_box_func(stepping_box) {
@@ -59,7 +59,7 @@ class PluralityVoter extends NumberVotecountVotingMethod {
 // console.log(votings);
 //
 // for (let i = 0; i< voters.length; i++){
-//   votings.registrate_vote(voters[i]);
+//   votings.register_vote(voters[i]);
 // }
 //
 // console.log(candidates);

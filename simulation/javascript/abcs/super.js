@@ -18,10 +18,10 @@ class VotingMethod {
     );
   }
 
-  registrate_vote(voter) {
-    // Called to registrate the vote of a Voter
+  register_vote(voter) {
+    // Called to register the vote of a Voter
     throw new Error(
-      "You must implement a registrate_vote method to your VotingMethod class"
+      "You must implement a register_vote method to your VotingMethod class"
     );
   }
 

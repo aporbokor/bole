@@ -13,14 +13,14 @@ class PerfectVoter extends NumberVotecountVotingMethod {
     max_votes = Math.sqrt(width * width + height * height);
   }
 
-  registrate_honest_vote(voter) {
+  register_honest_vote(voter) {
     this.sum_x += voter.x;
     this.sum_y += voter.y;
     this.voted_persons += 1;
   }
 
-  registrate_vote(voter) {
-    this.registrate_honest_vote(voter);
+  register_vote(voter) {
+    this.register_honest_vote(voter);
   }
 
   distance_to_average_point(candidate) {
@@ -58,7 +58,7 @@ class PerfectVoter extends NumberVotecountVotingMethod {
 // votings.prepare_for_voting()
 //
 // for (let i = 0; i< voters.length; i++){
-//   votings.registrate_vote(voters[i]);
+//   votings.register_vote(voters[i]);
 // }
 //
 //

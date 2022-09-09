@@ -1,5 +1,5 @@
 class AntiPluralityVoter extends NumberVotecountVotingMethod {
-  registrate_honest_vote(voter) {
+  register_honest_vote(voter) {
     let max_distance = 0;
     let max_candidate = this.candidates[0];
 
@@ -15,7 +15,7 @@ class AntiPluralityVoter extends NumberVotecountVotingMethod {
     voter.voted_for = max_candidate;
   }
 
-  registrate_strategic_vote(voter) {
+  register_strategic_vote(voter) {
     let max_distance = 0;
     let max_candidate = seems_win_candidates[0];
 
@@ -26,16 +26,16 @@ class AntiPluralityVoter extends NumberVotecountVotingMethod {
         max_distance = distance;
         max_candidate = curr_cand;
       }
-      max_candidate.votes += 1;
-      voter.voted_for = max_candidate;
     }
+    max_candidate.votes += 1;
+    voter.voted_for = max_candidate;
   }
 
-  registrate_vote(voter) {
+  register_vote(voter) {
     if (voter.strategic & (seems_win_candidates.length >= 2)) {
-      this.registrate_strategic_vote(voter);
+      this.register_strategic_vote(voter);
     } else {
-      this.registrate_honest_vote(voter);
+      this.register_honest_vote(voter);
     }
   }
 

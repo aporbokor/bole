@@ -19,12 +19,12 @@ class SuplementaryLike extends RunoffLike {
     }
   }
 
-  registrate_strategic_vote(voter) {
+  register_strategic_vote(voter) {
     let most_liked_seems_likely = this.best_candidate_tier_list(
       voter,
       seems_win_candidates
     )[0];
-    let honest_vote = this.registrate_honest_vote(voter);
+    let honest_vote = this.register_honest_vote(voter);
 
     if (
       !honest_vote.includes(most_liked_seems_likely) &
@@ -36,8 +36,8 @@ class SuplementaryLike extends RunoffLike {
     return honest_vote;
   }
 
-  registrate_honest_vote(voter) {
-    return super.registrate_honest_vote(voter).slice(0, this.tier_list_len);
+  register_honest_vote(voter) {
+    return super.register_honest_vote(voter).slice(0, this.tier_list_len);
   }
 
   eliminate_canidates(sub_votes, eliminated) {

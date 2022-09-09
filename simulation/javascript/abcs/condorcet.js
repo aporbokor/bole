@@ -94,7 +94,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     }
   }
 
-  registrate_vote(voter) {
+  register_vote(voter) {
     // Refreshing the outranking matrix based on the voter's ballot
     let tier_list = this.best_candidate_tier_list(voter);
 
