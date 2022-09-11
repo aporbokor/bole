@@ -218,3 +218,16 @@ h1.company-name {
     max-height: 80vh;
   }
 }
+
+article#user-interface section {
+  display: grid;
+  justify-items: center;
+}
+
+article#user-interface img {
+  object-fit: contain;
+  max-width: 80vw;
+}
+article#user-interface h3 {
+  justify-self: left;
+}
