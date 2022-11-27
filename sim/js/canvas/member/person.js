@@ -157,7 +157,7 @@ class Person extends Drawable {
 
     let image_input = createFileInput(function (file) {
       if (file.type === "image") {
-        this_.profile_pic = document.createElement("img");
+        this_.profile_pic = document.createElement("image");
         this_.profile_pic.src = file.data;
         this_.profile_pic.setAttribute("class", "person_profile_pic");
         this_.show_image = loadImage(file.data);

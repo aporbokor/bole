@@ -6,7 +6,7 @@ let results;
 let max_votes;
 const max_range = Infinity;
 
-const votingmethods = new Map([
+const vm = new Map([
   ["Plurality voting", PluralityVoter],
   ["Anti-plurality voting", AntiPluralityVoter],
   // ['theoretical perfect', PerfectVoter],
@@ -28,7 +28,7 @@ const votingmethods = new Map([
 let first = false;
 
 function select_voting() {
-  votingmethod = votingmethods.get(voting_type_selector.value());
+  votingmethod = vm.get(voting_type_selector.value());
   extra_function = empty_function;
 
   console.log(voters);
