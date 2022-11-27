@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>bole</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      id="font"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Syne:wght@800&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    
+
+    <link rel="shortcut icon" type="image/x-icon" href="../misc/img/" />
+    <!--CSS stylesheets-->
+    <link rel="stylesheet" type="text/css" href="../pages/intro/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../pages/intro/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="../pages/intro/css/general.css" />
+    <link rel="stylesheet" type="text/css" href="./css/sim.css" />
+    <link rel="stylesheet" type="text/css" href="../pages/intro/css/select.css" />
+  </head>
+
+  <body>
+    <nav>
+      <div class="center">
+        <div class="company-name" translate="no">BOLE</div>
+        <a class="run-btn" onclick="location.href='..';">
+          <div class="triangle-left"></div>
+        </a>
+      </div>
+    </nav>
+    <main>
+      <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+
+      <script src="js/canvas/drawable.js"></script>
+      <script src="js/canvas/arrow.js"></script>
+      <script src="js/canvas/range.js"></script>
+
+      <script src="js/canvas/member/person.js"></script>
+      <script src="js/canvas/member/voter.js"></script>
+      <script src="js/canvas/member/candidate.js"></script>
+
+      <script src="js/abcs/super.js"></script>
+      <script src="js/abcs/number_votecount.js"></script>
+      <script src="js/abcs/ranking.js"></script>
+      <script src="js/abcs/cardinal.js"></script>
+      <script src="js/abcs/runofflike.js"></script>
+      <script src="js/abcs/condorcet.js"></script>
+
+      <script src="js/vm/plurality_voting.js"></script>
+      <script src="js/vm/anti_plurality_voting.js"></script>
+      <script src="js/vm/approval_voting.js"></script>
+      <script src="js/vm/evaluative_voting.js"></script>
+      <script src="js/vm/score.js"></script>
+      <script src="js/vm/star.js"></script>
+
+      <script src="js/vm/borda_counting_voting.js"></script>
+      <script src="js/vm/bucklin.js"></script>
+
+      <script src="js/vm/perfect_voting.js"></script>
+
+      <script src="js/vm/supplementary_voting.js"></script>
+      <script src="js/vm/instant_runoff_voting.js"></script>
+      <script src="js/vm/coombs_voting.js"></script>
+
+      <script src="js/vm/copeland_voting.js"></script>
+      <script src="js/vm/tideman_voting.js"></script>
+
+      <script src="js/tools/tool.js"></script>
+      <script src="js/tools/no_tool.js"></script>
+      <script src="js/tools/delete_tool.js"></script>
+      <script src="js/tools/voter_brush.js"></script>
+      <script src="js/tools/honesty_painter.js"></script>
+
+      <script src="js/other/DOOM_elements.js"></script>
+      <script src="js/other/custom-select.js"></script>
+      <script src="js/other/global.js"></script>
+      <script src="js/other/utils.js"></script>
+      <script src="js/other/main.js"></script>
+
+      <div id="sim_gombok" class="content_box">
+        <div class="sim-gombok-container">
+          <!-- <div class="sim-buttons-subdiv-container">
+          <h3 class="sub-buttons-subdiv-title">Links</h3>
+          <div class="sim-buttons-subdiv">
+            <a href="#new_enviroment_div">New enviroment</a>
+            <a href="#edit_enviroment_div">Edit enviroment</a>
+            <a href="#sim_div">sim</a>
+          </div>
+        </div> -->
+
+          <div class="sim-buttons-subdiv-container">
+            <h3 class="sub-buttons-subdiv-title">Control panel</h3>
+            <div id="sim_div" class="sim-buttons-subdiv"></div>
+          </div>
+
+          <div class="sim-buttons-subdiv-container">
+            <h3 class="sub-buttons-subdiv-title">Environment variables</h3>
+            <div id="edit_enviroment_div" class="sim-buttons-subdiv"></div>
+          </div>
+
+          <div class="sim-buttons-subdiv-container">
+            <h3 class="sub-buttons-subdiv-title">Advanced</h3>
+            <div class="sim-buttons-subdiv" id="advanced"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="selected" class="content_box">Nobody is selected</div>
+
+      <div class="results_wrapper content_box">
+        <div id="vote_results">Voting results:</div>
+      </div>
+    </main>
+  </body>
+</html>
+
