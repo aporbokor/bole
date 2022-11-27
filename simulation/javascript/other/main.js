@@ -22,7 +22,7 @@ let selected_div;
 
 let new_envitoment_div;
 let edit_enviroment_div;
-let sim_div;
+let simulation_div;
 let visualization_div;
 
 let strategic_chance = 0;
@@ -294,7 +294,7 @@ function empty_function() {
 }
 
 /* The extra function is a visualizatin function which runs in every frame
-   By default it doesn't do anythong but this can de easily overwritten by vm for example*/
+   By default it doesn't do anythong but this can de easily overwritten by votingmethods for example*/
 let extra_function = empty_function;
 
 let extra_varible;
@@ -450,7 +450,7 @@ function calc_supporter_range() {
 }
 
 function preload() {
-  font = loadFont("../misc/fonts/Comfortaa-VariableFont_wght.ttf");
+  font = loadFont("../fonts/Comfortaa-VariableFont_wght.ttf");
 }
 
 function windowResized() {
@@ -556,7 +556,7 @@ function setup() {
 
   voting_type_selector = createSelect();
 
-  for (const x of vm.entries()) {
+  for (const x of votingmethods.entries()) {
     voting_type_selector.option(x[0]);
   }
 
@@ -654,7 +654,7 @@ function setup() {
 
   edit_enviroment_div = select("#edit_enviroment_div");
 
-  sim_div = select("#sim_div");
+  Simulation_div = select("#Simulation_div");
 
   tool_div = select("#tool_div");
 
@@ -672,38 +672,38 @@ function setup() {
   edit_enviroment_div.child(delete_candidate_button);
   edit_enviroment_div.child(delete_voter_button);
 
-  sim_div.child(document.createElement("br"));
+  Simulation_div.child(document.createElement("br"));
 
   const custom_select = document.createElement("div");
   custom_select.classList.add("custom-select");
   custom_select.func_type = "voting-select";
   custom_select.appendChild(voting_type_selector.elt);
-  sim_div.child(custom_select);
+  Simulation_div.child(custom_select);
 
-  sim_div.child(simulate_button);
-  sim_div.child(auto_simulate_check_box);
-  sim_div.child(simfreezer);
+  Simulation_div.child(simulate_button);
+  Simulation_div.child(auto_simulate_check_box);
+  Simulation_div.child(simfreezer);
 
-  sim_div.child(document.createElement("br"));
+  Simulation_div.child(document.createElement("br"));
 
   // const tl_select = document.createElement('div');
   // tl_select.classList.add('custom-select');
   // tl_select.classList.add('tool-sel');
   // tl_select.appendChild(tool_selector.elt);
   // tool_div.child(tl_select);
-  sim_div.child(custom_tool);
-  sim_div.child(tool_size);
+  Simulation_div.child(custom_tool);
+  Simulation_div.child(tool_size);
 
   advanced.child(approval_slider);
   advanced.child(supporter_slider);
   advanced.child(seems_win_slider);
   advanced.child(reset_to_default_button);
 
-  sim_div.child(reset_voter_color_buttton);
-  sim_div.child(hide_voters_button);
-  sim_div.child(delete_arrows_button);
-  sim_div.child(support_vis_checkbox);
-  sim_div.child(average_voter_checkbox);
+  Simulation_div.child(reset_voter_color_buttton);
+  Simulation_div.child(hide_voters_button);
+  Simulation_div.child(delete_arrows_button);
+  Simulation_div.child(support_vis_checkbox);
+  Simulation_div.child(average_voter_checkbox);
 
   vote_result_div = select("#vote_results");
 

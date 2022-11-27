@@ -52,7 +52,7 @@ class Candidate extends Person {
 
     if (this.supporters == 0) {
       extra_to_div.child(
-        createP("Supporters: not avelable until a sim has run")
+        createP("Supporters: not avelable until a simulation has run")
       );
     } else {
       extra_to_div.child(createP("Supporters: " + this.supporters));
