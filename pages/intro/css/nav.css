@@ -10,9 +10,17 @@ nav {
   z-index: 1000;
   height: var(--nav-height);
   background: var(--primary);
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr min-content 3fr;
   align-items: center;
   justify-content: center;
+}
+
+.nav-link {
+  margin-inline: auto;
+  justify-self: left;
+  grid-column-start: 1;
+  grid-column-end: 2;
 }
 
 .run-btn {
@@ -70,6 +78,10 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
+  justify-self: center;
+  grid-column-start: 3;
+  grid-column-end: 4;
 }
 .company-name {
   color: var(--secondary);
