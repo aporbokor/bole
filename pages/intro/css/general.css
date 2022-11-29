@@ -1,11 +1,15 @@
 /* Colors */
 :root {
-  --primary: black;
-  --primary-lt: #111;
+  --black: black;
+  --grey: #111;
   --surface: #222;
-  --secondary: white;
-  --accent: white;
-}
+  --white: white;
+  --border: #181a1b;
+  --orange: #f18f01;
+  --red: #ed3907;
+  --blue: #7247ff;
+  scroll-behavior: smooth;
+} 
 
 /* Breakpoints */
 
@@ -22,10 +26,6 @@
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-:root {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -79,7 +79,7 @@ a:not(.company-name)::before {
   transition: transform 250ms ease-in;
 }
 button {
-  color: var(--primary);
+  color: var(--secondary);
   cursor: pointer;
 }
 
@@ -94,15 +94,15 @@ h2 {
 }
 
 input {
-  accent-color: var(--accent);
+  accent-color: var(--secondary);
 }
 
 button {
   height: 2rem;
   margin-left: 0.5rem;
-  color: var(--accent);
+  color: var(--secondary);
   background: var(--primary);
-  border: 1px solid var(--accent);
+  border: 1px solid var(--secondary);
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -118,7 +118,7 @@ button::before {
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--accent);
+  background-color: var(--primary);
   z-index: -1;
   transform: scaleX(0);
   transition-property: transform;
@@ -129,7 +129,7 @@ button::before {
 
 button:hover {
   color: var(--primary);
-  font-weight: bold;
+/*   font-weight: bold; */
 }
 
 button:hover::before {

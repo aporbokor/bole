@@ -13,20 +13,20 @@
   padding: 1rem;
 }
 
-#sim_gombok,
+#sim_buttons,
 #vote_results,
 #selected {
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-#sim_gombok {
-  grid-area: sim-gombok;
+#sim_buttons {
+  grid-area: sim-buttons;
   max-height: var(--canvas-height);
   position: relative;
 }
 
-.sim-gombok-container {
+.sim-buttons-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -84,8 +84,8 @@
 main {
   display: grid;
   grid-template-areas:
-    "sim-gombok canvas selected"
-    "sim-gombok canvas results"
+    "sim-buttons canvas selected"
+    "sim-buttons canvas results"
     "step       step   results";
   grid-template-columns: 1fr min-content 1fr;
   grid-template-rows: 18rem calc(var(--canvas-height) - 19rem) auto;
@@ -134,7 +134,7 @@ ol {
 }
 
 li::marker {
-  color: var(--accent);
+  color: var(--secondary);
   padding-right: 0.05em;
 }
 
@@ -244,7 +244,7 @@ li::marker {
 }
 
 @media only screen and (min-width: 90em) {
-  .sim-gombok-container {
+  .sim-buttons-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     align-items: stretch;
@@ -280,7 +280,7 @@ li::marker {
 @media only screen and (min-width: 110em) {
   main {
     grid-template-areas:
-      "sim-gombok canvas selected results"
+      "sim-buttons canvas selected results"
       "step       step   step     results";
 
     grid-template-columns: 2fr min-content 1fr 1.1fr;
@@ -310,7 +310,7 @@ li::marker {
 
   main {
     grid-template-areas:
-      "sim-gombok sim-gombok"
+      "sim-buttons sim-buttons"
       "canvas selected"
       "canvas results"
       "step   results";
@@ -319,12 +319,12 @@ li::marker {
     grid-template-rows: 21rem 18rem calc(var(--canvas-height) - 19rem) min-content;
   }
 
-  #sim_gombok {
+  #sim_buttons {
     overflow-y: hidden;
     overflow-x: auto;
   }
 
-  .sim-gombok-container {
+  .sim-buttons-container {
     flex-direction: row;
     width: 200rem;
     align-items: stretch;
@@ -355,7 +355,7 @@ li::marker {
 @media only screen and (max-width: 65em) {
   main {
     grid-template-areas:
-      "sim-gombok selected"
+      "sim-buttons selected"
       "canvas canvas"
       "canvas canvas"
       "step   results";
@@ -367,7 +367,7 @@ li::marker {
 
 @media only screen and (max-width: 50em) {
   main {
-    grid-template-areas: "sim-gombok" "canvas" "results";
+    grid-template-areas: "sim-buttons" "canvas" "results";
     grid-template-columns: 1fr;
     grid-template-rows: 21rem min-content 1fr;
     padding: 10px;

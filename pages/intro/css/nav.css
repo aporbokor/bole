@@ -66,6 +66,12 @@ nav {
   transform: translate(6px, 6px);
 }
 
+.page-switch {
+  color: var(--secondary);
+  font-size: 1.2rem;
+  font-family:'Courier New', Courier, monospace;
+}
+
 .center {
   display: flex;
   align-items: center;
@@ -77,4 +83,8 @@ nav {
   font-size: 1.2rem;
   font-weight: 800;
   text-decoration: none;
+}
+
+.tutor {
+  
 }
