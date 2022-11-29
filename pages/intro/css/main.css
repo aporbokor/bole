@@ -1,7 +1,7 @@
 /*Main*/
 main {
   width: 100%;
-  background: var(--primary-lt);
+  background: var(--bg-primary-lt);
 }
 
 /* General stuff */
@@ -49,7 +49,7 @@ article {
 .doc {
   padding: 2rem;
   width: 100vw;
-  background-color: var(--surface);
+  background-color: var(--bg--surface);
 }
 .doc ul {
   margin-left: 1.3rem;
@@ -58,7 +58,7 @@ article {
 }
 h3 {
   font-family: "Montserrat", sans-serif;
-  color: var(--secondary);
+  color: var(--text--primary);
   font-weight: bold;
   font-size: clamp(1rem, 1.5rem, 2rem);
   margin-bottom: 1rem;
@@ -91,11 +91,11 @@ h3 {
   justify-content: center;
   padding-left: 1rem;
   flex-direction: column;
-  background: var(--primary-lt);
+  background: var(--bg-primary-lt);
 }
 
 .welcome > * {
-  color: var(--secondary);
+  color: var(--text--primary);
 }
 
 h1.company-name {
@@ -147,7 +147,7 @@ h1.company-name {
 }
 
 .drk {
-  background-color: var(--primary-lt);
+  background-color: var(--bg-primary-lt);
 }
 .toc-preview {
   position: sticky;

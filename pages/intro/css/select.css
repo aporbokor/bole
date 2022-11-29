@@ -1,10 +1,6 @@
-:root {
-  --drop-down-height: 100vh;
-}
-
 .custom-select {
   position: relative;
-  background-color: var(--primary-lt);
+  background-color: var(--bg--primary-lt);
   width: 10rem;
   margin-left: -0.5rem;
   isolation: isolate;
@@ -20,7 +16,7 @@
 }
 
 .select-selected {
-  background-color: var(--primary-lt);
+  background-color: var(--bg--primary-lt);
 }
 
 .select-selected:after {
@@ -31,26 +27,26 @@
   width: 0;
   height: 0;
   border: 6px solid transparent;
-  border-color: var(--secondary) transparent transparent transparent;
+  border-color: var(--text--primary) transparent transparent transparent;
 }
 
 .select-selected.select-arrow-active:after {
-  border-color: transparent transparent var(--secondary) transparent;
+  border-color: transparent transparent var(--text--primary) transparent;
   top: 7px;
 }
 
 .select-items div,
 .select-selected {
-  color: var(--secondary);
+  color: var(--text--primary);
   padding: 8px 16px;
   border: 1px solid transparent;
-  border-color: transparent transparent var(--primary) transparent;
+  border-color: transparent transparent var(--bg--primary) transparent;
   cursor: pointer;
 }
 
 .select-items {
   position: absolute;
-  background-color: var(--surface);
+  background-color: var(--bg--surface);
   top: 100%;
   left: 0;
   right: 0;
@@ -65,5 +61,5 @@
 
 .select-items div:hover,
 .same-as-selected {
-  background-color: var(--primary-lt);
+  background-color: var(--bg--primary-lt);
 }

@@ -9,7 +9,7 @@
   touch-action: none;
 }
 .content_box {
-  background-color: var(--primary);
+  background-color: var(--bg--primary);
   padding: 1rem;
 }
 
@@ -45,7 +45,7 @@
 
 .sim-buttons-title,
 .sub-buttons-subdiv-title {
-  background-color: var(--primary-lt);
+  background-color: var(--bg--primary-lt);
   z-index: 2;
   padding: 1em 1.5em;
   border-radius: 0.5em;
@@ -98,7 +98,7 @@ main {
 
 body {
   overflow-y: auto;
-  background: var(--primary-lt);
+  background: var(--bg--primary-lt);
 }
 .p_div_p {
   text-transform: lowercase;
@@ -110,7 +110,7 @@ body {
 
 .named_slider {
   /* The sytle of the divs which have a p and a slider */
-  border: 1px solid var(--primary-lt);
+  border: 1px solid var(--bg--primary-lt);
   margin-left: 2rem;
   margin-right: 2rem;
   border-radius: 5%;
@@ -134,7 +134,7 @@ ol {
 }
 
 li::marker {
-  color: var(--secondary);
+  color: var(--text--primary);
   padding-right: 0.05em;
 }
 
@@ -218,7 +218,7 @@ li::marker {
   /* The next button */
   text-decoration: none;
   padding: 0.5em 1em;
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--text--accent);
   width: fit-content;
   position: relative;
   isolation: isolate;
@@ -230,14 +230,14 @@ li::marker {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: var(--accent);
+  background-color: var(--text--accent);
   clip-path: polygon(0% 0%, 0% 50%, 0% 100%, 0 100%, 0 0);
   transition: clip-path 250ms ease-in;
   z-index: -1;
 }
 
 .next_stepp:hover {
-  color: var(--primary);
+  color: var(--bg--primary);
 }
 .next_stepp:hover::after {
   clip-path: polygon(100% 0%, 200% 50%, 100% 100%, 0 100%, 0 0);

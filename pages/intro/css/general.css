@@ -1,10 +1,33 @@
 /* Colors */
+html {
+  color-scheme: dark !important;
+}
+
 :root {
-  --primary: black;
-  --primary-lt: #111;
-  --surface: #222;
-  --secondary: white;
-  --accent: white;
+  --bg--primary: #000000;
+  --text--primary: #e8e6e3;
+  --border--primary: #8c8273;
+  --bg--primary-lt: #0d0e0e;
+  --text--primary-lt: #dddad6;
+  --border--primary-lt: #867d6e;
+  --bg--surface: #1a1c1d;
+  --bg--secondary: #181a1b;
+  --text--secondary: #e8e6e3;
+  --border--secondary: #303436;
+  --bg--accent: #181a1b;
+  --text--accent: #e8e6e3;
+  --border--accent: #303436; 
+}
+
+
+button {
+  color: var(--text--accent);
+  background: var(--bg--primary);
+  border: 1px solid var(--border--accent);
+}
+
+button::before {
+  background-color: var(--bg--accent);
 }
 
 /* Breakpoints */
@@ -59,11 +82,11 @@ a {
 }
 
 a:visited:not(.company-name) {
-  color: rgb(152, 200, 255);
+  color: var(--text--primary-lt);
 }
 
 a:hover:hover {
-  color: var(--secondary);
+  color: var(--text-primary);
 }
 
 a:not(.company-name)::before {
@@ -100,9 +123,6 @@ input {
 button {
   height: 2rem;
   margin-left: 0.5rem;
-  color: var(--accent);
-  background: var(--primary);
-  border: 1px solid var(--accent);
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -118,7 +138,6 @@ button::before {
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--accent);
   z-index: -1;
   transform: scaleX(0);
   transition-property: transform;
@@ -127,23 +146,18 @@ button::before {
   transform-origin: right;
 }
 
-button:hover {
-  color: var(--primary);
-  font-weight: bold;
-}
-
 button:hover::before {
   transform-origin: left;
   transform: scaleX(1);
 }
 
 progress {
-  accent-color: var(--accent);
+  accent-color: var(--bg--accent);
 }
 
 table,
 td {
-  border: 1px solid var(--accent);
+  border: 1px solid var(--bg--accent);
 }
 
 td,
@@ -153,10 +167,10 @@ th {
 }
 
 th {
-  background-color: var(--accent);
-  color: var(--primary);
+  background-color: var(--bg--accent);
+  color: var(--text--primary);
   font-weight: bold;
-  border: 1px solid var(--primary);
+  border: 1px solid var(--bg--primary);
 }
 
 /* Color classes */
