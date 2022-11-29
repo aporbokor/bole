@@ -73,8 +73,8 @@ class Range extends Drawable {
 
   draw_text() {
     if (this.text != null) {
-      const x = this.parent_cand.x + this.size;
-      const y = this.parent_cand.y;
+      const x = this.x;
+      const y = this.y + this.size;
 
       textFont(font);
       textAlign(CENTER, CENTER);
