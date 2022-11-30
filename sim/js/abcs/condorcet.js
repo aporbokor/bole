@@ -276,7 +276,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
       voting_sytem.outranking_matrix[voter_res[1].id][voter_res[0].id];
 
     let last_text = document.createElement("p");
-    last_text.innerHTML = `This is the outranking matrix (O) of every voter. We can store our <strong>preferences</strong> here. For example, we can see that ${first_choice} has been preferred over ${second_choice} by exactly ${preference} voters, and ${second_choice} has been preferred over ${first_choice} by exactly ${preference2} voters. This information (as we will see) is really useful for us.`;
+    last_text.innerHTML = `This is the outranking matrix (O) of every voter. We can store our <strong>preferences</strong> here. For example, we can see that ${first_choice} has been preferred over ${second_choice} by exactly ${preference} voters, and ${second_choice} has been preferred over ${first_choice} by exactly ${preference2} voters. This information (as we will see) is really useful to us.`;
 
     let content = document.createElement("div");
     content.appendChild(first_text);
@@ -351,13 +351,15 @@ class CondorcetVotingMethod extends RankingVotingMethod {
       v.hide();
     });
 
+    clicked_selected = undefined;
+
     voting_sytem.arrows_between_candidates();
     this.random_voter.set_color(this.random_voter.voted_for[0].color);
     let content = document.createElement("div");
 
     let text = document.createElement("p");
     text.innerHTML =
-      "From the outranking matrix we can create a relative strength matrix (R). Basically every R(i, j) equals O(i, j) - O(j, i). This kind of matrix shows us, that how by how many times did each candidate i beat candidate j. If this number is negative, then j has beaten i more times.";
+      "From the outranking matrix we can create a relative strength matrix (R). Basically every R(i, j) equals O(i, j) - O(j, i). This kind of matrix shows us, that by how many times did each candidate i beat candidate j. If this number is negative, then j has beaten i more times.";
 
     let table = table_from_matrix(
       voting_sytem.relative_strength_matrix,
