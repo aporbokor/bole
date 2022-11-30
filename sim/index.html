@@ -47,14 +47,7 @@
       <div class="nav-links-container">
         <div class="nav-links">
           <a class="button" href=".." tabindex="2">Main page</a>
-          <button
-            class="tutor"
-            id="starter-btn"
-            data-intro="hello step 1"
-            data-position="top"
-          >
-            Show me around
-          </button>
+          <button class="tutor" id="starter-btn">Tutorial</button>
         </div>
       </div>
       <div class="center">
@@ -111,70 +104,74 @@
         </a>
       </div>
     </nav>
-    <main>
-      <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+    <main
+      data-title="Our visualization principles"
+      data-intro="This is the visualization canvas. Voters are represented by smaller circles and the candidates are marked by chunkier ones. They are placed on an opinion plane, which means that the closer two voters are to each other, the more similar their opinions are. Every voter's ideal candidate is the one that is the closest to it."
+    >
+      <div style="display: none">
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+        <script src="js/canvas/drawable.js"></script>
+        <script src="js/canvas/arrow.js"></script>
+        <script src="js/canvas/range.js"></script>
+        <script src="js/canvas/member/person.js"></script>
+        <script src="js/canvas/member/voter.js"></script>
+        <script src="js/canvas/member/candidate.js"></script>
+        <script src="js/abcs/super.js"></script>
+        <script src="js/abcs/number_votecount.js"></script>
+        <script src="js/abcs/ranking.js"></script>
+        <script src="js/abcs/cardinal.js"></script>
+        <script src="js/abcs/runofflike.js"></script>
+        <script src="js/abcs/condorcet.js"></script>
+        <script src="js/vm/plurality_voting.js"></script>
+        <script src="js/vm/anti_plurality_voting.js"></script>
+        <script src="js/vm/approval_voting.js"></script>
+        <script src="js/vm/evaluative_voting.js"></script>
+        <script src="js/vm/score.js"></script>
+        <script src="js/vm/star.js"></script>
+        <script src="js/vm/borda_counting_voting.js"></script>
+        <script src="js/vm/bucklin.js"></script>
+        <script src="js/vm/supplementary_voting.js"></script>
+        <script src="js/vm/instant_runoff_voting.js"></script>
+        <script src="js/vm/coombs_voting.js"></script>
+        <script src="js/vm/copeland_voting.js"></script>
+        <script src="js/vm/tideman_voting.js"></script>
+        <script src="js/tools/tool.js"></script>
+        <script src="js/tools/no_tool.js"></script>
+        <script src="js/tools/delete_tool.js"></script>
+        <script src="js/tools/voter_brush.js"></script>
+        <script src="js/tools/honesty_painter.js"></script>
+        <script src="js/other/DOOM_elements.js"></script>
+        <script src="js/other/custom-select.js"></script>
+        <script src="js/other/global.js"></script>
+        <script src="js/other/utils.js"></script>
+        <script src="js/other/main.js"></script>
+      </div>
 
-      <script src="js/canvas/drawable.js"></script>
-      <script src="js/canvas/arrow.js"></script>
-      <script src="js/canvas/range.js"></script>
-
-      <script src="js/canvas/member/person.js"></script>
-      <script src="js/canvas/member/voter.js"></script>
-      <script src="js/canvas/member/candidate.js"></script>
-
-      <script src="js/abcs/super.js"></script>
-      <script src="js/abcs/number_votecount.js"></script>
-      <script src="js/abcs/ranking.js"></script>
-      <script src="js/abcs/cardinal.js"></script>
-      <script src="js/abcs/runofflike.js"></script>
-      <script src="js/abcs/condorcet.js"></script>
-
-      <script src="js/vm/plurality_voting.js"></script>
-      <script src="js/vm/anti_plurality_voting.js"></script>
-      <script src="js/vm/approval_voting.js"></script>
-      <script src="js/vm/evaluative_voting.js"></script>
-      <script src="js/vm/score.js"></script>
-      <script src="js/vm/star.js"></script>
-
-      <script src="js/vm/borda_counting_voting.js"></script>
-      <script src="js/vm/bucklin.js"></script>
-
-      <script src="js/vm/supplementary_voting.js"></script>
-      <script src="js/vm/instant_runoff_voting.js"></script>
-      <script src="js/vm/coombs_voting.js"></script>
-
-      <script src="js/vm/copeland_voting.js"></script>
-      <script src="js/vm/tideman_voting.js"></script>
-
-      <script src="js/tools/tool.js"></script>
-      <script src="js/tools/no_tool.js"></script>
-      <script src="js/tools/delete_tool.js"></script>
-      <script src="js/tools/voter_brush.js"></script>
-      <script src="js/tools/honesty_painter.js"></script>
-
-      <script src="js/other/DOOM_elements.js"></script>
-      <script src="js/other/custom-select.js"></script>
-      <script src="js/other/global.js"></script>
-      <script src="js/other/utils.js"></script>
-      <script src="js/other/main.js"></script>
-
-      <div id="sim_buttons" class="content_box" data-intro="hello step 2.">
+      <div id="sim_buttons" class="content_box">
         <div class="sim-buttons-container">
           <!-- <div class="sim-buttons-subdiv-container">
           <h3 class="sub-buttons-subdiv-title">Links</h3>
           <div class="sim-buttons-subdiv">
-            <a href="#new_enviroment_div">New enviroment</a>
-            <a href="#edit_enviroment_div">Edit enviroment</a>
+            <a href="#new_enviroment_div">New environment</a>
+            <a href="#edit_enviroment_div">Edit environment</a>
             <a href="#sim_div">sim</a>
           </div>
         </div> -->
 
-          <div class="sim-buttons-subdiv-container">
+          <div
+            class="sim-buttons-subdiv-container"
+            data-title="Running simulations"
+            data-intro="Here you can choose a voting system and then run a simulation with it by clicking on the run button. (There is an auto-simulate option as well)."
+          >
             <h3 class="sub-buttons-subdiv-title">Control panel</h3>
             <div id="sim_div" class="sim-buttons-subdiv"></div>
           </div>
 
-          <div class="sim-buttons-subdiv-container">
+          <div
+            class="sim-buttons-subdiv-container"
+            data-title="Environment generation"
+            data-intro="You can also generate a new environment by changing the number of voters and candidates using these sliders, and then pressing the reset environment button!"
+          >
             <h3 class="sub-buttons-subdiv-title">Environment variables</h3>
             <div id="edit_enviroment_div" class="sim-buttons-subdiv"></div>
           </div>
@@ -186,12 +183,30 @@
         </div>
       </div>
 
-      <div id="selected" class="content_box">Nobody is selected</div>
+      <div
+        id="selected"
+        class="content_box"
+        data-title="The selected participant"
+        data-intro="If you select a voter or a candidate you will see all of their information here. You can custumize them, and look into their preferences, ballots, election-results, etc."
+      >
+        Nobody is selected
+      </div>
 
-      <div class="results_wrapper content_box">
+      <div
+        class="results_wrapper content_box"
+        data-title="Election results"
+        data-intro="Here you can see the results of the elections. Ties are possible so sometimes you will see more than one candidate getting first place."
+      >
         <div id="vote_results">Voting results:</div>
       </div>
+      <div
+        class="step_by_stepp content_box div_w_p"
+        data-title="Voting method info"
+        data-intro="And finally here you can see the description of the currently used system. For some more complex systems we explain them step by step within the bounds of this box."
+      >
+        <p class="stepping_box_title p_div_p">The voting process:</p>
+      </div>
     </main>
-    <script src="intro.js"></script>
+    <script src="js/other/intro.js"></script>
   </body>
 </html>

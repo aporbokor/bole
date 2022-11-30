@@ -64,7 +64,7 @@ class SuplementaryLike extends RunoffLike {
     let returned = createP(this.second_explaining_text);
     if (this.first_round) {
       this.explaining_text =
-        "Now we are going to re-run the election counting the each voter's highest ranked not eliminated candidate. The winner of this run will be the winner of the election.";
+        "Now we are going to re-run the election counting each voter's highest ranked non eliminated candidate. The winner of this run will be the winner of the election.";
     }
     return returned;
   }

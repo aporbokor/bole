@@ -1,5 +1,5 @@
 class NumberVotecountVotingMethod extends VotingMethod {
-  // ABC for every votingmethod where tha candidates votes can be represented by numbers
+  // ABC for every voting_method where tha candidates votes can be represented by numbers
   constructor(candidates) {
     super(candidates);
     ABC_constructor(this, NumberVotecountVotingMethod);

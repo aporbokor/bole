@@ -1,7 +1,7 @@
 // Abstract base-classes
 
 class VotingMethod {
-  // ABC for every votingmethod
+  // ABC for every voting_method
 
   constructor(candidates) {
     ABC_constructor(this, VotingMethod);
@@ -53,10 +53,10 @@ class VotingMethod {
   }
 
   stepping_box_func(steppig_box) {
-    // This method is used for setting up a relationship between the votingmethod and the steppig_box
+    // This method is used for setting up a relationship between the voting_method and the steppig_box
     stepping_box.set_content(
       createP(
-        "Step by step visualization is not avalable for this votingmethod"
+        "Step by step visualization is not avalable for this voting_method"
       )
     );
   }

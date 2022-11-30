@@ -1,6 +1,6 @@
 let candidates;
 let voters;
-let votingmethod;
+let voting_method;
 let voter_maschine;
 let results;
 let max_votes;
@@ -28,7 +28,7 @@ const vm = new Map([
 let first = false;
 
 function select_voting() {
-  votingmethod = vm.get(voting_type_selector.value());
+  voting_method = vm.get(voting_type_selector.value());
   extra_function = empty_function;
 
   console.log(voters);
@@ -57,7 +57,7 @@ function simulate_voting() {
   count_supporters();
   calculate_seems_win_candidates();
 
-  voter_maschine = new votingmethod(candidates);
+  voter_maschine = new voting_method(candidates);
 
   voter_maschine.prepare_for_voting();
 

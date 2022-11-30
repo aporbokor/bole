@@ -212,6 +212,7 @@ li::marker {
 }
 
 .stepping_box_title {
+  all: inherit;
 }
 
 .next_stepp {

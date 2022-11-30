@@ -136,10 +136,7 @@ function createDivWithP(text) {
 class SteppingBox {
   // Class used for the stepping_box
   constructor() {
-    this.main_div = createDivWithP("The voting process:");
-    this.main_div.class("step_by_stepp");
-    this.main_div.addClass("content_box");
-    this.main_div.p.class("stepping_box_title");
+    this.main_div = select(".step_by_stepp");
 
     this.next_button = createA("#defaultCanvas0", "next step");
     this.next_button.class("next_stepp");

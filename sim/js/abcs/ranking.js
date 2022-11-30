@@ -1,5 +1,5 @@
 class RankingVotingMethod extends VotingMethod {
-  // ABC for every votingmethod where the voters need to rank the candidates
+  // ABC for every voting_method where the voters need to rank the candidates
 
   constructor(candidates) {
     super(candidates);

@@ -64,7 +64,7 @@ class CopelandVoter extends CondorcetVotingMethod {
 
     let second_text = document.createElement("p");
     second_text.innerHTML =
-      "From this, we can determine the winner with ease: just count which candidate has the most score!";
+      "From this, we can determine the winner with ease: just count which candidate has the most score by counting their row!";
 
     content.appendChild(text);
     content.appendChild(table);
