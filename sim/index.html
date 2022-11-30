@@ -14,7 +14,7 @@
     />
 
     <!-- Introjs -->
-    <script src="https://cdn.jsdelivr.net/npm/intro.js@6.0.0/intro.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/intro.js@6.0.0/intro.min.js"></script>
 
     <link rel="shortcut icon" type="image/x-icon" href="../f.png" />
     <!--CSS stylesheets-->
@@ -30,18 +30,34 @@
       href="../pages/intro/css/general.css"
     />
     <link rel="stylesheet" type="text/css" href="./css/sim.css" />
-    <link rel="stylesheet" type="text/css" href="../pages/intro/css/select.css" />
-    <link rel="stylesheet" href="https://unpkg.com/intro.js@6.0.0/minified/introjs.min.css">
-    <link rel="stylesheet" type="text/css" href="./css/introconf.css">
-
-
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../pages/intro/css/select.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/intro.js@6.0.0/minified/introjs.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./css/introconf.css" />
   </head>
 
   <body>
     <nav>
-      <a class="nav-link" href=".." tabindex="2"> Sim page </a>
+      <div class="nav-links-container">
+        <div class="nav-links">
+          <a class="button" href=".." tabindex="2">Main page</a>
+          <button
+            class="tutor"
+            id="starter-btn"
+            data-intro="hello step 1"
+            data-position="top"
+          >
+            Show me around
+          </button>
+        </div>
+      </div>
       <div class="center">
-        <button class="tutor" id="starter-btn" data-intro="hello step 1" data-position="top">Show me around</button>
         <div class="company-name" translate="no">BOLE</div>
         <a class="run-btn" onclick="location.href='..';">
           <div class="triangle-left"></div>
@@ -49,9 +65,8 @@
       </div>
     </nav>
     <main>
-      
       <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
-  
+
       <script src="js/canvas/drawable.js"></script>
       <script src="js/canvas/arrow.js"></script>
       <script src="js/canvas/range.js"></script>
@@ -108,7 +123,7 @@
         </div> -->
 
           <div class="sim-buttons-subdiv-container">
-            <h3 class="sub-buttons-subdiv-title" >Control panel</h3>
+            <h3 class="sub-buttons-subdiv-title">Control panel</h3>
             <div id="sim_div" class="sim-buttons-subdiv"></div>
           </div>
 
@@ -127,7 +142,7 @@
       <div id="selected" class="content_box">Nobody is selected</div>
 
       <div class="results_wrapper content_box">
-        <div id="vote_results" >Voting results:</div>
+        <div id="vote_results">Voting results:</div>
       </div>
     </main>
     <script src="intro.js"></script>

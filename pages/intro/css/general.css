@@ -16,18 +16,7 @@ html {
   --border--secondary: #303436;
   --bg--accent: #181a1b;
   --text--accent: #e8e6e3;
-  --border--accent: #303436; 
-}
-
-
-button {
-  color: var(--text--accent);
-  background: var(--bg--primary);
-  border: 1px solid var(--border--accent);
-}
-
-button::before {
-  background-color: var(--bg--accent);
+  --border--accent: #303436;
 }
 
 /* Breakpoints */
@@ -101,9 +90,42 @@ a:not(.company-name)::before {
   background-color: var(--secondary);
   transition: transform 250ms ease-in;
 }
-button {
+
+button,
+.button {
   color: var(--primary);
+  background: var(--bg--primary);
+  border: 1px solid var(--border--accent);
+  text-decoration: none;
   cursor: pointer;
+  height: 2rem;
+  margin-left: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition-property: color;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in-out;
+}
+
+button::before,
+.button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--bg--accent);
+  transform: scaleX(0);
+  transition-property: transform;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transform-origin: right;
+}
+
+button:hover::before,
+.button:hover::before {
+  transform-origin: left;
+  transform: scaleX(1);
 }
 
 h1,
@@ -118,37 +140,6 @@ h2 {
 
 input {
   accent-color: var(--accent);
-}
-
-button {
-  height: 2rem;
-  margin-left: 0.5rem;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition-property: color;
-  transition-duration: 0.4s;
-  transition-timing-function: ease-in-out;
-}
-
-button::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  transform: scaleX(0);
-  transition-property: transform;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
-  transform-origin: right;
-}
-
-button:hover::before {
-  transform-origin: left;
-  transform: scaleX(1);
 }
 
 progress {

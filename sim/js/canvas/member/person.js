@@ -143,8 +143,12 @@ class Person extends Drawable {
     /* Creates a div representing the person to be used in the selected div.
        Must define an extra_to_div abstractmethod for this to work*/
 
-    let returned = createDiv(this.constructor.name + ": ");
-    returned.style("color", this.target_color);
+    let title = createP(this.constructor.name + ": ");
+    title.style("color", this.target_color);
+
+    let returned = createDiv();
+    returned.child(title);
+    // returned.style("color", this.target_color);
 
     let edit_app = this.edit_apperance_div();
 
