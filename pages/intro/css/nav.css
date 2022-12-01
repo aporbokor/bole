@@ -114,10 +114,7 @@ nav {
 }
 
 .logo {
-  height: var(--nav-height);
-  font-family: Syne-Bold, Syne !important;
-  font-size: 581.65px;
-  font-variation-settings: "wght" 700;
+  height: calc(var(--nav-height) - 1.5rem);
 }
 
 .tutor {

@@ -119,9 +119,9 @@ class cardinalVotingMethod extends VotingMethod {
   }
 
   draw_circles_around_candidate(candidate) {
-    for (const range of candidate.ranges) {
-      range.show();
-    }
+    // for (const range of candidate.ranges) {
+    //   range.show();
+    // }
   }
 
   resize_voters(candidate) {

@@ -26,7 +26,7 @@ class Voter extends Person {
   }
 
   prefers(candidate1, candidate2) {
-    // Returns the candidate more preferred by the voter
+    // Returns if candidate1 is more prefered than candidate2 by the voter
     if (
       this.distance_to_candidate(candidate1) >
       this.distance_to_candidate(candidate2)

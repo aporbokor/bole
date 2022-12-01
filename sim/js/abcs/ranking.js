@@ -13,6 +13,7 @@ class RankingVotingMethod extends VotingMethod {
         votes.push(0);
       }
       this.candidates[i].votes = votes;
+      this.candidates[i].ranges = [];
     }
   }
 
@@ -51,7 +52,7 @@ class RankingVotingMethod extends VotingMethod {
   }
 
   set_extra_funct(voters) {
-    // Sets the extra_function ehat is used in visualizations and called in every frame
+    // Sets the extra_function that is used in visualizations and called in every frame
 
     for (let i = 0; i < voters.length; i++) {
       voters[i].on_select = function () {

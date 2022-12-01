@@ -9,6 +9,7 @@ class NumberVotecountVotingMethod extends VotingMethod {
   prepare_for_voting() {
     for (let i = 0; i < this.candidates.length; i++) {
       this.candidates[i].votes = 0;
+      this.candidates[i].ranges = [];
     }
   }
 

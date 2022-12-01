@@ -9,6 +9,8 @@ class Person extends Drawable {
     this.y = y;
 
     this.arrows_from = [];
+    this.show_ranges = true;
+    this.ranges = [];
   }
 
   // Visual methods
@@ -24,6 +26,7 @@ class Person extends Drawable {
     circle(this.x, this.y, this.size);
 
     this.draw_text();
+    this.draw_ranges();
     stroke(default_stroke);
   }
 
@@ -49,6 +52,12 @@ class Person extends Drawable {
 
       fill(0);
       text(this.text, this.x, this.y);
+    }
+  }
+
+  draw_ranges() {
+    for (const range of this.ranges) {
+      range.show();
     }
   }
 
@@ -176,6 +185,18 @@ class Person extends Drawable {
 
     returned.child(edit_app);
     returned.child(image_input);
+    if (this.ranges.length > 0) {
+      let hide_ranges_check_box = createCheckbox(
+        "Hide ranges",
+        !this.show_ranges
+      );
+
+      hide_ranges_check_box.changed(() => {
+        this.show_ranges = !hide_ranges_check_box.checked();
+      });
+
+      returned.child(hide_ranges_check_box);
+    }
     returned.child(xp);
     returned.child(yp);
     if (text != null) {

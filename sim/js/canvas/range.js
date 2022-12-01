@@ -6,7 +6,7 @@ class Range extends Drawable {
     default_size,
     parent_cand,
     text_color = "black",
-    text_size = 32,
+    text_size = 16,
     width = 5
   ) {
     super(color, name, default_size);
@@ -20,7 +20,7 @@ class Range extends Drawable {
     this.grow_speed = 1;
 
     this.max_offset = this.target_size;
-    this.moving_speed = 9;
+    this.moving_speed = 0.5;
 
     this.x = width / 2;
     this.y = height / 2;
@@ -30,16 +30,18 @@ class Range extends Drawable {
     this.target_x = this.parent_cand.x;
     this.target_y = this.parent_cand.y;
 
+    let progress = get_progress(this.moving_speed);
+
     let target_vector = createVector(this.target_x, this.target_y);
     let current_vector = createVector(this.x, this.y);
 
     let difference_vector = p5.Vector.sub(target_vector, current_vector);
 
-    difference_vector.setMag(difference_vector.mag() - this.moving_speed);
+    difference_vector.setMag(difference_vector.mag() - progress);
 
     difference_vector.limit(this.max_offset);
 
-    if (difference_vector.mag() < this.moving_speed) {
+    if (difference_vector.mag() < progress) {
       this.x = this.target_x;
       this.y = this.target_y;
       return;
@@ -59,7 +61,7 @@ class Range extends Drawable {
     this.draw_text();
     stroke(default_stroke);
 
-    if (!this.parent_cand.shown) {
+    if (!(this.parent_cand.shown & this.parent_cand.show_ranges)) {
       this.target_size = 0;
     }
 
@@ -74,7 +76,7 @@ class Range extends Drawable {
   draw_text() {
     if (this.text != null) {
       const x = this.x;
-      const y = this.y + this.size;
+      const y = this.y - this.size;
 
       textFont(font);
       textAlign(CENTER, CENTER);

@@ -141,6 +141,7 @@ class SteppingBox {
     this.next_button = createA("#defaultCanvas0", "next step");
     this.next_button.class("next_stepp");
     this.next_button.parent_box = this;
+    this.next_func_ = null;
 
     this.content_div = createDiv();
     this.content_div.class("stepping_content_div");
@@ -196,6 +197,8 @@ class SteppingBox {
        Used to set the content of the content box.
        The this keyword in that function will return te button itself.
        You can acess the stepping_box itself by saying: this.parent_box*/
+
+    this.next_func_ = func;
     this.next_button.mouseReleased(func);
   }
 

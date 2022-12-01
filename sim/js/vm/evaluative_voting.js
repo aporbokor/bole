@@ -38,6 +38,7 @@ class evaluativeVoter extends cardinalVotingMethod {
 
   extra_visualize(voters) {
     this.paint_voters();
+    this.set_up_voter_arrows();
 
     for (const cand of candidates) {
       cand.text = cand.score;

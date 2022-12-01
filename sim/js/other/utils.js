@@ -64,18 +64,21 @@ function* combinations(array, n) {
   }
 }
 
-function twoDMatrixWithZeros(dim1, dim2) {
-  //Crates a 2d array with the dimensions of (dim1, dim2) and fills it with 0-s
-
+function filledTwoDMatrix(dim1, dim2, fill_value) {
   let returned = [];
   for (let i = 0; i < dim1; i++) {
     let sub = [];
     for (let j = 0; j < dim2; j++) {
-      sub.push(0);
+      sub.push(fill_value);
     }
     returned.push(sub);
   }
   return returned;
+}
+
+function twoDMatrixWithZeros(dim1, dim2) {
+  //Crates a 2d array with the dimensions of (dim1, dim2) and fills it with 0-s
+  return filledTwoDMatrix(dim1, dim2, 0);
 }
 
 // create a 2d boolean array, initially filling everything with false

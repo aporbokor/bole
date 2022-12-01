@@ -424,7 +424,6 @@ auto_simulate = empty_function;
 
 function freeze() {
   frozen_sim = true;
-  console.log(simfreezer.elt);
   simfreezer.child()[0].checked = true;
 }
 
@@ -479,6 +478,8 @@ function setup() {
 
   stroke(default_stroke);
 
+  auto_reset_environment = createCheckbox("Auto reset environment", true);
+
   strategic_chance_slider = slider_with_name(
     "Tactical voter chance: ",
     0,
@@ -500,6 +501,24 @@ function setup() {
     candidate_population,
     1
   );
+
+  candidate_population_slider.changed(() => {
+    if (auto_reset_environment.checked()) {
+      reset_enviroment();
+    }
+  });
+
+  voter_population_slider.changed(() => {
+    if (auto_reset_environment.checked()) {
+      reset_enviroment();
+    }
+  });
+
+  strategic_chance_slider.changed(() => {
+    if (auto_reset_environment.checked()) {
+      reset_enviroment();
+    }
+  });
 
   add_voter_button = createButton("Add voter");
   add_voter_button.mousePressed(add_voter);
@@ -665,6 +684,7 @@ function setup() {
   new_envitoment_div.child(strategic_chance_slider);
   new_envitoment_div.child(voter_population_slider);
   new_envitoment_div.child(candidate_population_slider);
+  new_envitoment_div.child(auto_reset_environment);
   new_envitoment_div.child(reset_button);
 
   edit_enviroment_div.child(add_voter_button);

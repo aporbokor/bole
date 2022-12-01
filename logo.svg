@@ -23,7 +23,7 @@
 
       .cls-4 {
         fill: #fff;
-        font-family: Syne-Bold, Syne;
+        font-family: 'Syne', sans-serif;
         font-size: 581.65px;
         font-variation-settings: 'wght'700;
         font-weight: 700;

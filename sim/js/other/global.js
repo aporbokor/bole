@@ -47,12 +47,10 @@ function simulate_voting() {
 
   for (const cand of candidates) {
     cand.appear();
+    cand.reset_text();
+    // cand.show_ranges = true;
   }
   max_votes = voters.length;
-
-  candidates.forEach((cand) => {
-    cand.reset_text();
-  });
 
   count_supporters();
   calculate_seems_win_candidates();
@@ -62,6 +60,7 @@ function simulate_voting() {
   voter_maschine.prepare_for_voting();
 
   for (let i = 0; i < voters.length; i++) {
+    voters[i].ranges = [];
     voter_maschine.register_vote(voters[i]);
   }
 

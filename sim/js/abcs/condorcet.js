@@ -249,7 +249,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     );
 
     let first_text = document.createElement("p");
-    first_text.innerHTML = `After we have received every voter's ballot, now we can get to work. For each voter's ballot, we are going to count how many times has been each candidate placed before each candidate. For example, let's see what does the ballot of the voter named ${voter_p} (marked with the default voter color) looks like`;
+    first_text.innerHTML = `After we have received every voter's ballot, now we can get to work. For each voter's ballot, we are going to count how many times has been each candidate placed before each candidate. For example, let's see how the ballot of the voter named ${voter_p} (marked with the default voter color) looks like:`;
 
     let voter_res_list = voting_sytem.get_ballot_element(voter_res);
 
@@ -291,60 +291,70 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     this.parent_box.next_func(voting_sytem.show_relative_strength_matrix);
   }
 
+  arrow_between_2_candidates(cand1, cand2) {
+    const strength = this.relative_strength_matrix[cand1.id][cand2.id];
+    let winner;
+    let loser;
+
+    let arr;
+
+    if (strength > 0) {
+      winner = cand1;
+      loser = cand2;
+    } else {
+      winner = cand2;
+      loser = cand1;
+    }
+
+    arr = new Arrow(
+      winner.color,
+      `${winner.name} beats ${loser.name}`,
+      winner,
+      loser
+    );
+
+    arr.text = abs(strength);
+    arr.text_label =
+      `This many voters prefer ${winner.get_name_p().outerHTML} over ${
+        loser.get_name_p().outerHTML
+      }` +
+      ` than ${loser.get_name_p().outerHTML} over ${
+        winner.get_name_p().outerHTML
+      }`;
+
+    arr.start_person_data = `This candidate is preferred over ${
+      loser.get_name_p().outerHTML
+    } by ${this.outranking_matrix[winner.id][loser.id]} voters.`;
+    arr.end_person_data = `This candidate is preferred over ${
+      winner.get_name_p().outerHTML
+    } by ${this.outranking_matrix[loser.id][winner.id]} voters.`;
+
+    if (strength == 0) {
+      let endStyle = new HalfTriArrowHead(20, 20);
+      arr.set_end_styles(endStyle, endStyle);
+      arr.name = `${winner.name} and ${loser.name} are equaly preferred`;
+    }
+    return arr;
+  }
+
   arrows_between_candidates() {
     // Draws the arrows between the candidates in the second visualization stepp
 
     for (const cands of combinations(this.candidates, 2)) {
       let [cand1, cand2] = cands;
-
-      const strength = this.relative_strength_matrix[cand1.id][cand2.id];
-      let winner;
-      let loser;
-
-      let arr;
-
-      if (strength > 0) {
-        winner = cand1;
-        loser = cand2;
-      } else {
-        winner = cand2;
-        loser = cand1;
-      }
-
-      arr = new Arrow(
-        winner.color,
-        `${winner.name} beats ${loser.name}`,
-        winner,
-        loser
-      );
-
-      arr.text = abs(strength);
-      arr.text_label =
-        `This many voters prefer ${winner.get_name_p().outerHTML} over ${
-          loser.get_name_p().outerHTML
-        }` +
-        ` than ${loser.get_name_p().outerHTML} over ${
-          winner.get_name_p().outerHTML
-        }`;
-
-      arr.start_person_data = `This candidate is preferred over ${
-        loser.get_name_p().outerHTML
-      } by ${this.outranking_matrix[winner.id][loser.id]} voters.`;
-      arr.end_person_data = `This candidate is preferred over ${
-        winner.get_name_p().outerHTML
-      } by ${this.outranking_matrix[loser.id][winner.id]} voters.`;
-
-      if (strength == 0) {
-        let endStyle = new HalfTriArrowHead(20, 20);
-        arr.set_end_styles(endStyle, endStyle);
-        arr.name = `${winner.name} and ${loser.name} are equaly preferred`;
-      }
+      this.arrow_between_2_candidates(cand1, cand2);
     }
   }
 
   show_relative_strength_matrix() {
     // Second stepp in step_by_stepp visualization
     let voting_sytem = this.parent_box.visualized_system;
+
+    for (const cand of candidates) {
+      cand.appear();
+    }
+
+    voting_sytem.extra_visualize(voters);
     delete_arrows();
 
     voters.forEach((v) => {
@@ -367,11 +377,159 @@ class CondorcetVotingMethod extends RankingVotingMethod {
       voting_sytem.candidate_names
     );
 
+    let pair_visualize_button = document.createElement("button");
+    pair_visualize_button.addEventListener("click", (ev) => {
+      voting_sytem.start_showing_candidate_pairs(this.parent_box);
+    });
+    pair_visualize_button.innerText = "Visualize for each pair of candidates";
+
+    let last_p = document.createElement("p");
+    last_p.innerText =
+      "If this was a lot for you to take in at once, then you should press the 'Visualize for each pair of candidates' button. That way you will see how the outranking matrix and the relative strength matrix are constructed cell by cell.";
+
     content.appendChild(text);
     content.appendChild(table);
+    content.appendChild(pair_visualize_button);
+    content.appendChild(last_p);
 
     this.parent_box.set_content(content);
     this.parent_box.next_func(voting_sytem.show_first);
+  }
+
+  visualize_candidate_pair(cand1, cand2) {
+    // Visualizes the candidate pair on canvas
+
+    if (this.pair_arrow_for_vis != undefined) {
+      this.pair_arrow_for_vis.remove();
+    }
+
+    this.pair_arrow_for_vis = this.arrow_between_2_candidates(cand1, cand2);
+
+    for (const cand of candidates) {
+      if (cand == cand1 || cand == cand2) {
+        cand.appear();
+      } else {
+        cand.hide();
+      }
+    }
+
+    for (const voter of voters) {
+      let cand_to_set = cand1;
+
+      if (voter.prefers(cand2, cand1)) {
+        cand_to_set = cand2;
+      }
+      voter.set_color(cand_to_set.target_color);
+    }
+  }
+
+  show_next_candidate_pair() {
+    let voting_sytem = this.parent_box.visualized_system;
+
+    let { value, done } = voting_sytem.visualizaton_pairs_generator.next();
+    console.log(done);
+
+    if (done) {
+      voting_sytem.show_first.bind(this)();
+
+      delete_arrows();
+      voting_sytem.arrows_between_candidates();
+
+      for (const cand of candidates) {
+        cand.appear();
+      }
+      for (const voter of voters) {
+        voter.appear();
+      }
+      return;
+    }
+    let [cand1, cand2] = value;
+
+    voting_sytem.visualize_candidate_pair(cand1, cand2);
+
+    let winner_cand = voting_sytem.pair_arrow_for_vis.start_person;
+    let loser_cand = voting_sytem.pair_arrow_for_vis.end_person;
+
+    let cand1_over_2 = voting_sytem.outranking_matrix[cand1.id][cand2.id];
+    let cand2_over_1 = voting_sytem.outranking_matrix[cand2.id][cand1.id];
+
+    cand1.text = cand1_over_2;
+    cand2.text = cand2_over_1;
+
+    let cand1_over_2_relative =
+      voting_sytem.relative_strength_matrix[cand1.id][cand2.id];
+    let cand2_over_1_relative =
+      voting_sytem.relative_strength_matrix[cand2.id][cand1.id];
+
+    voting_sytem.empty_outranking_matrix[cand1.id][cand2.id] = cand1_over_2;
+    voting_sytem.empty_outranking_matrix[cand2.id][cand1.id] = cand2_over_1;
+
+    voting_sytem.empty_relative_strength_matrix[cand1.id][cand2.id] =
+      cand1_over_2_relative;
+    voting_sytem.empty_relative_strength_matrix[cand2.id][cand1.id] =
+      cand2_over_1_relative;
+
+    let content = document.createElement("div");
+    let results_p = document.createElement("p");
+
+    let can1_p = cand1.get_simple_name_p().outerHTML;
+    let can2_p = cand2.get_simple_name_p().outerHTML;
+    let winner_cand_p = winner_cand.get_simple_name_p().outerHTML;
+
+    let explainer_p = document.createElement("p");
+    explainer_p.innerHTML =
+      "In order to construct the Outranking Matrix we would need to know the following: if there were only two candidates, then which one would win in a plurality election? And we would need ro know that for every possible pair of candidates! Take the current pair for example: ";
+
+    results_p.innerHTML = `As we can see ${cand1_over_2} voters prefer ${can1_p} over ${can2_p} and ${cand2_over_1} voters prefer ${can2_p} over ${can1_p}. We know that, because we can read this data out from the voters' ballots. We can put these numbers into the corresponding cells in the Outranking matrix as follows:`;
+
+    let table1 = table_from_matrix(
+      voting_sytem.empty_outranking_matrix,
+      voting_sytem.candidate_names,
+      voting_sytem.candidate_names
+    );
+
+    let last_p = document.createElement("p");
+    last_p.innerHTML = `We have also drawn an arrow between the 2 candidates. This arrow indicates, that ${winner_cand_p} has won by ${
+      voting_sytem.relative_strength_matrix[winner_cand.id][loser_cand.id]
+    } votes. We will write this value to the Relative strength matrix as follows:`;
+
+    let table2 = table_from_matrix(
+      voting_sytem.empty_relative_strength_matrix,
+      voting_sytem.candidate_names,
+      voting_sytem.candidate_names
+    );
+
+    content.appendChild(explainer_p);
+    content.appendChild(results_p);
+    content.appendChild(table1);
+    content.appendChild(last_p);
+    content.appendChild(table2);
+
+    this.parent_box.set_content(content);
+    this.parent_box.next_func(voting_sytem.show_next_candidate_pair);
+  }
+
+  start_showing_candidate_pairs(stepping_box) {
+    this.visualizaton_pairs_generator = combinations(candidates, 2);
+    delete_arrows();
+    clicked_selected = undefined;
+
+    this.empty_outranking_matrix = filledTwoDMatrix(
+      candidates.length,
+      candidates.length,
+      null
+    );
+    this.empty_relative_strength_matrix = filledTwoDMatrix(
+      candidates.length,
+      candidates.length,
+      null
+    );
+
+    for (const voter of voters) {
+      voter.appear();
+    }
+
+    this.show_next_candidate_pair.bind(stepping_box.next_button)();
   }
 
   show_first() {
