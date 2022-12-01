@@ -1,4 +1,4 @@
-class scoreVoter extends cardinalVotingMethod {
+class Score extends cardinalVotingMethod {
   constructor(candidates) {
     super(candidates);
     this.ranges = [
@@ -50,10 +50,10 @@ class scoreVoter extends cardinalVotingMethod {
 
     extra_function = function () {
       for (let i = 0; i < candidates.length; i++) {
-        voter_maschine.draw_circles_around_candidate(candidates[i]);
+        voting_machine.draw_circles_around_candidate(candidates[i]);
       }
       if (candidates.some(isin)) {
-        voter_maschine.resize_voters(clicked_selected);
+        voting_machine.resize_voters(clicked_selected);
       }
     };
   }

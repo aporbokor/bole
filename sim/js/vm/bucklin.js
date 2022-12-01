@@ -51,7 +51,7 @@ class Bucklin extends RankingVotingMethod {
     description.innerText =
       "As the first step, we collect the voters preferences.";
     this.parent_box.set_content(description);
-    this.parent_box.next_func(voter_maschine.visualize_step);
+    this.parent_box.next_func(voting_machine.visualize_step);
   }
 
   visualize_step() {
@@ -59,9 +59,9 @@ class Bucklin extends RankingVotingMethod {
     let first_text = document.createElement("p");
     let second_text = document.createElement("p");
     let last_text = document.createElement("div");
-    const step = voter_maschine.step + 1;
+    const step = voting_machine.step + 1;
 
-    voter_maschine.color_voters_based_on_nth_preference(step - 1);
+    voting_machine.color_voters_based_on_nth_preference(step - 1);
 
     first_text.innerText = `As the ${int_to_serial_number(
       step
@@ -112,7 +112,7 @@ class Bucklin extends RankingVotingMethod {
 
     this.parent_box.set_content(step_div);
 
-    voter_maschine.step += 1;
+    voting_machine.step += 1;
   }
 
   stepping_box_func(steppig_box) {

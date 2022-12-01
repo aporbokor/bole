@@ -1,4 +1,4 @@
-class BordaCounting extends RankingVotingMethod {
+class Borda_count extends RankingVotingMethod {
   prepare_for_voting() {
     super.prepare_for_voting();
 
@@ -17,21 +17,21 @@ class BordaCounting extends RankingVotingMethod {
   }
 
   register_honest_vote(voter) {
-    return this.best_candidate_tier_list(voter);
+    return this.candidate_tier_list(voter);
   }
 
   register_strategic_vote(voter) {
     if (seems_win_candidates.length <= 1) {
       return this.register_honest_vote(voter);
     }
-    let winner_tier_list = this.best_candidate_tier_list(
+    let winner_tier_list = this.candidate_tier_list(
       voter,
       seems_win_candidates
     );
     let top = winner_tier_list[0];
     let bottom = winner_tier_list.slice(1);
 
-    let loser_tier_list = this.best_candidate_tier_list(
+    let loser_tier_list = this.candidate_tier_list(
       voter,
       seems_lose_candidates
     );

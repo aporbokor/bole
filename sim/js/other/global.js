@@ -1,28 +1,28 @@
 let candidates;
 let voters;
 let voting_method;
-let voter_maschine;
+let voting_machine;
 let results;
 let max_votes;
 const max_range = Infinity;
 
 const vm = new Map([
-  ["Plurality voting", PluralityVoter],
-  ["Anti-plurality voting", AntiPluralityVoter],
+  ["Plurality voting", Plurality],
+  ["Anti-plurality voting", Anti_plurality],
   // ['theoretical perfect', PerfectVoter],
-  ["Approval voting", ApprovalVoter],
-  ["Evaluative voting", evaluativeVoter],
-  ["Score voting", scoreVoter],
+  ["Approval voting", Approval],
+  ["Evaluative voting", Evaluative],
+  ["Score voting", Score],
   // ["STAR voting", starVoter],
   ["Bucklin voting", Bucklin],
-  ["Instant-runoff voting", InstantRunOffVoter],
-  ["Coombs's method", CoombsVoting],
-  ["Supplementary vote", SupplementaryVoter],
-  ["Contingent vote", ContingentVoter],
-  ["Sri Lankan contingent vote", SriLankanContingentVoter],
-  ["Borda count", BordaCounting],
-  ["Copeland's method", CopelandVoter],
-  ["Tideman (RP)", TideMan],
+  ["Instant-runoff voting", IRV],
+  ["Coombs's method", Coombs],
+  ["Supplementary vote", Supplementary],
+  ["Contingent vote", Contingent],
+  ["Sri Lankan contingent vote", Sri_lankan_contingent],
+  ["Borda count", Borda_count],
+  ["Copeland's method", Copeland],
+  ["Tideman (RP)", Tideman],
 ]);
 
 let first = false;
@@ -31,7 +31,6 @@ function select_voting() {
   voting_method = vm.get(voting_type_selector.value());
   extra_function = empty_function;
 
-  console.log(voters);
 
   for (const voter of voters) {
     voter.size = 2;
@@ -57,17 +56,17 @@ function simulate_voting() {
   count_supporters();
   calculate_seems_win_candidates();
 
-  voter_maschine = new voting_method(candidates);
+  voting_machine = new voting_method(candidates);
 
-  voter_maschine.prepare_for_voting();
+  voting_machine.prepare_for_voting();
 
   for (let i = 0; i < voters.length; i++) {
-    voter_maschine.register_vote(voters[i]);
+    voting_machine.register_vote(voters[i]);
   }
 
-  voting_results = voter_maschine.count_votes();
+  voting_results = voting_machine.count_votes();
   console.log("The voting machine:");
-  console.log(voter_maschine);
+  console.log(voting_machine);
 
   console.log("The results:");
   console.log(voting_results);
@@ -75,7 +74,7 @@ function simulate_voting() {
   console.log("The voters:");
   console.log(voters);
 
-  display_votes(voter_maschine);
-  voter_maschine.stepping_box_func(stepping_box);
+  display_votes(voting_machine);
+  voting_machine.stepping_box_func(stepping_box);
   load_clicked_selected();
 }

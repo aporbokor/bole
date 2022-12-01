@@ -1,4 +1,4 @@
-class CoombsVoting extends RunoffLike {
+class Coombs extends RunoffLike {
   constructor(candidates) {
     super(candidates);
     this.explaining_text =
@@ -49,7 +49,7 @@ class CoombsVoting extends RunoffLike {
       // let returned = createProgress(cand[0].name + ': ', cand[1], voters.length);
       // returned.label.style('color', cand[0].color);
       return candidate.get_custom_p(
-        ...voter_maschine.sub_votes_visualization_data(
+        ...voting_machine.sub_votes_visualization_data(
           candidate.sub_votes_for_visualization
         )
       );

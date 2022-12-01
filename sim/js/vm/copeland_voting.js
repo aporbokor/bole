@@ -1,4 +1,4 @@
-class CopelandVoter extends CondorcetVotingMethod {
+class Copeland extends CondorcetVotingMethod {
   prepare_for_voting() {
     super.prepare_for_voting();
     max_votes = this.candidates.length - 1;

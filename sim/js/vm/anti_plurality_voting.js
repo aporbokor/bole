@@ -1,4 +1,4 @@
-class AntiPluralityVoter extends NumberVotecountVotingMethod {
+class Anti_plurality extends NumberVotecountVotingMethod {
   register_honest_vote(voter) {
     let max_distance = 0;
     let max_candidate = this.candidates[0];

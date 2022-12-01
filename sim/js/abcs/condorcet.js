@@ -12,6 +12,7 @@ class Pair {
     }
   }
 }
+
 class CondorcetVotingMethod extends RankingVotingMethod {
   // ABC for condorcet_methods
 
@@ -19,11 +20,6 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     super(candidates);
     ABC_constructor(this, CondorcetVotingMethod);
     this.pairs = [];
-    this.locked = tdBooleanArray(
-      this.candidates.length,
-      this.candidates.length
-    );
-    console.log(this.locked);
   }
 
   prepare_for_voting() {
@@ -34,12 +30,12 @@ class CondorcetVotingMethod extends RankingVotingMethod {
       candidates[i].id = i;
     }
 
-    // Create outranking_matrix, with null-s in the main diagnal
+    // Create outranking_matrix, with null-s in the main diagonal
     this.outranking_matrix = twoDMatrixWithZeros(
       this.candidates.length,
       this.candidates.length
     );
-    set_diagnal(this.outranking_matrix, null);
+    set_diagonal(this.outranking_matrix, null);
 
     this.candidate_names = [];
 
@@ -65,38 +61,11 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     });
   }
 
-  invalid_edge(pair) {
-    let l = pair.loser;
-    while (true) {
-      console.log(this.locked);
-      for (let i = 0; i < this.candidates.length; i++) {
-        if (i == l) {
-          continue;
-        } else if (this.locked[l][i] == true) {
-          if (i == pair.winner) {
-            return true;
-          }
-          l = i;
-        } else {
-          return false;
-        }
-      }
-    }
-  }
-  create_graph() {
-    console.log(this.locked);
-    for (const pair of this.pairs) {
-      console.log(pair);
-      console.log(this.locked);
-      if (!this.invalid_edge(pair)) {
-        this.locked[pair.winner][pair.loser] = true;
-      }
-    }
-  }
+
 
   register_vote(voter) {
     // Refreshing the outranking matrix based on the voter's ballot
-    let tier_list = this.best_candidate_tier_list(voter);
+    let tier_list = this.candidate_tier_list(voter);
 
     for (let i = 0; i < tier_list.length; i++) {
       let runner = tier_list[i].id;
@@ -110,12 +79,12 @@ class CondorcetVotingMethod extends RankingVotingMethod {
   }
 
   get_outranking_matrix_from_ballot(ballot) {
-    // Transform a ballot to an outranking matrix. Currently only used in visualization
+    // Transform a ballot to an outranking matrix.
     let returned = twoDMatrixWithZeros(
       this.candidates.length,
       this.candidates.length
     );
-    set_diagnal(this.relative_strength_matrix, null);
+    set_diagonal(this.relative_strength_matrix, null);
 
     for (let i = 0; i < ballot.length; i++) {
       let runner = ballot[i].id;
@@ -133,7 +102,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
       this.candidates.length,
       this.candidates.length
     );
-    set_diagnal(this.relative_strength_matrix, null);
+    set_diagonal(this.relative_strength_matrix, null);
 
     for (let i = 0; i < this.candidates.length; i++) {
       for (let j = 0; j < this.candidates.length; j++) {
