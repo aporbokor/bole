@@ -6,7 +6,8 @@
         stroke-width: 88.62px;
       }
 
-      .cls-1, .cls-2 {
+      .cls-1,
+      .cls-2 {
         fill: none;
         stroke-miterlimit: 10;
       }
@@ -24,19 +25,21 @@
         fill: #fff;
         font-family: Syne-Bold, Syne;
         font-size: 581.65px;
-        font-variation-settings: 'wght' 700;
+        font-variation-settings: 'wght'700;
         font-weight: 700;
       }
     </style>
   </defs>
   <g id="text">
-    <text class="cls-4" transform="translate(746.99 562.16)"><tspan x="0" y="0">BOLE</tspan></text>
+    <text class="cls-4" transform="translate(746.99 562.16)">
+      <tspan x="0" y="0">BOLE</tspan>
+    </text>
   </g>
   <g id="logo">
-    <circle id="red-circle" class="cls-3" cx="198.51" cy="198.51" r="198.51"/>
-    <circle id="orange-circle" class="cls-2" cx="508.53" cy="366.53" r="93.54"/>
+    <circle id="red-circle" class="cls-3" cx="198.51" cy="198.51" r="198.51" />
+    <circle id="orange-circle" class="cls-2" cx="508.53" cy="366.53" r="93.54" />
     <g id="purple-circle">
-      <circle class="cls-1" cx="271.63" cy="583.67" r="122.03"/>
+      <circle class="cls-1" cx="271.63" cy="583.67" r="122.03" />
     </g>
   </g>
 </svg>
