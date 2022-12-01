@@ -1,4 +1,4 @@
-class InstantRunOffVoter extends RunoffLike {
+class IRV extends RunoffLike {
   constructor(candidates) {
     super(candidates);
     this.explaining_text =

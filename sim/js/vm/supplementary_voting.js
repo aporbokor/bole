@@ -20,7 +20,7 @@ class SuplementaryLike extends RunoffLike {
   }
 
   register_strategic_vote(voter) {
-    let most_liked_seems_likely = this.best_candidate_tier_list(
+    let most_liked_seems_likely = this.candidate_tier_list(
       voter,
       seems_win_candidates
     )[0];
@@ -79,19 +79,19 @@ class SuplementaryLike extends RunoffLike {
   }
 }
 
-class SupplementaryVoter extends SuplementaryLike {
+class Supplementary extends SuplementaryLike {
   constructor(candidates) {
     super(candidates, 2);
   }
 }
 
-class ContingentVoter extends SuplementaryLike {
+class Contingent extends SuplementaryLike {
   constructor(candidates) {
     super(candidates, candidates.length);
   }
 }
 
-class SriLankanContingentVoter extends SuplementaryLike {
+class Sri_lankan_contingent extends SuplementaryLike {
   constructor(candidates) {
     let len = 2;
     if (candidates.length >= 3) {

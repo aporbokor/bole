@@ -126,7 +126,7 @@ class cardinalVotingMethod extends VotingMethod {
 
   resize_voters(candidate) {
     for (let i = 0; i < voters.length; i++) {
-      let place = voter_maschine.place_in_voted_for(voters[i], candidate);
+      let place = voting_machine.place_in_voted_for(voters[i], candidate);
       voters[i].target_size += lerp(
         selected_size_adder * 2,
         -selected_size_adder * 2,
@@ -177,7 +177,7 @@ class cardinalVotingMethod extends VotingMethod {
               cand
             );
 
-            arr.text = voter_maschine.vote_to_text(j);
+            arr.text = voting_machine.vote_to_text(j);
             arr.text_label = `${cand.get_name_p().outerHTML}'s rank in ${
               this.get_name_p().outerHTML
             }'s ballot`;

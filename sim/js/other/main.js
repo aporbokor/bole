@@ -410,14 +410,14 @@ function get_results_elements(
   return returned;
 }
 
-function display_votes(voter_maschine) {
+function display_votes(voting_machine) {
   // Updates the results div and resets the stepping_box content
   stepping_box.delete_content();
 
   vote_result_div.html("Voting results:");
   vote_result_div.child(get_results_elements(voting_results));
 
-  voter_maschine.extra_visualize(voters);
+  voting_machine.extra_visualize(voters);
 }
 
 auto_simulate = empty_function;

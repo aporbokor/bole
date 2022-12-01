@@ -1,16 +1,58 @@
-class TideMan extends CondorcetVotingMethod {
+class Tideman extends CondorcetVotingMethod {
   count_votes() {
+
     this.calc_relative_strength_matrix();
-    console.log(this.locked);
-    console.log(this.relative_strength_matrix);
     this.add_pairs();
-    console.log(this.locked);
     this.sort_pairs();
-    console.log(this.locked);
-    console.log(this.pairs);
-    this.create_graph();
-    console.log(this.locked);
-    let winner;
+
+    // locked array establishes the graph, only adding edges if it doesn't create a cycle
+    let locked = gen_bool_arr(this.candidates.length);
+    set_diagonal(locked, null);
+
+    console.log(this.relative_strength_matrix);
+    console.log(this.pairs)
+
+
+
+
+
+/*     function invalid_edge(pair) {
+        let l = pair.loser;
+        while (true) {
+          for (let i = 0; i < this.candidates.length; i++) {
+            if (i == l) {
+              continue;
+            } else if (locked[l][i] == true) {
+              if (i == pair.winner) {
+                return true;
+              }
+              l = i;
+            } else {
+              return false;
+            }
+          }
+        }
+      } */
+
+    function create_graph(pairs, l) {
+      for (const p of pairs) {
+        let res = digraph_cycle(locked, l);
+        if (!digraph_cycle(locked, l)) {
+          locked[p.winner][p.loser] = true;
+        }
+      }
+    }
+
+    create_graph(this.pairs, this.candidates.length);
+
+    let source = digraph_source(locked, this.candidates.length)
+    console.log(source)
+    let winner = this.candidates[source];
+
+
+
+/*     let winner;
+    let chosen=false;
     for (let i = 0; i < this.candidates.length; i++) {
       for (let j = 0; j < this.candidates.length; j++) {
         if (this.locked[j][i] == false) {
@@ -18,14 +60,20 @@ class TideMan extends CondorcetVotingMethod {
             winner = this.candidates[i];
           }
         } else {
+          chosen=true;
+
           break;
         }
       }
-    }
+      if (chosen) {
+        break;
+      }
+    } */
     // TODO
-    if (winner == undefined) {
+
+/*     if (winner == undefined) {
       winner = this.candidates[this.pairs[0].winner];
-    }
+    } */
     return [
       [winner],
       this.candidates.filter(function (c) {

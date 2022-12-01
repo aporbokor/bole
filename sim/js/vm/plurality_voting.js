@@ -1,4 +1,4 @@
-class PluralityVoter extends NumberVotecountVotingMethod {
+class Plurality extends NumberVotecountVotingMethod {
   register_honest_vote(voter) {
     let min_tav = Infinity;
     let min_candidate = this.candidates[0];
@@ -53,7 +53,7 @@ class PluralityVoter extends NumberVotecountVotingMethod {
 //
 // let candidates = [new Candidate(0, 0, undefined), new Candidate(0.5, 0.5, undefined), new Candidate(1, 1, undefined)];
 //
-// let votings = new PluralityVoter(candidates);
+// let votings = new Plurality(candidates);
 // votings.prepare_for_voting()
 //
 // console.log(votings);

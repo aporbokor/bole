@@ -11,12 +11,12 @@ function sum_of_natural_numbers(start, end, stepp = 1) {
   return (range / 2) * (2 * start + (range - 1) * stepp);
 }
 
-function faktorial(n) {
+function factorial(n) {
   if (n == 0) {
     return 1;
   }
 
-  return n * faktorial(n - 1);
+  return n * factorial(n - 1);
 }
 
 function ABC_constructor(instance, class_) {
@@ -95,8 +95,17 @@ function tdBooleanArray(d1, d2) {
   return arr;
 }
 
-function set_diagnal(matrix, value) {
-  //Sets every item in the main diagnal of a 2d matrix equal to value
+function gen_bool_arr(s) {
+  let arr = [];
+  for (let i = 0; i < s; i++) {
+    let subarr = new Array(s).fill(false);
+    arr.push(subarr);
+  }
+  return arr;
+}
+
+function set_diagonal(matrix, value) {
+  //Sets every item in the main diagonal of a 2d matrix equal to value
 
   for (let i = 0; i < matrix.length; i++) {
     matrix[i][i] = value;

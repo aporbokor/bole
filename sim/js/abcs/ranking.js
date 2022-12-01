@@ -18,7 +18,7 @@ class RankingVotingMethod extends VotingMethod {
   }
 
   register_honest_vote(voter) {
-    return this.best_candidate_tier_list(voter, this.candidates);
+    return this.candidate_tier_list(voter, this.candidates);
   }
 
   register_strategic_vote(voter) {
@@ -39,7 +39,7 @@ class RankingVotingMethod extends VotingMethod {
     voter.voted_for = ballot;
   }
 
-  best_candidate_tier_list(voter, candidates_ = this.candidates) {
+  candidate_tier_list(voter, candidates_ = this.candidates) {
     // Given a voter and a list of candidates, retuns the voter's preference list for those candidates
     return voter.honest_preference(candidates_);
   }

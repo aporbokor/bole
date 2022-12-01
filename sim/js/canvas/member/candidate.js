@@ -36,7 +36,7 @@ class Candidate extends Person {
   }
 
   get_p() {
-    return this.get_custom_p(...voter_maschine.get_results_data(this));
+    return this.get_custom_p(...voting_machine.get_results_data(this));
   }
 
   get_extra_to_div() {

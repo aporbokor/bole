@@ -1,4 +1,4 @@
-class ApprovalVoter extends cardinalVotingMethod {
+class Approval extends cardinalVotingMethod {
   constructor(candidates) {
     super(candidates);
     this.ranges = [approval_range, max_range];
@@ -27,11 +27,11 @@ class ApprovalVoter extends cardinalVotingMethod {
 
     extra_function = function () {
       for (let i = 0; i < candidates.length; i++) {
-        voter_maschine.draw_circles_around_candidate(candidates[i]);
+        voting_machine.draw_circles_around_candidate(candidates[i]);
       }
 
       if (candidates.some(isin)) {
-        voter_maschine.resize_voters(clicked_selected);
+        voting_machine.resize_voters(clicked_selected);
       }
     };
   }
