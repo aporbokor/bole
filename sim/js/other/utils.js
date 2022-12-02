@@ -19,6 +19,17 @@ function factorial(n) {
   return n * factorial(n - 1);
 }
 
+function same_opinion(opinion1, opinion2) {
+  // Checks if two voter opinions are the same
+
+  for (let i = 0; i < opinion1.length; i++) {
+    if (opinion1[i].id != opinion2[i].id) {
+      return false;
+    }
+  }
+  return true;
+}
+
 function ABC_constructor(instance, class_) {
   /* Used in the constructor of abstract baseclasses (ABCs).
      Makes sure that you can't create an instance of an ABC.

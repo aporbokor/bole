@@ -157,17 +157,19 @@ function add_voter_to_position(x, y) {
     let x_ = constrain(round(x), 0, width);
     let y_ = constrain(round(y), 0, height);
 
-    voters.push(
-      new Voter(
-        x_,
-        y_,
-        random_bool(strategic_chance),
-        honest_voter_color,
-        `voter#${voters.length}`
-      )
+    let returned = new Voter(
+      x_,
+      y_,
+      random_bool(strategic_chance),
+      honest_voter_color,
+      `voter#${voters.length}`
     );
+
+    voters.push(returned);
     update_voter_population_slider();
     change_in_sim = true;
+
+    return returned;
   }
 }
 
@@ -222,7 +224,8 @@ function random_candidate(i) {
     round(random(width)),
     round(random(height)),
     rewrapp_index(candidate_colors, i),
-    "candidate#" + i
+    "candidate#" + i,
+    i
   );
 }
 
