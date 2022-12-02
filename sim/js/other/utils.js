@@ -1,3 +1,5 @@
+function print_json(a) { console.log(JSON.stringify(a)) }
+
 function cursor_in_canvas() {
   // returns wether the cursor is inside of the canvas or not
   return !(mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height);

@@ -38,35 +38,40 @@
 2   true  null   true  */
 
 
+/* [[null,true,false],
+[false,null,true],
+[true,false,null]] */
+
+// here graph looks like 0->1
+// then 2->0, after which cycle would occur
+
+// neigbours of 0 are [1]
+// neighbours of 1 are [2]
+// neighbors of 2 are [0]
 
 function digraph_cycle(am, l) {
   
   let visited = [];
   let finished =[];
-  for (let i=0; i<l; i++) {
-    visited[i]=false;
-    finished[i]=false;
-  }
-  function dfs(v, a) {
-
+  
+  function dfs(v, am) {
     if (finished[v]) return
-    if (visited[v]) return true
+    if (visited[v]) return true 
     visited[v]=true;
 
-    // check all edges pointing away from v, except the one calling dfs(v) = visited
-    let neighbours = [];
-    for (let i=0; i<l; i++) {
-        if (am[v][i]==true & !visited[i]) neighbours.push(i);
-    }
-    
-
-    for (const w in neighbours) {
-      dfs(w);
-    }
+    // check all edges pointing away from v
+    let neighbours=[];
+    for (let i=0; i<l; i++) if (am[v][i]) neighbours.push(i);
+    for (const w of neighbours) return dfs(w, am)
     finished[v]=true; 
-
   }
+
+  // call dfs with every vertex
   for (let i=0; i<l; i++) {
+    for (let j=0; j<l; j++) {
+      visited[j]=false;
+      finished[j]=false;
+    }
     let cycle = dfs(i, am);
     if (cycle) return true;
   }
@@ -81,12 +86,8 @@ function digraph_source(am, l) {
   let source;
   for (const v of vertices) {
     source=true;
-/*     console.log("currently observing candidate ", v) */
-    for (let i=0; i<l; i++) {
-/*       console.log("against candidate ", i)
-      console.log("result was: ", am[i][v]) */
+    for (let i=0; i<l; i++) 
       if (am[i][v]) { source=false; break; }
-    }
     if (source) return v;
   }
 }
