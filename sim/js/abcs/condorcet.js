@@ -192,9 +192,9 @@ class CondorcetVotingMethod extends RankingVotingMethod {
   //Visualization stuff below
 
   show_outranking_matrix() {
-    // First stepp in step_by_stepp visualization
+    // First step in step_by_step visualization
 
-    let voting_sytem = this.parent_box.visualized_system;
+    let voting_system = this.parent_box.visualized_system;
 
     delete_arrows();
     this.random_voter = random(voters);
@@ -208,17 +208,17 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     let voter_p = this.random_voter.get_simple_name_p().outerHTML;
 
     let voter_table_matrix =
-      voting_sytem.get_outranking_matrix_from_ballot(voter_res);
+      voting_system.get_outranking_matrix_from_ballot(voter_res);
     let voter_table = table_from_matrix(
       voter_table_matrix,
-      voting_sytem.candidate_names,
-      voting_sytem.candidate_names
+      voting_system.candidate_names,
+      voting_system.candidate_names
     );
 
     let first_text = document.createElement("p");
     first_text.innerHTML = `After we have received every voter's ballot, now we can get to work. For each voter's ballot, we are going to count how many times has been each candidate placed before each candidate. For example, let's see how the ballot of the voter named ${voter_p} (marked with the default voter color) looks like:`;
 
-    let voter_res_list = voting_sytem.get_ballot_element(voter_res);
+    let voter_res_list = voting_system.get_ballot_element(voter_res);
 
     let second_text = document.createElement("p");
 
@@ -232,15 +232,15 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     let third_text = document.createElement("p");
     third_text.innerHTML = `This table is the outranking matrix. This shows the preferences of ${voter_p}. As you can see, if we look at the row of ${first_choice} and the column of ${second_choice} we can see a one. This means that ${first_choice} is <strong>preferred</strong> over ${second_choice} by exactly one voter. If we do this for every voter's ballot, then we will know that how many times has candidate X been placed before candidate Y. We can place these findings in a table like so: `;
     let table = table_from_matrix(
-      voting_sytem.outranking_matrix,
-      voting_sytem.candidate_names,
-      voting_sytem.candidate_names
+      voting_system.outranking_matrix,
+      voting_system.candidate_names,
+      voting_system.candidate_names
     );
 
     const preference =
-      voting_sytem.outranking_matrix[voter_res[0].id][voter_res[1].id];
+      voting_system.outranking_matrix[voter_res[0].id][voter_res[1].id];
     const preference2 =
-      voting_sytem.outranking_matrix[voter_res[1].id][voter_res[0].id];
+      voting_system.outranking_matrix[voter_res[1].id][voter_res[0].id];
 
     let last_text = document.createElement("p");
     last_text.innerHTML = `This is the outranking matrix (O) of every voter. We can store our <strong>preferences</strong> here. For example, we can see that ${first_choice} has been preferred over ${second_choice} by exactly ${preference} voters, and ${second_choice} has been preferred over ${first_choice} by exactly ${preference2} voters. This information (as we will see) is really useful to us.`;
@@ -255,7 +255,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     content.appendChild(last_text);
     this.parent_box.set_content(content);
 
-    this.parent_box.next_func(voting_sytem.show_relative_strength_matrix);
+    this.parent_box.next_func(voting_system.show_relative_strength_matrix);
   }
 
   arrow_between_2_candidates(cand1, cand2) {
@@ -305,7 +305,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
   }
 
   arrows_between_candidates() {
-    // Draws the arrows between the candidates in the second visualization stepp
+    // Draws the arrows between the candidates in the second visualization step
 
     for (const cands of combinations(this.candidates, 2)) {
       let [cand1, cand2] = cands;
@@ -314,14 +314,14 @@ class CondorcetVotingMethod extends RankingVotingMethod {
   }
 
   show_relative_strength_matrix() {
-    // Second stepp in step_by_stepp visualization
-    let voting_sytem = this.parent_box.visualized_system;
+    // Second step in step_by_step visualization
+    let voting_system = this.parent_box.visualized_system;
 
     for (const cand of candidates) {
       cand.appear();
     }
 
-    voting_sytem.extra_visualize(voters);
+    voting_system.extra_visualize(voters);
     delete_arrows();
 
     voters.forEach((v) => {
@@ -330,7 +330,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
 
     clicked_selected = undefined;
 
-    voting_sytem.arrows_between_candidates();
+    voting_system.arrows_between_candidates();
     this.random_voter.set_color(this.random_voter.voted_for[0].color);
     let content = document.createElement("div");
 
@@ -339,14 +339,14 @@ class CondorcetVotingMethod extends RankingVotingMethod {
       "From the outranking matrix we can create a relative strength matrix (R). Basically every R(i, j) equals O(i, j) - O(j, i). This kind of matrix shows us, that by how many times did each candidate i beat candidate j. If this number is negative, then j has beaten i more times.";
 
     let table = table_from_matrix(
-      voting_sytem.relative_strength_matrix,
-      voting_sytem.candidate_names,
-      voting_sytem.candidate_names
+      voting_system.relative_strength_matrix,
+      voting_system.candidate_names,
+      voting_system.candidate_names
     );
 
     let pair_visualize_button = document.createElement("button");
     pair_visualize_button.addEventListener("click", (ev) => {
-      voting_sytem.start_showing_candidate_pairs(this.parent_box);
+      voting_system.start_showing_candidate_pairs(this.parent_box);
     });
     pair_visualize_button.innerText = "Visualize for each pair of candidates";
 
@@ -360,7 +360,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     content.appendChild(last_p);
 
     this.parent_box.set_content(content);
-    this.parent_box.next_func(voting_sytem.show_first);
+    this.parent_box.next_func(voting_system.specific_step);
   }
 
   visualize_candidate_pair(cand1, cand2) {
@@ -391,15 +391,15 @@ class CondorcetVotingMethod extends RankingVotingMethod {
   }
 
   show_next_candidate_pair() {
-    let voting_sytem = this.parent_box.visualized_system;
+    let voting_system = this.parent_box.visualized_system;
 
-    let { value, done } = voting_sytem.visualizaton_pairs_generator.next();
+    let { value, done } = voting_system.visualizaton_pairs_generator.next();
 
     if (done) {
-      voting_sytem.show_first.bind(this)();
+      voting_system.show_first.bind(this)();
 
       delete_arrows();
-      voting_sytem.arrows_between_candidates();
+      voting_system.arrows_between_candidates();
 
       for (const cand of candidates) {
         cand.appear();
@@ -411,28 +411,28 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     }
     let [cand1, cand2] = value;
 
-    voting_sytem.visualize_candidate_pair(cand1, cand2);
+    voting_system.visualize_candidate_pair(cand1, cand2);
 
-    let winner_cand = voting_sytem.pair_arrow_for_vis.start_person;
-    let loser_cand = voting_sytem.pair_arrow_for_vis.end_person;
+    let winner_cand = voting_system.pair_arrow_for_vis.start_person;
+    let loser_cand = voting_system.pair_arrow_for_vis.end_person;
 
-    let cand1_over_2 = voting_sytem.outranking_matrix[cand1.id][cand2.id];
-    let cand2_over_1 = voting_sytem.outranking_matrix[cand2.id][cand1.id];
+    let cand1_over_2 = voting_system.outranking_matrix[cand1.id][cand2.id];
+    let cand2_over_1 = voting_system.outranking_matrix[cand2.id][cand1.id];
 
     cand1.text = cand1_over_2;
     cand2.text = cand2_over_1;
 
     let cand1_over_2_relative =
-      voting_sytem.relative_strength_matrix[cand1.id][cand2.id];
+      voting_system.relative_strength_matrix[cand1.id][cand2.id];
     let cand2_over_1_relative =
-      voting_sytem.relative_strength_matrix[cand2.id][cand1.id];
+      voting_system.relative_strength_matrix[cand2.id][cand1.id];
 
-    voting_sytem.empty_outranking_matrix[cand1.id][cand2.id] = cand1_over_2;
-    voting_sytem.empty_outranking_matrix[cand2.id][cand1.id] = cand2_over_1;
+    voting_system.empty_outranking_matrix[cand1.id][cand2.id] = cand1_over_2;
+    voting_system.empty_outranking_matrix[cand2.id][cand1.id] = cand2_over_1;
 
-    voting_sytem.empty_relative_strength_matrix[cand1.id][cand2.id] =
+    voting_system.empty_relative_strength_matrix[cand1.id][cand2.id] =
       cand1_over_2_relative;
-    voting_sytem.empty_relative_strength_matrix[cand2.id][cand1.id] =
+    voting_system.empty_relative_strength_matrix[cand2.id][cand1.id] =
       cand2_over_1_relative;
 
     let content = document.createElement("div");
@@ -449,20 +449,20 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     results_p.innerHTML = `As we can see ${cand1_over_2} voters prefer ${can1_p} over ${can2_p} and ${cand2_over_1} voters prefer ${can2_p} over ${can1_p}. We know that, because we can read this data out from the voters' ballots. We can put these numbers into the corresponding cells in the Outranking matrix as follows:`;
 
     let table1 = table_from_matrix(
-      voting_sytem.empty_outranking_matrix,
-      voting_sytem.candidate_names,
-      voting_sytem.candidate_names
+      voting_system.empty_outranking_matrix,
+      voting_system.candidate_names,
+      voting_system.candidate_names
     );
 
     let last_p = document.createElement("p");
     last_p.innerHTML = `We have also drawn an arrow between the 2 candidates. This arrow indicates, that ${winner_cand_p} has won by ${
-      voting_sytem.relative_strength_matrix[winner_cand.id][loser_cand.id]
+      voting_system.relative_strength_matrix[winner_cand.id][loser_cand.id]
     } votes. We will write this value to the Relative strength matrix as follows:`;
 
     let table2 = table_from_matrix(
-      voting_sytem.empty_relative_strength_matrix,
-      voting_sytem.candidate_names,
-      voting_sytem.candidate_names
+      voting_system.empty_relative_strength_matrix,
+      voting_system.candidate_names,
+      voting_system.candidate_names
     );
 
     content.appendChild(explainer_p);
@@ -472,10 +472,10 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     content.appendChild(table2);
 
     this.parent_box.set_content(content);
-    this.parent_box.next_func(voting_sytem.show_next_candidate_pair);
+    this.parent_box.next_func(voting_system.show_next_candidate_pair);
   }
 
-  start_showing_candidate_pairs(stepping_box) {
+  start_showing_candidate_pairs(steping_box) {
     this.visualizaton_pairs_generator = combinations(candidates, 2);
     delete_arrows();
     clicked_selected = undefined;
@@ -495,24 +495,24 @@ class CondorcetVotingMethod extends RankingVotingMethod {
       voter.appear();
     }
 
-    this.show_next_candidate_pair.bind(stepping_box.next_button)();
+    this.show_next_candidate_pair.bind(steping_box.next_button)();
   }
 
   show_first() {
-    // The first step_by_stepp visualization step which every class needs to define which inherits from CondorcetVotingMethod
+    // The first step_by_step visualization step which every class needs to define which inherits from CondorcetVotingMethod
     throw new Error(
       "You must define a show_first method to your CondorcetVotingMethod class"
     );
   }
 
-  stepping_box_func(steppig_box) {
-    // Sets up stepping_box
+  steping_box_func(stepig_box) {
+    // Sets up steping_box
 
-    this.stepping_box = steppig_box;
-    steppig_box.visualized_system = this;
+    this.steping_box = stepig_box;
+    stepig_box.visualized_system = this;
 
-    stepping_box.show_next();
+    steping_box.show_next();
 
-    steppig_box.next_func(this.show_outranking_matrix);
+    stepig_box.next_func(this.show_outranking_matrix);
   }
 }

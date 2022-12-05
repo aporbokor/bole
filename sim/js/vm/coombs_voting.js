@@ -31,7 +31,7 @@ class Coombs extends RunoffLike {
     return [sub[0][sub[0].length - 1], "| sub-results: "];
   }
 
-  visualize_for_stepping_box(subresult) {
+  visualize_for_steping_box(subresult) {
     for (let i = 0; i < subresult.length; i++) {
       for (let j = 0; j < subresult[i].length; j++) {
         let votes = subresult[i][j][0].sub_votes_for_visualization[0];

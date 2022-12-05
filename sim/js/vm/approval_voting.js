@@ -36,8 +36,8 @@ class Approval extends cardinalVotingMethod {
     };
   }
 
-  stepping_box_func(stepping_box) {
-    stepping_box.set_content(
+  steping_box_func(steping_box) {
+    steping_box.set_content(
       createP(
         "Approval voting works like the following: every voter votes for n number of candidates who they approve with. In the end, the candidate with the most approves wins. In our visualization, every honest voter inside a candidate's approval range will approve with that candidate."
       )

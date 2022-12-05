@@ -76,7 +76,7 @@
   grid-area: selected;
 }
 
-.step_by_stepp {
+.step_by_step {
   grid-area: step;
   overflow-x: auto;
 }
@@ -211,11 +211,11 @@ li::marker {
 .simulate_button {
 }
 
-.stepping_box_title {
+.steping_box_title {
   all: inherit;
 }
 
-.next_stepp {
+.next_step {
   /* The next button */
   text-decoration: none;
   padding: 0.5em 1em;
@@ -227,7 +227,7 @@ li::marker {
   transition: color 250ms ease-in;
 }
 
-.next_stepp::after {
+.next_step::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -237,10 +237,10 @@ li::marker {
   z-index: -1;
 }
 
-.next_stepp:hover {
+.next_step:hover {
   color: var(--bg--primary);
 }
-.next_stepp:hover::after {
+.next_step:hover::after {
   clip-path: polygon(100% 0%, 200% 50%, 100% 100%, 0 100%, 0 0);
 }
 
@@ -375,7 +375,7 @@ li::marker {
   }
 
   #selected,
-  .step_by_stepp {
+  .step_by_step {
     display: none;
   }
 }

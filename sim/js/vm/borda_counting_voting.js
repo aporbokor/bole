@@ -75,7 +75,7 @@ class Borda_count extends RankingVotingMethod {
   }
 
   describe_process() {
-    let stepp_div = document.createElement("div");
+    let step_div = document.createElement("div");
     let start_text = document.createElement("p");
     start_text.innerHTML =
       "In borda counting, every voter ranks every candidate in order of preference. Then we assign scores to each candidate based on these preferences. Let's assume that the total number of candidates is n. For every k-th candidate in every voters' ballot, we are going to increment the k-th candidate's borda score by <strong>(n-k+1)</strong>. In this case, this looks like the following:";
@@ -88,7 +88,7 @@ class Borda_count extends RankingVotingMethod {
 
     const preference = random_voter.voted_for;
     const preference_ellement =
-      random_voter.last_voting_sytem.get_ballot_element(preference);
+      random_voter.last_voting_system.get_ballot_element(preference);
 
     let second_text = document.createElement("p");
     second_text.innerHTML = `${
@@ -134,25 +134,25 @@ class Borda_count extends RankingVotingMethod {
     last_text.innerText =
       "We do this to each voter, so in the end, we get how much borda score each candidate has. The candidate with the highest borda score wins.";
 
-    stepp_div.appendChild(start_text);
-    stepp_div.appendChild(second_text);
-    stepp_div.appendChild(preference_ellement);
-    stepp_div.appendChild(third_text);
-    stepp_div.appendChild(forth_text);
-    stepp_div.appendChild(fifth_text);
-    stepp_div.appendChild(table);
-    stepp_div.appendChild(last_text);
+    step_div.appendChild(start_text);
+    step_div.appendChild(second_text);
+    step_div.appendChild(preference_ellement);
+    step_div.appendChild(third_text);
+    step_div.appendChild(forth_text);
+    step_div.appendChild(fifth_text);
+    step_div.appendChild(table);
+    step_div.appendChild(last_text);
 
-    this.parent_box.set_content(stepp_div);
+    this.parent_box.set_content(step_div);
     this.parent_box.hide_next();
   }
 
-  stepping_box_func(steppig_box) {
-    this.stepping_box = steppig_box;
-    steppig_box.visualized_system = this;
+  steping_box_func(stepig_box) {
+    this.steping_box = stepig_box;
+    stepig_box.visualized_system = this;
 
-    stepping_box.show_next();
+    steping_box.show_next();
 
-    steppig_box.next_func(this.describe_process);
+    stepig_box.next_func(this.describe_process);
   }
 }

@@ -58,8 +58,8 @@ class Score extends cardinalVotingMethod {
     };
   }
 
-  stepping_box_func(stepping_box) {
-    stepping_box.set_content(
+  steping_box_func(steping_box) {
+    steping_box.set_content(
       createP(
         "Score voting works like the following: every voter votes ranks every candidate using 10 scores: from 0 to 9. In the end we evaluate the scores for each candidate and the candidate with the most points wins."
       )

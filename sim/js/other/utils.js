@@ -5,12 +5,12 @@ function cursor_in_canvas() {
   return !(mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height);
 }
 
-function sum_of_natural_numbers(start, end, stepp = 1) {
-  /* Adding up natural numbers from start to end with the increase of stepp
+function sum_of_natural_numbers(start, end, step = 1) {
+  /* Adding up natural numbers from start to end with the increase of step
       example: sum_of_natural_numbers(0, 100) = 0 + 1 + 2 + ... 100*/
 
   let range = end - start;
-  return (range / 2) * (2 * start + (range - 1) * stepp);
+  return (range / 2) * (2 * start + (range - 1) * step);
 }
 
 function factorial(n) {
