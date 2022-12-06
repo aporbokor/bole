@@ -7,22 +7,22 @@ let max_votes;
 const max_range = Infinity;
 
 const vm = new Map([
-  ["Plurality voting", Plurality],
-  ["Anti-plurality voting", Anti_plurality],
+  ["Plurality", Plurality],
+  ["Anti-plurality", Anti_plurality],
   // ['theoretical perfect', PerfectVoter],
-  ["Approval voting", Approval],
-  ["Evaluative voting", Evaluative],
-  ["Score voting", Score],
+  ["Approval", Approval],
+  ["Evaluative", Evaluative],
+  ["Score", Score],
   // ["STAR voting", starVoter],
-  ["Bucklin voting", Bucklin],
-  ["Instant-runoff voting", IRV],
-  ["Coombs's method", Coombs],
-  ["Supplementary vote", Supplementary],
-  ["Contingent vote", Contingent],
-  ["Sri Lankan contingent vote", Sri_lankan_contingent],
+  ["Bucklin", Bucklin],
+  ["Instant-runoff", IRV],
+  ["Coombs' method", Coombs],
+  ["Supplementary", Supplementary],
+  ["Contingent", Contingent],
+  ["Sri Lankan contingent", Sri_lankan_contingent],
   ["Borda count", Borda_count],
   ["Copeland's method", Copeland],
-  ["Tideman (RP)", Tideman],
+  ["Tideman", Tideman],
 ]);
 
 let first = false;
@@ -73,6 +73,6 @@ function simulate_voting() {
   console.log(voters);
 
   display_votes(voting_machine);
-  voting_machine.stepping_box_func(stepping_box);
+  voting_machine.steping_box_func(steping_box);
   load_clicked_selected();
 }

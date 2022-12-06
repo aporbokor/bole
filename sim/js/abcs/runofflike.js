@@ -97,7 +97,7 @@ class RunoffLike extends RankingVotingMethod {
     }
   }
 
-  stepp_in_visualization() {
+  step_in_visualization() {
     for (let i = 0; i < this.candidates.length; i++) {
       this.candidates[i].sub_votes_for_visualization.shift();
     }
@@ -183,7 +183,7 @@ class RunoffLike extends RankingVotingMethod {
     return [sub[0][0], "| sub-results: "];
   }
 
-  visualize_for_stepping_box(subresult) {
+  visualize_for_steping_box(subresult) {
     for (let i = 0; i < subresult.length; i++) {
       for (let j = 0; j < subresult[i].length; j++) {
         subresult[i][j][0].text = subresult[i][j][1];
@@ -204,13 +204,13 @@ class RunoffLike extends RankingVotingMethod {
     return res;
   }
 
-  show_stepping_box_content() {
-    let voting_sytem = this.parent_box.visualized_system;
+  show_steping_box_content() {
+    let voting_system = this.parent_box.visualized_system;
     let content = createDiv();
 
-    if (voting_sytem.visualization_stepp == 0) {
+    if (voting_system.visualization_step == 0) {
       extra_function = function () {
-        for (const y of stepping_box.visualized_system.eliminated_visualization.values()) {
+        for (const y of steping_box.visualized_system.eliminated_visualization.values()) {
           y.grow_by(-0.4 * candidate_size);
         }
       };
@@ -219,37 +219,37 @@ class RunoffLike extends RankingVotingMethod {
     content.child(
       createP(
         "This is the " +
-          int_to_serial_number(voting_sytem.visualization_stepp) +
+          int_to_serial_number(voting_system.visualization_step) +
           " step"
       )
     );
 
     if (
-      voting_sytem.visualization_stepp <
-      voting_sytem.sub_results.length - 1
+      voting_system.visualization_step <
+      voting_system.sub_results.length - 1
     ) {
-      voting_sytem.color_voters();
+      voting_system.color_voters();
 
-      let explaining_p = createP(voting_sytem.explaining_text);
+      let explaining_p = createP(voting_system.explaining_text);
       content.child(explaining_p);
       explaining_p.class("explaining_p");
 
       let subresult =
-        voting_sytem.sub_results[voting_sytem.visualization_stepp];
+        voting_system.sub_results[voting_system.visualization_step];
 
-      let res = voting_sytem.visualize_for_stepping_box(subresult);
+      let res = voting_system.visualize_for_steping_box(subresult);
 
-      let eliminated_candidates = voting_sytem.eliminate_canidates(
-        voting_sytem.sub_votes_for_visualization[
-          voting_sytem.visualization_stepp
+      let eliminated_candidates = voting_system.eliminate_canidates(
+        voting_system.sub_votes_for_visualization[
+          voting_system.visualization_step
         ],
-        voting_sytem.eliminated_visualization
+        voting_system.eliminated_visualization
       );
       let eliminated_div = createDivWithP(
         "These candidate(s) were eliminated:"
       );
 
-      for (const x of voting_sytem.eliminated_visualization.values()) {
+      for (const x of voting_system.eliminated_visualization.values()) {
         x.hide();
       }
 
@@ -262,35 +262,35 @@ class RunoffLike extends RankingVotingMethod {
       }
 
       eliminated_div.child(
-        voting_sytem.get_reasoning_text(eliminated_candidates)
+        voting_system.get_reasoning_text(eliminated_candidates)
       );
 
       for (let i = 0; i < eliminated_candidates.length; i++) {
-        voting_sytem.eliminated_visualization.add(eliminated_candidates[i]);
+        voting_system.eliminated_visualization.add(eliminated_candidates[i]);
       }
 
       content.child(res);
       content.child(eliminated_div);
 
-      voting_sytem.stepp_in_visualization();
+      voting_system.step_in_visualization();
     } else {
       content.child(createP("The winner has been chosen"));
-      voting_sytem.set_final_extra_function();
+      voting_system.set_final_extra_function();
       this.parent_box.hide_next();
     }
 
     this.parent_box.set_content(content);
-    voting_sytem.visualization_stepp += 1;
+    voting_system.visualization_step += 1;
   }
 
-  stepping_box_func(steppig_box) {
-    this.steppig_box = steppig_box;
-    steppig_box.visualized_system = this;
+  steping_box_func(stepig_box) {
+    this.stepig_box = stepig_box;
+    stepig_box.visualized_system = this;
 
-    this.visualization_stepp = 0;
-    stepping_box.show_next();
+    this.visualization_step = 0;
+    steping_box.show_next();
 
-    steppig_box.next_func(this.show_stepping_box_content);
+    stepig_box.next_func(this.show_steping_box_content);
   }
 
   set_final_extra_function() {

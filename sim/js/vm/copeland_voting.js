@@ -42,8 +42,8 @@ class Copeland extends CondorcetVotingMethod {
     return [cand.copeland_score, "| Copeland Score: "];
   }
 
-  show_first() {
-    let voting_sytem = this.parent_box.visualized_system;
+  specific_step() {
+    let voting_system = this.parent_box.visualized_system;
     let content = document.createElement("div");
 
     let text = document.createElement("p");
@@ -57,9 +57,9 @@ class Copeland extends CondorcetVotingMethod {
       "We do this for every candidate i, and in the end we get this:";
 
     let table = table_from_matrix(
-      voting_sytem.copeland_matrix,
-      voting_sytem.candidate_names,
-      voting_sytem.candidate_names
+      voting_system.copeland_matrix,
+      voting_system.candidate_names,
+      voting_system.candidate_names
     );
 
     let second_text = document.createElement("p");

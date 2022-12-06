@@ -78,7 +78,7 @@ class Voter extends Person {
 
     if (Array.isArray(this.voted_for)) {
       voted_for_d.child(
-        this.last_voting_sytem.get_ballot_element(this.voted_for)
+        this.last_voting_system.get_ballot_element(this.voted_for)
       );
     } else if (typeof this.voted_for === "undefined") {
       voted_for_d.child(createP("this person has not voted for anyone yet"));

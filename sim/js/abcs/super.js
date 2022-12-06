@@ -7,7 +7,7 @@ class VotingMethod {
     ABC_constructor(this, VotingMethod);
     this.candidates = candidates;
     for (let i = 0; i < voters.length; i++) {
-      voters[i].last_voting_sytem = this;
+      voters[i].last_voting_system = this;
     }
   }
 
@@ -52,9 +52,9 @@ class VotingMethod {
     return undefined;
   }
 
-  stepping_box_func(steppig_box) {
-    // This method is used for setting up a relationship between the voting_method and the steppig_box
-    stepping_box.set_content(
+  steping_box_func(stepig_box) {
+    // This method is used for setting up a relationship between the voting_method and the stepig_box
+    steping_box.set_content(
       createP(
         "Step by step visualization is not avalable for this voting_method"
       )

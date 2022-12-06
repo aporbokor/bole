@@ -39,8 +39,8 @@ class Plurality extends NumberVotecountVotingMethod {
     this.register_honest_vote(voter);
   }
 
-  stepping_box_func(stepping_box) {
-    stepping_box.set_content(
+  steping_box_func(steping_box) {
+    steping_box.set_content(
       createP(
         "Plurality voting works like the following: every voter votes for their favorite  candidate, and then we count the votes. The candidate with the most votes wins."
       )
