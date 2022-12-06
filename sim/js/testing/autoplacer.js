@@ -20,7 +20,7 @@ function place_voters_with_opinion_brute_force(
   opinion_list,
   candidates_in_opinion_list = candidates,
   is_tactical = false,
-  step_size = 10
+  step_size = 1
 ) {
   // Places votercount amount of voters onto the canvas in such a way, that their opinions matches the given opinion
   // Only works if the votercount is not at its maximum
@@ -54,4 +54,15 @@ function place_voters_with_opinion_brute_force(
     voters[voters.length - 1].tactical = is_tactical;
   }
   change_in_sim = true;
+}
+
+function getNamedcandidates() {
+  // Convenience method. Creates an object with 4 attributes corresponding to the first 4 candidates.
+  // I wanted to make it easier to specify an opinion in the place_voters_with_opinion_brute_force() function
+  return {
+    A: candidates[0],
+    B: candidates[1],
+    C: candidates[2],
+    D: candidates[3],
+  };
 }
