@@ -62,6 +62,7 @@
       </div>
     </nav>
     <main
+      id="main"
       data-title="Our visualization principles"
       data-intro="This is the visualization canvas. Voters are represented by smaller circles and the candidates are marked by chunkier ones. They are placed on an opinion plane, which means that the closer two voters are to each other, the more similar their opinions are. Every voter's ideal candidate is the one that is the closest to it."
     >
@@ -102,6 +103,7 @@
         <script src="js/other/global.js"></script>
         <script src="js/other/utils.js"></script>
         <script src="js/other/main.js"></script>
+        <script src="js/other/auto_scroller.js" defer></script>
         <script src="js/libs/graph.js"></script>
         <script src="js/testing/autoplacer.js"></script>
       </div>
@@ -146,7 +148,7 @@
         id="selected"
         class="content_box"
         data-title="The selected participant"
-        data-intro="If you select a voter or a candidate you will see all of their information here. You can custumize them, and look into their preferences, ballots, election-results, etc."
+        data-intro="If you select a voter or a candidate you will see all of their information here. You can customizethem, and look into their preferences, ballots, election-results, etc."
       >
         Nobody is selected
       </div>
@@ -167,5 +169,6 @@
       </div>
     </main>
     <script src="js/other/intro.js"></script>
+    <a class="back-to-top button" href="#main"><div>/\</div></a>
   </body>
 </html>

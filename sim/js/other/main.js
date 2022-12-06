@@ -371,6 +371,14 @@ function reset_on_select() {
   }
 }
 
+function select_drawable(drawable) {
+  // Makes a drawable become the selected drawable
+  last_selected = drawable;
+  clicked_selected = last_selected;
+  clicked_selected.on_select();
+  load_clicked_selected();
+}
+
 function reset_enviroment() {
   frozen_sim = false;
   delete_everything();

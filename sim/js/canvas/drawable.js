@@ -157,6 +157,13 @@ class Drawable {
     );
   }
 
+  add_link_to_element(element, event_type = "dblclick") {
+    // Makes a given element select the candidate if that element is double clicked
+    element.addEventListener(event_type, (event) => {
+      select_drawable(this);
+    });
+  }
+
   edit_apperance_div() {
     let returned = createDiv();
 
