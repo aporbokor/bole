@@ -262,7 +262,6 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     const strength = this.relative_strength_matrix[cand1.id][cand2.id];
     let winner;
     let loser;
-
     let arr;
 
     if (strength > 0) {

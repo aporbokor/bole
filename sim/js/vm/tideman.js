@@ -17,6 +17,7 @@ class Tideman extends CondorcetVotingMethod {
     } 
 
     create_graph(this.pairs, this.candidates.length, this.locked);
+    console.log(this.pairs)
     
     let source = digraph_source(this.locked, this.candidates.length)
     console.log(source)
@@ -24,7 +25,6 @@ class Tideman extends CondorcetVotingMethod {
 
     // choose randomly, tie has occured
     if (winner==undefined) winner = random(this.candidates)
-    this.curr = 0; 
 
     return [[winner]];
   }
@@ -60,12 +60,40 @@ class Tideman extends CondorcetVotingMethod {
         voting_system.candidate_names
       );
 
+      let graph_vis_btn = document.createElement("button");
+      graph_vis_btn.addEventListener("click", (ev) => {
+        voting_system.setup_edges(this.parent_box);
+      });
+      graph_vis_btn.innerText = "Visualize creation of graph";
 
       content.appendChild(text);
       content.appendChild(table);
+      content.appendChild(graph_vis_btn);
 
       this.parent_box.set_content(content);
       this.parent_box.next_func(voting_system.specific_step);
       this.curr++;
+    }
+
+    setup_edges (stepping_box) {
+      delete_arrows()
+      clicked_selected=undefined;
+      this.empty_locked = filledTwoDMatrix(
+        candidates.length,
+        candidates.length,
+        null
+      );
+      for (const voter of voters) voter.hide()
+      // environment storing var
+      this.curr = 0; 
+      this.show_edges.bind(stepping_box.next_button)()
+    }
+
+    show_edges() {
+      let vs = this.parent_box.visualized_system;
+      let pairs = vs.pairs;
+      
+
+
     }
   }
