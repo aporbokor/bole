@@ -11,7 +11,7 @@ nav {
   height: var(--nav-height);
   background: var(--bg--primary);
   display: grid;
-  grid-template-columns: 2fr 1fr min-content 3fr;
+  grid-template-columns: 2fr 1fr min-content 1fr 2fr;
   align-items: center;
   justify-content: center;
   overflow-y: hidden;
@@ -22,6 +22,11 @@ nav {
   grid-column-start: 1;
   grid-column-end: 2;
   max-height: calc(var(--nav-height)-1rem);
+}
+
+.nav-links-container:last-child {
+  grid-column-start: -2;
+  grid-column-end: -1;
 }
 .nav-link {
   margin-inline: auto;
@@ -124,7 +129,6 @@ nav {
   font-weight: 800;
   text-decoration: none;
 }
-
 
 .tutor {
 }

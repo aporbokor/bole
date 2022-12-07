@@ -84,9 +84,7 @@ class SelectTool extends Tool {
   on_click() {
     if (selected != undefined) {
       this.locked = true;
-      clicked_selected = last_selected;
-      clicked_selected.on_select();
-      load_clicked_selected();
+      select_drawable(last_selected);
     } else {
       clicked_selected = undefined;
     }

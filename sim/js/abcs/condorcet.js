@@ -395,7 +395,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     let { value, done } = voting_system.visualizaton_pairs_generator.next();
 
     if (done) {
-      voting_system.show_first.bind(this)();
+      voting_system.specific_step.bind(this)();
 
       delete_arrows();
       voting_system.arrows_between_candidates();
@@ -497,10 +497,10 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     this.show_next_candidate_pair.bind(steping_box.next_button)();
   }
 
-  show_first() {
+  specific_step() {
     // The first step_by_step visualization step which every class needs to define which inherits from CondorcetVotingMethod
     throw new Error(
-      "You must define a show_first method to your CondorcetVotingMethod class"
+      "You must define a specific_step method to your CondorcetVotingMethod class"
     );
   }
 

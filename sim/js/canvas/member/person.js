@@ -70,15 +70,15 @@ class Person extends Drawable {
   }
 
   // DOM methods
-  show_on_event(element, event = "click") {
-    // Sets the person as the selected, if an event listener registeres an specific event on an html element
-    element.select_on = this;
+  // add_link_to_element(element, event = "click") {
+  //   // Sets the person as the selected, if an event listener registeres an specific event on an html element
+  //   element.select_on = this;
 
-    element.addEventListener(event, function () {
-      console.log(this.select_on);
-      clicked_selected = this.select_on;
-    });
-  }
+  //   element.addEventListener(event, function () {
+  //     console.log(this.select_on);
+  //     clicked_selected = this.select_on;
+  //   });
+  // }
 
   get_name_p(extra_text = "") {
     // Return a p element wich represents the person
@@ -95,7 +95,7 @@ class Person extends Drawable {
     returned.innerHTML =
       this.profile_pic.outerHTML + ` ${this.name}${extra_text}`;
 
-    this.show_on_event(returned);
+    this.add_link_to_element(returned);
     return returned;
   }
 
@@ -105,7 +105,7 @@ class Person extends Drawable {
     returned.style.color = this.target_color;
     returned.classList.add("person_name");
     returned.innerText = this.name;
-    this.show_on_event(returned);
+    this.add_link_to_element(returned);
     return returned;
   }
 
@@ -127,7 +127,7 @@ class Person extends Drawable {
     returned.label.style("color", this.target_color);
     returned.class("candidate_p");
 
-    this.show_on_event(returned.elt);
+    this.add_link_to_element(returned.elt);
     return returned;
   }
 
@@ -166,17 +166,17 @@ class Person extends Drawable {
 
     let extra_to_div = this.get_extra_to_div();
 
-    let this_ = this;
+    // let this_ = this;
 
-    let image_input = createFileInput(function (file) {
-      if (file.type === "image") {
-        this_.profile_pic = document.createElement("image");
-        this_.profile_pic.src = file.data;
-        this_.profile_pic.setAttribute("class", "person_profile_pic");
-        this_.show_image = loadImage(file.data);
-        this_.show_image.resize(35, 35);
-      }
-    });
+    // let image_input = createFileInput(function (file) {
+    //   if (file.type === "image") {
+    //     this_.profile_pic = document.createElement("image");
+    //     this_.profile_pic.src = file.data;
+    //     this_.profile_pic.setAttribute("class", "person_profile_pic");
+    //     this_.show_image = loadImage(file.data);
+    //     this_.show_image.resize(35, 35);
+    //   }
+    // });
 
     let delete_button = this.get_delete_button();
 
@@ -184,7 +184,7 @@ class Person extends Drawable {
     let del_arr = this.get_delete_arrows_from_button();
 
     returned.child(edit_app);
-    returned.child(image_input);
+    // returned.child(image_input);
     if (this.ranges.length > 0) {
       let hide_ranges_check_box = createCheckbox(
         "Hide ranges",
