@@ -1,3 +1,11 @@
+const honest_voter_color = "#F18F01";
+const voter_size = 15;
+const voter_strokeWeight = 2;
+
+const min_voters = 1;
+let max_voters;
+let to_remove_voters = [];
+const max_voters_per_pixel = 0.0015;
 class Voter extends Person {
   // Representation of the voters
 
@@ -168,7 +176,6 @@ function delete_selected_voter() {
   this.parent_voter.remove();
   selected_div.child()[0].remove();
 }
-
 class Average extends Voter {
   get_extra_to_div() {
     return this.get_honest_preference_div();
@@ -200,5 +207,81 @@ class Average extends Voter {
 
   get_delete_button() {
     return null;
+  }
+}
+
+function add_voter() {
+  if ((voters.length < max_voters) & !frozen_sim) {
+    voters.push(random_voter(voters.length));
+    update_voter_population_slider();
+    change_in_sim = true;
+  }
+}
+
+function add_voter_to_position(x, y) {
+  if ((voters.length < max_voters) & !frozen_sim) {
+    let x_ = constrain(round(x), 0, width);
+    let y_ = constrain(round(y), 0, height);
+
+    let returned = new Voter(
+      x_,
+      y_,
+      random_bool(strategic_chance),
+      honest_voter_color,
+      `voter#${voters.length}`
+    );
+
+    voters.push(returned);
+    update_voter_population_slider();
+    change_in_sim = true;
+
+    return returned;
+  }
+}
+
+function remove_specific_voter(voter) {
+  // voters = voters.filter(function(curval){return curval != voter})
+  if ((voters.length - to_remove_voters.length != min_voters) & !frozen_sim) {
+    to_remove_voters.push(voter);
+  }
+}
+
+function remove_voter() {
+  if ((voters.length != min_voters) & !frozen_sim) {
+    delete voters[voters.length - 1].remove();
+    update_voter_population_slider();
+  }
+}
+
+function random_voter(i) {
+  return new Voter(
+    round(random(width)),
+    round(random(height)),
+    random_bool(strategic_chance),
+    honest_voter_color,
+    "voter#" + i
+  );
+}
+
+function reset_voter_color() {
+  for (let i = 0; i < voters.length; i++) {
+    voters[i].set_color(honest_voter_color);
+  }
+}
+
+function toggle_voter_hide() {
+  voters.forEach((v) => {
+    v.toggle_hidden();
+  });
+}
+
+function make_voters(db) {
+  // Add voters to the sim
+  if (!frozen_sim) {
+    voters = [];
+    for (let i = 0; i < db; i++) {
+      voters.push(random_voter(i));
+    }
+    update_voter_population_slider();
   }
 }

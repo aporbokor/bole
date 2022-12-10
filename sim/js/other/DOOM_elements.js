@@ -133,6 +133,14 @@ function createDivWithP(text) {
   return returned;
 }
 
+function createButtonWithIcon(text, icon_file_name) {
+  let returned = createButton(
+    `<i class="button-icon" style="--bg-image:url('../../misc/img/icons/${icon_file_name}')"></i> <p>${text}</p>`
+  );
+  returned.class("button-with-icon");
+  return returned;
+}
+
 class stepingBox {
   // Class used for the steping_box
   constructor() {

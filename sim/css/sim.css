@@ -211,6 +211,22 @@ li::marker {
 .simulate_button {
 }
 
+.button-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.button-icon {
+  content: var(--bg-image);
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.button-icon + p {
+  margin-inline: auto;
+}
+
 .steping_box_title {
   all: inherit;
 }
@@ -374,9 +390,17 @@ li::marker {
     padding: 10px;
   }
 
+  html::-webkit-scrollbar {
+    width: 3rem;
+  }
+
   #selected,
-  .step_by_step {
+  .step_by_step,
+  *[data-hide-on-mobile] {
     display: none;
+  }
+  .sim-buttons-container {
+    width: 90rem;
   }
 }
 
