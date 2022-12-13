@@ -9,6 +9,7 @@ class VotingMethod {
     for (let i = 0; i < voters.length; i++) {
       voters[i].last_voting_system = this;
     }
+    this.wiki_link = "https://apple.com";
   }
 
   prepare_for_voting() {
