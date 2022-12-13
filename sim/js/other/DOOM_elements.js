@@ -200,7 +200,7 @@ class stepingBox {
     this.content_div.inside = element;
     this.content_div.child(element);
 
-    this.link_holder.innerHTML = `<a href='${voting_machine.wiki_link}'>See more on Wikipedia</a>`;
+    // this.link_holder.innerHTML = `<a href='${voting_machine.wiki_link}'>See more on Wikipedia</a>`;
   }
 
   next_func(func) {

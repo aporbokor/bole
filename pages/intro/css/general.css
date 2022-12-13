@@ -97,6 +97,7 @@ button,
   background: var(--bg--primary);
   border: 1px solid var(--border--accent);
   text-decoration: none;
+  font-family: "Work Sans", sans-serif;
   cursor: pointer;
   height: 2rem;
   margin-left: 0.5rem;
