@@ -49,6 +49,26 @@
 // neighbours of 1 are [2]
 // neighbors of 2 are [0]
 
+/* let testcase = [
+  [
+      null,
+      true,
+      false
+  ],
+  [
+      false,
+      null,
+      true
+  ],
+  [
+      true,
+      false,
+      null
+  ]
+];
+
+console.log(digraph_cycle(testcase, 3));
+ */
 function digraph_cycle(am, l) {
   
   let visited = [];

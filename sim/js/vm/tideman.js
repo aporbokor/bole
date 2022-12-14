@@ -1,9 +1,12 @@
 class Tideman extends CondorcetVotingMethod {
   create_graph(pairs, l, locked) {
+    
     for (const p of pairs) {
-      if (!digraph_cycle(locked, l)) {
+      let clocked=[];
+      for (let i=0; i<locked.length; ++i) clocked[i] = locked[i].slice()
+      clocked[p.winner][p.loser]=true;
+      if (!digraph_cycle(clocked, l))
         locked[p.winner][p.loser] = true;
-      }
     }
   }
 
@@ -50,7 +53,7 @@ class Tideman extends CondorcetVotingMethod {
     let content = document.createElement("div");
 
     let text = document.createElement("p");
-    text.innerHTML = "The locked-in graph";
+    text.innerHTML = "";
 
     let table = table_from_matrix(
       voting_system.locked,
