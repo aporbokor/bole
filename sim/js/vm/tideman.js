@@ -1,9 +1,12 @@
 class Tideman extends CondorcetVotingMethod {
   create_graph(pairs, l, locked) {
+    
     for (const p of pairs) {
-      if (!digraph_cycle(locked, l)) {
+      let clocked=[];
+      for (let i=0; i<locked.length; ++i) clocked[i] = locked[i].slice()
+      clocked[p.winner][p.loser]=true;
+      if (!digraph_cycle(clocked, l))
         locked[p.winner][p.loser] = true;
-      }
     }
   }
 
@@ -50,7 +53,17 @@ class Tideman extends CondorcetVotingMethod {
     let content = document.createElement("div");
 
     let text = document.createElement("p");
-    text.innerHTML = "The locked-in graph";
+    text.innerHTML = "From the relative strength matrix we gain enough information to group candidates into pairs sorted(ranked) by strength of victory.\n \
+    This listing of pairs gives us an adjacency matrix shown below, from which we can identify the winners and losers of each pairwise comparison of any 2 candidates.";
+
+    let t2 = document.createElement("p");
+    t2.innerHTML = "The adjacency matrix is one of the most common data structures for graph representation, where rows represent source vertices and columns represent destination vertices. This might be a little hard to visualize just by looking at the table, but if you look at the canvas above, you can see the vertices represented by the candidates(filled-in circles) and the edges represented by arrows pointing one candidate from another. (The candidate from whom the arrow points away is the source vertex, and the candidate to whom the arrow points to is the destination vertex.)";
+    
+    let t3 = document.createElement("p");
+    t3.innerHTML = ("We create the graph by locking in 'edges' with the greatest margin of victory first ")
+
+    let t4 = document.createElement("p");
+    t4.innerHTML = "It might be helpful for your understanding to click on the 'visualize creation of graph' button below which goes much more in-depth in the creation of the graph."
 
     let table = table_from_matrix(
       voting_system.locked,
@@ -66,6 +79,9 @@ class Tideman extends CondorcetVotingMethod {
 
     content.appendChild(text);
     content.appendChild(table);
+    content.appendChild(t2);
+    content.appendChild(t3);
+    content.appendChild(t4);
     content.appendChild(graph_vis_btn);
 
     this.parent_box.set_content(content);

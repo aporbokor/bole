@@ -141,11 +141,11 @@ function createButtonWithIcon(text, icon_file_name) {
   return returned;
 }
 
-class stepingBox {
-  // Class used for the steping_box
+class steppingBox {
+  // Class used for the stepping_box
   constructor() {
     this.main_div = select(".step_by_step");
-    this.link_holder = select(".steping_box_link");
+    this.link_holder = select(".stepping_box_link");
 
     this.next_button = createA("#defaultCanvas0", "next step");
     this.next_button.class("next_step");
@@ -153,7 +153,7 @@ class stepingBox {
     this.next_func_ = null;
 
     this.content_div = createDiv();
-    this.content_div.class("steping_content_div");
+    this.content_div.class("stepping_content_div");
     this.content_div.inside = createP("No voting yet");
     this.content_div.child(this.content_div.inside);
 
@@ -165,36 +165,36 @@ class stepingBox {
 
     this.visualized_system = null;
 
-    // hide_steping_box = createButton('hide step by step box');
+    // hide_stepping_box = createButton('hide step by step box');
     // this.shown = true;
-    // hide_steping_box.parent_steping_box = this;
+    // hide_stepping_box.parent_stepping_box = this;
 
-    // hide_steping_box.mousePressed(function () {
-    //   if (this.parent_steping_box.shown) {
-    //     this.parent_steping_box.hide();
+    // hide_stepping_box.mousePressed(function () {
+    //   if (this.parent_stepping_box.shown) {
+    //     this.parent_stepping_box.hide();
     //     vote_result_div.show();
     //     this.html("show step by step box");
     //   } else {
-    //     this.parent_steping_box.show();
+    //     this.parent_stepping_box.show();
     //     vote_result_div.hide();
     //     this.html("hide step by step box");
     //   }
-    //   this.parent_steping_box.shown = !(this.parent_steping_box.shown);
+    //   this.parent_stepping_box.shown = !(this.parent_stepping_box.shown);
     // })
 
-    // szimulation_div.child(hide_steping_box);
+    // szimulation_div.child(hide_stepping_box);
     // this.hide();
     this.next_button.mousePressed(freeze);
     console.log(this.next_button.elt);
   }
 
   delete_content() {
-    // Removes the content from the steping box
+    // Removes the content from the stepping box
     this.content_div.inside.remove();
   }
 
   set_content(element) {
-    // Sets the content from the steping box
+    // Sets the content from the stepping box
 
     this.delete_content();
     this.content_div.inside = element;
@@ -207,7 +207,7 @@ class stepingBox {
     /* The funtion to be executed when clicking the next button.
        Used to set the content of the content box.
        The this keyword in that function will return te button itself.
-       You can acess the steping_box itself by saying: this.parent_box*/
+       You can acess the stepping_box itself by saying: this.parent_box*/
 
     this.next_func_ = func;
     this.next_button.mouseReleased(func);
