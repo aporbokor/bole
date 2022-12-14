@@ -147,11 +147,11 @@ class Borda_count extends RankingVotingMethod {
     this.parent_box.hide_next();
   }
 
-  steping_box_func(stepig_box) {
-    this.steping_box = stepig_box;
+  stepping_box_func(stepig_box) {
+    this.stepping_box = stepig_box;
     stepig_box.visualized_system = this;
 
-    steping_box.show_next();
+    stepping_box.show_next();
 
     stepig_box.next_func(this.describe_process);
   }

@@ -183,7 +183,7 @@ class RunoffLike extends RankingVotingMethod {
     return [sub[0][0], "| sub-results: "];
   }
 
-  visualize_for_steping_box(subresult) {
+  visualize_for_stepping_box(subresult) {
     for (let i = 0; i < subresult.length; i++) {
       for (let j = 0; j < subresult[i].length; j++) {
         subresult[i][j][0].text = subresult[i][j][1];
@@ -204,13 +204,13 @@ class RunoffLike extends RankingVotingMethod {
     return res;
   }
 
-  show_steping_box_content() {
+  show_stepping_box_content() {
     let voting_system = this.parent_box.visualized_system;
     let content = createDiv();
 
     if (voting_system.visualization_step == 0) {
       extra_function = function () {
-        for (const y of steping_box.visualized_system.eliminated_visualization.values()) {
+        for (const y of stepping_box.visualized_system.eliminated_visualization.values()) {
           y.grow_by(-0.4 * candidate_size);
         }
       };
@@ -237,7 +237,7 @@ class RunoffLike extends RankingVotingMethod {
       let subresult =
         voting_system.sub_results[voting_system.visualization_step];
 
-      let res = voting_system.visualize_for_steping_box(subresult);
+      let res = voting_system.visualize_for_stepping_box(subresult);
 
       let eliminated_candidates = voting_system.eliminate_canidates(
         voting_system.sub_votes_for_visualization[
@@ -283,14 +283,14 @@ class RunoffLike extends RankingVotingMethod {
     voting_system.visualization_step += 1;
   }
 
-  steping_box_func(stepig_box) {
+  stepping_box_func(stepig_box) {
     this.stepig_box = stepig_box;
     stepig_box.visualized_system = this;
 
     this.visualization_step = 0;
-    steping_box.show_next();
+    stepping_box.show_next();
 
-    stepig_box.next_func(this.show_steping_box_content);
+    stepig_box.next_func(this.show_stepping_box_content);
   }
 
   set_final_extra_function() {

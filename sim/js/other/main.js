@@ -85,8 +85,8 @@ let supporter_slider;
 let seems_win_slider;
 let reset_to_default_button;
 
-let steping_box;
-let hide_steping_box;
+let stepping_box;
+let hide_stepping_box;
 
 let grow_speed = 0.02;
 const selected_size_adder = 5;
@@ -241,8 +241,8 @@ function reset_enviroment() {
   reset_on_select();
   make_voters(voter_population);
   make_candidates(candidate_population);
-  steping_box.delete_content();
-  steping_box.hide_next();
+  stepping_box.delete_content();
+  stepping_box.hide_next();
   change_in_sim = true;
   clicked_selected = undefined;
   selected = undefined;
@@ -279,8 +279,8 @@ function get_results_elements(
 }
 
 function display_votes(voting_machine) {
-  // Updates the results div and resets the steping_box content
-  steping_box.delete_content();
+  // Updates the results div and resets the stepping_box content
+  stepping_box.delete_content();
 
   vote_result_div.html("Voting results:");
   vote_result_div.child(get_results_elements(voting_results));
@@ -302,7 +302,7 @@ function melt() {
 
 function auto_simulate_true() {
   if (change_in_sim) {
-    steping_box.hide_next();
+    stepping_box.hide_next();
     simulate_voting();
     change_in_sim = false;
   }
@@ -638,7 +638,7 @@ function setup() {
   average_voter.hidden_size = 0;
   average_voter.hide();
 
-  steping_box = new stepingBox();
+  stepping_box = new steppingBox();
   initialize_select();
   select_voting();
 }

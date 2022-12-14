@@ -73,6 +73,6 @@ function simulate_voting() {
   console.log(voters);
 
   display_votes(voting_machine);
-  voting_machine.steping_box_func(steping_box);
+  voting_machine.stepping_box_func(stepping_box);
   load_clicked_selected();
 }

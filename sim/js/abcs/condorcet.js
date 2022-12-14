@@ -474,7 +474,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     this.parent_box.next_func(voting_system.show_next_candidate_pair);
   }
 
-  start_showing_candidate_pairs(steping_box) {
+  start_showing_candidate_pairs(stepping_box) {
     this.visualizaton_pairs_generator = combinations(candidates, 2);
     delete_arrows();
     clicked_selected = undefined;
@@ -494,7 +494,7 @@ class CondorcetVotingMethod extends RankingVotingMethod {
       voter.appear();
     }
 
-    this.show_next_candidate_pair.bind(steping_box.next_button)();
+    this.show_next_candidate_pair.bind(stepping_box.next_button)();
   }
 
   specific_step() {
@@ -504,13 +504,13 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     );
   }
 
-  steping_box_func(stepig_box) {
-    // Sets up steping_box
+  stepping_box_func(stepig_box) {
+    // Sets up stepping_box
 
-    this.steping_box = stepig_box;
+    this.stepping_box = stepig_box;
     stepig_box.visualized_system = this;
 
-    steping_box.show_next();
+    stepping_box.show_next();
 
     stepig_box.next_func(this.show_outranking_matrix);
   }

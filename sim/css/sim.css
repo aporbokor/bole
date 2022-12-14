@@ -227,7 +227,7 @@ li::marker {
   margin-inline: auto;
 }
 
-.steping_box_title {
+.stepping_box_title {
   all: inherit;
 }
 
@@ -294,7 +294,7 @@ li::marker {
   } */
 }
 
-@media only screen and (min-width: 110em) {
+@media only screen and (min-width: 120em) {
   main {
     grid-template-areas:
       "sim-buttons  sim-buttons selected results"
