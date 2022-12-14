@@ -1,15 +1,6 @@
 const main_element = document.getElementsByTagName("main")[0];
 let font;
 
-const min_voters = 1;
-let max_voters;
-let to_remove_voters = [];
-const max_voters_per_pixel = 0.0015;
-
-let to_remove_candidates = [];
-const min_candidates = 2;
-const max_candidates = 7;
-
 let arrows = [];
 
 let frozen_sim = false;
@@ -62,7 +53,8 @@ let tools = new Map([
 ]);
 let tool_selector;
 let tool_size;
-let max_tool_size = 200;
+const max_tool_size = 200;
+const default_tool_size = 30;
 let tool_color = "green";
 const activated_tool_stroke_weight = 5;
 const inactive_tool_stroke_weight = 2;
@@ -105,36 +97,11 @@ const clicked_selected_stroke_weight = 4;
 const default_stroke = "rgb(0, 0, 0)";
 const strategic_voter_color = "rgb(0, 0, 0)";
 const strategic_voter_stroeke_weight = 3;
-const honest_voter_color = "#F18F01";
-const voter_size = 15;
-const voter_strokeWeight = 2;
 const support_circle_color = 111;
-
-const candidate_colors = [
-  "#FEFCFB",
-  "#ED3907",
-  "#7247FF",
-  "#162CD9",
-  "#2BB7DE",
-  "#BF1160",
-  "#0FFA42",
-];
-const candidate_size = 40;
-const candidate_strokeWeight = 5;
 
 const background_color = 0;
 
 const selected_size = 5;
-
-function random_voter(i) {
-  return new Voter(
-    round(random(width)),
-    round(random(height)),
-    random_bool(strategic_chance),
-    honest_voter_color,
-    "voter#" + i
-  );
-}
 
 function update_voter_population_slider() {
   voter_population_slider.setValue(voters.length);
@@ -144,54 +111,6 @@ function update_candidate_poupulation() {
   candidate_population_slider.setValue(candidates.length);
 }
 
-function add_voter() {
-  if ((voters.length < max_voters) & !frozen_sim) {
-    voters.push(random_voter(voters.length));
-    update_voter_population_slider();
-    change_in_sim = true;
-  }
-}
-
-function add_voter_to_position(x, y) {
-  if ((voters.length < max_voters) & !frozen_sim) {
-    let x_ = constrain(round(x), 0, width);
-    let y_ = constrain(round(y), 0, height);
-
-    let returned = new Voter(
-      x_,
-      y_,
-      random_bool(strategic_chance),
-      honest_voter_color,
-      `voter#${voters.length}`
-    );
-
-    voters.push(returned);
-    update_voter_population_slider();
-    change_in_sim = true;
-
-    return returned;
-  }
-}
-
-function reset_voter_color() {
-  for (let i = 0; i < voters.length; i++) {
-    voters[i].set_color(honest_voter_color);
-  }
-}
-
-function toggle_voter_hide() {
-  voters.forEach((v) => {
-    v.toggle_hidden();
-  });
-}
-
-function remove_voter() {
-  if ((voters.length != min_voters) & !frozen_sim) {
-    delete voters[voters.length - 1].remove();
-    update_voter_population_slider();
-  }
-}
-
 function add_arrow(arrow) {
   arrows.push(arrow);
 }
@@ -199,48 +118,6 @@ function add_arrow(arrow) {
 function delete_arrows() {
   for (const arr of arrows) {
     arr.remove();
-  }
-}
-
-function remove_specific_voter(voter) {
-  // voters = voters.filter(function(curval){return curval != voter})
-  if ((voters.length - to_remove_voters.length != min_voters) & !frozen_sim) {
-    to_remove_voters.push(voter);
-  }
-}
-
-function remove_specific_candidate(candidate) {
-  // candidates = candidates.filter(function(curval){return curval != candidate})
-  if (
-    (candidates.length - to_remove_candidates != min_candidates) &
-    !frozen_sim
-  ) {
-    to_remove_candidates.push(candidate);
-  }
-}
-
-function random_candidate(i) {
-  return new Candidate(
-    round(random(width)),
-    round(random(height)),
-    rewrapp_index(candidate_colors, i),
-    "candidate#" + i,
-    i
-  );
-}
-
-function add_candidate() {
-  if ((candidates.length != max_candidates) & !frozen_sim) {
-    candidates.push(random_candidate(candidates.length));
-    update_candidate_poupulation();
-    change_in_sim = true;
-  }
-}
-
-function remove_candidate() {
-  if ((candidates.length != min_candidates) & !frozen_sim) {
-    candidates[candidates.length - 1].remove();
-    update_candidate_poupulation();
   }
 }
 
@@ -269,27 +146,6 @@ function delete_everything() {
   voters = [];
   candidates = [];
   arrows = [];
-}
-
-function make_voters(db) {
-  // Add voters to the sim
-  if (!frozen_sim) {
-    voters = [];
-    for (let i = 0; i < db; i++) {
-      voters.push(random_voter(i));
-    }
-    update_voter_population_slider();
-  }
-}
-
-function make_candidates(db) {
-  // Add candidates to the sim
-  if (!frozen_sim) {
-    candidates = [];
-    for (let i = 0; i < db; i++) {
-      candidates.push(random_candidate(i));
-    }
-  }
 }
 
 function empty_function() {
@@ -396,6 +252,7 @@ function reset_enviroment() {
 function select_tool() {
   let current_tool_class = tools.get(tool_selector.value());
   current_tool = new current_tool_class();
+  tool_size.setValue(default_tool_size);
 }
 
 function get_results_elements(
@@ -490,6 +347,7 @@ function setup() {
   stroke(default_stroke);
 
   auto_reset_environment = createCheckbox("Auto reset environment", true);
+  auto_reset_environment.attribute("data-hide-on-mobile", "true");
 
   strategic_chance_slider = slider_with_name(
     "Tactical voter chance: ",
@@ -531,16 +389,20 @@ function setup() {
     }
   });
 
-  add_voter_button = createButton("Add voter");
-  add_voter_button.mousePressed(add_voter);
-
-  reset_voter_color_buttton = createButton("Reset voter colors");
+  reset_voter_color_buttton = createButtonWithIcon(
+    "Reset voter colors",
+    "reset.svg"
+  );
+  reset_voter_color_buttton.attribute("data-hide-on-mobile", "true");
   reset_voter_color_buttton.mousePressed(reset_voter_color);
+  reset_voter_color_buttton.attribute("data-hide-on-mobile", "true");
 
-  hide_voters_button = createButton("Toggle voter hide");
+  hide_voters_button = createButtonWithIcon("Toggle voter hide", "hide.svg");
+  hide_voters_button.attribute("data-hide-on-mobile", "true");
   hide_voters_button.mousePressed(toggle_voter_hide);
 
   delete_arrows_button = createButton("Delete all arrows");
+  delete_arrows_button.attribute("data-hide-on-mobile", "true");
   delete_arrows_button.mousePressed(delete_arrows);
 
   support_vis_checkbox = createCheckbox("Visualize support ranges", false);
@@ -559,6 +421,7 @@ function setup() {
       supporter_draw = empty_function;
     }
   });
+  support_vis_checkbox.attribute("data-hide-on-mobile", "true");
 
   average_voter_checkbox = createCheckbox("Show average voter", false);
   average_voter_checkbox.changed(function () {
@@ -572,16 +435,33 @@ function setup() {
     }
   });
 
-  add_candidate_button = createButton("Add candidate");
+  add_candidate_button = createButtonWithIcon(
+    "Add candidate",
+    "add_candidate.svg"
+  );
+  add_candidate_button.attribute("data-hide-on-mobile", "true");
   add_candidate_button.mousePressed(add_candidate);
 
-  delete_candidate_button = createButton("Delete candidate");
+  delete_candidate_button = createButtonWithIcon(
+    "Delete candidate",
+    "delete_candidate.svg"
+  );
+  delete_candidate_button.attribute("data-hide-on-mobile", "true");
   delete_candidate_button.mousePressed(remove_candidate);
 
-  delete_voter_button = createButton("Delete voter");
+  delete_voter_button = createButtonWithIcon(
+    "Delete voter",
+    "delete_voter.svg"
+  );
+  delete_voter_button.attribute("data-hide-on-mobile", "true");
   delete_voter_button.mousePressed(remove_voter);
 
-  reset_button = createButton("Reset environment");
+  add_voter_button = createButtonWithIcon("Add voter", "add_voter.svg");
+  add_voter_button.attribute("data-hide-on-mobile", "true");
+  add_voter_button.mousePressed(add_voter);
+
+  reset_button = createButtonWithIcon("Reset environment", "reset.svg");
+  reset_button.attribute("data-hide-on-mobile", "true");
   reset_button.mousePressed(reset_enviroment);
 
   voting_type_selector = createSelect();
@@ -599,15 +479,21 @@ function setup() {
 
   tool_selector.changed(select_tool);
 
-  select_tool();
-
   const custom_tool = document.createElement("div");
   custom_tool.classList.add("custom-select");
   custom_tool.appendChild(tool_selector.elt);
 
-  tool_size = slider_with_name("Tool size: ", 0, max_tool_size, 0, 1);
+  tool_size = slider_with_name(
+    "Tool size: ",
+    0,
+    max_tool_size,
+    default_tool_size,
+    1
+  );
+  tool_size.attribute("data-hide-on-mobile", "true");
+  select_tool();
 
-  simulate_button = createButton("Run");
+  simulate_button = createButtonWithIcon("Run", "run.svg");
   simulate_button.mousePressed(simulate_voting);
   simulate_button.addClass("simulate_button");
 
@@ -628,6 +514,7 @@ function setup() {
       melt();
     }
   });
+  simfreezer.attribute("data-hide-on-mobile", "true");
 
   approval_slider = slider_with_name(
     "Approval range: ",
@@ -667,7 +554,10 @@ function setup() {
     change_in_sim = true;
   });
 
-  reset_to_default_button = createButton("Reset advanced settings");
+  reset_to_default_button = createButtonWithIcon(
+    "Reset advanced settings",
+    "reset.svg"
+  );
   reset_to_default_button.mousePressed(() => {
     seems_win_slider.setValue(default_seems_win_percent);
     approval_slider.setValue(default_approval_size);
@@ -699,11 +589,9 @@ function setup() {
   new_envitoment_div.child(reset_button);
 
   edit_enviroment_div.child(add_voter_button);
+  edit_enviroment_div.child(delete_voter_button);
   edit_enviroment_div.child(add_candidate_button);
   edit_enviroment_div.child(delete_candidate_button);
-  edit_enviroment_div.child(delete_voter_button);
-
-  sim_div.child(document.createElement("br"));
 
   const custom_select = document.createElement("div");
   custom_select.classList.add("custom-select");

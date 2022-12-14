@@ -1,3 +1,30 @@
+const candidate_colors = [
+  "#FEFCFB",
+  "#ED3907",
+  "#7247FF",
+  "#162CD9",
+  "#2BB7DE",
+  "#BF1160",
+  "#0FFA42",
+];
+
+const candidate_names = [
+  "Alice",
+  "Bob",
+  "Charlie",
+  "David",
+  "Emily",
+  "Fiona",
+  "George",
+];
+const candidate_size = 40;
+const candidate_strokeWeight = 5;
+
+let to_remove_candidates = [];
+let to_add_candidates = [];
+const min_candidates = 2;
+const max_candidates = 7;
+
 class Candidate extends Person {
   // Class representing the candidates
   constructor(x, y, color, name, id) {
@@ -115,5 +142,54 @@ function calculate_seems_win_candidates() {
     }
     seems_lose_candidates.push(candidate);
     candidate.seems_win = false;
+  }
+}
+
+function random_candidate(i) {
+  return new Candidate(
+    round(random(width)),
+    round(random(height)),
+    rewrapp_index(candidate_colors, i),
+    rewrapp_index(candidate_names, i),
+    i
+  );
+}
+
+function add_candidate() {
+  if ((candidates.length != max_candidates) & !frozen_sim) {
+    candidates.push(to_add_candidates.shift());
+    update_candidate_poupulation();
+    change_in_sim = true;
+  }
+}
+
+function remove_candidate() {
+  if ((candidates.length != min_candidates) & !frozen_sim) {
+    candidates[candidates.length - 1].remove();
+    update_candidate_poupulation();
+  }
+}
+
+function remove_specific_candidate(candidate) {
+  // candidates = candidates.filter(function(curval){return curval != candidate})
+  if (
+    (candidates.length - to_remove_candidates != min_candidates) &
+    !frozen_sim
+  ) {
+    to_remove_candidates.push(candidate);
+    to_add_candidates.unshift(candidate);
+  }
+}
+
+function make_candidates(db) {
+  // Add candidates to the sim
+  if (!frozen_sim) {
+    candidates = [];
+    for (let i = 0; i < db; i++) {
+      candidates.push(random_candidate(i));
+    }
+    for (let i = db; i < max_candidates; i++) {
+      to_add_candidates.push(random_candidate(i));
+    }
   }
 }

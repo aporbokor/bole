@@ -133,10 +133,19 @@ function createDivWithP(text) {
   return returned;
 }
 
+function createButtonWithIcon(text, icon_file_name) {
+  let returned = createButton(
+    `<i class="button-icon" style="--bg-image:url('../../misc/img/icons/${icon_file_name}')"></i> <p>${text}</p>`
+  );
+  returned.class("button-with-icon");
+  return returned;
+}
+
 class stepingBox {
   // Class used for the steping_box
   constructor() {
     this.main_div = select(".step_by_step");
+    this.link_holder = select(".steping_box_link");
 
     this.next_button = createA("#defaultCanvas0", "next step");
     this.next_button.class("next_step");
@@ -190,6 +199,8 @@ class stepingBox {
     this.delete_content();
     this.content_div.inside = element;
     this.content_div.child(element);
+
+    // this.link_holder.innerHTML = `<a href='${voting_machine.wiki_link}'>See more on Wikipedia</a>`;
   }
 
   next_func(func) {

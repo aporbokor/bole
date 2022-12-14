@@ -211,6 +211,22 @@ li::marker {
 .simulate_button {
 }
 
+.button-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.button-icon {
+  content: var(--bg-image);
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.button-icon + p {
+  margin-inline: auto;
+}
+
 .steping_box_title {
   all: inherit;
 }
@@ -269,27 +285,33 @@ li::marker {
     flex-grow: 1;
   }
 
-  .sim-buttons-subdiv-container:nth-last-child(2) {
+  /* .sim-buttons-subdiv-container:nth-last-child(2) {
     grid-row-end: span 2;
   }
 
   .sim-buttons-subdiv-container:last-child {
     grid-column: 1 / -2;
-  }
+  } */
 }
 
 @media only screen and (min-width: 110em) {
   main {
     grid-template-areas:
-      "sim-buttons canvas selected results"
-      "step       step   step     results";
+      "sim-buttons  sim-buttons selected results"
+      "step       canvas    canvas   results";
 
-    grid-template-columns: 2fr min-content 1fr 1.1fr;
-    grid-template-rows: var(--canvas-height) min-content;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-rows: 30rem min-content;
+  }
+
+  .canvas {
+    align-self: start;
+    position: sticky;
+    top: var(--nav-height);
   }
 }
 
-@media only screen and (min-width: 190em) {
+/* @media only screen and (min-width: 190em) {
   .sim-buttons-subdiv-container:nth-last-child(2) {
     grid-row-end: auto;
     grid-column: -3/-1;
@@ -302,7 +324,7 @@ li::marker {
   .sim-buttons-subdiv-container:last-child {
     grid-column: -2/-1;
   }
-}
+} */
 
 @media only screen and (max-width: 80em) {
   :root:root {
@@ -370,18 +392,31 @@ li::marker {
   main {
     grid-template-areas: "sim-buttons" "canvas" "results";
     grid-template-columns: 1fr;
-    grid-template-rows: 21rem min-content 1fr;
+    grid-template-rows: 40rem min-content 1fr;
     padding: 10px;
   }
 
+  .sim-buttons-subdiv {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  html::-webkit-scrollbar {
+    width: 3rem;
+  }
+
   #selected,
-  .step_by_step {
+  .step_by_step,
+  *[data-hide-on-mobile] {
     display: none;
+  }
+  .sim-buttons-container {
+    width: 100%;
   }
 }
 
-@media only screen and (min-width: 992px) {
+/* @media only screen and (min-width: 992px) {
   .sub-buttons-subdiv-title {
     position: initial;
   }
-}
+} */
