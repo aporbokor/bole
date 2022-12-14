@@ -307,9 +307,16 @@ class RunoffLike extends RankingVotingMethod {
     }
 
     for (let i = 0; i < voters.length; i++) {
-      voters[i].set_color(
-        this.votes_for(voters[i], this.eliminated_visualization).color
+      const eliminated = union(
+        this.eliminated_visualization,
+        get_hidden_candidates()
       );
+
+      let color_to_set = honest_voter_color;
+      if (eliminated.size < candidates.length) {
+        color_to_set = this.votes_for(voters[i], eliminated).color;
+      }
+      voters[i].set_color(color_to_set);
     }
     super.set_extra_funct(voters);
   }

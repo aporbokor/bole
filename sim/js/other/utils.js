@@ -1,4 +1,6 @@
-function print_json(a) { console.log(JSON.stringify(a)) }
+function print_json(a) {
+  console.log(JSON.stringify(a));
+}
 
 function cursor_in_canvas() {
   // returns wether the cursor is inside of the canvas or not
@@ -59,6 +61,14 @@ function sum(arr) {
     returned += arr[i];
   }
   return returned;
+}
+
+function union(setA, setB) {
+  const _union = new Set(setA);
+  for (const elem of setB) {
+    _union.add(elem);
+  }
+  return _union;
 }
 
 function* combinations(array, n) {

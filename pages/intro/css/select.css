@@ -2,12 +2,11 @@
   position: relative;
   background-color: var(--bg--primary-lt);
   width: 10rem;
-  margin-left: -0.5rem;
   isolation: isolate;
   z-index: 999;
 }
 
-.custom-select:nth-child(2) {
+.custom-select:first-child {
   z-index: 9999;
 }
 

@@ -44,7 +44,6 @@ function simulate_voting() {
   delete_arrows();
 
   for (const cand of candidates) {
-    cand.appear();
     cand.reset_text();
     // cand.show_ranges = true;
   }

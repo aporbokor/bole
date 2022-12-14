@@ -29,14 +29,14 @@
 .sim-buttons-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 2rem;
 }
 
 .sim-buttons-subdiv-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 1rem;
 }
 
@@ -69,7 +69,7 @@
 
 #vote_results {
   position: sticky;
-  top: calc(var(--nav-height) + 0.5rem);
+  top: calc(var(--nav-height) + 1rem);
 }
 
 #selected {
@@ -111,12 +111,9 @@ body {
 .named_slider {
   /* The sytle of the divs which have a p and a slider */
   border: 1px solid var(--bg--primary-lt);
-  margin-left: 2rem;
-  margin-right: 2rem;
   border-radius: 5%;
   padding: 1rem;
   text-align: center;
-  margin-bottom: 1rem;
 }
 
 main button,
@@ -253,17 +250,26 @@ li::marker {
   z-index: -1;
 }
 
-.next_step:hover {
+.next_step:hover:hover:hover {
   color: var(--bg--primary);
 }
 .next_step:hover::after {
   clip-path: polygon(100% 0%, 200% 50%, 100% 100%, 0 100%, 0 0);
 }
 
-@media only screen and (min-width: 90em) {
+@media only screen and (min-width: 99em) {
+  main {
+    grid-template-areas:
+      "sim-buttons canvas selected results"
+      "step  step step  results";
+
+    grid-template-columns: 4fr min-content 3fr 3fr;
+    grid-template-rows: var(--canvas-height) 1fr;
+  }
+
   .sim-buttons-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     align-items: stretch;
     grid-auto-flow: row;
   }
@@ -294,20 +300,21 @@ li::marker {
   } */
 }
 
-@media only screen and (min-width: 110em) {
+@media only screen and (min-width: 115em) {
   main {
     grid-template-areas:
       "sim-buttons  sim-buttons selected results"
-      "step       canvas    canvas   results";
+      "step       canvas    canvas   results"
+      "step       -    -   results";
 
     grid-template-columns: 2fr 1fr 1fr 1fr;
-    grid-template-rows: 30rem min-content;
+    grid-template-rows: 30rem var(--canvas-height) 1fr;
   }
 
   .canvas {
     align-self: start;
     position: sticky;
-    top: var(--nav-height);
+    top: calc(var(--nav-height) + 1rem);
   }
 }
 
@@ -392,7 +399,7 @@ li::marker {
   main {
     grid-template-areas: "sim-buttons" "canvas" "results";
     grid-template-columns: 1fr;
-    grid-template-rows: 40rem min-content 1fr;
+    grid-template-rows: max-content min-content 1fr;
     padding: 10px;
   }
 

@@ -33,6 +33,7 @@ class Candidate extends Person {
     this.supporters = 0;
     this.seems_win = null;
     this.id = id;
+    this.hidden_size = 10;
   }
 
   show() {
@@ -192,4 +193,12 @@ function make_candidates(db) {
       to_add_candidates.push(random_candidate(i));
     }
   }
+}
+
+function get_shown_candidates(cands = candidates) {
+  return cands.filter((cand) => cand.to_show);
+}
+
+function get_hidden_candidates(cands = candidates) {
+  return cands.filter((cand) => !cand.to_show);
 }

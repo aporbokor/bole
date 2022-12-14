@@ -23,7 +23,7 @@ class Drawable {
     this.shown = true;
     this.to_show = true;
 
-    this.hidden_size = 3;
+    this.hidden_size = 5;
 
     this.hidden_text = false;
   }
@@ -41,10 +41,17 @@ class Drawable {
 
   appear() {
     this.to_show = true;
+
+    if (voting_machine != undefined && voting_machine != null) {
+      voting_machine.extra_visualize(voters);
+    }
   }
 
   hide() {
     this.to_show = false;
+    if (voting_machine != undefined && voting_machine != null) {
+      voting_machine.extra_visualize(voters);
+    }
   }
 
   toggle_hidden() {

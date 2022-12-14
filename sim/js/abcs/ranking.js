@@ -135,7 +135,14 @@ class RankingVotingMethod extends VotingMethod {
   extra_visualize(voters) {
     // Colors the voters based on their first choice and calls set_extra_funct()
     for (let i = 0; i < voters.length; i++) {
-      voters[i].set_color(voters[i].voted_for[0].color);
+      let winning_color = honest_voter_color;
+      for (const cand of voters[i].voted_for) {
+        if (cand.to_show) {
+          winning_color = cand.color;
+          break;
+        }
+      }
+      voters[i].set_color(winning_color);
     }
 
     this.set_extra_funct(voters);
