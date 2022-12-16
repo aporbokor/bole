@@ -153,4 +153,12 @@ class RankingVotingMethod extends VotingMethod {
       voter.set_color(voter.voted_for[n].target_color);
     }
   }
+  get_scores_div_of_cand(cand, mark_text = "'s places in voters' ballots: ") {
+    let nums = [];
+
+    for (let i = 0; i < this.candidates.length; i++) {
+      nums.push(i);
+    }
+    return cand.get_custom_p(cand.votes, mark_text, nums, voters.length).elt;
+  }
 }

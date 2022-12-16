@@ -109,11 +109,23 @@ class Person extends Drawable {
     return returned;
   }
 
-  get_custom_p(progress_data, text_after_name = "| Votes: ") {
+  get_custom_p(
+    progress_data,
+    text_after_name = "| Votes: ",
+    text_after_progress = null,
+    progress_maximum = null
+  ) {
     // Creates a DOM element with the person's name and progresses made of thee proggres_data
-
+    if (progress_maximum === null) {
+      progress_maximum = max_votes;
+    }
     let text = this.get_name_p().innerHTML + text_after_name;
-    let returned = createProgress(text, progress_data, max_votes);
+    let returned = createProgress(
+      text,
+      progress_data,
+      progress_maximum,
+      text_after_progress
+    );
 
     returned.style("color", this.color);
     returned.candidate_parent = this;

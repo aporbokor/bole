@@ -32,6 +32,7 @@ class SelectTool extends Tool {
       ) {
         selected = candidate;
         last_selected = selected;
+        // candidate.on_select();
         return undefined;
       }
     }

@@ -20,7 +20,7 @@ class Range extends Drawable {
     this.grow_speed = 1;
 
     this.max_offset = this.target_size;
-    this.moving_speed = 0.5;
+    this.moving_speed = 0.4;
 
     this.x = width / 2;
     this.y = height / 2;

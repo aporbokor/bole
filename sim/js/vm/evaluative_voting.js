@@ -55,10 +55,29 @@ class Evaluative extends cardinalVotingMethod {
     };
   }
   stepping_box_func(stepping_box) {
-    stepping_box.set_content(
-      createP(
-        "Evaluative voting works like the following: every voter votes ranks every candidate using 3 scores: for (1), abstain (0) and against (-1). In the end we evaluate the scores for each candidate and the candidate with the most points wins."
-      )
-    );
+    let content = document.createElement("div");
+
+    let description = document.createElement("p");
+    description.innerText =
+      "Evaluative voting works like the following: every voter votes ranks every candidate using 3 scores: for (1), abstain (0) and against (-1). In the end we evaluate the scores for each candidate and the candidate with the most points wins.";
+
+    const example_cand = random(candidates);
+
+    let text1 = document.createElement("p");
+    text1.innerHTML = `For example ${
+      example_cand.get_simple_name_p().outerHTML
+    } has ${example_cand.votes[0]} votes for <strong>for</strong> him/her and ${
+      example_cand.votes[2]
+    } <strong>against</strong> him/her. This means that ${
+      example_cand.get_simple_name_p().outerHTML
+    } will gain ${example_cand.votes[0]} points and lose ${
+      example_cand.votes[2]
+    } points leaving us with the total of ${example_cand.score} points.`;
+
+    content.appendChild(description);
+    content.appendChild(text1);
+    content.appendChild(this.get_scores_div_cand_list());
+
+    stepping_box.set_content(content);
   }
 }

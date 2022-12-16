@@ -78,7 +78,7 @@ class Borda_count extends RankingVotingMethod {
     let step_div = document.createElement("div");
     let start_text = document.createElement("p");
     start_text.innerHTML =
-      "In borda counting, every voter ranks every candidate in order of preference. Then we assign scores to each candidate based on these preferences. Let's assume that the total number of candidates is n. For every k-th candidate in every voters' ballot, we are going to increment the k-th candidate's borda score by <strong>(n-k+1)</strong>. In this case, this looks like the following:";
+      "Let's assume that the total number of candidates is n. For every k-th candidate in every voters' ballot, we are going to increment the k-th candidate's borda score by <strong>(n-k+1)</strong>. In this case, this looks like the following:";
 
     let random_voter = random(voters);
     random_voter.set_color(honest_voter_color);
@@ -147,12 +147,24 @@ class Borda_count extends RankingVotingMethod {
     this.parent_box.hide_next();
   }
 
-  stepping_box_func(stepig_box) {
-    this.stepping_box = stepig_box;
-    stepig_box.visualized_system = this;
+  stepping_box_func(stepping_box) {
+    this.stepping_box = stepping_box;
+    stepping_box.visualized_system = this;
 
+    let content = document.createElement("div");
+    let starter = document.createElement("p");
+    starter.innerText =
+      "In borda counting, every voter ranks every candidate in order of preference. Then we assign scores to each candidate based on these preferences.";
+
+    content.appendChild(starter);
+    content.appendChild(
+      this.get_scores_div_cand_list(
+        this.candidates,
+        "'s place on voters' ballots: "
+      )
+    );
+    stepping_box.set_content(content);
     stepping_box.show_next();
-
-    stepig_box.next_func(this.describe_process);
+    stepping_box.next_func(this.describe_process);
   }
 }

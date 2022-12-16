@@ -49,8 +49,26 @@ class VotingMethod {
   }
 
   extra_visualize(voters) {
-    // An mehtod to be used for visualization. It is calles in every frame.
+    // A mehtod to be used for visualization. It is calles in every frame.
     return undefined;
+  }
+
+  get_scores_div_of_cand(cand, mark_text = "'s marks: ") {
+    // A method to return a caniddate's score-divs. Every voting system asigns scores to candidates. This should return those
+    throw new Error(
+      "You must implement a get_scores_div_of_cand method to your VotingMethod class"
+    );
+  }
+
+  get_scores_div_cand_list(cands = candidates, mark_text = "'s marks: ") {
+    // Return an unordered list with each candidate's score-divs
+    let returned = document.createElement("ul");
+
+    for (const cand of cands) {
+      returned.appendChild(this.get_scores_div_of_cand(cand, mark_text));
+    }
+
+    return returned;
   }
 
   stepping_box_func(stepig_box) {

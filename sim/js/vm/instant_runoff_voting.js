@@ -27,7 +27,7 @@ class IRV extends RunoffLike {
     let votes = Array.from(eliminated_candidates.entries())[0][1]
       .sub_votes_for_visualization[0][0];
     return createP(
-      `The eliminated candidates in this vote counting had the fewest votes. In the first place. They all had ${votes}`
+      `The eliminated candidates in this vote counting had the fewest votes. In the first place. They all had ${votes}.`
     );
   }
 }

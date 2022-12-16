@@ -36,41 +36,68 @@ function slider_with_name(name, min, max, value, step) {
   return returned;
 }
 
-function createProgress(name, value, max) {
-  /* Creates a div with p and progress elements.
-     Value can be a number (result in 1 progress)
-     or an array of numbers (results in multiple proggresses)*/
+function createProgressElement(value, max, text = null) {
+  let returned = document.createElement("div");
+  returned.setAttribute("class", "progress_holder");
 
+  if (text != null) {
+    let start_text = document.createElement("p");
+    start_text.innerHTML = text;
+    start_text.setAttribute("class", "progress_starter_text");
+    returned.appendChild(start_text);
+  }
+  let bar = document.createElement("progress");
+  bar.setAttribute("class", "progress_");
+  bar.setAttribute("value", value);
+  bar.setAttribute("max", max);
+
+  let end_text = document.createElement("p");
+  end_text.innerHTML = value.toString();
+  end_text.setAttribute("class", "progress_ender_text");
+
+  returned.appendChild(bar);
+  returned.appendChild(end_text);
+
+  return returned;
+}
+
+function createSingleProgress(name, value, max, text = null) {
   let returned = createDiv();
 
+  let bar = createProgressElement(value, max, text);
+
+  let p = createP(name + value);
+  returned.child(p);
+  returned.label = p;
+
+  returned.child(bar);
+  return returned;
+}
+
+function createProgress(name, value, max, text = null) {
+  /* Creates a div with p and progress elements.
+     Value can be a number (result in 1 progress)
+     or an array of numbers (results in multiple progresses)
+     In case of multiple progresses the text array of strings will be used to label them if not null*/
+
   if (typeof value === "number") {
-    let bar = document.createElement("progress");
-    bar.setAttribute("class", "progress_");
-    bar.setAttribute("value", value);
-    bar.setAttribute("max", max);
-    bar.innerHTML = name;
-
-    let p = createP(name + value);
-    returned.child(p);
-    returned.label = p;
-
-    returned.child(bar);
+    return createSingleProgress(name, value, max);
   } else if (Array.isArray(value)) {
+    let returned = createDiv();
     let p = createP(name + value.join(", "));
     returned.child(p);
     returned.label = p;
+
+    if (text === null) {
+      text = Array(value.length).fill(null);
+    }
     for (let i = 0; i < value.length; i++) {
-      let bar = document.createElement("progress");
-      bar.setAttribute("class", "progress_");
-      bar.setAttribute("value", value[i]);
-      bar.setAttribute("max", max);
-      bar.innerHTML = name;
+      let bar = createProgressElement(value[i], max, text[i]);
 
       returned.child(bar);
-      returned.child(document.createElement("br"));
     }
+    return returned;
   }
-  return returned;
 }
 
 function table_from_matrix(matrix, x_axis, y_axis) {

@@ -14,7 +14,6 @@
 }
 
 #sim_buttons,
-#vote_results,
 #selected {
   overflow-y: auto;
   overflow-x: hidden;
@@ -101,10 +100,6 @@ body {
   background: var(--bg--primary-lt);
 }
 .p_div_p {
-  text-transform: lowercase;
-  font-size: 0.9rem;
-  padding: 0.5rem;
-  font-family: "Crimson Pro", serif;
   text-align: center;
 }
 
@@ -124,6 +119,7 @@ main select {
 ul,
 ol {
   padding-left: 1.5rem;
+  margin-top: 1rem;
 }
 
 #vote_results > ol {
@@ -170,17 +166,32 @@ li::marker {
   /* The candidates representation which only contains the candidates name and votes visualized by proggresbars*/
 }
 
-.progress_ {
-  position: relative;
-  width: 80%;
+.progress_holder {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.progress_::before {
+.progress_ {
+  flex-grow: 1;
+}
+
+.progress_starter_text {
+  width: 6rem;
+  text-align: right;
+}
+
+.progress_ender_text {
+  width: 3rem;
+}
+/* 
+.progress_::after {
   content: attr(value);
   position: absolute;
   left: 105%;
   line-height: 100%;
-}
+} */
 
 .selected {
 }

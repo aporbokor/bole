@@ -12,6 +12,9 @@ class cardinalVotingMethod extends VotingMethod {
       for (let j = 0; j < this.ranges.length; j++) {
         this.candidates[i].votes[j] = 0;
       }
+      this.candidates[i].on_select = () => {
+        this.paint_voters();
+      };
     }
     for (const cand of this.candidates) {
       if (
@@ -146,9 +149,16 @@ class cardinalVotingMethod extends VotingMethod {
   paint_voters() {
     for (let i = 0; i < voters.length; i++) {
       let selected_color = honest_voter_color;
-      for (const cands of voters[i].voted_for) {
+      for (const cands of voters[i].voted_for.slice(
+        0,
+        voters[i].voted_for.length - 1
+      )) {
         let accepted_cands = get_shown_candidates(cands);
         if (accepted_cands.length > 0) {
+          if (accepted_cands.includes(clicked_selected)) {
+            selected_color = clicked_selected.color;
+            break;
+          }
           selected_color = accepted_cands[0].color;
           break;
         }
@@ -196,5 +206,14 @@ class cardinalVotingMethod extends VotingMethod {
         }
       };
     }
+  }
+  get_scores_div_of_cand(cand, mark_text = "'s marks: ") {
+    // Returns a div similar to the one in the results div, but here the number of each kind of mark that the candidate has recieved is shown
+
+    let texts = [];
+    for (let i = 0; i < this.ranges.length; i++) {
+      texts.push(this.vote_to_text(i));
+    }
+    return cand.get_custom_p(cand.votes, mark_text, texts, voters.length).elt;
   }
 }
