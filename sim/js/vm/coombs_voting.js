@@ -18,7 +18,7 @@ class Coombs extends RunoffLike {
     return returned;
   }
 
-  eliminate_canidates(sub_votes, eliminated) {
+  eliminate_candidates(sub_votes, eliminated) {
     let last_places = new Counter();
     for (let i = 0; i < voters.length; i++) {
       last_places.count(this.get_last_valid_preference(voters[i], eliminated));

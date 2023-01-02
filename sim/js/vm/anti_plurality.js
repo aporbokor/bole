@@ -46,7 +46,7 @@ class Anti_plurality extends NumberVotecountVotingMethod {
   stepping_box_func(stepping_box) {
     stepping_box.set_content(
       createP(
-        "Anti-plurality voting works like the following: every voter votes for their most hated candidate, and then we count the votes. The candidate with the least votes wins."
+        "Anti-plurality voting is the exact opposite of plurality: every voter votes against a candidate, and the candidate with the least votes wins."
       )
     );
   }

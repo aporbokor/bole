@@ -50,10 +50,10 @@
   border-radius: 0.5em;
 }
 
-.sub-buttons-subdiv-title {
+/* .sub-buttons-subdiv-title {
   position: sticky;
   top: 0;
-}
+} */
 
 .sim-buttons-subdiv {
   display: flex;
@@ -217,6 +217,7 @@ li::marker {
 }
 
 .simulate_button {
+  max-height: 3rem;
 }
 
 .button-with-icon {

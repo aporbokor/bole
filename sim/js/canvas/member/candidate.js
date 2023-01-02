@@ -15,15 +15,16 @@ const candidate_names = [
   "David",
   "Emily",
   "Fiona",
-  "George",
+  "George"
 ];
+
 const candidate_size = 40;
 const candidate_strokeWeight = 5;
-
 let to_remove_candidates = [];
 let to_add_candidates = [];
 const min_candidates = 2;
 const max_candidates = 7;
+
 
 class Candidate extends Person {
   // Class representing the candidates
@@ -47,6 +48,8 @@ class Candidate extends Person {
   remove_self() {
     remove_specific_candidate(this);
   }
+  
+  
 
   get_small_p() {
     let returned;
@@ -70,6 +73,7 @@ class Candidate extends Person {
 
   get_extra_to_div() {
     let extra_to_div = createDiv();
+    
 
     if (Array.isArray(this.votes)) {
       extra_to_div.child(createP("Votes:" + this.votes.toString()));
@@ -81,7 +85,7 @@ class Candidate extends Person {
 
     if (this.supporters == 0) {
       extra_to_div.child(
-        createP("Supporters: not avelable until a sim has run")
+        createP("Supporters: not available until a sim has run")
       );
     } else {
       extra_to_div.child(createP("Supporters: " + this.supporters));
@@ -90,7 +94,7 @@ class Candidate extends Person {
     if (this.seems_win) {
       extra_to_div.child(
         createP(
-          "From the supporter count of this candidate, tactical voters have concluded that this candidate is likely to win. This might cause them to vote diferently than honest voters."
+          "From the supporter count of this candidate, tactical voters have concluded that this candidate is likely to win. This might cause them to vote differently than honest voters."
         )
       );
     }

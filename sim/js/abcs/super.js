@@ -71,8 +71,8 @@ class VotingMethod {
     return returned;
   }
 
-  stepping_box_func(stepig_box) {
-    // This method is used for setting up a relationship between the voting_method and the stepig_box
+  stepping_box_func(stepping_box) {
+    // This method is used for setting up a relationship between the voting_method and the stepping_box
     stepping_box.set_content(
       createP(
         "Step by step visualization is not avalable for this voting_method"

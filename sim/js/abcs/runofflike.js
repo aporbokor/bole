@@ -103,9 +103,9 @@ class RunoffLike extends RankingVotingMethod {
     }
   }
 
-  eliminate_canidates(sub_votes, eliminated) {
+  eliminate_candidates(sub_votes, eliminated) {
     throw new Error(
-      "You must implement an eliminate_canidates method to your RankingVotingMethod class"
+      "You must implement an eliminate_candidates method to your RankingVotingMethod class"
     );
   }
 
@@ -152,12 +152,12 @@ class RunoffLike extends RankingVotingMethod {
         })
       );
 
-      let new_ellimination = this.eliminate_canidates(sub_votes, eliminated);
+      let new_elimination = this.eliminate_candidates(sub_votes, eliminated);
 
-      result.unshift(new_ellimination);
+      result.unshift(new_elimination);
 
-      for (let j = 0; j < new_ellimination.length; j++) {
-        eliminated.add(new_ellimination[j]);
+      for (let j = 0; j < new_elimination.length; j++) {
+        eliminated.add(new_elimination[j]);
       }
     }
     console.log(this.sub_votes_for_visualization);
@@ -239,7 +239,7 @@ class RunoffLike extends RankingVotingMethod {
 
       let res = voting_system.visualize_for_stepping_box(subresult);
 
-      let eliminated_candidates = voting_system.eliminate_canidates(
+      let eliminated_candidates = voting_system.eliminate_candidates(
         voting_system.sub_votes_for_visualization[
           voting_system.visualization_step
         ],
@@ -283,14 +283,14 @@ class RunoffLike extends RankingVotingMethod {
     voting_system.visualization_step += 1;
   }
 
-  stepping_box_func(stepig_box) {
-    this.stepig_box = stepig_box;
-    stepig_box.visualized_system = this;
+  stepping_box_func(stepping_box) {
+    this.stepping_box = stepping_box;
+    stepping_box.visualized_system = this;
 
     this.visualization_step = 0;
     stepping_box.show_next();
 
-    stepig_box.next_func(this.show_stepping_box_content);
+    stepping_box.next_func(this.show_stepping_box_content);
   }
 
   set_final_extra_function() {

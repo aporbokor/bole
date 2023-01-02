@@ -115,13 +115,13 @@ class Bucklin extends RankingVotingMethod {
     voting_machine.step += 1;
   }
 
-  stepping_box_func(stepig_box) {
-    this.stepping_box = stepig_box;
-    stepig_box.visualized_system = this;
+  stepping_box_func(stepping_box) {
+    this.stepping_box = stepping_box;
+    stepping_box.visualized_system = this;
 
     stepping_box.show_next();
 
     this.step = 0;
-    stepig_box.next_func(this.describe_process);
+    stepping_box.next_func(this.describe_process);
   }
 }

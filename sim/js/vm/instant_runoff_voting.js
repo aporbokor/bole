@@ -5,7 +5,7 @@ class IRV extends RunoffLike {
       "Now we are going to run the election, counting the best-ranked not eliminated candidates of each voter's preference-list.";
   }
 
-  eliminate_canidates(sub_votes, eliminated) {
+  eliminate_candidates(sub_votes, eliminated) {
     const losers = this.get_majority_losers(sub_votes);
     if (losers.length > 0) {
       this.won_by_majority = true;

@@ -40,7 +40,7 @@ class SuplementaryLike extends RunoffLike {
     return super.register_honest_vote(voter).slice(0, this.tier_list_len);
   }
 
-  eliminate_canidates(sub_votes, eliminated) {
+  eliminate_candidates(sub_votes, eliminated) {
     if (sub_votes.size <= 2) {
       return sub_votes.mins();
     }
