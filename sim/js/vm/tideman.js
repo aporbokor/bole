@@ -54,16 +54,16 @@ class Tideman extends CondorcetVotingMethod {
 
     let text = document.createElement("p");
     text.innerHTML = "From the relative strength matrix we gain enough information to group candidates into pairs sorted(ranked) by strength of victory.\n \
-    This listing of pairs gives us an adjacency matrix shown below, from which we can identify the winners and losers of each pairwise comparison of any 2 candidates.";
+    This listing of pairs gives us an adjacency matrix shown below, showing the winners and losers of each pairwise comparison of any 2 candidates.";
 
     let t2 = document.createElement("p");
-    t2.innerHTML = "The adjacency matrix is one of the most common data structures for graph representation, where rows represent source vertices and columns represent destination vertices. This might be a little hard to visualize just by looking at the table, but if you look at the canvas above, you can see the vertices represented by the candidates(filled-in circles) and the edges represented by arrows pointing one candidate from another. (The candidate from whom the arrow points away is the source vertex, and the candidate to whom the arrow points to is the destination vertex.)";
+    t2.innerHTML = "Without using much jargon, the adjacency matrix is one of the most common data structures for graph representation, where rows represent source vertices and columns represent destination vertices. This might be a little hard to visualize just by looking at the table, but if you inspect the canvas, it should make sense. You can see the vertices represented by the candidates and the edges represented by arrows pointing one candidate from another. (The candidate from whom the arrow points away is the source vertex, and the candidate to whom the arrow points to is the destination vertex.)";
     
     let t3 = document.createElement("p");
-    t3.innerHTML = ("We create the graph by locking in 'edges' with the greatest margin of victory first ")
+    t3.innerHTML = ("We create the graph by locking in 'edges' with the greatest margin of victory first, but only if inserting the edge does not lead to a cycle(a situation whereby following the arrows, leads back to the initial source vertex.). In the case of a cycle, we skip that edge, and continue.")
 
     let t4 = document.createElement("p");
-    t4.innerHTML = "It might be helpful for your understanding to click on the 'visualize creation of graph' button below which goes much more in-depth in the creation of the graph."
+    t4.innerHTML = "It might be helpful for your understanding to click on the 'Visualize creation of graph' button below which goes much more in-depth in the creation of the graph."
 
     let table = table_from_matrix(
       voting_system.locked,
