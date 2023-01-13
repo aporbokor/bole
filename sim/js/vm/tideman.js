@@ -26,7 +26,7 @@ class Tideman extends CondorcetVotingMethod {
     console.log(source);
     let winner = this.candidates[source];
 
-    // choose randomly, tie has occured
+    // choose randomly, tie has occurred
     if (winner == undefined) winner = random(this.candidates);
 
     return [[winner]];
@@ -108,7 +108,7 @@ class Tideman extends CondorcetVotingMethod {
   show_edges() {
     let vs = this.parent_box.visualized_system;
     const pairs = vs.pairs;
-    const max_idx = pairs.length / 2;
+    const max_idx = (pairs.length / 2);
 
     clicked_selected = undefined;
 
@@ -131,13 +131,13 @@ class Tideman extends CondorcetVotingMethod {
     let text = document.createElement("p");
 
     if (wasnt_cycle) {
-      text.innerHTML = "[cycleless, placeholder]";
+      text.innerHTML = "We read from our adjacency matrix that " + candidate_names[winner_cand] + " beat " + candidate_names[loser_cand] + " and a cycle has not occurred, thus we insert an edge between them. ";
       vs.arrow_between_2_candidates(
         candidates[current_pair.winner],
         candidates[current_pair.loser]
       );
     } else {
-      text.innerHTML = "[placeholder]";
+      text.innerHTML = "In this scenario, either a draw or a cycle has occurred, this edge will not be locked in. We continue as if nothing had happened.";
     }
 
     let table = table_from_matrix(
