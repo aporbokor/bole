@@ -114,6 +114,7 @@ class Tideman extends CondorcetVotingMethod {
 
     if (max_idx === vs.curr) {
       console.log("kampó");
+      this.parent_box.next_func(vs.end_vis)
       return;
     }
 
@@ -154,5 +155,16 @@ class Tideman extends CondorcetVotingMethod {
     this.parent_box.next_func(vs.show_edges);
   }
 
-  end_vis() {}
+  end_vis() {
+    let vs = this.parent_box.visualized_system;
+    this.parent_box.hide_next();
+    let content = document.createElement("div")
+    let text = document.createElement("p")
+    let source = digraph_source(vs.locked, candidates.length);
+    let winner = candidates[source];
+    if (winner == undefined) winner = random(candidates);
+    text.innerText = "We can finally announce our winner: " + winner.name + ", but there is an off chance that a Condorcet winner could not be established, then the algorithm chooses randomly among candidates.";
+    content.appendChild(text);
+    this.parent_box.set_content(content);
+  }
 }
