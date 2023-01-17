@@ -18,7 +18,7 @@ class NumberVotecountVotingMethod extends VotingMethod {
   }
 
   get_ballot_element(ballot) {
-    console.log(ballot);
+    //console.log(ballot);
     let returned = document.createElement("ul");
 
     for (let i = 0; i < ballot.length; i++) {

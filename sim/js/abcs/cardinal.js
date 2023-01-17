@@ -100,7 +100,7 @@ class cardinalVotingMethod extends VotingMethod {
   vote_to_text(vote) {}
 
   get_ballot_element(vf) {
-    console.log(vf);
+    //console.log(vf);
     let returned = document.createElement("ul");
 
     for (let i = 0; i < vf.length; i++) {

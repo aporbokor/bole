@@ -44,7 +44,7 @@ function place_voters_with_opinion_brute_force(
     added_voter.x += step_size;
 
     if (added_voter.y >= height) {
-      console.log("No possible place to place these voters");
+      //console.log("No possible place to place these voters");
       return;
     }
   }

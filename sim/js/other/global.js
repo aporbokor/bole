@@ -62,14 +62,14 @@ function simulate_voting() {
   }
 
   voting_results = voting_machine.count_votes();
-  console.log("The voting machine:");
-  console.log(voting_machine);
+  //console.log("The voting machine:");
+  //console.log(voting_machine);
 
-  console.log("The results:");
-  console.log(voting_results);
+  //console.log("The results:");
+  //console.log(voting_results);
 
-  console.log("The voters:");
-  console.log(voters);
+  //console.log("The voters:");
+  //console.log(voters);
 
   display_votes(voting_machine);
   voting_machine.stepping_box_func(stepping_box);

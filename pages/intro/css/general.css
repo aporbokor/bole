@@ -146,6 +146,11 @@ progress {
   accent-color: var(--text--accent);
 }
 
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
 table,
 td {
   border: 1px solid var(--text--accent);
@@ -155,6 +160,7 @@ td,
 th {
   text-align: center;
   padding: 0.5em;
+  aspect-ratio: 1/1;
 }
 
 th {

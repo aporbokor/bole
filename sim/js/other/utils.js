@@ -1,5 +1,5 @@
 function print_json(a) {
-  console.log(JSON.stringify(a));
+  //console.log(JSON.stringify(a));
 }
 
 function cursor_in_canvas() {
@@ -114,7 +114,7 @@ function tdBooleanArray(d1, d2) {
     }
     arr.push(subarr);
   }
-  console.log(arr);
+  //console.log(arr);
   return arr;
 }
 

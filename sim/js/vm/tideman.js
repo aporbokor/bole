@@ -1,12 +1,10 @@
 class Tideman extends CondorcetVotingMethod {
   create_graph(pairs, l, locked) {
-    
     for (const p of pairs) {
-      let clocked=[];
-      for (let i=0; i<locked.length; ++i) clocked[i] = locked[i].slice()
-      clocked[p.winner][p.loser]=true;
-      if (!digraph_cycle(clocked, l))
-        locked[p.winner][p.loser] = true;
+      let clocked = [];
+      for (let i = 0; i < locked.length; ++i) clocked[i] = locked[i].slice();
+      clocked[p.winner][p.loser] = true;
+      if (!digraph_cycle(clocked, l)) locked[p.winner][p.loser] = true;
     }
   }
 
@@ -20,10 +18,10 @@ class Tideman extends CondorcetVotingMethod {
     set_diagonal(this.locked, null);
 
     this.create_graph(this.pairs, this.candidates.length, this.locked);
-    console.log(this.pairs);
+    //console.log(this.pairs);
 
     let source = digraph_source(this.locked, this.candidates.length);
-    console.log(source);
+    //console.log(source);
     let winner = this.candidates[source];
 
     // choose randomly, tie has occurred
@@ -53,17 +51,21 @@ class Tideman extends CondorcetVotingMethod {
     let content = document.createElement("div");
 
     let text = document.createElement("p");
-    text.innerHTML = "From the relative strength matrix we gain enough information to group candidates into pairs sorted(ranked) by strength of victory.\n \
+    text.innerHTML =
+      "From the relative strength matrix we gain enough information to group candidates into pairs sorted(ranked) by strength of victory.\n \
     This listing of pairs gives us an adjacency matrix shown below, showing the winners and losers of each pairwise comparison of any 2 candidates.";
 
     let t2 = document.createElement("p");
-    t2.innerHTML = "Without using much jargon, the adjacency matrix is one of the most common data structures for graph representation, where rows represent source vertices and columns represent destination vertices. This might be a little hard to visualize just by looking at the table, but if you inspect the canvas, it should make sense. You can see the vertices represented by the candidates and the edges represented by arrows pointing one candidate from another. (The candidate from whom the arrow points away is the source vertex, and the candidate to whom the arrow points to is the destination vertex.)";
-    
+    t2.innerHTML =
+      "Without using much jargon, the adjacency matrix is one of the most common data structures for graph representation, where rows represent source vertices and columns represent destination vertices. This might be a little hard to visualize just by looking at the table, but if you inspect the canvas, it should make sense. You can see the vertices represented by the candidates and the edges represented by arrows pointing one candidate from another. (The candidate from whom the arrow points away is the source vertex, and the candidate to whom the arrow points to is the destination vertex.)";
+
     let t3 = document.createElement("p");
-    t3.innerHTML = ("We create the graph by locking in 'edges' with the greatest margin of victory first, but only if inserting the edge does not lead to a cycle(a situation whereby following the arrows, leads back to the initial source vertex.). In the case of a cycle, we skip that edge, and continue.")
+    t3.innerHTML =
+      "We create the graph by locking in 'edges' with the greatest margin of victory first, but only if inserting the edge does not lead to a cycle(a situation whereby following the arrows, leads back to the initial source vertex.). In the case of a cycle, we skip that edge, and continue.";
 
     let t4 = document.createElement("p");
-    t4.innerHTML = "It might be helpful for your understanding to click on the 'Visualize creation of graph' button below which goes much more in-depth in the creation of the graph."
+    t4.innerHTML =
+      "It might be helpful for your understanding to click on the 'Visualize creation of graph' button below which goes much more in-depth in the creation of the graph.";
 
     let table = table_from_matrix(
       voting_system.locked,
@@ -108,13 +110,13 @@ class Tideman extends CondorcetVotingMethod {
   show_edges() {
     let vs = this.parent_box.visualized_system;
     const pairs = vs.pairs;
-    const max_idx = (pairs.length / 2);
+    const max_idx = pairs.length / 2;
 
     clicked_selected = undefined;
 
     if (max_idx === vs.curr) {
-      console.log("kampó");
-      this.parent_box.next_func(vs.end_vis)
+      //console.log("kampó");
+      this.parent_box.next_func(vs.end_vis);
       return;
     }
 
@@ -132,13 +134,19 @@ class Tideman extends CondorcetVotingMethod {
     let text = document.createElement("p");
 
     if (wasnt_cycle) {
-      text.innerHTML = "We read from our adjacency matrix that " + candidate_names[winner_cand] + " beat " + candidate_names[loser_cand] + " and a cycle has not occurred, thus we insert an edge between them. ";
+      text.innerHTML =
+        "We read from our adjacency matrix that " +
+        candidate_names[winner_cand] +
+        " beat " +
+        candidate_names[loser_cand] +
+        " and a cycle has not occurred, thus we insert an edge between them. ";
       vs.arrow_between_2_candidates(
         candidates[current_pair.winner],
         candidates[current_pair.loser]
       );
     } else {
-      text.innerHTML = "In this scenario, either a draw or a cycle has occurred, this edge will not be locked in. We continue as if nothing had happened.";
+      text.innerHTML =
+        "In this scenario, either a draw or a cycle has occurred, this edge will not be locked in. We continue as if nothing had happened.";
     }
 
     let table = table_from_matrix(
@@ -158,12 +166,15 @@ class Tideman extends CondorcetVotingMethod {
   end_vis() {
     let vs = this.parent_box.visualized_system;
     this.parent_box.hide_next();
-    let content = document.createElement("div")
-    let text = document.createElement("p")
+    let content = document.createElement("div");
+    let text = document.createElement("p");
     let source = digraph_source(vs.locked, candidates.length);
     let winner = candidates[source];
     if (winner == undefined) winner = random(candidates);
-    text.innerText = "We can finally announce our winner: " + winner.name + ", but there is an off chance that a Condorcet winner could not be established, then the algorithm chooses randomly among candidates.";
+    text.innerText =
+      "We can finally announce our winner: " +
+      winner.name +
+      ", but there is an off chance that a Condorcet winner could not be established, then the algorithm chooses randomly among candidates.";
     content.appendChild(text);
     this.parent_box.set_content(content);
   }

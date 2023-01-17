@@ -14,7 +14,7 @@ class IRV extends RunoffLike {
     this.won_by_majority = false;
 
     let mins = sub_votes.mins();
-    console.log(mins);
+    //console.log(mins);
     return mins;
   }
 

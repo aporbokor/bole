@@ -56,12 +56,12 @@ class Plurality extends NumberVotecountVotingMethod {
 // let votings = new Plurality(candidates);
 // votings.prepare_for_voting()
 //
-// console.log(votings);
+// //console.log(votings);
 //
 // for (let i = 0; i< voters.length; i++){
 //   votings.register_vote(voters[i]);
 // }
 //
-// console.log(candidates);
-// console.log(voters);
-// console.log(votings.count_votes());
+// //console.log(candidates);
+// //console.log(voters);
+// //console.log(votings.count_votes());

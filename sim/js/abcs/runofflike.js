@@ -14,7 +14,7 @@ class RunoffLike extends RankingVotingMethod {
   }
 
   winner_by_majority(sub_votes) {
-    // console.log(sub_votes.max_count);
+    // //console.log(sub_votes.max_count);
     return sub_votes.max_count() > voters.length / 2;
   }
 
@@ -126,7 +126,7 @@ class RunoffLike extends RankingVotingMethod {
       });
 
       let sub_votes = Counter.from_array(not_eliminated);
-      console.log(eliminated, not_eliminated);
+      //console.log(eliminated, not_eliminated);
 
       for (let i = 0; i < voters.length; i++) {
         let vote = this.votes_for(voters[i], eliminated);
@@ -144,7 +144,7 @@ class RunoffLike extends RankingVotingMethod {
       for (const x of sub_votes.entries()) {
         sub_result.push(x);
       }
-      console.log({ sub_result, sub_votes });
+      //console.log({ sub_result, sub_votes });
 
       this.sub_results.push(
         count_votes_for_ints(sub_result, function (cand) {
@@ -160,7 +160,7 @@ class RunoffLike extends RankingVotingMethod {
         eliminated.add(new_elimination[j]);
       }
     }
-    console.log(this.sub_votes_for_visualization);
+    //console.log(this.sub_votes_for_visualization);
     return result;
   }
 

@@ -12,7 +12,7 @@ let clicked_selected;
 let selected_div;
 
 let new_envitoment_div;
-let edit_enviroment_div;
+let edit_environment_div;
 let sim_div;
 let visualization_div;
 
@@ -235,7 +235,7 @@ function select_drawable(drawable) {
   load_clicked_selected();
 }
 
-function reset_enviroment() {
+function reset_environment() {
   frozen_sim = false;
   delete_everything();
   reset_on_select();
@@ -373,19 +373,19 @@ function setup() {
 
   candidate_population_slider.changed(() => {
     if (auto_reset_environment.checked()) {
-      reset_enviroment();
+      reset_environment();
     }
   });
 
   voter_population_slider.changed(() => {
     if (auto_reset_environment.checked()) {
-      reset_enviroment();
+      reset_environment();
     }
   });
 
   strategic_chance_slider.changed(() => {
     if (auto_reset_environment.checked()) {
-      reset_enviroment();
+      reset_environment();
     }
   });
 
@@ -462,7 +462,7 @@ function setup() {
 
   reset_button = createButtonWithIcon("Reset environment", "reset.svg");
   reset_button.attribute("data-hide-on-mobile", "true");
-  reset_button.mousePressed(reset_enviroment);
+  reset_button.mousePressed(reset_environment);
 
   voting_type_selector = createSelect();
 
@@ -570,9 +570,9 @@ function setup() {
     change_in_sim = true;
   });
 
-  new_envitoment_div = select("#edit_enviroment_div");
+  new_envitoment_div = select("#edit_environment_div");
 
-  edit_enviroment_div = select("#edit_enviroment_div");
+  edit_environment_div = select("#edit_environment_div");
 
   sim_div = select("#sim_div");
 
@@ -588,10 +588,10 @@ function setup() {
   new_envitoment_div.child(auto_reset_environment);
   new_envitoment_div.child(reset_button);
 
-  edit_enviroment_div.child(add_voter_button);
-  edit_enviroment_div.child(delete_voter_button);
-  edit_enviroment_div.child(add_candidate_button);
-  edit_enviroment_div.child(delete_candidate_button);
+  edit_environment_div.child(add_voter_button);
+  edit_environment_div.child(delete_voter_button);
+  edit_environment_div.child(add_candidate_button);
+  edit_environment_div.child(delete_candidate_button);
 
   const custom_select = document.createElement("div");
   custom_select.classList.add("custom-select");

@@ -29,10 +29,10 @@ class Copeland extends CondorcetVotingMethod {
 
   count_votes() {
     this.calc_relative_strength_matrix();
-    console.log(this.outranking_matrix);
-    console.log(this.relative_strength_matrix);
+    //console.log(this.outranking_matrix);
+    //console.log(this.relative_strength_matrix);
     this.calc_copeland_matrix();
-    console.log(this.copeland_matrix);
+    //console.log(this.copeland_matrix);
     return count_votes_for_ints(this.candidates, function (can) {
       return can.copeland_score;
     });

@@ -62,7 +62,7 @@ class PerfectVoter extends NumberVotecountVotingMethod {
 // }
 //
 //
-// console.log(votings);
-// console.log(candidates);
-// console.log(voters);
-// console.log(votings.count_votes());
+// //console.log(votings);
+// //console.log(candidates);
+// //console.log(voters);
+// //console.log(votings.count_votes());

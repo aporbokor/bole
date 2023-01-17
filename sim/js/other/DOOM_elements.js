@@ -212,7 +212,7 @@ class steppingBox {
     // szimulation_div.child(hide_stepping_box);
     // this.hide();
     this.next_button.mousePressed(freeze);
-    console.log(this.next_button.elt);
+    //console.log(this.next_button.elt);
   }
 
   delete_content() {

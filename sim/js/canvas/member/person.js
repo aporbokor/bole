@@ -75,7 +75,7 @@ class Person extends Drawable {
   //   element.select_on = this;
 
   //   element.addEventListener(event, function () {
-  //     console.log(this.select_on);
+  //     //console.log(this.select_on);
   //     clicked_selected = this.select_on;
   //   });
   // }

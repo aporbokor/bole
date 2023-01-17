@@ -23,7 +23,7 @@ class Coombs extends RunoffLike {
     for (let i = 0; i < voters.length; i++) {
       last_places.count(this.get_last_valid_preference(voters[i], eliminated));
     }
-    console.log(last_places);
+    //console.log(last_places);
     return last_places.maxs();
   }
 

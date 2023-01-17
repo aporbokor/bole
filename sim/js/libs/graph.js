@@ -37,7 +37,6 @@
 1   false null   false
 2   true  null   true  */
 
-
 /* [[null,true,false],
 [false,null,true],
 [true,false,null]] */
@@ -67,30 +66,29 @@
   ]
 ];
 
-console.log(digraph_cycle(testcase, 3));
+//console.log(digraph_cycle(testcase, 3));
  */
 function digraph_cycle(am, l) {
-  
   let visited = [];
-  let finished =[];
-  
+  let finished = [];
+
   function dfs(v, am) {
-    if (finished[v]) return
-    if (visited[v]) return true 
-    visited[v]=true;
+    if (finished[v]) return;
+    if (visited[v]) return true;
+    visited[v] = true;
 
     // check all edges pointing away from v
-    let neighbours=[];
-    for (let i=0; i<l; i++) if (am[v][i]) neighbours.push(i);
-    for (const w of neighbours) return dfs(w, am)
-    finished[v]=true; 
+    let neighbours = [];
+    for (let i = 0; i < l; i++) if (am[v][i]) neighbours.push(i);
+    for (const w of neighbours) return dfs(w, am);
+    finished[v] = true;
   }
 
   // call dfs with every vertex
-  for (let i=0; i<l; i++) {
-    for (let j=0; j<l; j++) {
-      visited[j]=false;
-      finished[j]=false;
+  for (let i = 0; i < l; i++) {
+    for (let j = 0; j < l; j++) {
+      visited[j] = false;
+      finished[j] = false;
     }
     let cycle = dfs(i, am);
     if (cycle) return true;
@@ -99,15 +97,18 @@ function digraph_cycle(am, l) {
 }
 
 function digraph_source(am, l) {
-  let vertices=[];
-  for (let i=0; i<l; i++) {
+  let vertices = [];
+  for (let i = 0; i < l; i++) {
     vertices.push(i);
   }
   let source;
   for (const v of vertices) {
-    source=true;
-    for (let i=0; i<l; i++) 
-      if (am[i][v]) { source=false; break; }
+    source = true;
+    for (let i = 0; i < l; i++)
+      if (am[i][v]) {
+        source = false;
+        break;
+      }
     if (source) return v;
   }
 }

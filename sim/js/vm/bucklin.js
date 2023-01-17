@@ -76,7 +76,7 @@ class Bucklin extends RankingVotingMethod {
       return cand.vote_count_for_visualization[step - 1];
     });
 
-    console.log(res);
+    //console.log(res);
 
     let result_element = get_results_elements(res, (cand) => {
       return cand.get_custom_p(cand.vote_count_for_visualization[step - 1]);
