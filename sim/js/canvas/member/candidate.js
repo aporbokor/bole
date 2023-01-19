@@ -15,7 +15,7 @@ const candidate_names = [
   "David",
   "Emily",
   "Fiona",
-  "George"
+  "George",
 ];
 
 const candidate_size = 40;
@@ -24,7 +24,6 @@ let to_remove_candidates = [];
 let to_add_candidates = [];
 const min_candidates = 2;
 const max_candidates = 7;
-
 
 class Candidate extends Person {
   // Class representing the candidates
@@ -48,8 +47,6 @@ class Candidate extends Person {
   remove_self() {
     remove_specific_candidate(this);
   }
-  
-  
 
   get_small_p() {
     let returned;
@@ -73,7 +70,6 @@ class Candidate extends Person {
 
   get_extra_to_div() {
     let extra_to_div = createDiv();
-    
 
     if (Array.isArray(this.votes)) {
       extra_to_div.child(createP("Votes:" + this.votes.toString()));
@@ -190,6 +186,7 @@ function make_candidates(db) {
   // Add candidates to the sim
   if (!frozen_sim) {
     candidates = [];
+    to_add_candidates = [];
     for (let i = 0; i < db; i++) {
       candidates.push(random_candidate(i));
     }

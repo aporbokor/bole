@@ -364,3 +364,49 @@ function get_progress(speed) {
 
   return deltaTime * speed;
 }
+
+function download(content, fileName, contentType) {
+  var a = document.createElement("a");
+  var file = new Blob([content], { type: contentType });
+  a.href = URL.createObjectURL(file);
+  a.download = fileName;
+  a.click();
+}
+
+class ETA {
+  constructor(max_items) {
+    this.max_items = max_items;
+    this.start_time = Date.now();
+  }
+
+  get_progress(value) {
+    return value / this.max_items;
+  }
+
+  get_elapsed_time() {
+    return Date.now() - this.start_time;
+  }
+
+  get_eta(value) {
+    const progress = this.get_progress(value);
+    const elapsed_time = this.get_elapsed_time();
+
+    return elapsed_time * (1 / progress) - elapsed_time;
+  }
+
+  get_formatted_eta(value) {
+    const progress = this.get_progress(value) * 100;
+
+    const eta = this.get_eta(value);
+
+    const total_seconds = Math.floor(eta / 1000);
+    const seconds = total_seconds % 60;
+
+    const total_minutes = Math.floor(total_seconds / 60);
+    const minutes = total_minutes % 60;
+
+    const hours = Math.floor(total_minutes / 60);
+
+    return `${progress}% ETA:${hours}:${minutes}:${seconds}`;
+  }
+}
