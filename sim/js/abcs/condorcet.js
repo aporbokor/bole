@@ -380,10 +380,10 @@ class CondorcetVotingMethod extends RankingVotingMethod {
     }
 
     for (const voter of voters) {
-      let cand_to_set = cand1;
+      let cand_to_set = cand2;
 
       if (voter.prefers(cand2, cand1)) {
-        cand_to_set = cand2;
+        cand_to_set = cand1;
       }
       voter.set_color(cand_to_set.target_color);
     }

@@ -87,7 +87,7 @@ class Tideman extends CondorcetVotingMethod {
     content.appendChild(graph_vis_btn);
 
     this.parent_box.set_content(content);
-    this.parent_box.next_func(voting_system.specific_step);
+    this.parent_box.next_func(voting_system.end_vis);
     this.curr++;
   }
 
@@ -116,7 +116,8 @@ class Tideman extends CondorcetVotingMethod {
 
     if (max_idx === vs.curr) {
       //console.log("kampó");
-      this.parent_box.next_func(vs.end_vis);
+      // this.parent_box.next_func(vs.end_vis);
+      vs.end_vis.bind(this)();
       return;
     }
 
@@ -165,6 +166,9 @@ class Tideman extends CondorcetVotingMethod {
 
   end_vis() {
     let vs = this.parent_box.visualized_system;
+    for (const voter of voters) {
+      voter.appear();
+    }
     this.parent_box.hide_next();
     let content = document.createElement("div");
     let text = document.createElement("p");
