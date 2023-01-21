@@ -1,4 +1,4 @@
-class SuplementaryLike extends RunoffLike {
+class SupplementaryLike extends RunoffLike {
   constructor(candidates, len) {
     super(candidates);
     this.tier_list_len = len;
@@ -79,19 +79,19 @@ class SuplementaryLike extends RunoffLike {
   }
 }
 
-class Supplementary extends SuplementaryLike {
+class Supplementary extends SupplementaryLike {
   constructor(candidates) {
     super(candidates, 2);
   }
 }
 
-class Contingent extends SuplementaryLike {
+class Contingent extends SupplementaryLike {
   constructor(candidates) {
     super(candidates, candidates.length);
   }
 }
 
-class Sri_lankan_contingent extends SuplementaryLike {
+class Sri_lankan_contingent extends SupplementaryLike {
   constructor(candidates) {
     let len = 2;
     if (candidates.length >= 3) {

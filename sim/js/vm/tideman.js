@@ -177,8 +177,7 @@ class Tideman extends CondorcetVotingMethod {
     if (winner == undefined) winner = random(candidates);
     text.innerText =
       "We can finally announce our winner: " +
-      winner.name +
-      ", but there is an off chance that a Condorcet winner could not be established, then the algorithm chooses randomly among candidates.";
+      winner.name + "!";
     content.appendChild(text);
     this.parent_box.set_content(content);
   }
