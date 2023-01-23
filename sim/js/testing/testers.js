@@ -124,6 +124,7 @@ function run_vote(voter_count, voting_system, candidate_count) {
   return voting_machine_.count_votes();
 }
 
+
 function IIA_criterion(voter_count, voting_system, starter_candidate_count) {
   let first_results = run_vote(voter_count, voting_system, starter_candidate_count);
   let first_winners = first_results[0];
@@ -202,6 +203,7 @@ function condorcet_winner_criterion(voter_count, voting_system, candidate_count)
   return false;
 }
 
+// S contains a single candidate
 function majority_criterion(voter_count, voting_system, candidate_count) {
   let winner = run_vote(voter_count, voting_system, candidate_count)[0];
   let first_votes = [];
@@ -214,7 +216,7 @@ function majority_criterion(voter_count, voting_system, candidate_count) {
   }
 
   if (majority_winner != undefined)
-    return majority_winner.id == winner.id;
+    return majority_winner.id == winner[0].id;
   return false; //TODO
 }
 
@@ -232,9 +234,52 @@ function condorcet_loser_criterion(voter_count, voting_system, candidate_count) 
   new_machine.count_votes();
 
   return (winner.copeland_score != 0) //TODO
-
 }
 
+// S contains all but one candidate
+function majority_loser_criterion(voter_count, voting_system, candidate_count) {
+  let winners = run_vote(voter_count, voting_system, candidate_count)[0];
+  let last_votes = [];
+  for (const voter of voters) {
+    last_votes[voter.honest_preference(candidates)[candidates.length-1].id]++;
+  }
+  let majority_loser;
+  for (let i = 0; i < candidates.length; ++i) {
+    if (last_votes[i]>voter_count) majority_loser = candidates[i];
+  }
+
+  if (majority_loser != undefined) {
+    let ok = true;
+    for (const winner of winners) {
+      if (winner.id == majority_loser.id) {
+        ok = false; break;
+      }
+    }
+    return ok;
+  }
+}
+
+// single-winner case of the 'Droop proportionality criterion'
+// S contains candidates such that the majority of voters prefer every candidate in S to outside of S
+function mutual_majority_criterion(voter_count, voting_system, candidate_count) {
+  //TODO incomplete
+  let winner = run_vote(voter_count, voting_system, candidate_count)[0];
+  let majority_subset = [];
+  // tabulate majority subset by running a pairwise comparison with each candidate
+  // first go over first candidate and collect candidates who beat it by a majority into a set
+  // if no candidates beat it, continue and add him into the set
+  let vm = new CondorcetVotingMethod(candidates);
+  vm.prepare_for_voting();
+  for (const v of voters) vm.register_vote(v);
+  vm.calc_relative_strength_matrix();
+  vm.add_pairs();
+  vm.sort_pairs();
+}
+
+// Smith-set: smallest non-empty subset of candidates such that every candidate inside is majority-preferred over every other candidates not in the subset
+function smith_criterion(voter_count, voting_system, candidate_count) {
+
+}
 // no winner is helped by up-ranking, no loser is helped by down-ranking
 // E.g. harming candidate x by changing some ballots from
 // z > x > y to x > z > y would violate the monotonicity criterion
