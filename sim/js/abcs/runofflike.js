@@ -314,7 +314,11 @@ class RunoffLike extends RankingVotingMethod {
 
       let color_to_set = honest_voter_color;
       if (eliminated.size < candidates.length) {
-        color_to_set = this.votes_for(voters[i], eliminated).color;
+        let cand_of_choice = this.votes_for(voters[i], eliminated);
+
+        if (cand_of_choice != undefined) {
+          color_to_set = cand_of_choice.color;
+        }
       }
       voters[i].set_color(color_to_set);
     }

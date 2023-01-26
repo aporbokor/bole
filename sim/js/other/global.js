@@ -14,7 +14,7 @@ const vm = new Map([
   ["Evaluative", Evaluative],
   ["Score", Score],
   // ["STAR voting", starVoter],
- // ["Bucklin", Bucklin],
+  ["Bucklin", Bucklin],
   ["Instant-runoff", IRV],
   ["Coombs' method", Coombs],
   ["Supplementary", Supplementary],

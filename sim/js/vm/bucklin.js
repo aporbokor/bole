@@ -32,6 +32,12 @@ class Bucklin extends RankingVotingMethod {
         );
       }
     }
+    return count_votes_for_ints(
+      candidates,
+      (this.get_votes = function (cand) {
+        return cand.final;
+      })
+    );
   }
 
   get_results_data(cand) {
