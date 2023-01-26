@@ -127,6 +127,18 @@ function run_vote_noreset(voting_system) {
   return voting_machine_.count_votes();
 }
 
+
+function run_vote_noreset_vm(voting_system) {
+  voting_machine_ = new voting_system(candidates);
+  voting_machine_.prepare_for_voting();
+
+  for (const voter of voters) {
+    voting_machine_.register_vote(voter);
+  }
+  // voting_machine_.count_votes();
+  return voting_machine_;
+}
+
 function IIA_criterion(voter_count, voting_system, starter_candidate_count) {
   let first_results = run_vote(voter_count, voting_system, starter_candidate_count);
   let first_winners = first_results[0];
@@ -247,20 +259,21 @@ function mutual_majority_criterion(voter_count, voting_system, candidate_count) 
   //TODO incomplete
   let winner = run_vote(voter_count, voting_system, candidate_count)[0];
   let majority_subset = [];
-  // tabulate majority subset by running a pairwise comparison with each candidate
-  // first go over first candidate and collect candidates who beat it by a majority into a set
-  // if no candidates beat it, continue and add him into the set
-  let vm = new CondorcetVotingMethod(candidates);
-  vm.prepare_for_voting();
-  for (const v of voters) vm.register_vote(v);
-  vm.calc_relative_strength_matrix();
-  vm.add_pairs();
-  vm.sort_pairs();
+
+  let 
 }
 
 // Smith-set: smallest non-empty subset of candidates such that every candidate inside is majority-preferred over every other candidates not in the subset
 function smith_criterion(voter_count, voting_system, candidate_count) {
-
+  let winner = run_vote(voter_count, voting_system, candidate_count);
+  let ss = smith_set();
+  for (const x of winner) {
+    for (const y of smith_set) {
+      if (x.id == y.id) break;
+      return false;
+    }
+  }
+  return true;
 }
 // no winner is helped by up-ranking, no loser is helped by down-ranking
 // E.g. harming candidate x by changing some ballots from

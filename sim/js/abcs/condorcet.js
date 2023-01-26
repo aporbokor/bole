@@ -13,6 +13,20 @@ class Pair {
   }
 }
 
+function smith_set() {
+  let n = candidates.length;
+  let copeland = run_vote_noreset_vm(n, Copeland, voters.length);
+  let s = copeland.count_votes();
+  let r = copeland.copeland_matrix;
+  let row,col,lhs,rhs ;
+  for(rhs=1,lhs=0;lhs<rhs;lhs=rhs,rhs=row+1)
+  { for(;rhs<n&&s[rhs]==s[rhs-1];rhs++) ; /* this line optional */
+    for(col=rhs,row=n;col==rhs&&row>=rhs;row--) for(col=lhs;col<rhs&&r[row-1][col]==0;col++) ; 
+  }
+  return lhs ; 
+}
+
+
 class CondorcetVotingMethod extends RankingVotingMethod {
   // ABC for condorcet_methods
 
