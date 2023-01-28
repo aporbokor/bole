@@ -114,7 +114,7 @@ function run_vote(voter_count, voting_system, candidate_count) {
 
   reset_environment();
 
-  return run_vote_noreset(voting_system)
+  return run_vote_noreset(voting_system);
 }
 
 function run_vote_noreset(voting_system) {
@@ -126,7 +126,6 @@ function run_vote_noreset(voting_system) {
   }
   return voting_machine_.count_votes();
 }
-
 
 function run_vote_noreset_vm(voting_system) {
   voting_machine_ = new voting_system(candidates);
@@ -140,12 +139,16 @@ function run_vote_noreset_vm(voting_system) {
 }
 
 function IIA_criterion(voter_count, voting_system, starter_candidate_count) {
-  let first_results = run_vote(voter_count, voting_system, starter_candidate_count);
+  let first_results = run_vote(
+    voter_count,
+    voting_system,
+    starter_candidate_count
+  );
   let first_winners = first_results[0];
 
   add_candidate();
   let new_cand = candidates[candidates.length - 1];
-  let new_winners = run_vote_noreset(voting_system)[0]
+  let new_winners = run_vote_noreset(voting_system)[0];
 
   if ((new_winners.length == 1) & (new_winners[0].id == new_cand.id)) {
     return true;
@@ -193,15 +196,20 @@ function best_winner_to_avg_voter_criterion(
   return false;
 }
 
-function condorcet_winner_criterion(voter_count, voting_system, candidate_count) {
+function condorcet_winner_criterion(
+  voter_count,
+  voting_system,
+  candidate_count
+) {
   // just do pairwise comparisons, rank pairs then identify condercet winner
   let winner = run_vote(voter_count, voting_system, candidate_count)[0][0];
 
-  let condorcet_winner = run_vote_noreset(Copeland)[0][0]
+  let condorcet_winner = run_vote_noreset(Copeland)[0][0];
 
-  if (condorcet_winner == undefined) return true
-  else if (condorcet_winner.copeland_score == (candidate_count - 1)) return (winner.id == condorcet_winner.id);
-  else return true
+  if (condorcet_winner == undefined) return true;
+  else if (condorcet_winner.copeland_score == candidate_count - 1)
+    return winner.id == condorcet_winner.id;
+  else return true;
 }
 
 // S contains a single candidate
@@ -213,62 +221,71 @@ function majority_criterion(voter_count, voting_system, candidate_count) {
   }
   let majority_winner;
   for (let i = 0; i < candidates.length; ++i) {
-    if (first_votes[i]>voter_count/2) majority_winner = candidates[i];
+    if (first_votes[i] > voter_count / 2) majority_winner = candidates[i];
   }
 
-  if (majority_winner != undefined)
-    return majority_winner.id == winner[0].id;
+  if (majority_winner != undefined) return majority_winner.id == winner[0].id;
   return true;
 }
 
 // compliant should be: IRV, contingent vote, borda count, tideman
 // non-compliant should be: plurality, supplementary, Sri Lankan contingent, approval, bucklin
-function condorcet_loser_criterion(voter_count, voting_system, candidate_count) {
+function condorcet_loser_criterion(
+  voter_count,
+  voting_system,
+  candidate_count
+) {
   let winner = run_vote(voter_count, voting_system, candidate_count)[0][0];
   run_vote_noreset(Copeland);
-  return (winner.copeland_score != 0)
+  return winner.copeland_score != 0;
 }
 
 // S contains all but one candidate
 function majority_loser_criterion(voter_count, voting_system, candidate_count) {
   let winners = run_vote(voter_count, voting_system, candidate_count)[0];
-   
+
   let last_votes = [];
   for (const voter of voters) {
-    last_votes[voter.honest_preference(candidates)[candidates.length-1].id]++;
+    last_votes[voter.honest_preference(candidates)[candidates.length - 1].id]++;
   }
   let majority_loser;
   for (let i = 0; i < candidates.length; ++i) {
-    if (last_votes[i]>voter_count / 2) majority_loser = candidates[i];
+    if (last_votes[i] > voter_count / 2) majority_loser = candidates[i];
   }
 
   if (majority_loser != undefined) {
     let ok = true;
     for (const winner of winners) {
       if (winner.id == majority_loser.id) {
-        ok = false; break;
+        ok = false;
+        break;
       }
     }
     return ok;
-  } else return true
+  } else return true;
 }
 
 // single-winner case of the 'Droop proportionality criterion'
 // S contains candidates such that the majority of voters prefer every candidate in S to outside of S
-function mutual_majority_criterion(voter_count, voting_system, candidate_count) {
+function mutual_majority_criterion(
+  voter_count,
+  voting_system,
+  candidate_count
+) {
   //TODO incomplete
   let winner = run_vote(voter_count, voting_system, candidate_count)[0];
   let majority_subset = [];
 
-  let 
+  let;
 }
 
 // Smith-set: smallest non-empty subset of candidates such that every candidate inside is majority-preferred over every other candidates not in the subset
 function smith_criterion(voter_count, voting_system, candidate_count) {
   let winner = run_vote(voter_count, voting_system, candidate_count);
   let ss = smith_set();
+  console.log(ss);
   for (const x of winner) {
-    for (const y of smith_set) {
+    for (const y of ss) {
       if (x.id == y.id) break;
       return false;
     }
@@ -278,7 +295,7 @@ function smith_criterion(voter_count, voting_system, candidate_count) {
 // no winner is helped by up-ranking, no loser is helped by down-ranking
 // E.g. harming candidate x by changing some ballots from
 // z > x > y to x > z > y would violate the monotonicity criterion
-// while harming x by changing ballots from 
+// while harming x by changing ballots from
 // z > x > y to x > z > y would not.
 //
 // results should be (ranked votingmethods only!):
@@ -288,24 +305,24 @@ function smith_criterion(voter_count, voting_system, candidate_count) {
 //
 // https://www.votingmatters.org.uk/ISSUE6/P4.HTM check for all these if (want_to_die == true)
 //function monotonicity_criterion(voter_count, voting_system, candidate_count) {
-  //if (voting_system.prototype instanceof RankingVotingMethod) {
-    //// create preference table
-    //voter_population = voter_count; 
-    //candidate_population = candidate_count;
-    //reset_environment();
-    //voting_machine_ = new voting_system(candidates);
-    //voting_machine_.prepare_for_voting();
-    //for (const voter of voters) {
-      //voting_machine_.register_vote(voter);
-    //}
-    //let ptable = twoDMatrixWithZeros(candidate_count, candidate_count);
-    //for (const candidate of candidates) {
-      //for (let i = 0; i < candidates.length; ++i) {
-        //ptable[candidate.id][i] = candidate.votes[i];
-      //}
-    //}
-    //console.log(ptable);
-    //let results = voting_machine_.count_votes();
-    //console.log(results[0].name)
+//if (voting_system.prototype instanceof RankingVotingMethod) {
+//// create preference table
+//voter_population = voter_count;
+//candidate_population = candidate_count;
+//reset_environment();
+//voting_machine_ = new voting_system(candidates);
+//voting_machine_.prepare_for_voting();
+//for (const voter of voters) {
+//voting_machine_.register_vote(voter);
+//}
+//let ptable = twoDMatrixWithZeros(candidate_count, candidate_count);
+//for (const candidate of candidates) {
+//for (let i = 0; i < candidates.length; ++i) {
+//ptable[candidate.id][i] = candidate.votes[i];
+//}
+//}
+//console.log(ptable);
+//let results = voting_machine_.count_votes();
+//console.log(results[0].name)
 
-  //}
+//}

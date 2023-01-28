@@ -13,6 +13,7 @@ class Pair {
   }
 }
 
+<<<<<<< HEAD
 function valiant_opponents(index, ss, cp_matrix) {
   for (let i =  0; i < cp_matrix.length; ++i) {
     if (i == index) continue;
@@ -68,7 +69,6 @@ function setup_args() {
     rres.push(subarr);
   }
   return [rres, sres, res[0]]
-}
 
 
 class CondorcetVotingMethod extends RankingVotingMethod {
