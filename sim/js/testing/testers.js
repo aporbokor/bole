@@ -282,8 +282,7 @@ function mutual_majority_criterion(
 // Smith-set: smallest non-empty subset of candidates such that every candidate inside is majority-preferred over every other candidates not in the subset
 function smith_criterion(voter_count, voting_system, candidate_count) {
   let winner = run_vote(voter_count, voting_system, candidate_count);
-  let ss = smith_set();
-  console.log(ss);
+  let ss = calc_smith_set();
   for (const x of winner) {
     for (const y of ss) {
       if (x.id == y.id) break;
