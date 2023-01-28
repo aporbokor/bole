@@ -169,11 +169,11 @@ function IIA_criterion(voter_count, voting_system, starter_candidate_count) {
   return true;
 }
 
-function tie_criterion(voter_count, voting_system, candidate_count) {
+function resolvability_criterion(voter_count, voting_system, candidate_count) {
   let results = run_vote(voter_count, voting_system, candidate_count);
   let winners = results[0];
 
-  if (winners.length > 1) {
+  if (winners.length == 1) {
     return true;
   }
   return false;
