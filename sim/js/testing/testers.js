@@ -185,17 +185,17 @@ function best_winner_to_avg_voter_criterion(
   candidate_count
 ) {
   let winners = run_vote(voter_count, voting_system, candidate_count)[0];
-
+  average_voter.replace();
   const winning_distance = average_voter.distance_to_candidate(
     average_voter.honest_preference(candidates)[0]
   );
 
   for (const cand of winners) {
-    if (average_voter.distance_to_candidate(cand) === winning_distance) {
-      return true;
+    if (average_voter.distance_to_candidate(cand) > winning_distance) {
+      return false;
     }
   }
-  return false;
+  return true;
 }
 
 function condorcet_winner_criterion(
@@ -217,6 +217,7 @@ function condorcet_winner_criterion(
 // S contains a single candidate
 function majority_criterion(voter_count, voting_system, candidate_count) {
   let winner = run_vote(voter_count, voting_system, candidate_count)[0];
+
   let first_votes = [];
   for (const voter of voters) {
     first_votes[voter.honest_preference(candidates)[0].id]++;
@@ -226,7 +227,12 @@ function majority_criterion(voter_count, voting_system, candidate_count) {
     if (first_votes[i] > voter_count / 2) majority_winner = candidates[i];
   }
 
+  if ((majority_winner != undefined) & (winner.length != 1)) {
+    return false;
+  }
+
   if (majority_winner != undefined) return majority_winner.id == winner[0].id;
+
   return true;
 }
 
