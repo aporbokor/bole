@@ -13,17 +13,61 @@ class Pair {
   }
 }
 
-function smith_set() {
-  let n = candidates.length;
-  let copeland = run_vote_noreset_vm(n, Copeland, voters.length);
-  let s = copeland.count_votes();
-  let r = copeland.copeland_matrix;
-  let row,col,lhs,rhs ;
-  for(rhs=1,lhs=0;lhs<rhs;lhs=rhs,rhs=row+1)
-  { for(;rhs<n&&s[rhs]==s[rhs-1];rhs++) ; /* this line optional */
-    for(col=rhs,row=n;col==rhs&&row>=rhs;row--) for(col=lhs;col<rhs&&r[row-1][col]==0;col++) ; 
+function valiant_opponents(index, ss, cp_matrix) {
+  for (let i =  0; i < cp_matrix.length; ++i) {
+    if (i == index) continue;
+    else if ((!ss.includes(i)) & (cp_matrix[i][index] > 0)) {
+      ss.push(i);
+      return valiant_opponents(i, ss, cp_matrix);
+    }
   }
-  return lhs ; 
+  return ss;
+}
+
+
+function calc_smith_set() {
+  // s is an array of doubled copeland scroes
+  // r is the given results matrix doubled
+  let arr, r, s, n = candidates.length;
+  arr = setup_args();
+  cp_matrix = arr[0];
+  scores = arr[1];
+  let smith_set = [];
+  // add copeland winner(s)
+  for (const cand of arr[2]) smith_set.push(cand.id); 
+
+  // go over all elements of smith set, and add any opponents whom they do not defeat recursively
+  for (const el of smith_set) {
+    smith_set = valiant_opponents(el, smith_set, cp_matrix);
+  }
+  let returned = [];
+  for (const el of smith_set) returned.push(candidates[el]);
+  return returned;
+}
+
+function setup_args() {
+  let cl = run_vote_noreset_vm(Copeland);
+  let res = cl.count_votes();
+  let s = [];
+  for (const x of res) {
+    for (const c of x) {
+      s.push(c.copeland_score);
+    }
+  }
+  let sres = [];
+  for (let i = 0; i < s.length; ++i) {
+    sres[i] = s[i]*2;
+  }
+  let r = cl.copeland_matrix;
+  let rres = [];
+  for (let i = 0; i < r.length; ++i) {
+    let subarr = [];
+    for (let j = 0; j < r.length; ++j) {
+      subarr[j] = r[i][j]*2;
+    }
+    rres.push(subarr);
+  }
+  return [rres, sres, res[0]]
 }
 
 

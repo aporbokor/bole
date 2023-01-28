@@ -23,6 +23,7 @@ const vm = new Map([
   ["Borda count", Borda_count],
   ["Copeland's method", Copeland],
   ["Tideman", Tideman],
+  ["Smith/Tideman", SmithTideman]
 ]);
 
 let first = false;
