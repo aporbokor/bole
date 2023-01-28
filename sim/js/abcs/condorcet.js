@@ -14,9 +14,9 @@ class Pair {
 }
 
 function valiant_opponents(index, ss, cp_matrix) {
-  for (let i =  0; i < cp_matrix.length; ++i) {
+  for (let i = 0; i < cp_matrix.length; ++i) {
     if (i == index) continue;
-    else if ((!ss.includes(i)) & (cp_matrix[i][index] > 0)) {
+    else if (!ss.includes(i) & (cp_matrix[i][index] > 0)) {
       ss.push(i);
       return valiant_opponents(i, ss, cp_matrix);
     }
@@ -24,17 +24,14 @@ function valiant_opponents(index, ss, cp_matrix) {
   return ss;
 }
 
-
 function calc_smith_set() {
   // s is an array of doubled copeland scroes
   // r is the given results matrix doubled
-  let arr, r, s, n = candidates.length;
-  arr = setup_args();
-  cp_matrix = arr[0];
-  scores = arr[1];
+  let arr = setup_args();
+  let cp_matrix = arr[0];
   let smith_set = [];
   // add copeland winner(s)
-  for (const cand of arr[2]) smith_set.push(cand.id); 
+  for (const cand of arr[2]) smith_set.push(cand.id);
 
   // go over all elements of smith set, and add any opponents whom they do not defeat recursively
   for (const el of smith_set) {
@@ -56,20 +53,19 @@ function setup_args() {
   }
   let sres = [];
   for (let i = 0; i < s.length; ++i) {
-    sres[i] = s[i]*2;
+    sres[i] = s[i] * 2;
   }
   let r = cl.copeland_matrix;
   let rres = [];
   for (let i = 0; i < r.length; ++i) {
     let subarr = [];
     for (let j = 0; j < r.length; ++j) {
-      subarr[j] = r[i][j]*2;
+      subarr[j] = r[i][j] * 2;
     }
     rres.push(subarr);
   }
-  return [rres, sres, res[0]]
+  return [rres, sres, res[0]];
 }
-
 
 class CondorcetVotingMethod extends RankingVotingMethod {
   // ABC for condorcet_methods

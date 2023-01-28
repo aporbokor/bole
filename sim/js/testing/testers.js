@@ -186,10 +186,12 @@ function best_winner_to_avg_voter_criterion(
 ) {
   let winners = run_vote(voter_count, voting_system, candidate_count)[0];
 
-  const should_win = average_voter.honest_preference(candidates)[0];
+  const winning_distance = average_voter.distance_to_candidate(
+    average_voter.honest_preference(candidates)[0]
+  );
 
   for (const cand of winners) {
-    if (should_win.id == cand.id) {
+    if (average_voter.distance_to_candidate(cand) === winning_distance) {
       return true;
     }
   }
@@ -281,13 +283,17 @@ function mutual_majority_criterion(
 
 // Smith-set: smallest non-empty subset of candidates such that every candidate inside is majority-preferred over every other candidates not in the subset
 function smith_criterion(voter_count, voting_system, candidate_count) {
-  let winner = run_vote(voter_count, voting_system, candidate_count);
+  let winner = run_vote(voter_count, voting_system, candidate_count)[0];
   let ss = calc_smith_set();
   for (const x of winner) {
+    let found = false;
     for (const y of ss) {
-      if (x.id == y.id) break;
-      return false;
+      if (x.id == y.id) {
+        found = true;
+        break;
+      }
     }
+    if (!found) return false;
   }
   return true;
 }
