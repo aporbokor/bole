@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Bole</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      id="font"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Syne:wght@800&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Introjs -->
+    <script src="https://cdn.jsdelivr.net/npm/intro.js@6.0.0/intro.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.svg" />
+    <!--CSS stylesheets-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../pages/intro/css/reset.css"
+    />
+    <link rel="stylesheet" type="text/css" href="../pages/intro/css/nav.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../pages/intro/css/general.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./css/sim.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../pages/intro/css/select.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/intro.js@6.0.0/minified/introjs.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./css/introconf.css" />
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav-links-container">
+        <div class="nav-links">
+          <a class="button" href=".." tabindex="2">Main page</a>
+        </div>
+      </div>
+      <div class="center">
+        <div class="company-name" translate="no">BOLE</div>
+        <a class="run-btn" onclick="location.href='..';">
+          <div class="triangle-left"></div>
+        </a>
+      </div>
+      <div class="nav-links-container">
+        <div class="nav-links">
+          <button class="tutor" id="starter-btn">Tutorial</button>
+        </div>
+      </div>
+    </nav>
+    <main
+      id="main"
+      data-title="Our visualization principles"
+      data-intro="This is the visualization canvas. Voters are represented by smaller circles and the candidates are marked by chunkier ones. They are placed on an opinion plane, which means that the closer two voters are to each other, the more similar their opinions are. Every voter's ideal candidate is the one that is the closest to it."
+    >
+      <div style="display: none">
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+        <script src="js/canvas/drawable.js"></script>
+        <script src="js/canvas/arrow.js"></script>
+        <script src="js/canvas/range.js"></script>
+        <script src="js/canvas/member/person.js"></script>
+        <script src="js/canvas/member/voter.js"></script>
+        <script src="js/canvas/member/candidate.js"></script>
+        <script src="js/abcs/super.js"></script>
+        <script src="js/abcs/number_votecount.js"></script>
+        <script src="js/abcs/ranking.js"></script>
+        <script src="js/abcs/cardinal.js"></script>
+        <script src="js/abcs/runofflike.js"></script>
+        <script src="js/abcs/condorcet.js"></script>
+        <script src="js/vm/plurality.js"></script>
+        <script src="js/vm/anti_plurality.js"></script>
+        <script src="js/vm/approval.js"></script>
+        <script src="js/vm/evaluative.js"></script>
+        <script src="js/vm/score.js"></script>
+        <script src="js/vm/star.js"></script>
+        <script src="js/vm/borda.js"></script>
+        <script src="js/vm/bucklin.js"></script>
+        <script src="js/vm/supplementary.js"></script>
+        <script src="js/vm/irv.js"></script>
+        <script src="js/vm/coombs.js"></script>
+        <script src="js/vm/copeland.js"></script>
+        <script src="js/vm/tideman.js"></script>
+        <script src="js/vm/stideman.js"></script>
+        <script src="js/tools/tool.js"></script>
+        <script src="js/tools/no_tool.js"></script>
+        <script src="js/tools/delete_tool.js"></script>
+        <script src="js/tools/voter_brush.js"></script>
+        <script src="js/tools/honesty_painter.js"></script>
+        <script src="js/other/DOOM_elements.js"></script>
+        <script src="js/other/custom-select.js"></script>
+        <script src="js/other/global.js"></script>
+        <script src="js/other/utils.js"></script>
+        <script src="js/other/main.js"></script>
+        <script src="js/other/auto_scroller.js" defer></script>
+        <script src="js/libs/graph.js"></script>
+        <script src="js/testing/autoplacer.js"></script>
+        <script src="js/testing/testers.js"></script>
+      </div>
+
+      <div id="sim_buttons" class="content_box">
+        <div class="sim-buttons-container">
+          <!-- <div class="sim-buttons-subdiv-container">
+          <h3 class="sub-buttons-subdiv-title">Links</h3>
+          <div class="sim-buttons-subdiv">
+            <a href="#new_environment_div">New environment</a>
+            <a href="#edit_environment_div">Edit environment</a>
+            <a href="#sim_div">sim</a>
+          </div>
+        </div> -->
+
+          <div
+            class="sim-buttons-subdiv-container"
+            data-title="Running simulations"
+            data-intro="Here you can choose a voting system and then run a simulation with it by clicking on the run button. (There is an auto-simulate option as well)."
+          >
+            <h3 class="sub-buttons-subdiv-title">Control panel</h3>
+            <div id="sim_div" class="sim-buttons-subdiv"></div>
+          </div>
+
+          <div
+            class="sim-buttons-subdiv-container"
+            data-title="Environment generation"
+            data-intro="You can also generate a new environment by changing some parameters using these sliders, and then pressing the reset environment button!"
+          >
+            <h3 class="sub-buttons-subdiv-title">Environment variables</h3>
+            <div id="edit_environment_div" class="sim-buttons-subdiv"></div>
+          </div>
+
+          <div class="sim-buttons-subdiv-container" data-hide-on-mobile>
+            <h3 class="sub-buttons-subdiv-title">Advanced</h3>
+            <div class="sim-buttons-subdiv" id="advanced"></div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="selected"
+        class="content_box"
+        data-title="Selected participant"
+        data-intro="If you click on a voter or a candidate you will see all the relevant information here. You can customize them, or look into their preferences, ballots, election-results, etc."
+      >
+        Nobody is selected
+      </div>
+
+      <div
+        class="results_wrapper content_box"
+        data-title="Election results"
+        data-intro="Here you can see the results of the elections. Ties are possible so sometimes you will see more than one candidate getting first place."
+      >
+        <div id="vote_results">Voting results:</div>
+      </div>
+      <div
+        class="step_by_step content_box div_w_p"
+        data-title="Voting method info"
+        data-intro="And finally here you can see the description of the currently used system. For some more complex systems we explain them step by step within the bounds of this box."
+      >
+        <!-- <p class="stepping_box_title p_div_p">The voting process:</p> -->
+        <!-- <p class="stepping_box_link"><a href="#">See more on Wikipedia</a></p> -->
+      </div>
+    </main>
+    <script src="js/other/intro.js"></script>
+    <a class="back-to-top button" href="#main"><div>/\</div></a>
+  </body>
+</html>

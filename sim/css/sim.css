@@ -1,0 +1,442 @@
+:root {
+  --canvas-height: min(660px, 100vh - 30px);
+  --canvas-width: min(780px, 100vw - 20px);
+}
+
+.canvas {
+  grid-area: canvas;
+  margin: auto;
+  touch-action: none;
+}
+.content_box {
+  background-color: var(--bg--primary);
+  padding: 1rem;
+}
+
+#sim_buttons,
+#selected {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#sim_buttons {
+  grid-area: sim-buttons;
+  max-height: var(--canvas-height);
+  position: relative;
+}
+
+.sim-buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2rem;
+}
+
+.sim-buttons-subdiv-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.sim-buttons-title {
+}
+
+.sim-buttons-title,
+.sub-buttons-subdiv-title {
+  background-color: var(--bg--primary-lt);
+  z-index: 2;
+  padding: 1em 1.5em;
+  border-radius: 0.5em;
+}
+
+/* .sub-buttons-subdiv-title {
+  position: sticky;
+  top: 0;
+} */
+
+.sim-buttons-subdiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.results_wrapper {
+  grid-area: results;
+}
+
+#vote_results {
+  position: sticky;
+  top: calc(var(--nav-height) + 1rem);
+}
+
+#selected {
+  grid-area: selected;
+}
+
+.step_by_step {
+  grid-area: step;
+  overflow-x: auto;
+}
+
+main {
+  display: grid;
+  grid-template-areas:
+    "sim-buttons canvas selected"
+    "sim-buttons canvas results"
+    "step       step   results";
+  grid-template-columns: 1fr min-content 1fr;
+  grid-template-rows: 18rem calc(var(--canvas-height) - 19rem) auto;
+
+  align-items: stretch;
+  gap: 1rem;
+
+  padding: 1rem;
+}
+
+body {
+  overflow-y: auto;
+  background: var(--bg--primary-lt);
+}
+.p_div_p {
+  text-align: center;
+}
+
+.named_slider {
+  /* The sytle of the divs which have a p and a slider */
+  border: 1px solid var(--bg--primary-lt);
+  border-radius: 5%;
+  padding: 1rem;
+  text-align: center;
+}
+
+main button,
+main select {
+  width: 10rem;
+}
+
+ul,
+ol {
+  padding-left: 1.5rem;
+  /* margin-top: 0.5rem; */
+}
+
+#vote_results > ol {
+  padding-left: 0.5rem;
+}
+
+li::marker {
+  color: var(--text--primary);
+  padding-right: 0.05em;
+}
+
+.tick-marker::marker {
+  content: "✔";
+}
+
+.person_profile_pic {
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  margin-right: 0.2em;
+  vertical-align: middle;
+}
+
+.explaining_p {
+}
+
+.person_name {
+  display: inline;
+  font-weight: bold;
+}
+
+.named_slider {
+}
+
+.canvas {
+}
+
+.place_div > * {
+  /* each place in the vote_results div */
+  margin-left: 1em;
+}
+
+.candidate_p {
+  /* The candidates representation which only contains the candidates name and votes visualized by proggresbars*/
+}
+
+.progress_holder {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progress_ {
+  flex-grow: 1;
+}
+
+.progress_starter_text {
+  width: 6rem;
+  text-align: right;
+}
+
+.progress_ender_text {
+  width: 3rem;
+}
+/* 
+.progress_::after {
+  content: attr(value);
+  position: absolute;
+  left: 105%;
+  line-height: 100%;
+} */
+
+.selected {
+}
+
+.voter_div {
+  /* If the selected person is a voter, this is the style which the voter is gona appear in */
+}
+
+.voter-voted-for {
+  padding: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.candidate_div {
+  /* If the selected person is a candidate, this is the style which the candidate is gona appear in */
+}
+
+.delete_person {
+  /* The style of the delete button inside the selected div */
+}
+
+.named_slider_title {
+  /* The title (p) of the named slider */
+}
+
+.simulate_button {
+  max-height: 3rem;
+}
+
+.button-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.button-icon {
+  content: var(--bg-image);
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.button-icon + p {
+  margin-inline: auto;
+}
+
+.stepping_box_title {
+  all: inherit;
+}
+
+.next_step {
+  /* The next button */
+  text-decoration: none;
+  padding: 0.5em 1em;
+  outline: 2px solid var(--text--accent);
+  width: fit-content;
+  position: relative;
+  isolation: isolate;
+  background-color: transparent;
+  transition: color 250ms ease-in;
+}
+
+.next_step::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--text--accent);
+  clip-path: polygon(0% 0%, 0% 50%, 0% 100%, 0 100%, 0 0);
+  transition: clip-path 250ms ease-in;
+  z-index: -1;
+}
+
+.next_step:hover:hover:hover {
+  color: var(--bg--primary);
+}
+.next_step:hover::after {
+  clip-path: polygon(100% 0%, 200% 50%, 100% 100%, 0 100%, 0 0);
+}
+
+@media only screen and (min-width: 99em) {
+  main {
+    grid-template-areas:
+      "sim-buttons canvas selected results"
+      "step  step step  results";
+
+    grid-template-columns: 4fr min-content 3fr 3fr;
+    grid-template-rows: var(--canvas-height) 1fr;
+  }
+
+  .sim-buttons-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    align-items: stretch;
+    grid-auto-flow: row;
+  }
+
+  .sim-buttons-subdiv-container {
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    place-items: stretch;
+  }
+
+  .sim-buttons-subdiv {
+    justify-content: space-evenly;
+    align-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sim-buttons-subdiv > * {
+    flex-grow: 1;
+  }
+
+  /* .sim-buttons-subdiv-container:nth-last-child(2) {
+    grid-row-end: span 2;
+  }
+
+  .sim-buttons-subdiv-container:last-child {
+    grid-column: 1 / -2;
+  } */
+}
+
+@media only screen and (min-width: 115em) {
+  main {
+    grid-template-areas:
+      "sim-buttons  sim-buttons selected results"
+      "step       canvas    canvas   results"
+      "step       -    -   results";
+
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-rows: 30rem var(--canvas-height) 1fr;
+  }
+
+  .canvas {
+    align-self: start;
+    position: sticky;
+    top: calc(var(--nav-height) + 1rem);
+  }
+}
+
+/* @media only screen and (min-width: 190em) {
+  .sim-buttons-subdiv-container:nth-last-child(2) {
+    grid-row-end: auto;
+    grid-column: -3/-1;
+  }
+
+  .sim-buttons-subdiv-container:nth-last-child(3) {
+    grid-column: span 2;
+  }
+
+  .sim-buttons-subdiv-container:last-child {
+    grid-column: -2/-1;
+  }
+} */
+
+@media only screen and (max-width: 80em) {
+  :root:root {
+    --drop-down-height: 10rem;
+  }
+
+  main {
+    grid-template-areas:
+      "sim-buttons sim-buttons"
+      "canvas selected"
+      "canvas results"
+      "step   results";
+
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: 21rem 18rem calc(var(--canvas-height) - 19rem) min-content;
+  }
+
+  #sim_buttons {
+    overflow-y: hidden;
+    overflow-x: auto;
+  }
+
+  .sim-buttons-container {
+    flex-direction: row;
+    width: 200rem;
+    align-items: stretch;
+  }
+
+  .sim-buttons-subdiv-container {
+    max-height: 100%;
+    align-items: stretch;
+  }
+
+  .sim-buttons-subdiv {
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+  }
+
+  .sim-buttons-subdiv > button {
+    flex-grow: 1;
+  }
+
+  .sub-buttons-subdiv-title {
+    left: 0;
+    flex-grow: 0;
+    width: fit-content;
+  }
+}
+
+@media only screen and (max-width: 65em) {
+  main {
+    grid-template-areas:
+      "sim-buttons selected"
+      "canvas canvas"
+      "canvas canvas"
+      "step   results";
+
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 21rem min-content min-content;
+  }
+}
+
+@media only screen and (max-width: 50em) {
+  main {
+    grid-template-areas: "sim-buttons" "canvas" "results";
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content min-content 1fr;
+    padding: 10px;
+  }
+
+  .sim-buttons-subdiv {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  html::-webkit-scrollbar {
+    width: 3rem;
+  }
+
+  #selected,
+  .step_by_step,
+  *[data-hide-on-mobile] {
+    display: none;
+  }
+  .sim-buttons-container {
+    width: 100%;
+  }
+}
+
+/* @media only screen and (min-width: 992px) {
+  .sub-buttons-subdiv-title {
+    position: initial;
+  }
+} */
