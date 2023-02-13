@@ -317,7 +317,7 @@ function calc_supporter_range() {
 }
 
 function preload() {
-  font = loadFont("../misc/fonts/Comfortaa-VariableFont_wght.ttf");
+  font = loadFont("../misc/fonts/WorkSans-VariableFont_wght.ttf");
 }
 
 function windowResized() {
@@ -405,7 +405,7 @@ function setup() {
   delete_arrows_button.attribute("data-hide-on-mobile", "true");
   delete_arrows_button.mousePressed(delete_arrows);
 
-  support_vis_checkbox = createCheckbox("Visualize support ranges", false);
+  support_vis_checkbox = createCheckbox("Show support ranges", false);
   support_vis_checkbox.changed(function () {
     if (this.checked()) {
       supporter_draw = function () {

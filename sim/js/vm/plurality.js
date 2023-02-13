@@ -42,7 +42,7 @@ class Plurality extends NumberVotecountVotingMethod {
   stepping_box_func(stepping_box) {
     stepping_box.set_content(
       createP(
-        "Plurality voting is the simplest of the bunch: every voter votes for their favorite candidate, and the candidate with the most votes wins."
+        "Plurality voting is the simplest of the bunch: every voter votes for their favorite candidate, and the candidate with the most votes is elected."
       )
     );
   }

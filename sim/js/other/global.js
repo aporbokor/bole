@@ -22,8 +22,8 @@ const vm = new Map([
   ["Sri Lankan contingent", Sri_lankan_contingent],
   ["Borda count", Borda_count],
   ["Copeland's method", Copeland],
-  ["Tideman", Tideman],
-  ["Smith/Tideman", SmithTideman]
+  ["Tideman", SmithTideman],
+  // ["Smith/Tideman", SmithTideman]
 ]);
 
 let first = false;

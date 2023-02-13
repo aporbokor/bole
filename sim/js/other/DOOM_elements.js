@@ -174,7 +174,7 @@ class steppingBox {
     this.main_div = select(".step_by_step");
     this.link_holder = select(".stepping_box_link");
 
-    this.next_button = createA("#defaultCanvas0", "next step");
+    this.next_button = createA("#defaultCanvas0", "explain!");
     this.next_button.class("next_step");
     this.next_button.parent_box = this;
     this.next_func_ = null;

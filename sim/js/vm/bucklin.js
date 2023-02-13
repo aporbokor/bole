@@ -69,9 +69,7 @@ class Bucklin extends RankingVotingMethod {
 
     voting_machine.color_voters_based_on_nth_preference(step - 1);
 
-    first_text.innerText = `As the ${int_to_serial_number(
-      step
-    )} step, we count each voter's ${int_to_serial_number(step)} preferences.`;
+    first_text.innerText = "We count each voter's preferences.";
 
     if (step > 1) {
       second_text.innerText =

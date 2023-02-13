@@ -119,7 +119,7 @@ main select {
 ul,
 ol {
   padding-left: 1.5rem;
-  margin-top: 1rem;
+  /* margin-top: 0.5rem; */
 }
 
 #vote_results > ol {
@@ -201,7 +201,8 @@ li::marker {
 }
 
 .voter-voted-for {
-  padding: 1.5rem;
+  padding: 0.5rem;
+  padding-left: 1.5rem;
 }
 
 .candidate_div {

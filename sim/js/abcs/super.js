@@ -44,7 +44,7 @@ class VotingMethod {
 
   get_results_data(cand) {
     // Defines what data should be displayed in the results_div
-    return [cand.votes, "| Votes: "];
+    return [cand.votes, " | votes: "];
   }
 
   extra_visualize(voters) {

@@ -82,18 +82,18 @@
         <script src="js/abcs/condorcet.js"></script>
         <script src="js/vm/plurality.js"></script>
         <script src="js/vm/anti_plurality.js"></script>
-        <script src="js/vm/approval_voting.js"></script>
-        <script src="js/vm/evaluative_voting.js"></script>
+        <script src="js/vm/approval.js"></script>
+        <script src="js/vm/evaluative.js"></script>
         <script src="js/vm/score.js"></script>
         <script src="js/vm/star.js"></script>
-        <script src="js/vm/borda_counting_voting.js"></script>
+        <script src="js/vm/borda.js"></script>
         <script src="js/vm/bucklin.js"></script>
         <script src="js/vm/supplementary.js"></script>
-        <script src="js/vm/instant_runoff_voting.js"></script>
-        <script src="js/vm/coombs_voting.js"></script>
-        <script src="js/vm/copeland_voting.js"></script>
+        <script src="js/vm/irv.js"></script>
+        <script src="js/vm/coombs.js"></script>
+        <script src="js/vm/copeland.js"></script>
         <script src="js/vm/tideman.js"></script>
-        <script src="js/vm/smith_tideman.js"></script>
+        <script src="js/vm/stideman.js"></script>
         <script src="js/tools/tool.js"></script>
         <script src="js/tools/no_tool.js"></script>
         <script src="js/tools/delete_tool.js"></script>
@@ -133,7 +133,7 @@
           <div
             class="sim-buttons-subdiv-container"
             data-title="Environment generation"
-            data-intro="You can also generate a new environment by changing the number of voters and candidates using these sliders, and then pressing the reset environment button!"
+            data-intro="You can also generate a new environment by changing some parameters using these sliders, and then pressing the reset environment button!"
           >
             <h3 class="sub-buttons-subdiv-title">Environment variables</h3>
             <div id="edit_environment_div" class="sim-buttons-subdiv"></div>
@@ -149,8 +149,8 @@
       <div
         id="selected"
         class="content_box"
-        data-title="The selected participant"
-        data-intro="If you select a voter or a candidate you will see all of their information here. You can customizethem, and look into their preferences, ballots, election-results, etc."
+        data-title="Selected participant"
+        data-intro="If you click on a voter or a candidate you will see all the relevant information here. You can customize them, or look into their preferences, ballots, election-results, etc."
       >
         Nobody is selected
       </div>
@@ -167,7 +167,7 @@
         data-title="Voting method info"
         data-intro="And finally here you can see the description of the currently used system. For some more complex systems we explain them step by step within the bounds of this box."
       >
-        <p class="stepping_box_title p_div_p">The voting process:</p>
+        <!-- <p class="stepping_box_title p_div_p">The voting process:</p> -->
         <!-- <p class="stepping_box_link"><a href="#">See more on Wikipedia</a></p> -->
       </div>
     </main>
