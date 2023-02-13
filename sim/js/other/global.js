@@ -43,6 +43,7 @@ function simulate_voting() {
 
   reset_on_select();
   delete_arrows();
+  stepping_box.hide_next();
 
   for (const cand of candidates) {
     cand.reset_text();
