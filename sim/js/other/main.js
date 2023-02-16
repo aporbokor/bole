@@ -586,12 +586,12 @@ function setup() {
   new_envitoment_div.child(voter_population_slider);
   new_envitoment_div.child(candidate_population_slider);
   new_envitoment_div.child(auto_reset_environment);
-  new_envitoment_div.child(reset_button);
 
   edit_environment_div.child(add_voter_button);
   edit_environment_div.child(delete_voter_button);
   edit_environment_div.child(add_candidate_button);
   edit_environment_div.child(delete_candidate_button);
+  new_envitoment_div.child(reset_button);
 
   const custom_select = document.createElement("div");
   custom_select.classList.add("custom-select");
@@ -618,9 +618,9 @@ function setup() {
   advanced.child(seems_win_slider);
   advanced.child(reset_to_default_button);
 
-  sim_div.child(reset_voter_color_buttton);
   sim_div.child(hide_voters_button);
   sim_div.child(delete_arrows_button);
+  sim_div.child(reset_voter_color_buttton);
   sim_div.child(support_vis_checkbox);
   sim_div.child(average_voter_checkbox);
 
