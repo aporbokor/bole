@@ -11,6 +11,10 @@ class Approval extends cardinalVotingMethod {
     return "disapprove";
   }
 
+  vote_to_score(vote) {
+    return -vote + 1;
+  }
+
   get_results_data(cand) {
     return [cand.votes[0], " | approves: "];
   }

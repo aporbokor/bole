@@ -99,6 +99,10 @@ class cardinalVotingMethod extends VotingMethod {
 
   vote_to_text(vote) {}
 
+  vote_to_score(vote) {
+    return this.vote_to_text(vote);
+  }
+
   get_ballot_element(vf) {
     //console.log(vf);
     let returned = document.createElement("ul");
@@ -198,7 +202,7 @@ class cardinalVotingMethod extends VotingMethod {
               cand
             );
 
-            arr.text = voting_machine.vote_to_text(j);
+            arr.text = voting_machine.vote_to_score(j);
             arr.text_label = `${cand.get_name_p().outerHTML}'s rank in ${
               this.get_name_p().outerHTML
             }'s ballot`;
