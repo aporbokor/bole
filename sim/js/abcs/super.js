@@ -52,14 +52,14 @@ class VotingMethod {
     return undefined;
   }
 
-  get_scores_div_of_cand(cand, mark_text = "'s marks: ") {
+  get_scores_div_of_cand(cand, mark_text = "'s grades: ") {
     // A method to return a caniddate's score-divs. Every voting system asigns scores to candidates. This should return those
     throw new Error(
       "You must implement a get_scores_div_of_cand method to your VotingMethod class"
     );
   }
 
-  get_scores_div_cand_list(cands = candidates, mark_text = "'s marks: ") {
+  get_scores_div_cand_list(cands = candidates, mark_text = "'s grades: ") {
     // Return an unordered list with each candidate's score-divs
     let returned = document.createElement("ul");
 
