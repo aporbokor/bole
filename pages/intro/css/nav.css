@@ -31,6 +31,8 @@ nav {
 .nav-link {
   margin-inline: auto;
   justify-self: left;
+  align-self: center;
+  border: none !important; 
 }
 
 .nav-links-container {
