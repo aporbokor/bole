@@ -149,7 +149,7 @@ class Person extends Drawable {
     }
 
     let returned = createButton(
-      `Remove arrows pointing from this ${this.constructor.name}`
+      `Remove arrows` /*pointing from this ${this.constructor.name}`*/
     );
     returned.parent = this;
 

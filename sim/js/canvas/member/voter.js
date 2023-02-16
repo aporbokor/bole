@@ -103,7 +103,7 @@ class Voter extends Person {
 
   get_extra_to_div() {
     let returned = createDiv();
-    let strategic_p = createCheckbox("strategic", this.strategic);
+    let strategic_p = createCheckbox("tactical", this.strategic);
     let supports_d = document.createElement("ul");
 
     strategic_p.parent_voter = this;
