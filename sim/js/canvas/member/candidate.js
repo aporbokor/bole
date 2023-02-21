@@ -51,11 +51,11 @@ class Candidate extends Person {
   get_small_p() {
     let returned;
     if (typeof this.votes === "undefined") {
-      returned = createP(this.name + "|no votes yet");
+      returned = createP(this.name + " | no votes yet");
     } else if (Array.isArray(this.votes)) {
-      returned = createP(this.name + "| Votes: " + this.votes.join(", "));
+      returned = createP(this.name + " | votes: " + this.votes.join(", "));
     } else {
-      returned = createP(this.name + "| Votes: " + this.votes);
+      returned = createP(this.name + " | votes: " + this.votes);
     }
 
     returned.class("candidate_p");
@@ -72,25 +72,25 @@ class Candidate extends Person {
     let extra_to_div = createDiv();
 
     if (Array.isArray(this.votes)) {
-      extra_to_div.child(createP("Votes:" + this.votes.toString()));
+      extra_to_div.child(createP("votes: " + this.votes.toString()));
     } else if (typeof this.votes === "undefined") {
-      extra_to_div.child(createP("No votes yet"));
+      extra_to_div.child(createP("no votes yet"));
     } else {
-      extra_to_div.child(createP("Votes: " + this.votes));
+      extra_to_div.child(createP("votes: " + this.votes));
     }
 
     if (this.supporters == 0) {
       extra_to_div.child(
-        createP("Supporters: not available until a sim has run")
+        createP("supporters: not available")
       );
     } else {
-      extra_to_div.child(createP("Supporters: " + this.supporters));
+      extra_to_div.child(createP("supporters: " + this.supporters));
     }
 
     if (this.seems_win) {
       extra_to_div.child(
         createP(
-          "From the supporter count of this candidate, tactical voters have concluded that this candidate is likely to win. This might cause them to vote differently than honest voters."
+          "From the known supporters of this candidate, tactical voters have concluded that this candidate is likely to win. This might cause them to vote differently than honest voters."
         )
       );
     }

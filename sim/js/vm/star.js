@@ -64,6 +64,6 @@ class starVoter extends cardinalVotingMethod {
   }
 
   get_results_data(cand) {
-    return [cand.score, "| Score: "];
+    return [cand.score, " | score: "];
   }
 }

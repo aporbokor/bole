@@ -218,9 +218,8 @@ class RunoffLike extends RankingVotingMethod {
 
     content.child(
       createP(
-        "This is the " +
-          int_to_serial_number(voting_system.visualization_step) +
-          " step"
+          int_to_serial_number(voting_system.visualization_step + 1) +
+          " step:"
       )
     );
 

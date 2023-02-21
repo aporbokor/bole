@@ -41,14 +41,14 @@ class Bucklin extends RankingVotingMethod {
   }
 
   get_results_data(cand) {
-    return [cand.final, "| final vote count: "];
+    return [cand.final, " | accumulated votes: "];
   }
 
   extra_visualize(voters) {
     super.extra_visualize(voters);
     for (const cand of this.candidates) {
       cand.text = cand.final;
-      cand.text_label = "final vote count";
+      cand.text_label = "accumulated votes: ";
     }
   }
 
@@ -69,7 +69,7 @@ class Bucklin extends RankingVotingMethod {
 
     voting_machine.color_voters_based_on_nth_preference(step - 1);
 
-    first_text.innerText = "We count each voter's preferences.";
+    first_text.innerText = `We count each voter's ${int_to_serial_number(step)} preferences.`;
 
     if (step > 1) {
       second_text.innerText =
@@ -90,7 +90,7 @@ class Bucklin extends RankingVotingMethod {
       this.parent_box.hide_next();
       let last_first_p = document.createElement("p");
       last_first_p.innerText =
-        "In this round, at least one candidate had a majority, which means that this was the last round. We just need to count the final votes, to determent the winners:";
+        "In this round, at least one candidate had a majority, which means that this was the last round. The winner is the candidate with the most votes accumulated.";
 
       let cands = document.createElement("div");
       for (const candidate of voting_results[0]) {
@@ -102,11 +102,11 @@ class Bucklin extends RankingVotingMethod {
 
       last_text.appendChild(last_first_p);
       last_text.appendChild(cands);
-      last_text.appendChild(last_last_p);
+      // last_text.appendChild(last_last_p);
     } else {
       last_text.innerText = `In this round nobody had a majority (> ${ceil(
         max_votes / 2
-      )} voters) so this process continues.`;
+      )} votes) so this process continues.`;
     }
 
     step_div.appendChild(first_text);
@@ -126,6 +126,6 @@ class Bucklin extends RankingVotingMethod {
     stepping_box.show_next();
 
     this.step = 0;
-    stepping_box.next_func(this.describe_process);
+    stepping_box.next_func(this.visualize_step);
   }
 }

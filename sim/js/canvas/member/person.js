@@ -111,7 +111,7 @@ class Person extends Drawable {
 
   get_custom_p(
     progress_data,
-    text_after_name = "| Votes: ",
+    text_after_name = " | votes: ",
     text_after_progress = null,
     progress_maximum = null
   ) {

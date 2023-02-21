@@ -35,7 +35,7 @@ class Score extends cardinalVotingMethod {
   }
 
   get_results_data(cand) {
-    return [cand.score, "| Score: "];
+    return [cand.score, " | score: "];
   }
 
   extra_visualize(voters) {
@@ -63,7 +63,7 @@ class Score extends cardinalVotingMethod {
 
     let description = document.createElement("p");
     description.innerHTML =
-      "Score voting works like the following: every voter votes gives each candidate a score (from 0 to 9), the scores of each candidate are evaluated, and the candidate with the most points is elected.";
+      "Score voting works like the following: every voter votes gives each candidate a score (from 0 to 9), the scores of each candidate are counted, and the candidate with the most points is elected.";
 
     content.appendChild(description);
     content.appendChild(this.get_scores_div_cand_list());

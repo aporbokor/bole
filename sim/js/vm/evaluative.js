@@ -36,7 +36,7 @@ class Evaluative extends cardinalVotingMethod {
   }
 
   get_results_data(cand) {
-    return [cand.score, "| Score: "];
+    return [cand.score, " | score: "];
   }
 
   extra_visualize(voters) {
@@ -45,7 +45,7 @@ class Evaluative extends cardinalVotingMethod {
 
     for (const cand of candidates) {
       cand.text = cand.score;
-      cand.text_label = "score";
+      cand.text_label = "Score";
     }
 
     extra_function = function () {
@@ -62,20 +62,20 @@ class Evaluative extends cardinalVotingMethod {
 
     let description = document.createElement("p");
     description.innerText =
-      "Evaluative voting works like the following: every voter votes ranks every candidate using 3 scores: for (1), abstain (0) and against (-1). In the end we evaluate the scores for each candidate and the candidate with the most points wins.";
+      "Evaluative voting works like the following: every voter votes evaluates every candidate using 3 scores: for (1), abstain (0) and against (-1). Then the scores for each candidate are counted, and the candidate with the most points wins.";
 
     const example_cand = random(candidates);
 
     let text1 = document.createElement("p");
-    text1.innerHTML = `For example ${
+    text1.innerHTML = `For example, ${
       example_cand.get_simple_name_p().outerHTML
-    } has ${example_cand.votes[0]} votes for <strong>for</strong> him/her and ${
+    } has ${example_cand.votes[0]} voters <strong>for</strong> him/her and ${
       example_cand.votes[2]
     } <strong>against</strong> him/her. This means that ${
       example_cand.get_simple_name_p().outerHTML
     } will gain ${example_cand.votes[0]} points and lose ${
       example_cand.votes[2]
-    } points leaving us with the total of ${example_cand.score} points.`;
+    } points leaving him/her with a total of ${example_cand.score} points.`;
 
     content.appendChild(description);
     content.appendChild(text1);
