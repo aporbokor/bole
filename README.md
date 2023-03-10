@@ -6,8 +6,14 @@ Bole is an interactive simulation/visualization of single-winner voting systems.
 * **Educational:** For those interested in the way of voting, it provides a boundless environment in which during experimentation, one can get a deep understanding about the different voting systems, their advantages and disadvantages.
 * **Dynamic:** It gives an opportunity for the curious to automatize the process of voting method analysis by running multiple elections with the environment regenerated each time, remembering the outcomes, and (possibly) testing against given criterions.
 
+[Try Bole](https://getbole.com)
+
 ## Documentation
 
 You can find the Bole documentation [on the website](https::/getbole.com/pages/intro).
 
 There exists a written document about the motivations of the project and the real-world implications, which can be read [here](abstract.pdf), currently only available in hungarian, but we are working on the translation!
+
+## License
+
+Bole is [GNU AGPLv3 licensed](./LICENSE).
