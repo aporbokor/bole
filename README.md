@@ -10,7 +10,7 @@ Bole is an interactive simulation/visualization of single-winner voting systems.
 
 ## Documentation
 
-You can find the Bole documentation [on the website](https::/getbole.com/pages/intro).
+You can find the Bole documentation [on the website](https://getbole.com/pages/intro/).
 
 There exists a written document about the motivations of the project and the real-world implications, which can be read [here](abstract.pdf), currently only available in Hungarian, but we are working on the translation!
 
