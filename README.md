@@ -1,4 +1,4 @@
-# [Bole](https://getbole.com) &middot; [![GitHub license](https://img.shields.io/github/license/aporbokor/bole)](LICENSE.md) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md) 
+# [Bole](https://getbole.com) &middot; [![GitHub license](https://img.shields.io/github/license/aporbokor/bole)](LICENSE) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md) 
 
 Bole is an interactive simulation/visualization of single-winner voting systems.
 
