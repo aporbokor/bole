@@ -14,6 +14,6 @@ You can find the Bole documentation [on the website](https://getbole.com/pages/i
 
 There exists a written document about the motivations of the project and the real-world implications, which can be read [here](abstract.pdf), currently only available in Hungarian, but we are working on the translation!
 
-## License
+### License
 
 Bole is [GNU AGPLv3 licensed](./LICENSE).
