@@ -1,51 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Bole</title>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.svg" ; />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      id="font"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Syne:wght@800&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <!--CSS stylesheets-->
-    <link rel="stylesheet" href="/pages/intro/css/reset.css" />
-    <link rel="stylesheet" href="/pages/intro/css/general.css" />
-    <link rel="stylesheet" href="/pages/intro/css/main.css" />
-    <link rel="stylesheet" href="/pages/intro/css/nav.css" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Bole</title>
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="../../favicon.svg"
+            ; />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            id="font"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Syne:wght@800&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet" />
+        <!--CSS stylesheets-->
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/general.css" />
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/nav.css" />
 
-    <script src="https://kit.fontawesome.com/6b6fd3c508.js" crossorigin="anonymous"></script>
-  </head>
+        <script
+            src="https://kit.fontawesome.com/6b6fd3c508.js"
+            crossorigin="anonymous"></script>
+    </head>
 
-  <body>
-    <nav>
-      <a class="nav-link button" href="/index.html" tabindex="2">Back</a>
+    <body>
+        <nav>
+            <a class="nav-link button" href="../../index.html" tabindex="2"
+                >Back</a
+            >
 
-      <div class="center">
-        <a href="#intro_" class="company-name" translate="no" tabindex="1"
-          >BOLE</a
-        >
-        <a class="run-btn" href="/index.html" tabindex="2">
-          <div class="triangle-left"></div>
-        </a>
-      </div>
-    </nav>
-    <main>
-      <header>
-        <p>
-          This is a visualization of the current single-winner voting systems.
-        </p>
-        <p>
-          It is recommended that you read the entire introduction before you try
-          the simulation out, because the concepts therein are essential.
-        </p>
-      </header>
-      <!--       <article id="intro_" class="doc drk">
+            <div class="center">
+                <a
+                    href="#intro_"
+                    class="company-name"
+                    translate="no"
+                    tabindex="1"
+                    >BOLE</a
+                >
+                <a class="run-btn" href="../../index.html" tabindex="2">
+                    <div class="triangle-left"></div>
+                </a>
+            </div>
+        </nav>
+        <main>
+            <header>
+                <p>
+                    This is a visualization of the current single-winner voting
+                    systems.
+                </p>
+                <p>
+                    It is recommended that you read the entire introduction
+                    before you try the simulation out, because the concepts
+                    therein are essential.
+                </p>
+            </header>
+            <!--       <article id="intro_" class="doc drk">
         <h2>See it yourself</h2>
         <p>
           See and explore yourself why the world's most used voting system sucks
@@ -76,136 +89,155 @@
         <p>Join the exploration today!</p>
       </article> -->
 
-      <article id="visualization" class="doc">
-        <div class="section-starter-content">
-          <h2 class="section-title">Opinion plane</h2>
-
-          <div class="overflower-flex">
-            <div class="section-starter-text">
-              <p>
-                The ideal electoral system is the one that straightforwardly and
-                most accurately represents the preferences of voters. This is
-                the goal every voting system strives for.
-                <br />
-                To represent the opinions of voters and candidates, an opinion
-                plane is a must-have. Inside our simulation, the placement of a
-                voter/candidate on the x and y axis represents their opinion,
-                meaning the closer the voter is to a candidate, the more similar
-                their opinions are.
-              </p>
-            </div>
-            <image
-              src="/misc/img/opinion_example_2.png"
-              alt="opinion visualization example with arrows"
-              class="canvas_img viewable_picture section-starter-picture"
-            />
-          </div>
-        </div>
-      </article>
-
-      <article id="participants" class="doc drk">
-        <div class="section-starter-content">
-          <h2 class="section-title">Participants</h2>
-          <div class="overflower-flex drk">
-            <div>
-              <p>
-                In our visualization the voters are marked with a smaller
-                circle, and the candidates are marked with a bigger circle. If a
-                voter has the same color as a candidate, it means that the voter
-                voted for the candidate.
-              </p>
-
-              <p>
-                However, this is (only) a simulation. In real life there is
-                no such thing as 2 different and independent opinion axes.
-              </p>
-              <p>
-                Also, in our simulation, voters know every candidate's exact
-                opinion. That does not resemble a real life scenario, because
-                sometimes it's in a candidate's best interest to lie about their
-                opinion. So in today's world
-                <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank"
-                  >we don't know who we can trust</a
-                >.
-              </p>
-            </div>
-            <image
-              src="/misc/img/opinion_example.png"
-              alt="opinion visualization example"
-              class="canvas_img viewable_picture"
-            />
-          </div>
-        </div>
-      </article>
-
-      <article id="voter_types" class="doc">
-        <h2 class="section-title pd">Voter types</h2>
-        <div class="section-starter-content">
-          <p class="section-starter-text">
-            There are two ways a voter may vote: honestly, or tactically. The
-            honest way is the intended way, the other is a consequence of the
-            weaknesses of some voting systems.
-          </p>
-        </div>
-
-        <ul>
-          <li>
-            <div>
-              <section id="voter-not-smort" class="docli nospace">
+            <article id="visualization" class="doc">
                 <div class="section-starter-content">
-                  <h3 class="li-title np">Honest/sincere voter</h3>
-                  <div class="overflower-flex sml">
+                    <h2 class="section-title">Opinion plane</h2>
+
+                    <div class="overflower-flex">
+                        <div class="section-starter-text">
+                            <p>
+                                The ideal electoral system is the one that
+                                straightforwardly and most accurately represents
+                                the preferences of voters. This is the goal
+                                every voting system strives for.
+                                <br />
+                                To represent the opinions of voters and
+                                candidates, an opinion plane is a must-have.
+                                Inside our simulation, the placement of a
+                                voter/candidate on the x and y axis represents
+                                their opinion, meaning the closer the voter is
+                                to a candidate, the more similar their opinions
+                                are.
+                            </p>
+                        </div>
+                        <image
+                            src="../../misc/img/opinion_example_2.png"
+                            alt="opinion visualization example with arrows"
+                            class="canvas_img viewable_picture section-starter-picture" />
+                    </div>
+                </div>
+            </article>
+
+            <article id="participants" class="doc drk">
+                <div class="section-starter-content">
+                    <h2 class="section-title">Participants</h2>
+                    <div class="overflower-flex drk">
+                        <div>
+                            <p>
+                                In our visualization the voters are marked with
+                                a smaller circle, and the candidates are marked
+                                with a bigger circle. If a voter has the same
+                                color as a candidate, it means that the voter
+                                voted for the candidate.
+                            </p>
+
+                            <p>
+                                However, this is (only) a simulation. In real
+                                life there is no such thing as 2 different and
+                                independent opinion axes.
+                            </p>
+                            <p>
+                                Also, in our simulation, voters know every
+                                candidate's exact opinion. That does not
+                                resemble a real life scenario, because sometimes
+                                it's in a candidate's best interest to lie about
+                                their opinion. So in today's world
+                                <a
+                                    href="https://youtu.be/dQw4w9WgXcQ"
+                                    target="_blank"
+                                    >we don't know who we can trust</a
+                                >.
+                            </p>
+                        </div>
+                        <image
+                            src="../../misc/img/opinion_example.png"
+                            alt="opinion visualization example"
+                            class="canvas_img viewable_picture" />
+                    </div>
+                </div>
+            </article>
+
+            <article id="voter_types" class="doc">
+                <h2 class="section-title pd">Voter types</h2>
+                <div class="section-starter-content">
                     <p class="section-starter-text">
-                      Honest voters vote for the candidate with whom their views
-                      align the most. They do not consider the candidate's
-                      chances of winning, and they do not change their
-                      preference based on that. However, the design of many
-                      voting systems prevents full expression of voter opinion.
-                      As a result, voters may attempt to prevent undesired
-                      outcomes rather than support positive outcomes. That is
-                      precisely how they succumb to the dark side, namely:
-                      tactical voting. They are represented with a non-filled
-                      circle in the simulation.
+                        There are two ways a voter may vote: honestly, or
+                        tactically. The honest way is the intended way, the
+                        other is a consequence of the weaknesses of some voting
+                        systems.
                     </p>
-                    <image
-                      src="/misc/img/voter_types/honest_voters.png"
-                      alt="An image with honest voters only"
-                      class="canvas_img viewable_picture section-starter-picture"
-                    />
-                  </div>
                 </div>
-              </section>
-            </div>
-          </li>
-          <li>
-            <section id="voter-smort" class="docli nospace">
-              <div class="section-starter-content">
-                <h3 class="li-title np">Tactical/insincere voter</h3>
-                <div class="overflower-flex sml">
-                  <p class="section-starter-text">
-                    Tactical voters, also called insincere or sophisticated
-                    voters may support another candidate more strongly than
-                    their sincere preference in order to prevent an undesirable
-                    outcome. This situation occurs in elections with more than
-                    two candidates. For example: a voter might gain a better
-                    outcome by voting for a less preferred but more generally
-                    popular candidate. There are a lot of ways for a voter to
-                    vote tactically, for example, they can rank an alternative
-                    lower in hopes of defeating it. They are represented with a
-                    filled circle in the visualization.
-                  </p>
-                  <image
-                    src="/misc/img/voter_types/tactical_voting.png"
-                    alt="an image where tactical voters are trying to avoid an undesirable outcome"
-                    class="canvas_img viewable_picture section-starter-picture"
-                  />
-                </div>
-              </div>
-            </section>
-          </li>
-        </ul>
-      </article>
-    </main>
-    <script src="/pages/intro/js/preview.js"></script>
-  </body>
+
+                <ul>
+                    <li>
+                        <div>
+                            <section id="voter-not-smort" class="docli nospace">
+                                <div class="section-starter-content">
+                                    <h3 class="li-title np">
+                                        Honest/sincere voter
+                                    </h3>
+                                    <div class="overflower-flex sml">
+                                        <p class="section-starter-text">
+                                            Honest voters vote for the candidate
+                                            with whom their views align the
+                                            most. They do not consider the
+                                            candidate's chances of winning, and
+                                            they do not change their preference
+                                            based on that. However, the design
+                                            of many voting systems prevents full
+                                            expression of voter opinion. As a
+                                            result, voters may attempt to
+                                            prevent undesired outcomes rather
+                                            than support positive outcomes. That
+                                            is precisely how they succumb to the
+                                            dark side, namely: tactical voting.
+                                            They are represented with a
+                                            non-filled circle in the simulation.
+                                        </p>
+                                        <image
+                                            src="../../misc/img/voter_types/honest_voters.png"
+                                            alt="An image with honest voters only"
+                                            class="canvas_img viewable_picture section-starter-picture" />
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </li>
+                    <li>
+                        <section id="voter-smort" class="docli nospace">
+                            <div class="section-starter-content">
+                                <h3 class="li-title np">
+                                    Tactical/insincere voter
+                                </h3>
+                                <div class="overflower-flex sml">
+                                    <p class="section-starter-text">
+                                        Tactical voters, also called insincere
+                                        or sophisticated voters may support
+                                        another candidate more strongly than
+                                        their sincere preference in order to
+                                        prevent an undesirable outcome. This
+                                        situation occurs in elections with more
+                                        than two candidates. For example: a
+                                        voter might gain a better outcome by
+                                        voting for a less preferred but more
+                                        generally popular candidate. There are a
+                                        lot of ways for a voter to vote
+                                        tactically, for example, they can rank
+                                        an alternative lower in hopes of
+                                        defeating it. They are represented with
+                                        a filled circle in the visualization.
+                                    </p>
+                                    <image
+                                        src="../../misc/img/voter_types/tactical_voting.png"
+                                        alt="an image where tactical voters are trying to avoid an undesirable outcome"
+                                        class="canvas_img viewable_picture section-starter-picture" />
+                                </div>
+                            </div>
+                        </section>
+                    </li>
+                </ul>
+            </article>
+        </main>
+        <script src="js/preview.js"></script>
+    </body>
 </html>
